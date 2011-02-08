@@ -1,5 +1,9 @@
 ;;; iy-init.el --- Init function. The start entry.
 
+;;; eval me to compile the dir
+;; (byte-recompile-directory "~/.emacs.d/lisp" 0 nil)
+
+
 ;; locate this file
 
 (eval-when-compile (require 'cl))
@@ -12,6 +16,9 @@
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
+
+(setq custom-file (concat iy-config-dir "custom.el"))
+(load custom-file t t)
 
 (defun iy-init-load-modules ()
   "Emacs load modules"
@@ -41,8 +48,10 @@
   (iy-init-install-el-get)
 
   ;; load some libraries first
-  (if (memq 'iy-theme iy-blacklist) (require 'iy-theme))
-  (iy-init-load-modules))
+  (unless (memq 'iy-theme iy-blacklist) (require 'iy-theme))
+  (iy-init-load-modules)
+
+  (el-get))
 
 (iy-init)
 
