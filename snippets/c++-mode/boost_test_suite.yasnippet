@@ -1,0 +1,8 @@
+# name: BOOST_AUTO_TEST_SUITE
+# key: tsuite
+# --
+BOOST_AUTO_TEST_SUITE(${1:`(yas/underscore-to-camel (yas/buffer-name-stub))`}_test)
+
+$0
+
+BOOST_AUTO_TEST_SUITE_END() // $1_test

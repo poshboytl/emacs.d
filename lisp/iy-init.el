@@ -9,10 +9,6 @@
 (eval-when-compile (require 'cl))
 (require 'iy-dep)
 
-(setq iy-config-dir (file-name-as-directory user-emacs-directory))
-(setq iy-lisp-dir (file-name-directory (locate-file "iy-init.el" load-path)))
-(setq iy-el-get-dir (file-name-as-directory (concat iy-config-dir "el-get")))
-
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)

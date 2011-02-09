@@ -1,0 +1,11 @@
+# name: figure for HTML
+# expand-env: ((yas/indent-line nil))
+# --
+#+BEGIN_HTML
+  <div class="figure">
+    <p><a href="images/${1:name}.png" alt="$2">
+      <img src="images/thumb/$1.png"/>
+    </a></p>
+    <p>${2:caption}</p>
+  </div>
+#+END_HTML

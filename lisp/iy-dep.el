@@ -1,5 +1,11 @@
 ;;; Dependencies
 
+;;; Constants
+
+(defconst iy-config-dir (file-name-as-directory user-emacs-directory))
+(defconst iy-lisp-dir (file-name-directory (locate-file "iy-init.el" load-path)))
+(defconst iy-el-get-dir (file-name-as-directory (concat iy-config-dir "el-get")))
+
 ;;; Customizations
 
 (defgroup iy-config nil "Ian Yang's config file customization")

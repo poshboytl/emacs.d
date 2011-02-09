@@ -1,0 +1,5 @@
+#name : FOREACH (var list) ENDFOREACH (var)
+# --
+FOREACH(${1:var} ${2:list})
+  $0
+ENDIF($1)
