@@ -47,7 +47,7 @@
   (unless (memq 'iy-theme iy-blacklist) (require 'iy-theme))
   (iy-init-load-modules)
 
-  (el-get))
+  (el-get 'sync))
 
 (iy-init)
 
