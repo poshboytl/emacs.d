@@ -4,7 +4,7 @@
 
 
 (defun iy-el-get-after-yasnippet ()
-;; Develop and keep personal snippets under ~/emacs.d/mysnippets
+  (require 'dropdown-list nil t)
   (yas/initialize)
   (setq yas/root-directory (concat iy-config-dir "snippets"))
   (yas/load-directory yas/root-directory))
