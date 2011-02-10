@@ -6,3 +6,5 @@
 (defun iy-markdown-mode-init ()
   (turn-on-auto-fill)
   (flyspell-mode 1))
+
+(provide 'iy-packages)
