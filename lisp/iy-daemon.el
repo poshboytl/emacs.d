@@ -34,7 +34,9 @@
               (message "Run delete frame hook %s" (prin1-to-string f))
               (funcall f)))))
 
-      (add-hook 'delete-frame-functions 'iy-daemon-run-delete-frame-hooks)
+      ;; do not run it in Mac OS X
+      (unless (eq system-type 'darwin)
+        (add-hook 'delete-frame-functions 'iy-daemon-run-delete-frame-hooks))
 
       (server-start)))
 
