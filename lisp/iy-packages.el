@@ -27,4 +27,8 @@
 (push 'highlight-symbol el-get-sources)
 (push 'highlight-parentheses el-get-sources)
 
+(push 'yaml-mode el-get-sources)
+
+(push 'gist el-get-sources)
+
 (provide 'iy-packages)
