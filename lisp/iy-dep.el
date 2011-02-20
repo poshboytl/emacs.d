@@ -13,12 +13,18 @@
 (defcustom iy-frame-font "Droid Sans Mono:pixelsize=21"
   "Default font"
   :type 'string
-  :group 'iy-config)
+  :group 'iy-config
+  :set (lambda (symbol value)
+         (set-default symbol value)
+         (set-frame-font value)))
 
 (defcustom iy-frame-font-chinese "WenQuanYi Micro Hei Mono:pixelsize=22"
   "Chinese font"
   :type 'string
-  :group 'iy-config)
+  :group 'iy-config
+  :set (lambda (symbol value)
+         (set-default symbol value)
+         (set-fontset-font "fontset-default" 'chinese-gbk value)))
 
 (defcustom iy-codebase-dir (expand-file-name "~/CodeBase")
   "Root directory of projects source"

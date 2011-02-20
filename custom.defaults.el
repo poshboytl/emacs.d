@@ -1,8 +1,6 @@
+;; I save some customization here.
+
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex -shell-escape")
  '(abbrev-mode t)
  '(ack-executable "/usr/bin/ack-grep")
@@ -51,7 +49,7 @@
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(current-language-environment "UTF-8")
  '(debug-on-error nil)
- '(default-major-mode (quote text-mode) t)
+ '(default-major-mode (quote text-mode))
  '(delete-old-versions t)
  '(delete-selection-mode t)
  '(desktop-base-file-name ".emacs.desktop")
@@ -73,7 +71,7 @@
  '(ecb-method-face (quote ecb-default-highlight-face))
  '(ecb-options-version "2.40")
  '(ecb-other-window-behavior (quote smart))
- '(ecb-source-path (quote (("/usr/include" "/sysinc") ("/opt/gcc41/include" "/gcc41inc") "ian" ("~/ian/CodeBase" "/CB"))))
+ '(ecb-source-path (quote (("/usr/include" "/sysinc") ("/opt/gcc41/include" "/gcc41inc") "ian" ("~/CodeBase" "/CB"))))
  '(ecb-tag-header-face (quote secondary-selection))
  '(ecb-tip-of-the-day nil)
  '(ecb-toggle-layout-sequence (quote ("left7" "left15" "left13")))
@@ -127,8 +125,6 @@
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(install-elisp-repository-directory "~/.emacs.d/site-lisp")
- '(iy-frame-font "Inconsolata:pixelsize=16")
- '(iy-frame-font-chinese "STHeiti:pixelsize=16")
  '(iy-go-to-char-key-backward 58)
  '(jabber-alert-presence-hooks nil)
  '(jabber-history-enabled t)
@@ -147,7 +143,7 @@
  '(kill-whole-line t)
  '(longlines-show-hard-newlines t)
  '(magit-process-popup-time 60)
- '(magit-repo-dirs (quote ("~/ian/CodeBase")))
+ '(magit-repo-dirs (quote ("~/CodeBase")))
  '(magit-repo-dirs-depth 1)
  '(mail-abbrevs-mode t)
  '(menu-bar-mode nil)
@@ -171,7 +167,7 @@
  '(pulse-flag nil)
  '(pulse-iterations 5)
  '(recentf-arrange-rules (quote (("Elisp files (%d)" ".\\.el\\'") ("Java files (%d)" ".\\.java\\'") ("C/C++ files (%d)" ".\\.c\\(pp\\)?\\'" ".\\.h\\(pp\\)?\\'") ("Org files (%d)" ".\\.org\\'"))))
- '(recentf-exclude (quote ("semantic\\.cache" "COMMIT_EDITMSG" "git-emacs-tmp.*" "\\.breadcrumb" "\\.ido\\.last" "\\.projects.ede")) t)
+ '(recentf-exclude (quote ("semantic\\.cache" "COMMIT_EDITMSG" "git-emacs-tmp.*" "\\.breadcrumb" "\\.ido\\.last" "\\.projects.ede")))
  '(recentf-menu-filter (quote recentf-arrange-by-rule))
  '(recentf-save-file "~/.emacs.d/data/recentf")
  '(reftex-default-bibliography (quote ("biblio.bib" "my.bib")))
@@ -220,9 +216,3 @@
  '(yas/choose-keys-first nil)
  '(yas/prompt-functions (quote (yas/dropdown-prompt yas/ido-prompt yas/x-prompt yas/no-prompt)))
  '(yas/use-menu (quote abbreviate)))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )

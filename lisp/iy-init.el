@@ -14,7 +14,12 @@
 (add-to-list 'load-path iy-lisp-dir)
 
 (setq custom-file (concat iy-config-dir "custom.el"))
-(load custom-file t t)
+(setq iy-custom-defaults-file (concat iy-config-dir "custom.defaults.el"))
+
+;; Once user has customized and saved, use user custom file.
+(if (file-exists-p custom-file)
+    (load custom-file t t)
+  (load iy-custom-defaults-file t t))
 
 (defun iy-init-load-modules ()
   "Emacs load modules"
