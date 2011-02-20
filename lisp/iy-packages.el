@@ -8,6 +8,7 @@
 ;;   (shell-command-completion-mode))
 
 (require 'iy-go-to-char)
+(eval-when-compile (require 'el-get))
 
 (autoload 'zap-up-to-char "misc" "kill up to but not including char" t)
 
