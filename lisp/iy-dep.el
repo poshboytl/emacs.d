@@ -3,8 +3,13 @@
 ;;; Constants
 
 (defconst iy-config-dir (file-name-as-directory user-emacs-directory))
+(defconst iy-data-dir (concat iy-config-dir "data/"))
 (defconst iy-lisp-dir (file-name-directory (locate-file "iy-init.el" load-path)))
-(defconst iy-el-get-dir (file-name-as-directory (concat iy-config-dir "el-get")))
+(defconst iy-el-get-dir (concat iy-config-dir "el-get/"))
+
+;;; helper functions
+(defun iy-set-default-as-directory (sym val)
+  (set-default sym (file-name-as-directory val)))
 
 ;;; Customizations
 
@@ -26,15 +31,17 @@
          (set-default symbol value)
          (set-fontset-font "fontset-default" 'chinese-gbk value)))
 
-(defcustom iy-codebase-dir (expand-file-name "~/CodeBase")
+(defcustom iy-codebase-dir (expand-file-name "~/CodeBase/")
   "Root directory of projects source"
   :group 'iy-config
-  :type 'directory)
+  :type 'directory
+  :set 'iy-set-default-as-directory)
 
-(defcustom iy-dropbox-dir (expand-file-name "~/Dropbox")
+(defcustom iy-dropbox-dir (expand-file-name "~/Dropbox/")
   "Dropbox root directory"
   :group 'iy-config
-  :type 'directory)
+  :type 'directory
+  :set 'iy-set-default-as-directory)
 
 (defcustom iy-header-dirs (list "/usr/include")
   "C/C++ header directories"
