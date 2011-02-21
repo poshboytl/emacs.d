@@ -9,6 +9,26 @@
   (require 'anything-config)
   (require 'anything-match-plugin)
 
+  ;;; Sources
+  (setq anything-sources
+        '(
+          ;; eproject-anything-c-source-projects
+          anything-c-source-ffap-line
+          anything-c-source-ffap-guesser
+          anything-c-source-buffers+
+          anything-c-source-file-cache
+          anything-c-source-files-in-current-dir+
+          anything-c-source-recentf
+          anything-c-source-file-name-history
+          anything-c-source-bookmarks
+          ;; eproject-anything-c-source-files
+          anything-c-source-locate
+          anything-c-source-w3m-bookmarks))
+  ;; anything-c-source-complex-command-history
+  ;; anything-c-source-file-name-history
+  ;; anything-c-source-info-pages
+  ;; anything-c-source-man-pages
+
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
   (define-key iy-map (kbd "M-x") 'anything-execute-extended-command)
@@ -42,26 +62,7 @@
 (setq anything-idle-delay 0.3)
 (setq anything-quick-update t)
 (setq anything-gtags-classify t)
-
-;;; Sources
-(setq anything-sources
-      '(
-        ;; eproject-anything-c-source-projects
-        anything-c-source-ffap-line
-        anything-c-source-ffap-guesser
-        anything-c-source-buffers+
-        anything-c-source-file-cache
-        anything-c-source-files-in-current-dir+
-        anything-c-source-recentf
-        anything-c-source-file-name-history
-        anything-c-source-bookmarks
-        ;; eproject-anything-c-source-files
-        anything-c-source-locate
-        anything-c-source-w3m-bookmarks))
-;; anything-c-source-complex-command-history
-;; anything-c-source-file-name-history
-;; anything-c-source-info-pages
-;; anything-c-source-man-pages
+(setq anything-c-use-standard-keys t)
 
 ;;; Bindings
 (defun anything-insert-buffer-base-name ()
