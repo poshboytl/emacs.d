@@ -112,6 +112,9 @@
 (global-set-key (kbd "M-O") 'other-frame)
 
 ;;; Fx
+(global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
+(global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
+
 (global-set-key (kbd "C-<f9>") 'mark-thing)
 (global-set-key (kbd "<ESC> <f9>") 'mark-thing)
 (global-set-key (kbd "<f9>") 'cycle-thing-region)
