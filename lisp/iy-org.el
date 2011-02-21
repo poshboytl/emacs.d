@@ -391,6 +391,9 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
    ("x" "Clipboard" entry (file+headline "inbox.org" "Clipboard")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %x"
     :prepend t :empty-lines 1)
+   ("b" "Default template" entry (file+headline "inbox.org" "Bookmarks")
+    "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i"
+    :prepend t :empty-lines 1 :immediate-finish t)
    ("w" "Default template" entry (file+headline "inbox.org" "Bookmarks")
     "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i"
     :prepend t :empty-lines 1 :immediate-finish t)))
