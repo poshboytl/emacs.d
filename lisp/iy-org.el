@@ -35,6 +35,7 @@
         org-protocol
         org-w3m
         org-gnus
+        org-clock
         ))
 
 ;;; Customization
@@ -140,11 +141,11 @@
 (setq org-special-ctrl-k t)
 (setq org-yank-adjusted-subtrees nil)
 (setq org-use-fast-todo-selection t)
-(setq org-directory (concat iy-dropbox-dir "/g/org"))
-(setq org-agenda-files (list (concat iy-dropbox-dir "/g/org")))
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-mobile-directory (concat iy-dropbox-dir "/MobileOrg"))
-(setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "/g/org/from_mobile.org"))
+(setq org-directory (concat iy-dropbox-dir "g/org"))
+(setq org-agenda-files (list (concat iy-dropbox-dir "g/org")))
+(setq org-default-notes-file (concat org-directory "inbox.org"))
+(setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
+(setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/from_mobile.org"))
 (setq org-ditaa-jar-path iy-ditaa-path)
 
 ;;; Startup
@@ -472,34 +473,42 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
 ;; (ignore-errors (org-agenda-to-appt))
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
 ;; our little façade-function for djcb-popup
+
 (defun iy/appt-display (min-to-app new-time msg)
-  (message "Appointment in %d minute(s): %s" min-to-app msg)
-  (dbus-call-method
-   :session "org.freedesktop.Notifications"
-   "/org/freedesktop/Notifications"
-   "org.freedesktop.Notifications" "Notify"
-   "Emacs Appt"
-   0
-   "appointment-soon"
-   (format "Appointment in %d minute(s)" min-to-app)
-   msg
-   '(:array)
-   '(:array :signature "{sv}")
-   ':int32 -1))
+  (let ((title (format "Appointment in %d minute(s)" min-to-app)))
+    (message (concat title ": " msg))
+    (if (fboundp 'dbus-call-method)
+        (dbus-call-method
+         :session "org.freedesktop.Notifications"
+         "/org/freedesktop/Notifications"
+         "org.freedesktop.Notifications" "Notify"
+         "Emacs Appt"
+         0
+         "appointment-soon"
+         (format "Appointment in %d minute(s)" min-to-app)
+         msg
+         '(:array)
+         '(:array :signature "{sv}")
+         ':int32 -1)
+      (el-get-notify title msg))))
+
 (defun iy/org-clock-display (msg)
   (message "Org Notification: %s" msg)
-  (dbus-call-method
-   :session "org.freedesktop.Notifications"
-   "/org/freedesktop/Notifications"
-   "org.freedesktop.Notifications" "Notify"
-   "Emacs Org"
-   0
-   "appointment-missed"
-   "Org Notification"
-   msg
-   '(:array)
-   '(:array :signature "{sv}")
-   ':int32 -1))
+  (if (fboundp 'dbus-call-method)
+      (dbus-call-method
+       :session "org.freedesktop.Notifications"
+       "/org/freedesktop/Notifications"
+       "org.freedesktop.Notifications" "Notify"
+       "Emacs Org"
+       0
+       "appointment-missed"
+       "Org Notification"
+       msg
+       '(:array)
+       '(:array :signature "{sv}")
+       ':int32 -1)
+    (el-get-notify "Org Notification" msg)))
+
 (setq appt-disp-window-function (function iy/appt-display))
 (setq org-show-notification-handler (function iy/org-clock-display))
 
