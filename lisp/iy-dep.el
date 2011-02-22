@@ -15,7 +15,7 @@
 
 (defgroup iy-config nil "Ian Yang's config file customization")
 
-(defcustom iy-frame-font "Droid Sans Mono:pixelsize=21"
+(defcustom iy-frame-font "Mono:pixelsize=21"
   "Default font"
   :type 'string
   :group 'iy-config
@@ -23,7 +23,7 @@
          (set-default symbol value)
          (set-frame-font value)))
 
-(defcustom iy-frame-font-chinese "WenQuanYi Micro Hei Mono:pixelsize=22"
+(defcustom iy-frame-font-chinese "Mono:pixelsize=22"
   "Chinese font"
   :type 'string
   :group 'iy-config
