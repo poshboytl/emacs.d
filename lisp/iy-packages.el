@@ -28,6 +28,8 @@
 (push 'highlight-symbol el-get-sources)
 (push 'highlight-parentheses el-get-sources)
 
+(push 'sass-mode el-get-sources)
+(push 'haml-mode el-get-sources)
 (push 'yaml-mode el-get-sources)
 
 (push 'gist el-get-sources)

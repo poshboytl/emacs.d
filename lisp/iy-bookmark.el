@@ -33,7 +33,12 @@ LAXP non-nil means use lax completion."
                                                   (concat prompt (format " (%s): " default))
                                                 (concat prompt ": ")))
              (str                             (ido-completing-read
-                                               prompt (mapcar 'car alist) pred (not laxp) nil
+                                               prompt
+                                               (mapcar
+                                                (lambda (e)
+                                                  (if (listp e) (car e) e))
+                                                alist)
+                                               pred (not laxp) nil
                                                (or hist 'bookmark-history) default)))
         (if (and (string-equal "" str) default) default str)))))
 
@@ -50,12 +55,13 @@ LAXP non-nil means use lax completion."
         (ev last-command-event)
         (echo-keystrokes nil))
     (while (not done)
-      (cond ((or (eq ev ?,) (eq ev ?\M-,)) (bmkp-next-bookmark-this-buffer 1))
-            ((or (eq ev ?.) (eq ev ?\M-.)) (bmkp-previous-bookmark-this-buffer 1))
-            ((eq ev ?<) (bmkp-next-bookmark 1))
-            ((eq ev ?>) (bmkp-previous-bookmark 1))
-            ((eq (event-basic-type ev) ?/) (bookmark-bmenu-list))
-            (t (setq done t)))
+      (ignore-errors
+        (cond ((or (eq ev ?,) (eq ev ?\M-,)) (bmkp-next-bookmark-this-buffer 1))
+              ((or (eq ev ?.) (eq ev ?\M-.)) (bmkp-previous-bookmark-this-buffer 1))
+              ((eq ev ?<) (bmkp-next-bookmark 1))
+              ((eq ev ?>) (bmkp-previous-bookmark 1))
+              ((eq (event-basic-type ev) ?/) (bookmark-bmenu-list))
+              (t (setq done t))))
       (when (not done)
         (setq ev (read-event))))
     (push ev unread-command-events)))
@@ -69,7 +75,7 @@ LAXP non-nil means use lax completion."
 (define-key iy-map (kbd ">") 'iy-bmkp-navigation)
 (define-key iy-map (kbd ",") 'iy-bmkp-navigation)
 (define-key iy-map (kbd "M-,") 'iy-bmkp-navigation)
-(define-key iy-map (kbd "<") 'iy-bmpk-navigation)
+(define-key iy-map (kbd "<") 'iy-bmkp-navigation)
 (define-key iy-map (kbd "/") 'bookmark-bmenu-list)
 (define-key iy-map (kbd "M-/") 'bookmark-bmenu-list)
 

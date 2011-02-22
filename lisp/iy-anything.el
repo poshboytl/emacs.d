@@ -1,9 +1,12 @@
 (require 'iy-keymap)
+(require 'iy-eproject)
 
 ;;; Libraries
-(push '(:name anything
-              :after iy-el-get-after-anything)
-      el-get-sources)
+(add-to-list
+ 'el-get-sources
+ '(:name anything
+         :after iy-el-get-after-anything)
+ 'append)
 
 (defun iy-el-get-after-anything ()
   (require 'anything-config)
@@ -12,7 +15,6 @@
   ;;; Sources
   (setq anything-sources
         '(
-          ;; eproject-anything-c-source-projects
           anything-c-source-ffap-line
           anything-c-source-ffap-guesser
           anything-c-source-buffers+
@@ -21,7 +23,6 @@
           anything-c-source-recentf
           anything-c-source-file-name-history
           anything-c-source-bookmarks
-          ;; eproject-anything-c-source-files
           anything-c-source-locate
           anything-c-source-w3m-bookmarks))
   ;; anything-c-source-complex-command-history

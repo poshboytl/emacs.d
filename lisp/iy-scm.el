@@ -3,10 +3,10 @@
 (add-to-list 'auto-mode-alist '("\\.gitconfig\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.git/config\\'" . conf-mode))
 
+(push '(:name magit :features nil) el-get-sources)
 (push '(:name git-emacs
               :features git-emacs-autoloads)
       el-get-sources)
-(push '(:name magit :features nil) el-get-sources)
 
 (autoload 'magit-status "magit" nil t)
 

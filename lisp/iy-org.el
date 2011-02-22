@@ -42,7 +42,7 @@
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
-        (800 900 1000 1100 1200 1300 1400 1500 1600 1700)))
+        (600 800 1000 1200 1400 1600 1800 2000 2200)))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "LATER(l)"
@@ -69,11 +69,10 @@
                       ("@mail" . ?m)
                       (:endgroup . nil)
                       ("project" . ?p)
-                      ("yeogirl" . ?y)
                       ("server" . ?s)
                       ("blog" . ?b)
                       ("event" . ?e)
-                      ("izs" . ?i)
+                      ("intridea" . ?i)
                       ("family" . ?f)
                       ("note" . ?n)
                       ("next" . ?x)
@@ -142,7 +141,7 @@
 (setq org-yank-adjusted-subtrees nil)
 (setq org-use-fast-todo-selection t)
 (setq org-directory (concat iy-dropbox-dir "g/org"))
-(setq org-agenda-files (list (concat iy-dropbox-dir "g/org")))
+(setq org-agenda-files (list (concat iy-dropbox-dir "g/org") (concat iy-dropbox-dir "g/org/projects")))
 (setq org-default-notes-file (concat org-directory "inbox.org"))
 (setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
 (setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/from_mobile.org"))

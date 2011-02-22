@@ -53,7 +53,7 @@
   (iy-init-load-modules)
 
   (push 'package el-get-sources)
-  (el-get 'sync))
+  (el-get 'wait))
 
 (iy-init)
 

@@ -77,20 +77,11 @@
         (ad-set-arg 0 (replace-regexp-in-string
                        (car match) (cdr match) my-url)))))
 
-(defun jao-w3m-go-to-linknum ()
-  "Turn on link numbers and ask for one to go to."
-  (interactive)
-  (let ((active w3m-link-numbering-mode))
-    (when (not active) (w3m-link-numbering-mode))
-    (unwind-protect
-        (w3m-move-numbered-anchor (read-number "Anchor number: "))
-      (when (not active) (w3m-link-numbering-mode)))))
-
 (defun iy-el-get-after-emacs-w3m ()
   (require 'w3m-lnum)
+  (w3m-link-numbering-mode)
   (define-key w3m-mode-map "o" 'wicked-w3m-open-current-page-in-default-browser)
   (define-key w3m-mode-map "O" 'wicked-w3m-open-link-or-image-in-default-browser)
-  (define-key w3m-mode-map "f" 'jao-w3m-go-to-linknum)
   (define-key w3m-mode-map "," 'w3m-previous-buffer)
   (define-key w3m-mode-map "." 'w3m-next-buffer)
   (define-key w3m-mode-map (kbd "C-w") 'w3m-delete-buffer)
