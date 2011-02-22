@@ -34,4 +34,6 @@
 
 (push 'gist el-get-sources)
 
+(push 'full-ack el-get-sources)
+
 (provide 'iy-packages)
