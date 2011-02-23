@@ -1,3 +1,4 @@
+
 ;;; iy-org --- config for Orgmode
 
 (require 'iy-dep)
@@ -42,7 +43,7 @@
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
-        (600 800 1000 1200 1400 1600 1800 2000 2200)))
+        (800 1000 1200 1400 1600 1800 2000 2200 2400)))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "LATER(l)"
