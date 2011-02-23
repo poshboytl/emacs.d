@@ -105,6 +105,21 @@
         (setq ev (read-event))))
     (push ev unread-command-events)))
 
+;;; Organization
+
+(if (fboundp 'fold-dwim-toggle)
+    (progn
+      (define-key iy-map (kbd "i") 'fold-dwim-toggle)
+      (define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
+      (define-key iy-map (kbd "I") 'fold-dwim-hide-all)
+      (define-key iy-map (kbd "C-i") 'fold-dwim-show-all))
+  (define-key iy-map (kbd "i") 'hs-toggle-hiding)
+  (define-key iy-map (kbd "M-i") 'hs-toggle-hiding)
+  (define-key iy-map (kbd "I") 'hs-hide-all)
+  (define-key iy-map (kbd "C-i") 'hs-show-all))
+(define-key iy-map (kbd "u") 'hs-hide-level)
+(define-key iy-map (kbd "M-u") 'hs-hide-level)
+
 ;;; Buffer/File
 (global-set-key (kbd "C-M-l") 'iy-switch-to-previous-buffer)
 

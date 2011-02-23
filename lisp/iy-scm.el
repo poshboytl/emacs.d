@@ -22,7 +22,10 @@
 (add-hook 'magit-mode-hook 'iy/magit-mode-init)
 
 (defun iy/magit-log-edit-mode-init ()
-  (flyspell-mode 1))
+  (flyspell-mode 1)
+  (auto-fill-mode t)
+  (setq fill-column 72))
+
 (add-hook 'magit-log-edit-mode-hook 'iy/magit-log-edit-mode-init)
 
 (provide 'iy-scm)

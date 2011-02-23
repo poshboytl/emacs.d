@@ -43,4 +43,7 @@
                        (autoload 'pivotal "pivotal-tracker" nil t)))
       el-get-sources)
 
+;; fix flyspell
+(defadvice called-interactively-p (before iy-fix-interactively-p (&optional arg) activate))
+
 (provide 'iy-packages)
