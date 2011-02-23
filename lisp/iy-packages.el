@@ -36,4 +36,11 @@
 
 (push 'full-ack el-get-sources)
 
+(push '(:name pivotal-tracker
+              :type git
+              :url "git://github.com/jxa/pivotal-tracker.git"
+              :after (lambda ()
+                       (autoload 'pivotal "pivotal-tracker" nil t)))
+      el-get-sources)
+
 (provide 'iy-packages)
