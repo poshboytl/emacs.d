@@ -1,3 +1,5 @@
+(eval-when-compile (require 'el-get))
+
 (require 'iy-keymap)
 (require 'iy-eproject)
 
