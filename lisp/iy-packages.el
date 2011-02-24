@@ -62,4 +62,6 @@
 
 (push 'fringe-helper el-get-sources)
 
+(push '(:name company :type elpa) el-get-sources)
+
 (provide 'iy-packages)
