@@ -2,7 +2,7 @@
 
 ;;; Load libraries
 (require 'iy-dep)
-(require 'iy-packages)
+(require 'iy-keymap)
 
 ;;; Move
 (global-set-key (kbd "M-g") 'goto-line)
@@ -127,6 +127,8 @@
 (global-set-key (kbd "M-O") 'other-frame)
 
 ;;; Fx
+(global-set-key (kbd "<f2>") 'recentf-open-files)
+
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
 
