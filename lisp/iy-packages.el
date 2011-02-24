@@ -34,8 +34,6 @@
 
 (push 'gist el-get-sources)
 
-(push 'full-ack el-get-sources)
-
 (push '(:name pivotal-tracker
               :type git
               :url "git://github.com/jxa/pivotal-tracker.git"
