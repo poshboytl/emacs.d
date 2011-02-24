@@ -8,7 +8,8 @@
 ;;   (shell-command-completion-mode))
 
 (require 'iy-go-to-char)
-(eval-when-compile (require 'el-get))
+
+(recentf-mode)
 
 (autoload 'zap-up-to-char "misc" "kill up to but not including char" t)
 
@@ -41,7 +42,24 @@
                        (autoload 'pivotal "pivotal-tracker" nil t)))
       el-get-sources)
 
+(push 'browse-kill-ring el-get-sources)
+
+(push '(:name kill-ring-search
+              :type elpa)
+      el-get-sources)
+
+(global-set-key (kbd "C-M-y") 'browse-kill-ring)
+(defadvice yank-pop (around kill-ring-search-maybe (arg) activate)
+  "If last action was not a yank, run `kill-ring-search' instead."
+  (interactive "p")
+  (if (not (eq last-command 'yank))
+      (kill-ring-search)
+    (barf-if-buffer-read-only)
+    ad-do-it))
+
 ;; fix flyspell
 (defadvice called-interactively-p (before iy-fix-interactively-p (&optional arg) activate))
+
+(push 'fringe-helper el-get-sources)
 
 (provide 'iy-packages)
