@@ -30,8 +30,6 @@
   (hs-minor-mode t)
   (flyspell-prog-mode)
   (ruby-electric-mode t)
-  (when (fboundp 'gtags-mode)
-    (gtags-mode t))
   (turn-on-auto-fill)
   (local-set-key (kbd "<return>") 'newline-and-indent)
   (local-set-key (kbd "C-h h") 'yari)

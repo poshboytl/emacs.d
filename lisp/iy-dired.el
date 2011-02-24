@@ -94,8 +94,6 @@
 (defun iy/dired-mode-init ()
   (hl-line-mode)
   (dired-omit-mode 1)
-  (when (fboundp 'gtags-mode)
-    (gtags-mode))
   (define-key dired-mode-map "E" 'wdired-change-to-wdired-mode)
   (define-key dired-mode-map
     [menu-bar immediate wdired-change-to-wdired-mode]
