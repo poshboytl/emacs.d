@@ -1,7 +1,5 @@
-(eval-when-compile (require 'el-get))
-
+(require 'iy-dep)
 (require 'iy-keymap)
-(require 'iy-eproject)
 
 ;;; Libraries
 (add-to-list
