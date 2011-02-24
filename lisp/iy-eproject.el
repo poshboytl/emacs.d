@@ -1,5 +1,3 @@
-(eval-when-compile (require 'el-get))
-
 (push '(:name eproject
               :type git
               :url "git://github.com/doitian/eproject.git"

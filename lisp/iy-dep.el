@@ -1,5 +1,9 @@
 ;;; Dependencies
 
+;;; Declare Variables
+(unless (boundp 'el-get-sources)
+  (setq el-get-sources nil))
+
 ;;; Constants
 
 (defconst iy-config-dir (file-name-as-directory user-emacs-directory))
@@ -10,6 +14,10 @@
 ;;; helper functions
 (defun iy-set-default-as-directory (sym val)
   (set-default sym (file-name-as-directory val)))
+
+(defun iy-require-maybe (feature &optional filename noerror)
+  (unless (memq feature iy-blacklist)
+    (require feature filename noerror)))
 
 ;;; Customizations
 
