@@ -1,7 +1,7 @@
 (require 'iy-dep)
 
 ;; customization
-(set-default ido-save-directory-list-file (concat iy-data-dir "ido.last"))
+(setq ido-save-directory-list-file (concat iy-data-dir "ido.last"))
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (setq ido-read-file-name-as-directory-commands nil)
