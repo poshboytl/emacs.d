@@ -2,7 +2,6 @@
 (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 
-(push 'rinari el-get-sources)
 (push '(:name rvm
               :type git
               :url "git://github.com/senny/rvm.el.git"
@@ -16,17 +15,26 @@
       el-get-sources)
 (autoload 'ruby-electric-mode "ruby-electric")
 
+(push 'yari el-get-sources)
+(defalias 'ri 'yari)
+
+(push 'ruby-block el-get-sources)
+(make-variable-buffer-local 'ruby-block-mode)
+
+;; Load rinari at last, so it is initialized before other packages.
+;; Rinari bundled ruby-mode shoud be used instead of the system default.
+(push 'rinari el-get-sources)
+
 (defun iy/ruby-mode-init ()
   (rinari-minor-mode t)
-  ;; (ruby-block-mode t)
   (hs-minor-mode t)
   (flyspell-prog-mode)
-  (yas/fix-keybindings)
   (ruby-electric-mode t)
-  ;; (gtags-mode t)
+  (when (fboundp 'gtags-mode)
+    (gtags-mode t))
   (turn-on-auto-fill)
   (local-set-key (kbd "<return>") 'newline-and-indent)
-  ;; (local-set-key (kbd "C-h h") 'ri)
+  (local-set-key (kbd "C-h h") 'yari)
   ;; (local-set-key (kbd "C-h .") 'rct-complete-symbol)
   (remove-hook 'before-save-hook 'ruby-mode-set-encoding))
 
