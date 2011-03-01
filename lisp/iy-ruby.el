@@ -26,6 +26,16 @@
 ;; Rinari bundled ruby-mode shoud be used instead of the system default.
 (push 'rinari el-get-sources)
 
+(push '(:name cucumber
+              :type git
+              :url "git://github.com/michaelklishin/cucumber.el.git"
+              :after (lambda ()
+                       (autoload 'feature-mode "feature-mode" nil t)
+                       (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))))
+      el-get-sources)
+(push 'rspec-mode el-get-sources)
+(setq rspec-use-rvm t)
+
 (defun iy/ruby-mode-init ()
   (rinari-minor-mode t)
   (hs-minor-mode t)
