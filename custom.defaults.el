@@ -159,6 +159,7 @@
  '(recentf-save-file (concat iy-data-dir "recentf"))
  '(reftex-default-bibliography (quote ("biblio.bib" "my.bib")))
  '(ruby-block-highlight-face (quote highlight))
+ '(require-final-newline nil)
  '(scroll-bar-mode nil)
  '(scroll-step 1)
  '(semantic-idle-scheduler-work-idle-time 40)
