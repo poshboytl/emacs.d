@@ -37,6 +37,7 @@
  '(bookmark-default-file (concat iy-data-dir "bookmark"))
  '(bookmark-use-annotations nil)
  '(browse-url-browser-function (quote w3m-browse-url))
+ '(calendar-week-start-day 1)
  '(clean-buffer-list-delay-special 3600)
  '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
  '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
