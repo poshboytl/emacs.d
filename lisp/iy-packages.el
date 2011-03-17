@@ -13,8 +13,6 @@
 
 (autoload 'zap-up-to-char "misc" "kill up to but not including char" t)
 
-(push '(:name company :type elpa) el-get-sources)
-
 (push '(:name thing-cmds
               :type emacswiki) el-get-sources)
 (autoload 'mark-thing "thing-cmds"

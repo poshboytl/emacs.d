@@ -1,4 +1,6 @@
+(require 'iy-dep)
 (require 'iy-keymap)
+(require 'iy-company)
 
 ;; add nxhtml in the end, because it will load old org
 (add-to-list

@@ -53,7 +53,7 @@
   (iy-init-load-modules)
 
   ;; reverse the list
-  (setq el-get-sources (cons 'package (nreverse a)))
+  (setq el-get-sources (cons 'package (nreverse el-get-sources)))
   (el-get 'wait))
 
 (iy-init)
