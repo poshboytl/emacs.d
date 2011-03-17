@@ -22,10 +22,6 @@
 (push 'ruby-block el-get-sources)
 (make-variable-buffer-local 'ruby-block-mode)
 
-;; Load rinari at last, so it is initialized before other packages.
-;; Rinari bundled ruby-mode shoud be used instead of the system default.
-(push 'rinari el-get-sources)
-
 (push '(:name cucumber
               :type git
               :url "git://github.com/michaelklishin/cucumber.el.git"
@@ -35,6 +31,10 @@
       el-get-sources)
 (push 'rspec-mode el-get-sources)
 (setq rspec-use-rvm t)
+
+;; Load rinari at last, so it is initialized before other packages.
+;; Rinari bundled ruby-mode shoud be used instead of the system default.
+(push 'rinari el-get-sources)
 
 (defun iy/ruby-mode-init ()
   (rinari-minor-mode t)
