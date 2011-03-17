@@ -13,7 +13,7 @@
 ;;; Helpers
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(defalias 'save-pwd 'xsteve/save-current-directory)
+(defalias 'save-pwd 'xsteve-save-current-directory)
 (defalias 'qrr 'query-replace-regexp)
 (defalias 'rr 'replace-regexp)
 (defalias 'rb 'revert-buffer-no-confirm)
@@ -22,6 +22,8 @@
 (defalias 'jabber 'jabber-connect-all)
 (defalias 'aa 'anything-apropos)
 (defalias 'org 'org-iswitchb)
+(defalias 'sp 'speedbar-get-focus)
+
 (fset 'man 'woman)
 (defun backup-dired ()
   (interactive)
