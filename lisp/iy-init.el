@@ -52,7 +52,8 @@
   (unless (memq 'iy-theme iy-blacklist) (require 'iy-theme))
   (iy-init-load-modules)
 
-  (push 'package el-get-sources)
+  ;; reverse the list
+  (setq el-get-sources (cons 'package (nreverse a)))
   (el-get 'wait))
 
 (iy-init)

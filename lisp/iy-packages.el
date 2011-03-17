@@ -13,6 +13,8 @@
 
 (autoload 'zap-up-to-char "misc" "kill up to but not including char" t)
 
+(push '(:name company :type elpa) el-get-sources)
+
 (push '(:name thing-cmds
               :type emacswiki) el-get-sources)
 (autoload 'mark-thing "thing-cmds"
@@ -29,9 +31,9 @@
 (push 'highlight-symbol el-get-sources)
 (push 'highlight-parentheses el-get-sources)
 
-(push 'sass-mode el-get-sources)
-(push 'haml-mode el-get-sources)
 (push 'yaml-mode el-get-sources)
+(push 'haml-mode el-get-sources)
+(push 'sass-mode el-get-sources)
 
 (push 'gist el-get-sources)
 
@@ -61,7 +63,5 @@
 (defadvice called-interactively-p (before iy-fix-interactively-p (&optional arg) activate))
 
 (push 'fringe-helper el-get-sources)
-
-(push '(:name company :type elpa) el-get-sources)
 
 (provide 'iy-packages)

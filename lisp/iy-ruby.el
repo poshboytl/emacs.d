@@ -3,6 +3,8 @@
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
 
+(push 'rinari el-get-sources)
+
 (push '(:name rvm
               :type git
               :url "git://github.com/senny/rvm.el.git"
@@ -31,10 +33,6 @@
       el-get-sources)
 (push 'rspec-mode el-get-sources)
 (setq rspec-use-rvm t)
-
-;; Load rinari at last, so it is initialized before other packages.
-;; Rinari bundled ruby-mode shoud be used instead of the system default.
-(push 'rinari el-get-sources)
 
 (defun iy/ruby-mode-init ()
   (rinari-minor-mode t)
