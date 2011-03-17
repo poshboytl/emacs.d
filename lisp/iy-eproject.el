@@ -1,9 +1,17 @@
-(push '(:name eproject
-              :type git
-              :url "git://github.com/doitian/eproject.git"
-              :features eproject
-              :after iy-el-get-after-eproject)
-      el-get-sources)
+(eval-when-compile (require 'el-get))
+
+(eval-and-compile
+  (push '(:name eproject
+                :type git
+                :url "git://github.com/doitian/eproject.git"
+                :features eproject
+                :after iy-el-get-after-eproject)
+        el-get-sources))
+
+(eval-when-compile
+  (progn
+    (el-get)
+    (require 'eproject)))
 
 (defun iy-el-get-after-eproject ()
   (defadvice eproject--buffer-file-name (after guess-directory activate)
