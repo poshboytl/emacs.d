@@ -2,7 +2,6 @@
 (push '(:name xcscope :after iy-el-get-after-xcscope :localname "xcscope.el")
       el-get-sources)
 (push '(:name etags-select :type elpa) el-get-sources)
-(push
 
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)

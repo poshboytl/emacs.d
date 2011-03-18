@@ -1,8 +1,10 @@
-
 ;;; iy-org --- config for Orgmode
 
 (require 'iy-dep)
+(require 'iy-daemon)
 (require 'iy-keymap)
+
+(push 'org-mode el-get-sources)
 
 ;; enable org-mac-protocol for Mac OS X
 (when (eq system-type 'darwin)
@@ -17,8 +19,6 @@
                     "mv orgQSLib/*.scpt orgQSLib/escape.rb ~/Library/Scripts/orgQSLib")
            :features org-mac-protocol)
    el-get-sources))
-
-(push 'org-mode el-get-sources)
 
 ;;; Modules
 (setq org-modules

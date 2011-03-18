@@ -3,11 +3,10 @@
 (require 'iy-company)
 
 ;; add nxhtml in the end, because it will load old org
-(add-to-list
- 'el-get-sources
+(push
  '(:name nxhtml
          :after iy-el-get-after-nxhtml)
- t)
+ el-get-sources)
 
 (defun iy-el-get-after-nxhtml ()
   (defun iy-popcmp-popup-os ()
