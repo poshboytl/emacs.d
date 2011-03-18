@@ -50,7 +50,6 @@
 
   ;; load some libraries first
   (unless (memq 'iy-theme iy-blacklist) (require 'iy-theme))
-  (unless (memq 'iy-cedet iy-blacklist) (require 'iy-cedet))
   (unless (memq 'iy-org iy-blacklist) (require 'iy-org))
   (iy-init-load-modules)
 

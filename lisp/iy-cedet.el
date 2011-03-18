@@ -1,14 +1,13 @@
+(require 'iy-dep)
+(require 'iy-eproject)
+
 (push '(:name cedet
-              :build (list "touch `find . -name Makefile`"
-                           (concat "make EMACS=" el-get-emacs))
               :autoloads nil
-              :features nil
               :after iy-after-el-get-cedet)
       el-get-sources)
-(el-get 'sync)
 
 (defun iy-after-el-get-cedet ()
-  (load (concat el-get-dir "cedet/common/cedet"))
+  (load "cedet")
   (setq senator-prefix-key [(control ?,)])
   (defvar iy-cedet-ignore-projects '(".emacs.d"))
   (defun iy-semanticdb-cache-directory-p(directory)
