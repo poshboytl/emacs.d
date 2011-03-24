@@ -3,7 +3,9 @@
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
 
-(push 'rinari el-get-sources)
+(push '(:name rinari
+              :after (lambda () (load (concat el-get-dir "rinari/util/ruby-mode"))))
+      el-get-sources)
 
 (push '(:name rvm
               :type git
