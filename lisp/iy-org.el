@@ -36,13 +36,14 @@
         org-w3m
         org-gnus
         org-clock
+        org-timer
         ))
 
 ;;; Customization
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
-        (900 1100 1300 1400 1600 1800 2000 2200 2400)))
+        (900 1100 1300 1400 1600 1800 2000 2200 2400 2500)))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "LATER(l)"
@@ -59,33 +60,17 @@
 ;;   ("@tennisclub" . ?t)
 ;;   (:endgroup . nil)
 (setq org-tag-alist '((:startgroup . nil)
-                      ("@office" . ?o)
+                      ("@computer" . ?c)
                       ("@home" . ?h)
                       ("@downtown" . ?d)
-                      ("@gym" . ?g)
                       ("@reading" . ?r)
-                      ("@computer" . ?c)
                       ("@call" . ?l)
                       ("@mail" . ?m)
                       (:endgroup . nil)
                       ("project" . ?p)
-                      ("server" . ?s)
-                      ("blog" . ?b)
                       ("event" . ?e)
-                      ("intridea" . ?i)
-                      ("family" . ?f)
-                      ("note" . ?n)
-                      ("next" . ?x)
-                      (:startgroup . nil)
-                      ("plan" . ?1)
-                      ("research" . ?2)
-                      ("design" . ?3)
-                      ("implement" . ?4)
-                      ("test" . ?5)
-                      ("review" . ?6)
-                      ("experiment" . ?7)
-                      ("documenting" . ?8)
-                      (:endgroup . nil)))
+                      ("idea" . ?i)
+                      ("next" . ?n)))
 
 (setq org-todo-state-tags-triggers
       '(("WAITING" ("next"))
@@ -101,7 +86,7 @@
 
 (setq org-global-properties
       '(("STYLE_ALL" . "habit")
-        ("Effort_ALL" . "0:10 0:30 1:00 2:00 3:00 4:00 6:00 8:00 12:00 16:00 24:00")))
+        ("Effort_ALL" . "0:30 1:00 1:30 2:00 2:30 3:00 3:30 4:00")))
 
 (setq org-tags-exclude-from-inheritance '("project"))
 (setq org-columns-default-format "%42ITEM %TAGS %TODO{T} %5Effort(Time){:} %6CLOCKSUM{Total} %SCHEDULED")
@@ -126,6 +111,7 @@
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-skip-timestamp-if-done t)
+(setq org-agenda-span 'day)
 (setq org-tags-column -80)
 (setq org-agenda-tags-column -80)
 (setq org-enforce-todo-checkbox-dependencies t)
@@ -219,149 +205,6 @@
       (replace-match "")
       (org-clock-in))))
 
-
-;;; Report
-(defun org-dblock-write:rangereport (params)
-  "Display day-by-day time reports."
-  (let* ((ts (plist-get params :tstart))
-         (te (plist-get params :tend))
-         (start (time-to-seconds
-                 (apply 'encode-time (org-parse-time-string ts))))
-         (end (time-to-seconds
-               (apply 'encode-time (org-parse-time-string te))))
-         day-numbers)
-    (setq params (plist-put params :tstart nil))
-    (setq params (plist-put params :end nil))
-    (while (<= start end)
-      (save-excursion
-        (insert "\n\n"
-                (format-time-string (car org-time-stamp-formats)
-                                    (seconds-to-time start))
-                "----------------\n")
-        (org-dblock-write:clocktable
-         (plist-put
-          (plist-put
-           params
-           :tstart
-           (format-time-string (car org-time-stamp-formats)
-                               (seconds-to-time start)))
-          :tend
-          (format-time-string (car org-time-stamp-formats)
-                              (seconds-to-time end))))
-        (setq start (+ 86400 start))))))
-
-;;; Agenda Load
-(defun sacha-org-agenda-load (&optional match)
-  "Can be included in `org-agenda-custom-commands'."
-  (let ((inhibit-read-only t)
-        (time (sacha-org-calculate-free-time
-               ;; today
-               (calendar-gregorian-from-absolute org-starting-day)
-               ;; now if today AND after starting time, else start of day
-               (if (= org-starting-day
-                      (time-to-days (current-time)))
-                   (max
-                    (let* ((now (decode-time))
-                           (cur-hour (nth 2 now))
-                           (cur-min (nth 1 now)))
-                      (+ (* cur-hour 60) cur-min))
-                    (let ((start (car (elt org-agenda-time-grid 2))))
-                      (+ (* (/ start 100) 60) (% start 100))))
-                 (let ((start (car (elt org-agenda-time-grid 2))))
-                   (+ (* (/ start 100) 60) (% start 100))))
-               ;; until the last time in my time grid
-               (let ((last (car (last (elt org-agenda-time-grid 2)))))
-                 (+ (* (/ last 100) 60) (% last 100))))))
-    (goto-char (point-max))
-    (insert (format
-             "%.1f%% load: %d minutes to be scheduled, %d minutes free, %d minutes gap"
-             (or (cdr time) (/ (car time) (* .01 (cdr time))))
-             (car time)
-             (cdr time)
-             (- (cdr time) (car time))))))
-
-;; I do not use appt, just copy function appt-convert-time here
-(defun iy-convert-time (time2conv)
-  "Convert hour:min[am/pm] format TIME2CONV to minutes from midnight.
-A period (.) can be used instead of a colon (:) to separate the
-hour and minute parts."
-  ;; Formats that should be accepted:
-  ;;   10:00 10.00 10h00 10h 10am 10:00am 10.00am
-  (let ((min (if (string-match "[h:.]\\([0-9][0-9]\\)" time2conv)
-                 (string-to-number (match-string 1 time2conv))
-               0))
-        (hr (if (string-match "[0-9]*[0-9]" time2conv)
-                (string-to-number (match-string 0 time2conv))
-              0)))
-    ;; Convert the time appointment time into 24 hour time.
-    (cond ((and (string-match "pm" time2conv) (< hr 12))
-           (setq hr (+ 12 hr)))
-          ((and (string-match "am" time2conv) (= hr 12))
-           (setq hr 0)))
-    ;; Convert the actual time into minutes.
-    (+ (* hr 60) min)))
-
-(defun iy-org-get-entries (files date)
-  (let (entry entries)
-    (dolist (file files)
-      (catch 'nextfile
-        (org-check-agenda-file file)
-        (setq entry (org-agenda-get-day-entries
-                     file date :scheduled :timestamp))
-        (setq entries (append entry entries))))
-    entries))
-
-(defun sacha-org-calculate-free-time (date start-time end-of-day)
-  "Return a cons cell of the form (TASK-TIME . FREE-TIME) for DATE, given START-TIME and END-OF-DAY.
-DATE is a list of the form (MONTH DAY YEAR).
-START-TIME and END-OF-DAY are the number of minutes past midnight."
-  (save-window-excursion
-    (let* ((entries (iy-org-get-entries (org-agenda-files) date))
-           (total-unscheduled 0)
-           (total-gap 0)
-           (last-timestamp start-time)
-           scheduled-entries)
-      ;; For each item on the list
-      (dolist (entry entries)
-        (let ((time (get-text-property 1 'time entry))
-              (effort (org-get-effort (get-text-property 1 'org-hd-marker entry))))
-          (cond
-           ((and time
-                 (string-match "\\([^-]+\\)-\\([^-]+\\)" time))
-            (push (cons
-                   (save-match-data (iy-convert-time (match-string 1 time)))
-                   (save-match-data (iy-convert-time (match-string 2 time))))
-                  scheduled-entries))
-           ((and time
-                 (string-match "\\([^-]+\\)\\.+" time)
-                 (not (eq effort nil)))
-            (let ((start (save-match-data (iy-convert-time (match-string 1 time))))
-                  (effort (save-match-data (iy-convert-time effort))))
-              (push (cons start (+ start effort)) scheduled-entries)))
-           ((not (eq effort nil))
-            (setq total-unscheduled (+ (iy-convert-time effort)
-                                       total-unscheduled))))))
-      ;; Sort the scheduled entries by time
-      (setq scheduled-entries (sort scheduled-entries (lambda (a b) (< (car a) (car b)))))
-      (while scheduled-entries
-        (let ((start (car (car scheduled-entries)))
-              (end (cdr (car scheduled-entries))))
-          (cond
-           ;; are we in the middle of this timeslot?
-           ((and (>= last-timestamp start)
-                 (<= last-timestamp end))
-            ;; move timestamp later, no change to time
-            (setq last-timestamp end))
-           ;; are we completely before this timeslot?
-           ((< last-timestamp start)
-            ;; add gap to total, skip to the end
-            (setq total-gap (+ (- start last-timestamp) total-gap))
-            (setq last-timestamp end)))
-          (setq scheduled-entries (cdr scheduled-entries))))
-      (if (< last-timestamp end-of-day)
-          (setq total-gap (+ (- end-of-day last-timestamp) total-gap)))
-      (cons total-unscheduled total-gap))))
-
 ;;; Template
 (setq
  org-remember-templates
@@ -378,16 +221,13 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
  '(("r" "Notes" entry (file+headline "inbox.org" "Notes")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i"
     :prepend t)
-   ("i" "Ideas" entry (file+headline "inbox.org" "Ideas")
-    "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i"
-    :prepend t)
    ("t" "TODO" entry (file+headline "inbox.org" "Tasks")
     "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
    ("s" "SOMEDAY" entry (file+headline "inbox.org" "Someday")
     "* SOMEDAY %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
    ("j" "Journal" entry (file+datetree "journal.org")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
-   ("x" "Clipboard" entry (file+headline "inbox.org" "Clipboard")
+   ("x" "Clipboard" entry (file+headline "inbox.org" "Notes")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %x"
     :prepend t :empty-lines 1)
    ("b" "Default template" entry (file+headline "inbox.org" "Bookmarks")
@@ -403,28 +243,13 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
         ("lt" "TODO List"
          ((todo "GOING|PAUSE")
           (todo "TODO")
-          (todo "WAITING|LATER"))
-         ((org-agenda-todo-ignore-scheduled nil)
-          (org-agenda-todo-ignore-deadlines nil)
-          (org-agenda-todo-ignore-with-date nil)))
+          (todo "WAITING|LATER")))
         ("lh" "Home Lists"
          ((tags-todo "@home/TODO|GOING|PAUSE")
           (tags-todo "@reading/TODO|GOING|PAUSE")
           (tags-todo "@computer/TODO|GOING|PAUSE")
           (tags-todo "@mail/TODO|GOING|PAUSE")
-          (tags-todo "@call/TODO|GOING|PAUSE"))
-         ((org-agenda-todo-ignore-scheduled nil)
-          (org-agenda-todo-ignore-deadlines nil)
-          (org-agenda-todo-ignore-with-date nil)))
-        ("lo" "Office Lists"
-         ((tags-todo "@office/TODO|GOING|PAUSE")
-          (tags-todo "@reading/TODO|GOING|PAUSE")
-          (tags-todo "@computer/TODO|GOING|PAUSE")
-          (tags-todo "@mail/TODO|GOING|PAUSE")
-          (tags-todo "@call/TODO|GOING|PAUSE"))
-         ((org-agenda-todo-ignore-scheduled nil)
-          (org-agenda-todo-ignore-deadlines nil)
-          (org-agenda-todo-ignore-with-date nil)))
+          (tags-todo "@call/TODO|GOING|PAUSE")))
         ("ld" "Downtown Lists"
          ((tags-todo "@downtown/TODO|GOING|PAUSE")
           (tags-todo "@mail/TODO|GOING|PAUSE")
@@ -441,26 +266,24 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
           (org-agenda-todo-ignore-with-date nil)))
 
         ("d" "Daily Action List"
-         ((agenda "" ((org-agenda-ndays 1)
+         ((agenda "" ((org-agenda-span 'day)
                       (org-agenda-sorting-strategy
                        (quote ((agenda time-up priority-down tag-up) )))
                       (org-deadline-warning-days 0)))
-          (sacha-org-agenda-load)
-          (todo "GOING|PAUSE")
-          (tags "project/-DONE-CANCELED")
-          (todo "TODO")
-          (todo "WAITING|LATER")
-          (tags "inbox-CONTAINER=\"true\"")))
+          (todo "GOING|PAUSE")))
 
-        ("p" "Projects" ((tags "project/-DONE-CANCELED")))
+        ("D" "Export Daily Action List"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-agenda-sorting-strategy
+                       (quote ((agenda time-up priority-down tag-up) )))
+                      (org-deadline-warning-days 0)))
+          (todo "GOING|PAUSE"))
+         nil
+         ("~/Documents/today_agenda.html"))
 
-        ("r" "Weekly Review"
-         ((todo)
-          (todo "WARNING")
-          (todo "SOMEDAY")
-          (tags "project/-DONE-CANCELED")
-          (stuck "")
-          (tags "inbox")))
+        ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
+
+        ("i" "Inbox" tags "inbox-CONTAINER=\"true\"")
 
         ("q" . "Custom queries")
         ("qa" "Archive search" search ""
@@ -468,13 +291,12 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
         ("qA" "Archive tags search" org-tags-view "" 
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
 
-        ("i" "Inbox" tags "inbox")))
+        ))
 
 ;;; Appt
 (appt-activate 1)
 ;; (ignore-errors (org-agenda-to-appt))
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
-;; our little façade-function for djcb-popup
 
 (defun iy/appt-display (min-to-app new-time msg)
   (let ((title (format "Appointment in %d minute(s)" min-to-app)))
@@ -513,6 +335,12 @@ START-TIME and END-OF-DAY are the number of minutes past midnight."
 
 (setq appt-disp-window-function (function iy/appt-display))
 (setq org-show-notification-handler (function iy/org-clock-display))
+
+;; timer for pomodoro
+(setq org-timer-default-timer 25)
+(add-hook 'org-clock-in-hook '(lambda ()
+      (if (not org-timer-current-timer)
+      (org-timer-set-timer '(25)))))
 
 ;; TODO: org-toodledo
 (autoload 'org-toodledo-initialize-org "org-toodledo"
