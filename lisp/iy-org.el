@@ -23,7 +23,6 @@
 ;;; Modules
 (setq org-modules
       '(
-        org-bbdb
         org-bibtex
         org-bookmark
         org-expiry
