@@ -1,10 +1,21 @@
+(require 'iy-keymap)
+
 (push 'full-ack el-get-sources)
 (push '(:name xcscope :after iy-el-get-after-xcscope :localname "xcscope.el")
       el-get-sources)
 (push '(:name etags-select :type elpa) el-get-sources)
+(push 'nav el-get-sources)
 
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)
+(define-key iy-map "e" 'nav-toggle)
+(add-hook 'nav-mode-hook 'iy-nav-mode-init)
+(defun iy-nav-mode-init ()
+  (local-set-key "N" 'nav-make-new-directory)
+  (local-set-key "n" 'next-line)
+  (local-set-key "p" 'previous-line)
+  (local-set-key "b" 'nav-pop-dir)
+  (hl-line-mode))
 
 (defun iy-el-get-after-xcscope ()
   (defcustom cscope-ignore-case t
