@@ -4,7 +4,6 @@ ifeq (,$(findstring darwin,$(OSTYPE)))
 else
   EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
 endif
-OSTYPE=$(shell echo $$OSTYPE)
 
 BATCH=$(EMACS) -batch -q -no-site-file -eval\
   "(setq load-path (cons (expand-file-name \"./lisp/\") (cons (expand-file-name \"./lisp/3rdparty/\") (cons (expand-file-name \"./el-get/el-get/\") load-path))))"
