@@ -43,7 +43,7 @@
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
-        (900 1100 1300 1400 1600 1800 2000 2200 2400 2500)))
+        (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "LATER(l)"
@@ -272,14 +272,13 @@
                       (org-deadline-warning-days 0)))
           (todo "GOING|PAUSE")))
 
-        ("D" "Export Daily Action List"
+        ("g" "Go Today"
          ((agenda "" ((org-agenda-span 'day)
                       (org-agenda-sorting-strategy
                        (quote ((agenda time-up priority-down tag-up) )))
                       (org-deadline-warning-days 0)))
-          (todo "GOING|PAUSE"))
-         nil
-         ("~/Documents/today_agenda.html"))
+          (tags "project/-DONE-CANCELED")
+          (todo "GOING|PAUSE|TODO")))
 
         ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
