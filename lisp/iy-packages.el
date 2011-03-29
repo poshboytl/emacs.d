@@ -33,6 +33,8 @@
 (push 'haml-mode el-get-sources)
 (push 'sass-mode el-get-sources)
 
+(push 'haskell-mode el-get-sources)
+
 (push 'gist el-get-sources)
 
 (push '(:name pivotal-tracker
