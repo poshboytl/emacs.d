@@ -89,7 +89,7 @@
         ("Effort_ALL" . "0:30 1:00 1:30 2:00 2:30 3:00 3:30 4:00")))
 
 (setq org-tags-exclude-from-inheritance '("project"))
-(setq org-columns-default-format "%42ITEM %TAGS %TODO{T} %5Effort(Time){:} %6CLOCKSUM{Total} %SCHEDULED")
+(setq org-columns-default-format "%42ITEM %TAGS %TODO %5Effort(Time){:} %6CLOCKSUM{Total} %SCHEDULED")
 (setq org-read-date-prefer-future 'time)
 (setq org-completion-use-ido t)
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
