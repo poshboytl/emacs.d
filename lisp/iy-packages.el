@@ -65,4 +65,9 @@
 
 (push 'fringe-helper el-get-sources)
 
+(push '(:name dtrt-indent
+              :features nil
+              :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
+      el-get-sources)
+
 (provide 'iy-packages)
