@@ -88,8 +88,12 @@
   ;; (set (make-local-variable 'filladapt-token-table) iy-c-filladapt-token-table)
   ;; (c-setup-filladapt)
   ;; (gtags-mode)
+  (autopair-mode)
+  (setq autopair-handle-action-fns
+        '(
+          autopair-default-handle-action
+          iy-autopair-open-braces))
   (local-set-key (kbd "C-,") 'ctl-comma-map)
-  
   (add-hook 'pre-command-hook 'wcy-cancel-auto-new-line nil t))
 
 ;; see http://ann77.stu.cdut.edu.cn/EmacsAutoNewLineImpv.html
@@ -107,6 +111,14 @@
           (if (and (boundp c-auto-newline) c-auto-newline)
               (progn
                 (delete-blank-lines)))))))
+
+(defun iy-autopair-open-braces (action pair pos-before)
+  (when (and (eq 'opening action)
+             (eq ?\} pair)
+             (looking-back "^[ 	]*"))
+    (save-excursion
+      (newline)
+      (indent-according-to-mode))))
 
 (defun iy-c++-mode-init ()
   (iy-c-mode-init)

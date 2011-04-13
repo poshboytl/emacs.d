@@ -70,4 +70,7 @@
               :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
       el-get-sources)
 
+(push 'autopair el-get-sources)
+(setq autopair-blink nil)
+
 (provide 'iy-packages)
