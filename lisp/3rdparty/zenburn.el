@@ -56,10 +56,14 @@
 
 (defvar zenburn-fg "#dcdccc")
 
-(defvar zenburn-bg-1 "#2b2b2b")
-(defvar zenburn-bg "#3f3f3f")
-(defvar zenburn-bg+1 "#4f4f4f")
-(defvar zenburn-bg+2 "#5f5f5f")
+(defvar zenburn-bg-1 "#1b1b1b")
+(defvar zenburn-bg "#2b2b2b")
+(defvar zenburn-bg+1 "#3f3f3f")
+(defvar zenburn-bg+2 "#4f4f4f")
+;; (defvar zenburn-bg-1 "#2b2b2b")
+;; (defvar zenburn-bg "#3f3f3f")
+;; (defvar zenburn-bg+1 "#4f4f4f")
+;; (defvar zenburn-bg+2 "#5f5f5f")
 (defvar zenburn-red+1 "#dca3a3")
 (defvar zenburn-red "#cc9393")
 (defvar zenburn-red-1 "#bc8383")
@@ -401,7 +405,7 @@ static char *gnus-pointer[] = {
 
           `(button ((t (:foreground ,zenburn-yellow :underline t))))
 
-          `(cursor ((t (:background "#aaaaaa" :foreground nil))))
+          `(cursor ((t (:background "#cdc092" :foreground nil))))
           '(hover-highlight ((t (:underline t :foreground "#f8f893"))))
           '(menu ((t nil)))
           '(mouse ((t (:inherit zenburn-foreground))))
@@ -426,6 +430,11 @@ static char *gnus-pointer[] = {
           '(minimap-active-region-background ((t (:foreground nil
                                                               :background "#233323"))))
           '(which-func ((t (:inherit mode-line))))
+
+          `(anything-dir-priv ((t (:inherit diredp-dir-priv))))
+          `(anything-file-name ((t (:inherit diredp-file-name))))
+          `(anything-header ((t (:inherit diredp-dir-heading))))
+          `(anything-isearch-match ((t (:inherit isearch))))
 
           '(apt-utils-normal-package
             ((t (:inherit zenburn-primary-1))))
