@@ -431,6 +431,7 @@ static char *gnus-pointer[] = {
                                                               :background "#233323"))))
           '(which-func ((t (:inherit mode-line))))
 
+          '(diredp-file-name ((t (:foreground "#DCDCCC"))))
           `(anything-dir-priv ((t (:inherit diredp-dir-priv))))
           `(anything-file-name ((t (:inherit diredp-file-name))))
           `(anything-header ((t (:inherit diredp-dir-heading))))
