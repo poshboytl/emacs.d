@@ -121,8 +121,7 @@
       (indent-according-to-mode))))
 
 (defun iy-c++-mode-init ()
-  (iy-c-mode-init)
-  )
+  (iy-c-mode-init))
 (defun iy-objc-mode-init ()
   (iy-c-mode-init))
 
@@ -130,6 +129,5 @@
 (add-hook 'c-mode-hook 'iy-c-mode-init)
 (add-hook 'c++-mode-hook 'iy-c++-mode-init)
 (add-hook 'objc-mode-hook 'iy-objc-mode-init)
-
 
 (provide 'iy-c)
