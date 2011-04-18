@@ -11,11 +11,9 @@
                        (define-key winring-map (kbd "n") 'winring-next-configuration)
                        (define-key winring-map (kbd "C-n") 'winring-prev-configuration)
                        (define-key winring-map (kbd "C-p") 'winring-prev-configuration)
-                       (winring-initialize)))
+                       (flet ((winring-next-name nil "default"))
+                         (winring-initialize))))
       el-get-sources)
-
-(completing-read PROMPT COLLECTION &optional PREDICATE REQUIRE-MATCH
-INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)
 
 (defun iy-winring-jump-or-create (&optional name)
   "Jump to or create configuration by name"
