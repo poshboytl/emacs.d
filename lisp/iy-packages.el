@@ -73,4 +73,6 @@
 (push 'autopair el-get-sources)
 (setq autopair-blink nil)
 
+(push 'folding el-get-sources)
+
 (provide 'iy-packages)
