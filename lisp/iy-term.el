@@ -12,5 +12,6 @@
  term-unbind-key-list
  '("C-x" "C-g" "M-w" "C-h" "M-s" "M-o" "M-x" "M-X"))
 
+(defalias 'mt 'multi-term)
 
 (provide 'iy-term)

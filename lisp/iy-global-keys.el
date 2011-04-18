@@ -125,6 +125,11 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") 'other-frame)
+(global-set-key (kbd "C-x K") (lambda ()
+                                (interactive)
+                                (if (< (length (window-list)) 2)
+                                    (kill-buffer)
+                                  (kill-buffer-and-window))))
 
 ;;; Fx
 (global-set-key (kbd "<f2>") 'recentf-open-files)
