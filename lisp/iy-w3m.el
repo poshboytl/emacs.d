@@ -7,9 +7,10 @@
 (setq browse-url-generic-program
       (if (eq system-type 'darwin)
           "open"
-        (or (executable-find "google-chrome")
+        (or (executable-find "x-www-browser")
             (executable-find "firefox-4.0")
-            (executable-find "firefox"))))
+            (executable-find "firefox")
+            (executable-find "google-chrome"))))
 
 (defun wicked-w3m-open-current-page-in-default-browser ()
   "Open the current URL in GUI."
