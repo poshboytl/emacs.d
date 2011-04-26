@@ -6,3 +6,4 @@
 /.org-id-locations
 /org-clock-save.el
 /custom.el
+/tramp
