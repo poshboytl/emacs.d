@@ -13,7 +13,6 @@
                               (forward-symbol (- arg))))
 
 (define-key iy-map (kbd "f") 'iy-go-to-char)
-(global-set-key (kbd "C-z") 'iy-go-to-char)
 (define-key iy-map (kbd "F") 'iy-go-to-char-backward)
 (define-key iy-map (kbd ";") 'iy-go-to-char-continue)
 (define-key iy-map (kbd ":") 'iy-go-to-char-continue-backward)
@@ -133,6 +132,10 @@
 
 ;;; Fx
 (global-set-key (kbd "<f2>") 'recentf-open-files)
+
+(if (fboundp 'iy-compile)
+    (global-set-key (kbd "<f5>") 'iy-compile)
+  (global-set-key (kbd "<f5>") 'compile))
 
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
