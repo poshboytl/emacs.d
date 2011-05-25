@@ -60,14 +60,13 @@
 ;;   ("@tennisclub" . ?t)
 ;;   (:endgroup . nil)
 (setq org-tag-alist '((:startgroup . nil)
-                      ("@computer" . ?c)
+                      ("@pc" . ?p)
                       ("@home" . ?h)
                       ("@downtown" . ?d)
-                      ("@reading" . ?r)
-                      ("@call" . ?l)
-                      ("@mail" . ?m)
+                      ("@contact" . ?c)
+                      ("@people" . ?o)
                       (:endgroup . nil)
-                      ("project" . ?p)
+                      ("project" . ?x)
                       ("event" . ?e)
                       ("idea" . ?i)
                       ("next" . ?n)))
@@ -239,50 +238,31 @@
 
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
-      '(("l" . "Context List")
-        ("lt" "TODO List"
-         ((todo "GOING|PAUSE")
-          (todo "TODO")
-          (todo "WAITING|LATER")))
-        ("lh" "Home Lists"
-         ((tags-todo "@home/TODO|GOING|PAUSE")
-          (tags-todo "@reading/TODO|GOING|PAUSE")
-          (tags-todo "@computer/TODO|GOING|PAUSE")
-          (tags-todo "@mail/TODO|GOING|PAUSE")
-          (tags-todo "@call/TODO|GOING|PAUSE")))
-        ("ld" "Downtown Lists"
-         ((tags-todo "@downtown/TODO|GOING|PAUSE")
-          (tags-todo "@mail/TODO|GOING|PAUSE")
-          (tags-todo "@call/TODO|GOING|PAUSE"))
-         ((org-agenda-todo-ignore-scheduled nil)
-          (org-agenda-todo-ignore-deadlines nil)
-          (org-agenda-todo-ignore-with-date nil)))
-        ("lm" "Maybe"
-         ((tags-todo "WAITING")
-          (tags-todo "LATER")
-          (tags "inbox-CONTAINER=\"true\""))
-         ((org-agenda-todo-ignore-scheduled nil)
-          (org-agenda-todo-ignore-deadlines nil)
-          (org-agenda-todo-ignore-with-date nil)))
+      '(("l" "Context List")
+        ("ld" "Downtown"
+         ((tags-todo "@downtown/GOING|PAUSE|TODO")))
+        ("lh" "Home"
+         ((tags-todo "@home/GOING|PAUSE|TODO")))
+        ("lc" "Computer"
+         ((tags-todo "@computer/GOING|PAUSE|TODO")))
+        ("lm" "Mail"
+         ((tags-todo "@mail/GOING|PAUSE|TODO")))
+        ("lo" "People"
+         ((tags-todo "@people/GOING|PAUSE|TODO")))
+        ("T" "TODO List"
+         ((todo "GOING|PAUSE|TODO")))
+        ("M" "Maybe"
+         ((todo "WAITING|LATER"))
+         ((org-agenda-todo-ignore-with-date nil)))
+        ("i" "Inbox" tags "inbox-CONTAINER=\"true\"")
 
         ("d" "Daily Action List"
          ((agenda "" ((org-agenda-span 'day)
                       (org-agenda-sorting-strategy
                        (quote ((agenda time-up priority-down tag-up) )))
-                      (org-deadline-warning-days 0)))
-          (todo "GOING|PAUSE")))
+                      (org-deadline-warning-days 0)))))
 
-        ("g" "Go Today"
-         ((agenda "" ((org-agenda-span 'day)
-                      (org-agenda-sorting-strategy
-                       (quote ((agenda time-up priority-down tag-up) )))
-                      (org-deadline-warning-days 0)))
-          (tags "project/-DONE-CANCELED")
-          (todo "GOING|PAUSE|TODO")))
-
-        ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
-
-        ("i" "Inbox" tags "inbox-CONTAINER=\"true\"")
+        ("x" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
         ("q" . "Custom queries")
         ("qa" "Archive search" search ""
