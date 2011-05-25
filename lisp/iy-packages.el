@@ -75,4 +75,6 @@
 
 (push 'folding el-get-sources)
 
+(push 'erlware-mode el-get-sources)
+
 (provide 'iy-packages)
