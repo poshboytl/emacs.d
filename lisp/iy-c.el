@@ -96,6 +96,26 @@
   (local-set-key (kbd "C-,") 'ctl-comma-map)
   (add-hook 'pre-command-hook 'wcy-cancel-auto-new-line nil t))
 
+(defun iy-java-mode-init ()
+  (c-set-style "cust")
+  (setq c-basic-offset 2)
+  (local-set-key (kbd "<return>") 'newline-and-indent)
+  (local-set-key (kbd "C-<return>") 'newline)
+  (hs-minor-mode t)
+  (if (fboundp 'c-subword-mode)
+      (c-subword-mode t)
+    (subword-mode t))
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (turn-on-auto-fill)
+  (flyspell-prog-mode)
+  (autopair-mode)
+  (setq autopair-handle-action-fns
+        '(
+          autopair-default-handle-action
+          iy-autopair-open-braces))
+  (local-set-key (kbd "C-,") 'ctl-comma-map)
+  (add-hook 'pre-command-hook 'wcy-cancel-auto-new-line nil t))
+
 ;; see http://ann77.stu.cdut.edu.cn/EmacsAutoNewLineImpv.html
 ;; auto-newline refinement
 (defvar wcy-cancel-auto-new-line-command-list
@@ -129,5 +149,6 @@
 (add-hook 'c-mode-hook 'iy-c-mode-init)
 (add-hook 'c++-mode-hook 'iy-c++-mode-init)
 (add-hook 'objc-mode-hook 'iy-objc-mode-init)
+(add-hook 'java-mode-hook 'iy-java-mode-init)
 
 (provide 'iy-c)
