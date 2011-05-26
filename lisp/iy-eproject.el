@@ -49,6 +49,8 @@ ROOT defaults to the current buffer's project-root."
         (concat "cd " root "; make -k"))
        ((or (file-exists-p "Rakefile"))
         "rake ")
+       ((or (file-exists-p "pom.xml"))
+        (concat "cd " root "; mvn test"))
        (t nil))))
 
   (setq

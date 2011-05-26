@@ -1,5 +1,9 @@
 (require 'iy-dep)
 
+(add-to-list 'compilation-error-regexp-alist-alist
+             '(maven "^\\[\\w+\\] \\(.*\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\] \\(.*\\)$" 1 2 3 (4)))
+(add-to-list 'compilation-error-regexp-alist 'maven)
+
 (require 'flymake)
 
 (defun flymake-ruby-init ()
@@ -13,6 +17,9 @@
 (push '("\\.rb\\'" flymake-ruby-init) flymake-allowed-file-name-masks)
 (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
 (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
+(push '( 1 2 3 4)
+      flymake-err-line-patterns)
+
 
 (defun flymake-init-hook ()
   (if (and (not (null buffer-file-name))
