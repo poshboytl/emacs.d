@@ -1,10 +1,9 @@
 (require 'iy-dep)
+(require 'flymake)
 
 (add-to-list 'compilation-error-regexp-alist-alist
              '(maven "^\\[\\w+\\] \\(.*\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\] \\(.*\\)$" 1 2 3 (4)))
 (add-to-list 'compilation-error-regexp-alist 'maven)
-
-(require 'flymake)
 
 (defun flymake-ruby-init ()
   (let* ((temp-file   (flymake-init-create-temp-buffer-copy
