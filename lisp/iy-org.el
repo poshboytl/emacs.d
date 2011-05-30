@@ -60,14 +60,14 @@
 ;;   ("@tennisclub" . ?t)
 ;;   (:endgroup . nil)
 (setq org-tag-alist '((:startgroup . nil)
-                      ("@pc" . ?p)
                       ("@home" . ?h)
-                      ("@downtown" . ?d)
-                      ("@contact" . ?c)
-                      ("@people" . ?o)
+                      ("@errands" . ?e)
+                      ("@computer" . ?c)
+                      ("@phone" . ?p)
+                      ("@mail" . ?m)
                       (:endgroup . nil)
                       ("project" . ?x)
-                      ("event" . ?e)
+                      ("event" . ?v)
                       ("idea" . ?i)
                       ("next" . ?n)))
 
@@ -239,16 +239,16 @@
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
       '(("l" "Context List")
-        ("ld" "Downtown"
-         ((tags-todo "@downtown/GOING|PAUSE|TODO")))
         ("lh" "Home"
          ((tags-todo "@home/GOING|PAUSE|TODO")))
+        ("le" "Errands"
+         ((tags-todo "@errands/GOING|PAUSE|TODO")))
         ("lc" "Computer"
          ((tags-todo "@computer/GOING|PAUSE|TODO")))
+        ("lp" "Phone"
+         ((tags-todo "@phone/GOING|PAUSE|TODO")))
         ("lm" "Mail"
          ((tags-todo "@mail/GOING|PAUSE|TODO")))
-        ("lo" "People"
-         ((tags-todo "@people/GOING|PAUSE|TODO")))
         ("T" "TODO List"
          ((todo "GOING|PAUSE|TODO")))
         ("M" "Maybe"
