@@ -77,4 +77,6 @@
 
 (push 'erlware-mode el-get-sources)
 
+(push '(:name pick-backup :type elpa) el-get-sources)
+
 (provide 'iy-packages)

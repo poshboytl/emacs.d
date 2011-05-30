@@ -1,5 +1,6 @@
 (require 'iy-dep)
 (require 'iy-keymap)
+(require 'iy-eproject)
 
 ;;; Libraries
 (add-to-list
@@ -14,17 +15,17 @@
 
   ;;; Sources
   (setq anything-sources
-        '(
-          anything-c-source-ffap-line
-          anything-c-source-ffap-guesser
-          anything-c-source-buffers+
-          anything-c-source-file-cache
-          anything-c-source-files-in-current-dir+
-          anything-c-source-recentf
-          anything-c-source-file-name-history
-          anything-c-source-bookmarks
-          anything-c-source-locate
-          anything-c-source-w3m-bookmarks))
+        (list
+         'anything-c-source-ffap-line
+         'anything-c-source-ffap-guesser
+         'anything-c-source-buffers+
+         'anything-c-source-file-cache
+         'anything-c-source-files-in-current-dir+
+         'anything-c-source-recentf
+         'anything-c-source-file-name-history
+         'anything-c-source-bookmarks
+         'anything-c-source-locate
+         'anything-c-source-w3m-bookmarks))
   ;; anything-c-source-complex-command-history
   ;; anything-c-source-file-name-history
   ;; anything-c-source-info-pages
@@ -32,9 +33,6 @@
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
-  (define-key iy-map (kbd "M-x") 'anything-execute-extended-command)
-  (define-key iy-map (kbd "g") 'iy/anything-sementic)
-  (define-key iy-map (kbd "G") 'iy/anything-tags)
 
   (define-key anything-isearch-map (kbd "C-s") 'anything-isearch-again)
   (setq anything-enable-digit-shortcuts t)

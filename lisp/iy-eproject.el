@@ -85,6 +85,11 @@ ROOT defaults to the current buffer's project-root."
         (eproject-set-attribute :compile-history compile-history)
         (eproject-set-attribute :compile-command compile-command))))
   (global-set-key (kbd "<f5>") 'iy-compile)
+
+  (defun eroot ()
+    "Open root directory"
+    (interactive)
+    (dired (eproject-root)))
   )
 
 (provide 'iy-eproject)
