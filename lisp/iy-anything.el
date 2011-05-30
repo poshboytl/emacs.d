@@ -24,7 +24,6 @@
          'anything-c-source-recentf
          'anything-c-source-file-name-history
          'anything-c-source-bookmarks
-         'anything-c-source-locate
          'anything-c-source-w3m-bookmarks))
   ;; anything-c-source-complex-command-history
   ;; anything-c-source-file-name-history
@@ -34,7 +33,6 @@
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
 
-  (define-key anything-isearch-map (kbd "C-s") 'anything-isearch-again)
   (setq anything-enable-digit-shortcuts t)
   (define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
   (define-key anything-map (kbd "M-2") 'anything-select-with-digit-shortcut)
@@ -54,6 +52,8 @@
 
   (define-key minibuffer-local-map "\C-r" 'anything-minibuffer-history)
   (define-key minibuffer-local-completion-map "\C-r" 'anything-minibuffer-history)
+
+  (define-key anything-command-map (kbd "g") 'anything-do-grep)
   )
 
 ;; Customization

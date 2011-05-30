@@ -57,7 +57,8 @@ ROOT defaults to the current buffer's project-root."
    eproject-extra-attributes
    '(
      ((lambda (root) t)
-      (:compile-command iy-eproject-guess-compile-command))))
+      (:compile-command iy-eproject-guess-compile-command
+                        :project-files-cache nil))))
 
   (defun iy-eproject-mode-init ()
     ;; setup mode line
@@ -86,10 +87,27 @@ ROOT defaults to the current buffer's project-root."
         (eproject-set-attribute :compile-command compile-command))))
   (global-set-key (kbd "<f5>") 'iy-compile)
 
-  (defun eroot ()
-    "Open root directory"
+  (defun* iy-eproject-list-project-files-with-cache (&optional (root (eproject-root)))
+    (let ((files (eproject-attribute :project-files-cache root)))
+      (if files files
+        (eproject-set-attribute :project-files-cache (eproject-list-project-files) root))))
+
+  (defun iy-eproject-find-file-with-cache ()
+    "Present the user with a list of files in the current project.
+to select from, open file when selected."
     (interactive)
-    (dired (eproject-root)))
+    (let* ((root (ignore-errors (eproject-root)))
+           (default-directory root)
+           (files (and root (iy-eproject-list-project-files-with-cache root))))
+      (when files
+        (find-file
+         (ido-completing-read
+          "Project file: "
+          (mapcar (lambda (f) (file-relative-name f root)) files))))))
+
+  (define-key iy-map (kbd "p p") 'eproject-revisit-project)
+  (define-key iy-map (kbd "p b") 'eproject-ibuffer)
+  (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   )
 
 (provide 'iy-eproject)

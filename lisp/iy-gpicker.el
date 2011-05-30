@@ -9,7 +9,7 @@
 (defun iy-gpicker-find-file (&optional dir)
   (interactive)
   (let* ((dir (or dir
-                  (if dired-directory (expand-file-name dired-directory) (buffer-file-name))
+                  (if dired-directory (expand-file-name dired-directory) default-directory)
                   iy-codebase-dir)))
     (with-temp-buffer
       (call-process iy-gpicker-cmd nil (list (current-buffer) nil) nil
