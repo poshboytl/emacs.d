@@ -265,6 +265,14 @@
                        (quote ((agenda time-up priority-down tag-up) )))
                       (org-deadline-warning-days 0)))))
 
+        ("r" "Review"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-agenda-sorting-strategy
+                       (quote ((agenda time-up priority-down tag-up) )))
+                      (org-deadline-warning-days 0)
+                      (org-agenda-skip-deadline-if-done nil)
+                      (org-agenda-skip-scheduled-if-done nil)))))
+
         ("x" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
         ("q" . "Custom queries")
@@ -323,6 +331,9 @@
 (add-hook 'org-clock-in-hook '(lambda ()
       (if (not org-timer-current-timer)
       (org-timer-set-timer '(25)))))
+(add-hook 'org-clock-out-hook '(lambda ()
+                                 (if org-timer-current-timer
+                                     (org-timer-cancel-timer))))
 
 ;; TODO: org-toodledo
 (autoload 'org-toodledo-initialize-org "org-toodledo"
