@@ -132,6 +132,7 @@
 (setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
 (setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/from_mobile.org"))
 (setq org-ditaa-jar-path iy-ditaa-path)
+(setq org-extend-today-until 2)
 
 ;;; Startup
 (eval-after-load "remember"
@@ -271,6 +272,7 @@
                        (quote ((agenda time-up priority-down tag-up) )))
                       (org-deadline-warning-days 0)
                       (org-agenda-skip-deadline-if-done nil)
+                      (org-agenda-skip-timestamp-if-done nil)
                       (org-agenda-skip-scheduled-if-done nil)))))
 
         ("x" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
@@ -338,5 +340,27 @@
 ;; TODO: org-toodledo
 (autoload 'org-toodledo-initialize-org "org-toodledo"
   "toodledo" t)
+
+(defun org-agenda-3-days-view (&optional day-of-year)
+  "Switch to 3-days (yesterday, today, tomorrow) view for agenda."
+  (interactive "P")
+  (org-agenda-check-type t 'agenda)
+  (if (and (not day-of-year) (equal org-agenda-current-span 3))
+      (error "Viewing span is already \"%s\"" 3))
+  (let* ((sd (or day-of-year 
+                 (org-get-at-bol 'day)
+                 (time-to-days (current-time))))
+         (sd (and sd (1- sd)))
+         (org-agenda-overriding-arguments
+          (or org-agenda-overriding-arguments
+              (list (car org-agenda-last-arguments) sd 3 t))))
+    (org-agenda-redo)
+    (org-agenda-find-same-or-today-or-agenda))
+  (org-agenda-set-mode-name)
+  (message "Switched to %s view" 3))
+(eval-after-load "org-agenda"
+  (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view))
+
+
 
 (provide 'iy-org)
