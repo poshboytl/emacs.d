@@ -63,6 +63,7 @@
                       ("@home" . ?h)
                       ("@errands" . ?e)
                       ("@computer" . ?c)
+                      ("@reading" . ?r)
                       ("@phone" . ?p)
                       ("@mail" . ?m)
                       (:endgroup . nil)
@@ -238,7 +239,7 @@
 
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
-      '(("l" "Context List")
+      '(("l" . "Context List")
         ("lh" "Home"
          ((tags-todo "@home/GOING|PAUSE|TODO")))
         ("le" "Errands"
@@ -249,6 +250,8 @@
          ((tags-todo "@phone/GOING|PAUSE|TODO")))
         ("lm" "Mail"
          ((tags-todo "@mail/GOING|PAUSE|TODO")))
+        ("lr" "Reading"
+         ((tags-todo "@reading/GOING|PAUSE|TODO")))
         ("T" "TODO List"
          ((todo "GOING|PAUSE|TODO")))
         ("M" "Maybe"
