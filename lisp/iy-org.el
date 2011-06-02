@@ -65,7 +65,7 @@
                       ("@computer" . ?c)
                       ("@reading" . ?r)
                       ("@phone" . ?p)
-                      ("@mail" . ?m)
+                      ("@message" . ?m)
                       (:endgroup . nil)
                       ("project" . ?x)
                       ("event" . ?v)
