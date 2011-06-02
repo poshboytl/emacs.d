@@ -25,6 +25,7 @@
                                    (else-clause after)
                                    (access-label after)
                                    (catch-clause  after)
+                                   (inline-open after)
                                    (namespace-open)))
     (c-hanging-colons-alist     . ((inher-intro)
                                    (case-label after)
