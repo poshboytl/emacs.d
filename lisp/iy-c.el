@@ -94,7 +94,6 @@
         '(
           autopair-default-handle-action
           iy-autopair-open-braces))
-  (local-set-key (kbd "C-,") 'ctl-comma-map)
   (add-hook 'pre-command-hook 'wcy-cancel-auto-new-line nil t))
 
 (defun iy-java-mode-init ()
@@ -114,7 +113,6 @@
         '(
           autopair-default-handle-action
           iy-autopair-open-braces))
-  (local-set-key (kbd "C-,") 'ctl-comma-map)
   (add-hook 'pre-command-hook 'wcy-cancel-auto-new-line nil t))
 
 ;; see http://ann77.stu.cdut.edu.cn/EmacsAutoNewLineImpv.html

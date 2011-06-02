@@ -10,7 +10,6 @@
 
 (defun iy-after-el-get-cedet ()
   (load (concat (el-get-package-directory "cedet") "common/cedet.el"))
-  (setq senator-prefix-key [(control ?,)])
   (defvar iy-cedet-ignore-projects '(".emacs.d"))
   (defun iy-semanticdb-cache-directory-p(directory)
     (let* ((project (eproject-detect-project directory))
