@@ -110,4 +110,18 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   )
 
+(defun eproject-detect-project (&optional file)
+  (let ((file (or file (eproject--buffer-file-name)))
+        bestroot besttype)
+    (loop for type in (eproject--all-types)
+          do (let ((root (eproject--run-project-selector type file)))
+               (when (and root
+                          (or (not bestroot)
+                              ;; longest filename == best match (XXX:
+                              ;; need to canonicalize?)
+                              (> (length root) (length bestroot))))
+                 (setq bestroot root)
+                 (setq besttype type))))
+    (cons bestroot besttype)))
+
 (provide 'iy-eproject)

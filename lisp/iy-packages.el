@@ -13,8 +13,12 @@
 
 (autoload 'zap-up-to-char "misc" "kill up to but not including char" t)
 
-(push '(:name thing-cmds
+(push '(:name hide-comnt
               :type emacswiki) el-get-sources)
+(push '(:name thing-cmds
+              :type emacswiki
+              :load-path ("." "../hide-comnt")
+              :autoloads nil) el-get-sources)
 (autoload 'mark-thing "thing-cmds"
   "Set point at one end of THING and set mark ARG THINGs from point." t)
 (autoload 'cycle-thing-region "thing-cmds"
@@ -67,7 +71,7 @@
 
 (push '(:name dtrt-indent
               :features nil
-              :after (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
+              :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
       el-get-sources)
 
 (push 'autopair el-get-sources)
@@ -77,6 +81,6 @@
 
 (push 'erlware-mode el-get-sources)
 
-(push '(:name pick-backup :type elpa) el-get-sources)
+;; (push '(:name pick-backup :type elpa) el-get-sources)
 
 (provide 'iy-packages)

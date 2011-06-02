@@ -10,7 +10,7 @@
   (yas/load-directory yas/root-directory))
 
 (push '(:name yasnippet
-              :after iy-el-get-after-yasnippet)
+              :post-init iy-el-get-after-yasnippet)
       el-get-sources)
 
 (defun yas/fix-keybindings ()

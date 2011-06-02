@@ -54,7 +54,25 @@
   (iy-init-load-modules)
 
   ;; reverse the list
-  (setq el-get-sources (cons 'package (nreverse el-get-sources)))
+  (setq
+   el-get-sources
+   (cons
+    '(:name package
+            :post-init (lambda ()
+                         (setq package-user-dir 
+                               (expand-file-name 
+                                (convert-standard-filename 
+                                 (concat (file-name-as-directory 
+                                          (el-get-package-directory "package")) 
+                                         "elpa")))
+                               package-directory-list 
+                               (list (file-name-as-directory package-user-dir) 
+                                     "/usr/share/emacs/site-lisp/elpa/"))
+                         (make-directory package-user-dir t)
+                         (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+                                                  ("gnu" . "http://elpa.gnu.org/packages/")))
+                         (package-initialize)))
+    (nreverse el-get-sources)))
   (el-get 'wait))
 
 (iy-init)

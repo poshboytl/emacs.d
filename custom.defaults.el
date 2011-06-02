@@ -43,7 +43,7 @@
  '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
  '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
  '(comint-buffer-maximum-size 10240)
- '(compilation-auto-jump-to-first-error t)
+ '(compilation-auto-jump-to-first-error nil)
  '(compilation-context-lines 10)
  '(compilation-scroll-output (quote first-error))
  '(compose-mail-user-agent-warnings nil)

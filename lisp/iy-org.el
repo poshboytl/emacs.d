@@ -159,7 +159,9 @@
   (define-key org-mode-map (kbd "C-M-'") 'mark-sexp)
   (define-key org-mode-map (kbd "M-'") 'mark-word)
   (define-key org-mode-map (kbd "C-c ,") 'org-cycle-agenda-files)
+  (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view)
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
+
   (flyspell-mode 1)
   (when (fboundp 'filladapt-mode)
     (filladapt-mode)
@@ -358,9 +360,5 @@
     (org-agenda-find-same-or-today-or-agenda))
   (org-agenda-set-mode-name)
   (message "Switched to %s view" 3))
-(eval-after-load "org-agenda"
-  (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view))
-
-
 
 (provide 'iy-org)

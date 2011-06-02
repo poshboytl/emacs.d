@@ -3,11 +3,13 @@
 
 (push '(:name cedet
               :autoloads nil
+              :build `("find . -name Makefile | xargs touch"
+                       ,(concat "make EMACS=" el-get-emacs " MAKEINFO=echo"))
               :after iy-after-el-get-cedet)
       el-get-sources)
 
 (defun iy-after-el-get-cedet ()
-  (load "cedet")
+  (load (concat (el-get-package-directory "cedet") "common/cedet.el"))
   (setq senator-prefix-key [(control ?,)])
   (defvar iy-cedet-ignore-projects '(".emacs.d"))
   (defun iy-semanticdb-cache-directory-p(directory)
