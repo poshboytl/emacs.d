@@ -71,6 +71,7 @@
 
 (push '(:name dtrt-indent
               :features nil
+              :url "https://github.com/emacsmirror/dtrt-indent.git"
               :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
       el-get-sources)
 

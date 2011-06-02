@@ -73,7 +73,7 @@
                                                   ("gnu" . "http://elpa.gnu.org/packages/")))
                          (package-initialize)))
     (nreverse el-get-sources)))
-  (el-get 'wait))
+  (el-get 'sync))
 
 (iy-init)
 
