@@ -155,6 +155,7 @@
  '(pulse-delay 0.03)
  '(pulse-flag nil)
  '(pulse-iterations 5)
+ '(rainbow-html-colors-major-mode-list (quote (html-mode css-mode php-mode nxml-mode xml-mode sass-mode)))
  '(recentf-arrange-rules (quote (("Elisp files (%d)" ".\\.el\\'") ("Java files (%d)" ".\\.java\\'") ("C/C++ files (%d)" ".\\.c\\(pp\\)?\\'" ".\\.h\\(pp\\)?\\'") ("Org files (%d)" ".\\.org\\'"))))
  '(recentf-exclude (quote ("semantic\\.cache" "COMMIT_EDITMSG" "git-emacs-tmp.*" "\\.breadcrumb" "\\.ido\\.last" "\\.projects.ede")))
  '(recentf-menu-filter (quote recentf-arrange-by-rule))

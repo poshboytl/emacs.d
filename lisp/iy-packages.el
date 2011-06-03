@@ -36,6 +36,9 @@
 (push 'yaml-mode el-get-sources)
 (push 'haml-mode el-get-sources)
 (push 'sass-mode el-get-sources)
+(push 'rainbow-mode el-get-sources)
+(add-hook 'sass-mode-hook 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
 
 (unless (eq system-type 'darwin)
   (push 'haskell-mode el-get-sources))
