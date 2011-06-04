@@ -1,22 +1,49 @@
-;; (eval-when-compile (require 'el-get))
-;; 
 (push '(:name eproject
               :type git
               :url "git://github.com/jrockway/eproject.git"
               :features eproject
               :after iy-el-get-after-eproject)
       el-get-sources)
-;; 
-;; (eval-when-compile
-;;   (progn
-;;     (el-get)
-;;     (require 'eproject)))
 
 (eval-when-compile (require 'cl))
 
 (defface eproject-mode-line-project-name-face
   '((t (:inherit font-lock-string :bold t)))
   "Face for displaying the project name in the modeline." :group 'eproject)
+
+(defun eproject-detect-project (&optional file)
+  (let ((file (or file (eproject--buffer-file-name)))
+        bestroot besttype)
+    (loop for type in (eproject--all-types)
+          do (let ((root (eproject--run-project-selector type file)))
+               (when (and root
+                          (or (not bestroot)
+                              ;; longest filename == best match (XXX:
+                              ;; need to canonicalize?)
+                              (> (length root) (length bestroot))))
+                 (setq bestroot root)
+                 (setq besttype type))))
+    (cons bestroot besttype)))
+
+(defun eproject-maybe-create-tags-table ()
+  (let* ((root (eproject-root))
+         (default-directory root))
+    (when (and root (eproject-attribute :create-etags root))
+      (shell-command "ctags -e -R")
+      (visit-tags-table (concat root "TAGS") t))))
+(add-hook 'eproject-first-buffer-hook 'eproject-maybe-create-tags-table)
+
+(defun eproject-visit-tags-table (&optional create)
+  (interactive "P")
+  (let* ((root (eproject-root))
+         (file (concat root "TAGS")))
+    (when root
+      (when create
+        (let ((default-directory root))
+          (shell-command "ctags -e -R")))
+      (when (file-exists-p file)
+        (visit-tags-table file t)))))
+(add-hook 'eproject-mode-hook 'eproject-visit-tags-table)
 
 (defun iy-el-get-after-eproject ()
   (defadvice eproject--buffer-file-name (after guess-directory activate)
@@ -107,21 +134,6 @@ to select from, open file when selected."
 
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
-  (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
-  )
-
-(defun eproject-detect-project (&optional file)
-  (let ((file (or file (eproject--buffer-file-name)))
-        bestroot besttype)
-    (loop for type in (eproject--all-types)
-          do (let ((root (eproject--run-project-selector type file)))
-               (when (and root
-                          (or (not bestroot)
-                              ;; longest filename == best match (XXX:
-                              ;; need to canonicalize?)
-                              (> (length root) (length bestroot))))
-                 (setq bestroot root)
-                 (setq besttype type))))
-    (cons bestroot besttype)))
+  (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache))
 
 (provide 'iy-eproject)

@@ -174,6 +174,7 @@
  '(sql-sqlite-options (quote ("-line")))
  '(sql-sqlite-program "sqlite3")
  '(tab-width 4)
+ '(tags-add-tables nil)
  '(term-bind-key-alist (quote (("C-c C-c" . term-interrupt-subjob) ("C-s" . isearch-forward) ("C-r" . isearch-backward) ("C-m" . term-send-raw) ("M-f" . term-send-forward-word) ("M-b" . term-send-backward-word) ("M-o" . term-send-backspace) ("M-p" . term-send-up) ("M-n" . term-send-down) ("M-M" . term-send-forward-kill-word) ("M-N" . term-send-backward-kill-word) ("M-r" . term-send-reverse-search-history) ("M-," . term-send-input) ("M-x" . execute-extended-command) ("M-X" . anything-at-point) ("M-o" . other-window) ("M-s" . iy-map))))
  '(term-unbind-key-list (quote ("C-x" "C-g" "M-w" "C-h")))
  '(tool-bar-mode nil)
