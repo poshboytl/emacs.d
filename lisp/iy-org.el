@@ -256,7 +256,8 @@
         ("lr" "Reading"
          ((tags-todo "@reading/GOING|PAUSE|TODO")))
         ("T" "TODO List"
-         ((todo "GOING|PAUSE|TODO")))
+         ((todo "GOING|PAUSE|TODO"))
+         ((org-agenda-todo-ignore-with-date nil)))
         ("M" "Maybe"
          ((todo "WAITING|LATER"))
          ((org-agenda-todo-ignore-with-date nil)))
