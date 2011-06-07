@@ -8,6 +8,7 @@
 (setq ido-use-filename-at-point nil)
 
 (ido-mode t)
+(ido-load-history)
 
 (defun iy-ido-mode-init ()
   (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
