@@ -85,6 +85,13 @@
 
 (push 'erlware-mode el-get-sources)
 
+(push '(:name cheat
+              :type http
+              :features nil
+              :url "https://github.com/defunkt/cheat.el/raw/master/cheat.el"
+              :post-init (lambda () (autoload 'cheat "cheat" nil t)))
+      el-get-sources)
+
 ;; (push '(:name pick-backup :type elpa) el-get-sources)
 
 (provide 'iy-packages)
