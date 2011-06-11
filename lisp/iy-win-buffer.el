@@ -6,13 +6,14 @@
               :url "lp:winring"
               :features winring
               :after (lambda () 
-                       (setq winring-keymap-prefix (kbd "C-z"))
-                       (define-key winring-map (kbd "C-z") 'iy-winring-jump-or-create)
+                       (setq winring-keymap-prefix (kbd "M-s w"))
+                       (defun winring-create-frame-hook (frame)
+                         (winring-set-name "default" frame))
+                       (define-key winring-map (kbd "w") 'iy-winring-jump-or-create)
                        (define-key winring-map (kbd "n") 'winring-next-configuration)
                        (define-key winring-map (kbd "C-n") 'winring-prev-configuration)
                        (define-key winring-map (kbd "C-p") 'winring-prev-configuration)
-                       (flet ((winring-next-name nil "default"))
-                         (winring-initialize))))
+                       (winring-initialize)))
       el-get-sources)
 
 (defun iy-winring-jump-or-create (&optional name)
@@ -21,7 +22,8 @@
   (let* ((ring (winring-get-ring))
          (n (1- (ring-length ring)))
          (current (winring-name-of-current))
-         lst index item)
+         (lst (list (cons current -1)))
+         index item)
     (while (<= 0 n)
       (push (cons (winring-name-of (ring-ref ring n)) n) lst)
       (setq n (1- n)))
