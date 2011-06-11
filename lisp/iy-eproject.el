@@ -30,7 +30,8 @@
          (default-directory root))
     (when (and root (eproject-attribute :create-etags root))
       (shell-command "ctags -e -R")
-      (visit-tags-table (concat root "TAGS") t))))
+      (ignore-errors
+        (visit-tags-table (concat root "TAGS") t)))))
 (add-hook 'eproject-first-buffer-hook 'eproject-maybe-create-tags-table)
 
 (defun eproject-visit-tags-table (&optional create)
@@ -42,7 +43,8 @@
         (let ((default-directory root))
           (shell-command "ctags -e -R")))
       (when (file-exists-p file)
-        (visit-tags-table file t)))))
+        (ignore-errors
+          (visit-tags-table file t))))))
 (add-hook 'eproject-mode-hook 'eproject-visit-tags-table)
 
 (defun iy-el-get-after-eproject ()
