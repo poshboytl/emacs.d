@@ -1,13 +1,6 @@
-(push '(:name espressso
-              :type http
-              :url "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el")
-      el-get-sources)
+(defun iy-js-mode-init ()
+  (local-set-key (kbd "M-.") 'find-tag))
 
-(autoload 'espresso-mode "espresso" "Start espresso-mode" t)
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
-
-(defalias 'js-mode 'espresso-mode)
-(defalias 'javascript-mode 'espresso-mode)
+(add-hook 'js-mode-hook 'iy-js-mode-init)
 
 (provide 'iy-js)
