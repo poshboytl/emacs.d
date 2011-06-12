@@ -7,7 +7,7 @@
  '(iy-frame-font-chinese "Heiti SC:pixelsize=18")
  '(abbrev-mode t)
  '(ack-prompt-for-directory t)
- '(anything-command-map-prefix-key "M-s a")
+ '(anything-command-map-prefix-key "M-A")
  '(appt-display-format (quote window))
  '(appt-message-warning-time 10)
  '(auto-save-interval 50)
