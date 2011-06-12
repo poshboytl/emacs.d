@@ -3,16 +3,12 @@
 (push 'full-ack el-get-sources)
 (push '(:name xcscope :after iy-el-get-after-xcscope :localname "xcscope.el")
       el-get-sources)
-(push 'nav el-get-sources)
 
-(define-key iy-map "e" 'nav-toggle)
-(add-hook 'nav-mode-hook 'iy-nav-mode-init)
-(defun iy-nav-mode-init ()
-  (local-set-key "N" 'nav-make-new-directory)
-  (local-set-key "n" 'next-line)
-  (local-set-key "p" 'previous-line)
-  (local-set-key "b" 'nav-pop-dir)
-  (hl-line-mode))
+(defun ack-here ()
+  (interactive)
+  (let ((ack-root-directory-functions nil)
+        (ack-prompt-for-directory t))
+    (call-interactively 'ack)))
 
 (defun iy-el-get-after-xcscope ()
   (defcustom cscope-ignore-case t
@@ -38,5 +34,14 @@
     "ignore case in cscope search"
      (when cscope-ignore-case
        (ad-set-arg 1 (cons "-C" (ad-get-arg 1))))))
+
+(push '(:name alternative-files
+              :compile "alternative-files.el"
+              :type git
+              :url "git://github.com/doitian/alternative-files-el.git"
+              :after (lambda ()
+                       (define-key iy-map "a" 'alternative-files-find-file)
+                       (define-key iy-map "A" 'alternative-files-create-file)))
+      el-get-sources)
 
 (provide 'iy-code-browser)
