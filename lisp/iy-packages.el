@@ -95,6 +95,6 @@
               :post-init (lambda () (autoload 'cheat "cheat" nil t)))
       el-get-sources)
 
-;; (push '(:name pick-backup :type elpa) el-get-sources)
+(push '(:name pick-backup :type elpa) el-get-sources)
 
 (provide 'iy-packages)
