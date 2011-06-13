@@ -43,7 +43,10 @@
 (unless (eq system-type 'darwin)
   (push 'haskell-mode el-get-sources))
 
-(push 'gist el-get-sources)
+(push '(:name gist
+              :type git
+              :url "git://github.com/baron/gist.el.git")
+      el-get-sources)
 
 (push '(:name pivotal-tracker
               :type git
