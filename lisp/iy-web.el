@@ -15,6 +15,8 @@
   (add-hook 'nxhtml-mode-hook 'iy/nxhtml-mode-init)
 
   (require 'fold-dwim nil t)
+  (when (fboundp 'sml-modeline-mode)
+    (sml-modeline-mode t))
   (define-key iy-map (kbd "i") 'fold-dwim-toggle)
   (define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
   (define-key iy-map (kbd "I") 'fold-dwim-hide-all)
