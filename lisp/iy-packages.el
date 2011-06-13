@@ -37,13 +37,6 @@
               :url "git://github.com/baron/gist.el.git")
       el-get-sources)
 
-(push '(:name pivotal-tracker
-              :type git
-              :url "git://github.com/jxa/pivotal-tracker.git"
-              :after (lambda ()
-                       (autoload 'pivotal "pivotal-tracker" nil t)))
-      el-get-sources)
-
 (push 'browse-kill-ring el-get-sources)
 
 (push '(:name kill-ring-search
