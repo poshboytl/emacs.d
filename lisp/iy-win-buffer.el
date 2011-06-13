@@ -44,13 +44,6 @@
         (winring-save-current-configuration)
         (winring-restore-configuration item)))))
 
-;; EDiff windows
-(define-key iy-map (kbd "e")
-  (lambda ()
-    (interactive)
-    (let ((ediff-window-display-p (lambda () nil)))
-      (ediff-show-registry))))
-
 (defun iy-ediff-before-setup-winring-jump ()
   (iy-winring-jump-or-create "*ediff*"))
 (defun iy-ediff-after-setup-save-register ()
