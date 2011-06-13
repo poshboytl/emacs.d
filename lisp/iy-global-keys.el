@@ -140,9 +140,6 @@
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
 
-(global-set-key (kbd "C-<f9>") 'mark-thing)
-(global-set-key (kbd "<ESC> <f9>") 'mark-thing)
-(global-set-key (kbd "<f9>") 'cycle-thing-region)
 (global-set-key (kbd "<f10>") 'grep-find)
 (global-set-key (kbd "<f11>") 'occur)
 (global-set-key (kbd "<f12>") 'magit-status)
