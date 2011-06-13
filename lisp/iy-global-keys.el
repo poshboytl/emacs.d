@@ -69,8 +69,6 @@
 
 ;;; Highlight
 
-(define-key iy-map (kbd "h") 'flash-line-highlight)
-
 (define-key iy-map (kbd "9") 'iy-highlight-symbol-navigation)
 (define-key iy-map (kbd "0") 'iy-highlight-symbol-navigation)
 (define-key iy-map (kbd "+") 'highlight-symbol-query-replace)

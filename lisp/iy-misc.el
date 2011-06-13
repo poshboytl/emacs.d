@@ -23,6 +23,7 @@
 (defalias 'aa 'anything-apropos)
 (defalias 'org 'org-iswitchb)
 (defalias 'sp 'speedbar-get-focus)
+(defalias 'h 'flash-line-highlight)
 
 (fset 'man 'woman)
 (defun backup-dired ()
