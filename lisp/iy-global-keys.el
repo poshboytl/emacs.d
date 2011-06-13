@@ -116,8 +116,6 @@
   (define-key iy-map (kbd "i") 'hs-toggle-hiding)
   (define-key iy-map (kbd "I") 'hs-hide-all)
   (define-key iy-map (kbd "M-i") 'hs-show-all))
-(define-key iy-map (kbd "u") 'hs-hide-level)
-(define-key iy-map (kbd "M-u") 'hs-hide-level)
 
 ;;; Buffer/File
 (global-set-key (kbd "C-M-l") 'iy-switch-to-previous-buffer)
