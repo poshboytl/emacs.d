@@ -32,6 +32,7 @@
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
+  (define-key iy-map (kbd "s") 'anything-at-point)
 
   (setq anything-enable-digit-shortcuts t)
   (define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
@@ -54,6 +55,10 @@
   (define-key minibuffer-local-completion-map "\C-r" 'anything-minibuffer-history)
 
   (define-key anything-command-map (kbd "g") 'anything-do-grep)
+  (define-key anything-command-map (kbd "o") 'anything-occur)
+  (define-key anything-command-map (kbd "r") 'anything-register)
+  (define-key anything-command-map (kbd "R") 'anything-regexp)
+  (define-key anything-command-map (kbd "b") 'anything-c-pp-bookmarks)
   )
 
 ;; Customization

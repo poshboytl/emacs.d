@@ -24,7 +24,7 @@
   (iy-gpicker-find-file (or eproject-root
                             iy-codebase-dir)))
 
-(define-key iy-map (kbd "o") 'iy-gpicker-find-file-in-project)
+(define-key iy-map (kbd "t") 'iy-gpicker-find-file-in-project)
 (define-key iy-map (kbd "C-j") 'iy-gpicker-find-file)
 
 (provide 'iy-gpicker)
