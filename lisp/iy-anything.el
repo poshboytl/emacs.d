@@ -65,7 +65,6 @@
 (setq anything-input-idle-delay 0)
 (setq anything-idle-delay 0.3)
 (setq anything-quick-update t)
-(setq anything-gtags-classify t)
 (setq anything-c-use-standard-keys t)
 
 ;;; Bindings

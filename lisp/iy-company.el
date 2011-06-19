@@ -12,10 +12,8 @@
           company-nxml
           company-css
           company-semantic
-          (company-gtags
-           company-etags)
+          company-etags
           company-keywords))
-  (require 'company-gtags)
   (require 'company-etags)
   (add-to-list 'company-etags-modes 'ruby-mode)
   (define-key iy-map " " 'company-complete-common)

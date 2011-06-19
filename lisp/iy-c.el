@@ -88,7 +88,6 @@
   ;; (turn-on-filladapt-mode)
   ;; (set (make-local-variable 'filladapt-token-table) iy-c-filladapt-token-table)
   ;; (c-setup-filladapt)
-  ;; (gtags-mode)
   (autopair-mode)
   (setq autopair-handle-action-fns
         '(
