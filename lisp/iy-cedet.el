@@ -38,7 +38,6 @@
 
   (semantic-load-enable-code-helpers)
   (require 'semantic-gcc)
-  (require 'semanticdb-global)
   (semanticdb-enable-gnu-global-databases 'c-mode)
   (semanticdb-enable-gnu-global-databases 'c++-mode)
   (semantic-load-enable-primary-exuberent-ctags-support)
