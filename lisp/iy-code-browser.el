@@ -41,6 +41,7 @@
               :url "git://github.com/doitian/alternative-files-el.git"
               :after (lambda ()
                        (define-key iy-map "a" 'alternative-files-find-file)
+                       (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
                        (define-key iy-map (kbd "A") 'alternative-files-create-file)))
       el-get-sources)
 
