@@ -21,7 +21,6 @@
 (defalias 'mocc 'multi-occur)
 (defalias 'jabber 'jabber-connect-all)
 (defalias 'aa 'anything-apropos)
-(defalias 'org 'org-iswitchb)
 (defalias 'sp 'speedbar-get-focus)
 (defalias 'h 'flash-line-highlight)
 

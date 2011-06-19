@@ -281,11 +281,17 @@
         ("x" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
         ("q" . "Custom queries")
-        ("qa" "Archive search" search ""
+        ("qa" "Archive tags search" org-tags-view "" 
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
-        ("qA" "Archive tags search" org-tags-view "" 
+        ("qA" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
 
+        ("qa" "Code snippets tags search" org-tags-view ""
+         ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
+                                    (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
+        ("qa" "Code snippets tags search" search ""
+         ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
+                                    (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
         ))
 
 ;;; Appt
@@ -361,5 +367,12 @@
     (org-agenda-find-same-or-today-or-agenda))
   (org-agenda-set-mode-name)
   (message "Switched to %s view" 3))
+
+(defun org ()
+  (interactive)
+  (ido-find-file-in-dir org-directory))
+(defun snippet ()
+  (interactive)
+  (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets/" )))
 
 (provide 'iy-org)
