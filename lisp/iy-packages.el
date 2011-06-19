@@ -79,6 +79,6 @@
 
 (push '(:name pick-backup :type elpa) el-get-sources)
 
-(cua-selection-mode)
+(cua-selection-mode t)
 
 (provide 'iy-packages)
