@@ -238,7 +238,10 @@
     :prepend t :empty-lines 1 :immediate-finish t)
    ("w" "Default template" entry (file+headline "inbox.org" "Bookmarks")
     "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i"
-    :prepend t :empty-lines 1 :immediate-finish t)))
+    :prepend t :empty-lines 1 :immediate-finish t)
+
+   ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
+    "* %? %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC\n  %i\n#+END_SRC\n")))
 
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
@@ -286,10 +289,10 @@
         ("qA" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
 
-        ("qa" "Code snippets tags search" org-tags-view ""
+        ("qc" "Code snippets tags search" org-tags-view ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
-        ("qa" "Code snippets tags search" search ""
+        ("qC" "Code snippets tags search" search ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
         ))
