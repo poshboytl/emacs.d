@@ -104,7 +104,7 @@
   (define-key dired-mode-map (kbd "/") 'diredp-omit-marked)
   (define-key dired-mode-map "(" 'dired-details-toggle)
   (define-key dired-mode-map ")" 'dired-details-toggle)
-  (define-key dired-mode-map (kbd "C-<return>") 'dired-launch-command))
+  (define-key dired-mode-map (kbd "M-<return>") 'dired-launch-command))
 
 (add-hook 'dired-mode-hook 'iy/dired-mode-init)
 

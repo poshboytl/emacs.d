@@ -137,6 +137,7 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
+  (define-key iy-map (kbd "p o") 'iy-eproject-find-file-with-cache)
   
   (defun eproject-root-safe ()
     (ignore-errors (eproject-root)))

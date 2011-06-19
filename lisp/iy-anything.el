@@ -25,10 +25,6 @@
          'anything-c-source-file-name-history
          'anything-c-source-bookmarks
          'anything-c-source-w3m-bookmarks))
-  ;; anything-c-source-complex-command-history
-  ;; anything-c-source-file-name-history
-  ;; anything-c-source-info-pages
-  ;; anything-c-source-man-pages
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
@@ -59,7 +55,7 @@
   (define-key anything-command-map (kbd "r") 'anything-register)
   (define-key anything-command-map (kbd "R") 'anything-regexp)
   (define-key anything-command-map (kbd "b") 'anything-c-pp-bookmarks)
-  )
+  (define-key anything-command-map (kbd "'") 'anything-all-mark-rings))
 
 ;; Customization
 (setq anything-input-idle-delay 0)
