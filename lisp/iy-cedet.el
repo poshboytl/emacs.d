@@ -38,8 +38,6 @@
 
   (semantic-load-enable-code-helpers)
   (require 'semantic-gcc)
-  (semanticdb-enable-gnu-global-databases 'c-mode)
-  (semanticdb-enable-gnu-global-databases 'c++-mode)
   (semantic-load-enable-primary-exuberent-ctags-support)
 
   (remove-hook 'senator-minor-mode-hook 'senator-hippie-expand-hook)
