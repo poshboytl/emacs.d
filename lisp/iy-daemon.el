@@ -38,7 +38,6 @@
       (unless (eq system-type 'darwin)
         (add-hook 'delete-frame-functions 'iy-daemon-run-delete-frame-hooks))
 
-      (unless (server-running-p)
-        (server-start))))
+      (server-start)))
 
 (provide 'iy-daemon)
