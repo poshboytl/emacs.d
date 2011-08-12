@@ -45,7 +45,8 @@
   (local-set-key (kbd "<return>") 'newline-and-indent)
   (local-set-key (kbd "C-h h") 'yari)
   ;; (local-set-key (kbd "C-h .") 'rct-complete-symbol)
-  (remove-hook 'before-save-hook 'ruby-mode-set-encoding))
+  ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
+  )
 
 (defun yas/advise-indent-function (function-symbol)
   (eval `(defadvice ,function-symbol (around yas/try-expand-first activate)
