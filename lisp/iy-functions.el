@@ -135,4 +135,11 @@
   (interactive "p\ncZap back up to char: ")
   (zap-up-to-char (- arg) char))
 
+(defun iy-next-line-and-open-it-if-not-empty ()
+  (interactive)
+  (forward-line)
+  (unless (looking-at "[ 	]*$")
+    (open-line 1))
+  (indent-according-to-mode))
+
 (provide 'iy-functions)

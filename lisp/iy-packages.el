@@ -29,6 +29,8 @@
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 
+(push 'coffee-mode el-get-sources)
+
 (unless (eq system-type 'darwin)
   (push 'haskell-mode el-get-sources))
 

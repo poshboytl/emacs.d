@@ -57,6 +57,8 @@
 (define-key iy-map (kbd "q f") 'iy-insert-file-name)
 (define-key iy-map (kbd "q b") 'jared/insert-file-or-buffer-name)
 
+(global-set-key (kbd "C-<return>") 'iy-next-line-and-open-it-if-not-empty)
+
 ;;; Mark
 (global-set-key (kbd "C-'") 'set-mark-command)
 (global-set-key (kbd "C-x C-'") 'pop-global-mark)
