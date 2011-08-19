@@ -292,7 +292,7 @@
         ("qc" "Code snippets tags search" org-tags-view ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
-        ("qC" "Code snippets tags search" search ""
+        ("qC" "Code snippets search" search ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
         ))

@@ -1,3 +1,5 @@
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
+
 (defun iy-js-mode-init ()
   (local-set-key (kbd "M-.") 'find-tag))
 
