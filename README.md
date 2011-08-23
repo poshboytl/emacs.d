@@ -9,7 +9,7 @@ Known problems
 
 3. Remove system ruby-mode:
 
-       $ rm /usr/share/emacs/23.3/lisp/progmodes/ruby-mode.el
+       $ rm /usr/share/emacs/23.3/lisp/progmodes/ruby-mode.el*
 
 
 4. Manually compile auctex in Mac. `textmf` have to be manually specified
