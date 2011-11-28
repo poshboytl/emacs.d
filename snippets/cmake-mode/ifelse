@@ -1,7 +1,0 @@
-#name : IF (condition) ELSE(condition) ENDIF (condition)
-# --
-IF(${1:condition})
-  $0
-ELSE($1)
-
-ENDIF($1)

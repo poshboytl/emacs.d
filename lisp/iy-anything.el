@@ -18,7 +18,7 @@
         (list
          'anything-c-source-ffap-line
          'anything-c-source-ffap-guesser
-         'anything-c-source-buffers+
+         'anything-c-source-buffers-list
          'anything-c-source-file-cache
          'anything-c-source-files-in-current-dir+
          'anything-c-source-recentf

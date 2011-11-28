@@ -61,6 +61,7 @@
            ("jabber" (or
                       (mode . jabber-chat-mode)
                       (mode . jabber-roster-mode)))
+           ("irc" (mode . erc-mode))
            ("system" (or
                       (mode       . help-mode)
                       (mode       . completion-list-mode)

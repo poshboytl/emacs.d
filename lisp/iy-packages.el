@@ -20,12 +20,19 @@
               ) el-get-sources)
 
 (push 'highlight-symbol el-get-sources)
-(push 'highlight-parentheses el-get-sources)
+(push '(:name highlight-parentheses
+              :after (lambda ()
+                       (add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
+                       (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+                       (add-hook 'ruby-mode-hook 'highlight-parentheses-mode))
+              ) el-get-sources)
 
 (push 'yaml-mode el-get-sources)
 (push 'haml-mode el-get-sources)
 (push 'sass-mode el-get-sources)
-(push 'rainbow-mode el-get-sources)
+(push '(:name rainbow-mode
+              :url "git://github.com/emacsmirror/rainbow-mode.git")
+      el-get-sources)
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 

@@ -2,14 +2,18 @@
 
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 
-
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
   (yas/initialize)
-  (setq yas/root-directory (concat iy-config-dir "snippets"))
-  (yas/load-directory yas/root-directory))
+  (setq yas/snippet-dirs (list (concat iy-el-get-dir "yasnippet/snippets")
+                               (concat iy-config-dir "snippets")))
+  (yas/load-snippet-dirs))
 
 (push '(:name yasnippet
+              :type git
+              :url "git://github.com/capitaomorte/yasnippet.git"
+              :features "yasnippet"
+              :description "YASnippet is a template system for Emacs."
               :post-init iy-el-get-after-yasnippet)
       el-get-sources)
 

@@ -8,9 +8,7 @@
 (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
 
-(push '(:name rinari
-              :after (lambda () (load (concat el-get-dir "rinari/util/ruby-mode"))))
-      el-get-sources)
+(push 'rinari el-get-sources)
 
 (push '(:name rvm
               :type git
@@ -59,8 +57,7 @@
              "Try to expand a snippet before point, then call `%s' as usual"
              function-symbol)
            (let ((yas/fallback-behavior nil))
-             (unless (and (interactive-p)
-                          (yas/expand))
+             (unless (yas/expand)
                ad-do-it)))))
 
 (yas/advise-indent-function 'ruby-indent-line)

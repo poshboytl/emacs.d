@@ -54,7 +54,9 @@
       (setq ad-return-value (buffer-file-name (marker-buffer org-edit-src-beg-marker))))
     (unless ad-return-value
       (setq ad-return-value
-            (cond ((memq major-mode '(magit-mode term-mode)) (expand-file-name default-directory))
+            (cond ((or (eq major-mode 'term-mode)
+                       (string-match-p "^magit-" (prin1-to-string major-mode)))
+                   (expand-file-name default-directory))
                   (t nil)))))
 
   (add-hook 'org-src-mode-hook 'eproject-maybe-turn-on)

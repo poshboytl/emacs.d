@@ -15,6 +15,7 @@
 
 (setq custom-file (concat iy-config-dir "custom.el"))
 (setq iy-custom-defaults-file (concat iy-config-dir "custom.defaults.el"))
+(defvar el-get-packages nil)
 
 ;; Once user has customized and saved, use user custom file.
 (if (file-exists-p custom-file)
@@ -54,26 +55,19 @@
   (iy-init-load-modules)
 
   ;; reverse the list
-  (setq
-   el-get-sources
-   (cons
-    '(:name package
-            :post-init (lambda ()
-                         (setq package-user-dir 
-                               (expand-file-name 
-                                (convert-standard-filename 
-                                 (concat (file-name-as-directory 
-                                          (el-get-package-directory "package")) 
-                                         "elpa")))
-                               package-directory-list 
-                               (list (file-name-as-directory package-user-dir) 
-                                     "/usr/share/emacs/site-lisp/elpa/"))
-                         (make-directory package-user-dir t)
-                         (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-                                                  ("gnu" . "http://elpa.gnu.org/packages/")))
-                         (package-initialize)))
-    (nreverse el-get-sources)))
-  (el-get 'sync))
+  (setq el-get-sources
+   (cons 'package (nreverse el-get-sources)))
+
+  ;; extract out names from el-get-sources
+  (setq el-get-packages
+        (mapcar
+         (lambda (package)
+           (if (listp package)
+               (plist-get package :name)
+             package))
+         el-get-sources))
+
+  (el-get 'sync el-get-packages))
 
 (iy-init)
 

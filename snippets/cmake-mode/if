@@ -1,5 +1,0 @@
-#name : IF (condition) ENDIF (condition)
-# --
-IF(${1:condition})
-  $0
-ENDIF($1)

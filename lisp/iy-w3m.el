@@ -80,7 +80,7 @@
 
 (defun iy-el-get-after-emacs-w3m ()
   (require 'w3m-lnum)
-  (w3m-link-numbering-mode)
+  (w3m-lnum-mode)
   (define-key w3m-mode-map "o" 'wicked-w3m-open-current-page-in-default-browser)
   (define-key w3m-mode-map "O" 'wicked-w3m-open-link-or-image-in-default-browser)
   (define-key w3m-mode-map "," 'w3m-previous-buffer)
