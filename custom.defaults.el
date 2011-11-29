@@ -100,7 +100,7 @@
  '(graphviz-dot-toggle-completions t)
  '(highlight-symbol-idle-delay 1)
  '(highlight-symbol-on-navigation-p t)
- '(hl-paren-colors (quote ("#7f9f7f" "#6ca0a3" "#93e0e3" "#dfaf8f" "#dc8cc3" "#9c6363" "#bc8383" "#dca3a3")))
+ '(hl-paren-colors (quote ("#7f9f7f" "#93e0e3" "#dc8cc3" "#bc8383")))
  '(home-end-enable t)
  '(htmlize-html-charset "UTF-8")
  '(htmlize-output-type (quote css))
