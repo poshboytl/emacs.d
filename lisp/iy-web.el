@@ -1,6 +1,5 @@
 (require 'iy-dep)
 (require 'iy-keymap)
-(require 'iy-company)
 
 ;; add nxhtml in the end, because it will load old org
 (push
@@ -10,7 +9,6 @@
 
 (defun iy-el-get-after-nxhtml ()
   (defun iy/nxhtml-mode-init ()
-    (setq popcmp-completion-style 'anything)
     (zencoding-mode t))
   (add-hook 'nxhtml-mode-hook 'iy/nxhtml-mode-init)
 

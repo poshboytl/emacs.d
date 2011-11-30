@@ -6,11 +6,13 @@ else
 endif
 
 BATCH=$(EMACS) -batch -q -no-site-file -eval\
-  "(setq load-path (cons (expand-file-name \"./lisp/\") (cons (expand-file-name \"./lisp/3rdparty/\") (cons (expand-file-name \"./el-get/el-get/\") load-path))))"
+  "(setq load-path (cons (expand-file-name \"./lisp/\") (cons (expand-file-name \"./lisp/3rdparty/\") (cons (expand-file-name \"./lisp/3rdparty/emacs-color-theme-solarized/\") (cons (expand-file-name \"./el-get/el-get/\") load-path)))))"\
+  -eval "(setq max-specpdl-size 2000)" \
+  -eval "(setq max-lisp-eval-depth 1000)"
 
 ELC= $(BATCH) -f batch-byte-compile
 
-ELFILES=$(wildcard lisp/*.el) $(wildcard lisp/3rdparty/*.el)
+ELFILES=$(wildcard lisp/*.el) $(wildcard lisp/3rdparty/*.el) $(wildcard lisp/3rdparty/emacs-color-theme-solarized/*.el)
 ELCFILES=$(ELFILES:%.el=%.elc)
 
 .SUFFIXES: .el .elc

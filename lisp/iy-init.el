@@ -10,6 +10,7 @@
 (require 'iy-dep)
 
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
+(add-to-list 'load-path (concat iy-lisp-dir "3rdparty/emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
 

@@ -1,0 +1,3 @@
+[submodule "lisp/3rdparty/emacs-color-theme-solarized"]
+	path = lisp/3rdparty/emacs-color-theme-solarized
+	url = git@github.com:doitian/emacs-color-theme-solarized.git

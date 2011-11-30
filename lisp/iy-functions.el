@@ -77,10 +77,6 @@
          (ptr (assq mode folding-mode-marks-alist)))
     (setcdr ptr (list b e))))
 
-(defun iy-toggle-newline-mark ()
-  (interactive)
-  (whitespace-toggle-options 'newline-mark))
-
 (defun iy-close-help ()
   (interactive)
   (save-excursion

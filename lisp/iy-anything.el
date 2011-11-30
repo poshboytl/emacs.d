@@ -24,11 +24,13 @@
          'anything-c-source-recentf
          'anything-c-source-file-name-history
          'anything-c-source-bookmarks
-         'anything-c-source-w3m-bookmarks))
+         'anything-c-source-w3m-bookmarks
+         'anything-c-source-locate))
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
   (define-key iy-map (kbd "M-s") 'anything-at-point)
+  (define-key iy-map (kbd "M-x") 'anything-M-x)
 
   (setq anything-enable-digit-shortcuts t)
   (define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
@@ -40,7 +42,7 @@
   (define-key anything-map (kbd "M-7") 'anything-select-with-digit-shortcut)
   (define-key anything-map (kbd "M-8") 'anything-select-with-digit-shortcut)
   (define-key anything-map (kbd "M-9") 'anything-select-with-digit-shortcut)
-  (define-key anything-map "\C-k" (lambda () (interactive) (delete-minibuffer-contents)))
+  (define-key anything-map "\C-u" 'anything-delete-minibuffer-contents)
   (define-key anything-map "\M-N" 'anything-next-source)
   (define-key anything-map "\M-P" 'anything-previous-source)
   (define-key anything-map "\C-\M-n" 'anything-next-source)
@@ -70,5 +72,19 @@
   (anything-insert-string
    (with-current-buffer anything-current-buffer
      (buffer-stub-name))))
+
+;; 1. Quote the string
+;; 2. If we didn't input any typically regexp characters, convert spaces to .*,
+;;    however, it is still order related.
+(defun anything-pattern-to-regexp (string)
+  (prin1-to-string
+   (unless (string-match-p "[*+$^]" string)
+     (replace-regexp-in-string " +" ".*" (regexp-quote string)))))
+
+;; Hack
+;; Convert anything pattern to regexp for locate
+(defadvice anything-c-locate-init (around anything-pattern-to-regexp () activate)
+  (let ((anything-pattern (anything-pattern-to-regexp anything-pattern)))
+    ad-do-it))
 
 (provide 'iy-anything)

@@ -517,15 +517,15 @@ static char *gnus-pointer[] = {
           '(dictionary-reference ((t (:inherit zenburn-primary-1))))
           '(dictionary-word-entry ((t (:inherit font-lock-keyword))))
 
-          '(diff-header ((t (:inherit zenburn-highlight-subtle))))
-          '(diff-index ((t (:inherit bold))))
-          '(diff-file-header ((t (:inherit bold))))
-          '(diff-hunk-header ((t (:inherit zenburn-highlight-subtle))))
+          '(diff-header ((t (:inherit font-lock-keyword))))
+          `(diff-index ((t (:background "#ff0000"))))
+          '(diff-file-header ((t (:inherit font-lock-keyword))))
+          '(diff-hunk-header ((t (:inherit font-lock-builtin))))
 
-          '(diff-added ((t (:inherit zenburn-primary-3))))
-          '(diff-removed ((t (:inherit zenburn-blue))))
-          '(diff-context ((t (:inherit font-lock-comment))))
-          '(diff-refine-change ((t (:inherit zenburn-background-2))))
+          `(diff-added ((t (:foreground "#60b48a"))))
+          `(diff-removed ((t (:foreground "#705050"))))
+          '(diff-context ((t (:inherit default))))
+          `(diff-refine-change ((t (:background "#323232"))))
 
           `(ediff-current-diff-A ((t (:background "#495766" :foreground ,zenburn-fg))))
           `(ediff-current-diff-Ancestor ((t (:background "#495766" :foreground ,zenburn-fg))))

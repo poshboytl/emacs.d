@@ -122,6 +122,10 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") 'other-frame)
+(global-set-key (kbd "C-<next>") 'next-buffer)
+(global-set-key (kbd "C-<prior>") 'previous-buffer)
+
+(global-set-key (kbd "M-O") 'other-frame)
 (global-set-key (kbd "C-x K") (lambda ()
                                 (interactive)
                                 (if (< (length (window-list)) 2)
