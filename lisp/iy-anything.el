@@ -78,7 +78,7 @@
 ;;    however, it is still order related.
 (defun anything-pattern-to-regexp (string)
   (prin1-to-string
-   (unless (string-match-p "[*+$^]" string)
+   (if (string-match-p "[*+$^]" string) string
      (replace-regexp-in-string " +" ".*" (regexp-quote string)))))
 
 ;; Hack
