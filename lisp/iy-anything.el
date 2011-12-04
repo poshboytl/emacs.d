@@ -78,8 +78,17 @@
 ;;    however, it is still order related.
 (defun anything-pattern-to-regexp (string)
   (prin1-to-string
-   (if (string-match-p "[*+$^]" string) string
-     (replace-regexp-in-string " +" ".*" (regexp-quote string)))))
+   (if (string-match-p "[\\[\\]*+$^]" string) string
+     (let ((parts (split-string string "[ \t]+" t)))
+       (if (eq 2 (length parts))
+           ;; for two parts a,b we make a.*b\|b.*a
+           (concat
+            (mapconcat 'regexp-quote parts ".*")
+            "\\|"
+            (mapconcat 'regexp-quote (reverse parts) ".*"))
+         ;; only 1 part or more than 2 parts, fine, just combine them using .*,
+         ;; thus it will slow down locate a lot. This means you have to type in order
+         (mapconcat 'regexp-quote parts ".*"))))))
 
 ;; Hack
 ;; Convert anything pattern to regexp for locate

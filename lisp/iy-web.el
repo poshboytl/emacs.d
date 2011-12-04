@@ -18,6 +18,11 @@
   (define-key iy-map (kbd "i") 'fold-dwim-toggle)
   (define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
   (define-key iy-map (kbd "I") 'fold-dwim-hide-all)
-  (define-key iy-map (kbd "C-i") 'fold-dwim-show-all))
+  (define-key iy-map (kbd "C-i") 'fold-dwim-show-all)
+
+  ;; revert some mode
+  (add-to-list 'auto-mode-alist '("\\.md\\.erb\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\.md\\.erb\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.html.haml" . haml-mode)))
 
 (provide 'iy-web)
