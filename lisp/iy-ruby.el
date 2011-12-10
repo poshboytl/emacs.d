@@ -10,13 +10,6 @@
 
 (push 'rinari el-get-sources)
 
-(push '(:name rvm
-              :type git
-              :url "git://github.com/senny/rvm.el.git"
-              :after (lambda () (rvm-use-default))
-              :features rvm)
-      el-get-sources)
-
 (push '(:name ruby-electric
               :type http
               :url "http://shylock.uw.hu/Emacs/ruby-electric.el")
