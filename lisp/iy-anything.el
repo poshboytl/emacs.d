@@ -3,11 +3,9 @@
 (require 'iy-eproject)
 
 ;;; Libraries
-(add-to-list
- 'el-get-sources
- '(:name anything
-         :after iy-el-get-after-anything)
- 'append)
+(push '(:name anything
+              :after iy-el-get-after-anything)
+      el-get-sources)
 
 (defun iy-el-get-after-anything ()
   (require 'anything-config)
