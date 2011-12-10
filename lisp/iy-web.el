@@ -23,6 +23,7 @@
   ;; revert some mode
   (add-to-list 'auto-mode-alist '("\\.md\\.erb\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.html\\.md\\.erb\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.html.haml" . haml-mode)))
 
 (provide 'iy-web)
