@@ -1,4 +1,5 @@
 ; Buffer Window staff
+(require 'iy-keymap)
 
 (defun iy-ediff-before-setup-winring-jump ()
   (iy-winring-jump-or-create "*ediff*"))
@@ -78,7 +79,7 @@ middle"
 	 (fr-width (frame-width)))
     (cond
      ((eq 0 this-window-x-min) "left")
-     ((eq (+ fr-width 2) this-window-x-max) "right")
+     ((<= fr-width this-window-x-max) "right")
      (t "mid"))))
 
 (defun win-resize-enlarge-horiz ()
@@ -116,6 +117,39 @@ middle"
 (global-set-key [S-left] 'win-resize-enlarge-vert)
 (global-set-key [S-right] 'win-resize-minimize-vert)
 
-(windmove-default-keybindings 'control)
+(windmove-default-keybindings 'meta)
+
+(defun iy-wind-move-resize ()
+  "wind move and resze"
+  (interactive)
+  (let ((done nil)
+        (ev last-command-event)
+        (echo-keystrokes nil))
+    (while (not done)
+      (condition-case e
+          (progn
+            (message (prin1-to-string ev))
+            (cond ((eq ev ?h) (windmove-left))
+                  ((eq ev ?j) (windmove-down))
+                  ((eq ev ?k) (windmove-up))
+                  ((eq ev ?l) (windmove-right))
+                  ((eq ev ?H) (win-resize-enlarge-vert))
+                  ((eq ev ?J) (win-resize-minimize-horiz))
+                  ((eq ev ?K) (win-resize-enlarge-horiz))
+                  ((eq ev ?L) (win-resize-minimize-vert))
+                  (t (setq done t))))
+        (error (message (apply 'concat (cdr e)))))
+      (when (not done)
+        (setq ev (read-event))))
+    (push ev unread-command-events)))
+
+(define-key iy-map "h" 'iy-wind-move-resize)
+(define-key iy-map "j" 'iy-wind-move-resize)
+(define-key iy-map "k" 'iy-wind-move-resize)
+(define-key iy-map "l" 'iy-wind-move-resize)
+(define-key iy-map "H" 'iy-wind-move-resize)
+(define-key iy-map "J" 'iy-wind-move-resize)
+(define-key iy-map "K" 'iy-wind-move-resize)
+(define-key iy-map "L" 'iy-wind-move-resize)
 
 (provide 'iy-win-buffer)
