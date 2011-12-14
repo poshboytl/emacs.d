@@ -85,9 +85,6 @@
   (flyspell-prog-mode)
   (when (fboundp 'doxymacs-mode)
     (doxymacs-mode))
-  ;; (turn-on-filladapt-mode)
-  ;; (set (make-local-variable 'filladapt-token-table) iy-c-filladapt-token-table)
-  ;; (c-setup-filladapt)
   (autopair-mode)
   (setq autopair-handle-action-fns
         '(

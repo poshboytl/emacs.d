@@ -163,9 +163,6 @@
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
 
   (flyspell-mode 1)
-  (when (fboundp 'filladapt-mode)
-    (filladapt-mode)
-    (setq filladapt-token-table iy-default-filladapt-token-table))
   (when (fboundp 'yas/fix-keybindings) (yas/fix-keybindings)))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
