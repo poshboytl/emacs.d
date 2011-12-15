@@ -30,11 +30,9 @@
         org-id
         org-info
         org-inlinetask
-        org-jsinfo
         org-man
         org-protocol
         org-w3m
-        org-gnus
         org-clock
         org-timer
         ))
