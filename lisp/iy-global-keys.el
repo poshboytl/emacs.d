@@ -60,11 +60,6 @@
 (global-set-key (kbd "C-<return>") 'iy-next-line-and-open-it-if-not-empty)
 
 ;;; Mark
-(global-set-key (kbd "C-'") 'set-mark-command)
-(global-set-key (kbd "C-x C-'") 'pop-global-mark)
-(global-set-key (kbd "C-M-'") 'mark-sexp)
-(global-set-key (kbd "M-'") 'mark-word)
-
 (global-set-key (kbd "C-2") 'set-mark-command)
 (global-set-key (kbd "C-x C-2") 'pop-global-mark)
 (global-set-key (kbd "C-M-2") 'mark-sexp)
