@@ -6,20 +6,6 @@
 
 (push 'org-mode el-get-sources)
 
-;; enable org-mac-protocol for Mac OS X
-(when (eq system-type 'darwin)
-  (push
-   '(:name org-mac-protocol
-           :type git
-           :url "git://github.com/claviclaws/org-mac-protocol.git"
-           :compile "org-mac-protocol.el"
-           :build '("mkdir -p ~/Library/Scripts/"
-                    "mkdir -p ~/Library/Scripts/orgQSLib"
-                    "mv *.scpt ~/Library/Scripts/"
-                    "mv orgQSLib/*.scpt orgQSLib/escape.rb ~/Library/Scripts/orgQSLib")
-           :features org-mac-protocol)
-   el-get-sources))
-
 ;;; Modules
 (setq org-modules
       '(
@@ -31,7 +17,6 @@
         org-info
         org-inlinetask
         org-man
-        org-protocol
         org-w3m
         org-clock
         org-timer
