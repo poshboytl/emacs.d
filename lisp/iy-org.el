@@ -117,12 +117,6 @@
 (setq org-ditaa-jar-path iy-ditaa-path)
 (setq org-extend-today-until 2)
 
-;;; Startup
-(eval-after-load "remember"
-  '(progn
-     (org-remember-insinuate)
-     (org-clock-persistence-insinuate)))
-
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c L") 'org-insert-link-global)
 (global-set-key (kbd "C-c o") 'org-open-at-point-global)
@@ -180,25 +174,7 @@
   "Switch to PAUSE if clock out a task marked GOING"
   (if (string= state "GOING") "PAUSE" state))
 
-(add-hook 'remember-mode-hook 'iy-start-clock-if-needed 'append)
-(defun iy-start-clock-if-needed ()
-  (save-excursion
-    (goto-char (point-min))
-    (when (re-search-forward " *CLOCK-IN *" nil t)
-      (replace-match "")
-      (org-clock-in))))
-
 ;;; Template
-(setq
- org-remember-templates
- '(
-   ("Applescript Remember" ?y
-    "* %:shortdesc\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i\n %?"
-    "inbox.org" "Bookmarks")
-   ("AppleScript note" ?z
-    "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i"
-    "inbox.org" "Notes")))
-
 (setq
  org-capture-templates
  '(("r" "Notes" entry (file+headline "inbox.org" "Notes")
