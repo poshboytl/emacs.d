@@ -110,7 +110,9 @@
 (setq org-yank-adjusted-subtrees nil)
 (setq org-use-fast-todo-selection t)
 (setq org-directory (concat iy-dropbox-dir "g/org"))
-(setq org-mobile-directory (concat iy-dropbox-dir "g/morg"))
+(setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
+(setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/mobile-inbox.org"))
+
 (setq org-agenda-files (list (concat iy-dropbox-dir "g/org") (concat iy-dropbox-dir "g/org/projects")))
 (setq org-default-notes-file (concat org-directory "inbox.org"))
 (setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
