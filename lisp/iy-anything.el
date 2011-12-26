@@ -45,7 +45,6 @@
   (define-key anything-map "\M-P" 'anything-previous-source)
   (define-key anything-map "\C-\M-n" 'anything-next-source)
   (define-key anything-map "\C-\M-p" 'anything-previous-source)
-  (define-key anything-map (kbd "C-'") 'anything-toggle-visible-mark)
 
   (define-key minibuffer-local-map "\C-r" 'anything-minibuffer-history)
   (define-key minibuffer-local-completion-map "\C-r" 'anything-minibuffer-history)

@@ -48,6 +48,9 @@
 (add-hook 'eproject-mode-hook 'eproject-visit-tags-table)
 
 (defun iy-el-get-after-eproject ()
+  (macroexpand '(define-project-type generic-bundle (generic-git) (look-for "Gemfile")
+                  :irrelevant-files ("vendor/bundle")))
+
   (defadvice eproject--buffer-file-name (after guess-directory activate)
     (when (and (boundp 'org-src-mode) org-src-mode
                (boundp 'org-edit-src-beg-marker) org-edit-src-beg-marker)
