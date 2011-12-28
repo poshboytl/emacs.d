@@ -4,6 +4,18 @@
 (require 'iy-daemon)
 (require 'iy-keymap)
 
+(push '(:name deft
+              :after iy-el-get-after-deft)
+      el-get-sources)
+(defun iy-el-get-after-deft ()
+  (setq
+   deft-extension "org"
+   deft-directory (concat iy-dropbox-dir "g/org")
+   deft-use-filename-as-title t
+   deft-text-mode 'org-mode)
+  (define-key iy-map (kbd "e") 'deft))
+
+
 (push 'org-mode el-get-sources)
 
 ;;; Modules
