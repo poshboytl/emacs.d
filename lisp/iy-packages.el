@@ -92,10 +92,4 @@
   (local-set-key (kbd "M-o") 'other-window))
 (add-hook 'diff-mode-hook 'iy/diff-mode-init)
 
-(push '(:name sauron
-              :type git
-              :url "git://github.com/djcb/sauron.git"
-              :features sauron)
-      el-get-sources)
-
 (provide 'iy-packages)
