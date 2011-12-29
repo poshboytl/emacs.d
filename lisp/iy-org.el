@@ -4,17 +4,16 @@
 (require 'iy-daemon)
 (require 'iy-keymap)
 
-(push '(:name deft
-              :after iy-el-get-after-deft)
-      el-get-sources)
-(defun iy-el-get-after-deft ()
-  (setq
-   deft-extension "org"
-   deft-directory (concat iy-dropbox-dir "g/org")
-   deft-use-filename-as-title t
-   deft-text-mode 'org-mode)
-  (define-key iy-map (kbd "e") 'deft))
-
+;; (push '(:name deft
+;;               :after iy-el-get-after-deft)
+;;       el-get-sources)
+;; (defun iy-el-get-after-deft ()
+;;   (setq
+;;    deft-extension "md"
+;;    deft-directory (concat iy-dropbox-dir "g/notes")
+;;    deft-use-filename-as-title t
+;;    deft-text-mode 'markdown-mode)
+;;   (define-key iy-map (kbd "e") 'deft))
 
 (push 'org-mode el-get-sources)
 
@@ -126,7 +125,7 @@
 (setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/mobile-inbox.org"))
 
 (setq org-agenda-files (list (concat iy-dropbox-dir "g/org") (concat iy-dropbox-dir "g/org/projects")))
-(setq org-default-notes-file (concat org-directory "inbox.org"))
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-mobile-directory (concat iy-dropbox-dir "MobileOrg"))
 (setq org-mobile-inbox-for-pull (concat iy-dropbox-dir "g/org/from_mobile.org"))
 (setq org-ditaa-jar-path iy-ditaa-path)
@@ -192,24 +191,21 @@
 ;;; Template
 (setq
  org-capture-templates
- '(("r" "Notes" entry (file+headline "inbox.org" "Notes")
+ '(("r" "Notes" entry (file+headline (concat org-directory "/inbox.org") "Notes")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i"
     :prepend t)
-   ("t" "TODO" entry (file+headline "inbox.org" "Tasks")
+   ("t" "TODO" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
     "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
-   ("s" "SOMEDAY" entry (file+headline "inbox.org" "Someday")
+   ("d" "Dump" plain (file+olp (concat org-directory "/inbox.org") "Quick Notes" "Plain")
+    "\n--%U--------------------------------------------------\n%?\n" :empty-lines 1)
+   ("l" "List" item (file+olp (concat org-directory "/inbox.org") "Quick Notes" "List") "%?\n" :empty-lines 1)
+   ("j" "Journal" plain (file+datetree (concat org-directory "/journal.org"))
+    "\n%?\n" :empty-lines 1)
+   ("s" "SOMEDAY" entry (file+headline (concat org-directory "/inbox.org") "Someday")
     "* SOMEDAY %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
-   ("j" "Journal" entry (file+datetree "journal.org")
-    "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
-   ("x" "Clipboard" entry (file+headline "inbox.org" "Notes")
+   ("x" "Clipboard" entry (file+headline (concat org-directory "/inbox.org") "Notes")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %x"
     :prepend t :empty-lines 1)
-   ("b" "Default template" entry (file+headline "inbox.org" "Bookmarks")
-    "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i"
-    :prepend t :empty-lines 1 :immediate-finish t)
-   ("w" "Default template" entry (file+headline "inbox.org" "Bookmarks")
-    "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n  %i"
-    :prepend t :empty-lines 1 :immediate-finish t)
 
    ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
     "* %? %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC\n  %i\n#+END_SRC\n")))
@@ -347,6 +343,6 @@
   (ido-find-file-in-dir org-directory))
 (defun snippet ()
   (interactive)
-  (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets/" )))
+  (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets" )))
 
 (provide 'iy-org)
