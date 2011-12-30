@@ -5,7 +5,7 @@
 (custom-set-variables
  '(abbrev-mode t)
  '(ack-prompt-for-directory t)
- '(anything-command-map-prefix-key "M-s s")
+ '(anything-command-map-prefix-key "M-S")
  '(appt-display-format (quote window))
  '(appt-message-warning-time 10)
  '(auto-save-interval 50)

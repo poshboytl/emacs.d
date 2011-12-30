@@ -27,7 +27,7 @@
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
-  (define-key iy-map (kbd "M-s") 'anything-at-point)
+  (global-set-key (kbd "M-S") 'anything-command-map)
   (define-key iy-map (kbd "M-x") 'anything-M-x)
 
   (setq anything-enable-digit-shortcuts t)
