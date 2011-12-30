@@ -5,8 +5,8 @@
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
   (yas/initialize)
-  (setq yas/snippet-dirs (list (concat iy-el-get-dir "yasnippet/snippets")
-                               (concat iy-config-dir "snippets")))
+  (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")
+                               (concat iy-el-get-dir "yasnippet/snippets")))
   (yas/load-snippet-dirs))
 
 (push '(:name yasnippet
@@ -48,6 +48,8 @@
 (defun yas/underscore-to-camel (string)
   (replace-regexp-in-string "_" "" (upcase-initials string)))
 
-(define-key iy-map [tab] 'yas/ido-insert-snippets)
+(define-key iy-map (kbd "s s") 'yas/ido-insert-snippets)
+(define-key iy-map (kbd "s f") 'yas/find-snippets)
+(define-key iy-map (kbd "s n") 'yas/new-snippet)
 
 (provide 'iy-template)
