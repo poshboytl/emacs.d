@@ -47,10 +47,22 @@
           (visit-tags-table file t))))))
 (add-hook 'eproject-mode-hook 'eproject-visit-tags-table)
 
+(eval-when-compile
+  (progn
+    (defmacro define-project-type (type supertypes selector &rest metadata)
+      `(progn
+         (defvar ,(intern (format "%s-project-file-visit-hook" type)) nil
+           ,(format "Hooks that will be run when a file in a %s project is opened." type))
+         (setq eproject-project-types
+               (nconc (assq-delete-all ',type eproject-project-types)
+                      (list
+                        (list ',type ',supertypes
+                              (lambda (file) ,selector)
+                              ',metadata))))))))
+
 (defun iy-el-get-after-eproject ()
-  (eval
-   (macroexpand '(define-project-type generic-bundle (generic-git) (look-for "Gemfile")
-                  :irrelevant-files ("vendor/bundle"))))
+  (define-project-type generic-bundle (generic) (look-for "Gemfile")
+    :irrelevant-files ("^[.]" "^[#]" ".git/" "vendor"))
 
   (defadvice eproject--buffer-file-name (after guess-directory activate)
     (when (and (boundp 'org-src-mode) org-src-mode

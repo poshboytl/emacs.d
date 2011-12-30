@@ -15,6 +15,7 @@
 (add-to-list 'load-path iy-lisp-dir)
 
 (setq custom-file (concat iy-config-dir "custom.el"))
+(setq secrets-file (concat iy-config-dir "secrets.el"))
 (setq iy-custom-defaults-file (concat iy-config-dir "custom.defaults.el"))
 (defvar el-get-packages nil)
 
@@ -22,6 +23,9 @@
 (if (file-exists-p custom-file)
     (load custom-file t t)
   (load iy-custom-defaults-file t t))
+
+(when (file-exists-p secrets-file)
+  (load secrets-file t t))
 
 (defun iy-init-load-modules ()
   "Emacs load modules"

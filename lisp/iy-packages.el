@@ -46,6 +46,10 @@
               :url "git://github.com/baron/gist.el.git")
       el-get-sources)
 
+(push '(:name tumble
+              :type elpa)
+      el-get-sources)
+
 (push 'browse-kill-ring el-get-sources)
 
 (push '(:name kill-ring-search

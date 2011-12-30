@@ -4,16 +4,16 @@
 (require 'iy-daemon)
 (require 'iy-keymap)
 
-;; (push '(:name deft
-;;               :after iy-el-get-after-deft)
-;;       el-get-sources)
-;; (defun iy-el-get-after-deft ()
-;;   (setq
-;;    deft-extension "md"
-;;    deft-directory (concat iy-dropbox-dir "g/notes")
-;;    deft-use-filename-as-title t
-;;    deft-text-mode 'markdown-mode)
-;;   (define-key iy-map (kbd "e") 'deft))
+(push '(:name deft
+              :after iy-el-get-after-deft)
+      el-get-sources)
+(defun iy-el-get-after-deft ()
+  (setq
+   deft-extension "md"
+   deft-directory (concat iy-dropbox-dir "g/notes")
+   deft-use-filename-as-title t
+   deft-text-mode 'markdown-mode)
+  (define-key iy-map (kbd "e") 'deft))
 
 (push 'org-mode el-get-sources)
 
@@ -196,9 +196,6 @@
     :prepend t)
    ("t" "TODO" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
     "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
-   ("d" "Dump" plain (file+olp (concat org-directory "/inbox.org") "Quick Notes" "Plain")
-    "\n--%U--------------------------------------------------\n%?\n" :empty-lines 1)
-   ("l" "List" item (file+olp (concat org-directory "/inbox.org") "Quick Notes" "List") "%?\n" :empty-lines 1)
    ("j" "Journal" plain (file+datetree (concat org-directory "/journal.org"))
     "\n%?\n" :empty-lines 1)
    ("s" "SOMEDAY" entry (file+headline (concat org-directory "/inbox.org") "Someday")
