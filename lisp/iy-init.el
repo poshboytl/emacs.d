@@ -9,6 +9,10 @@
 (eval-when-compile (require 'cl))
 (require 'iy-dep)
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty/emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
