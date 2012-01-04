@@ -1,4 +1,11 @@
-(require 'iy-keymap)
+;;{{{ TAGS
+(custom-set-variables
+ '(tags-add-tables nil))
+;;}}}
+
+;;{{{ ACK
+(custom-set-variables
+ '(ack-prompt-for-directory t))
 
 (push 'full-ack el-get-sources)
 (push '(:name xcscope :after iy-el-get-after-xcscope :localname "xcscope.el")
@@ -9,7 +16,9 @@
   (let ((ack-root-directory-functions nil)
         (ack-prompt-for-directory t))
     (call-interactively 'ack)))
+;;}}}
 
+;;{{{ cscope
 (defun iy-el-get-after-xcscope ()
   (defcustom cscope-ignore-case t
     "*Whether to ignore case while searching."
@@ -34,7 +43,9 @@
     "ignore case in cscope search"
      (when cscope-ignore-case
        (ad-set-arg 1 (cons "-C" (ad-get-arg 1))))))
+;;}}}
 
+;;{{{ Alternative File
 (push '(:name alternative-files
               :compile "alternative-files.el"
               :type git
@@ -45,5 +56,6 @@
                        (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
                        (define-key iy-map (kbd "A") 'alternative-files-create-file)))
       el-get-sources)
+;;}}}
 
-(provide 'iy-code-browser)
+(provide 'iy-programming)

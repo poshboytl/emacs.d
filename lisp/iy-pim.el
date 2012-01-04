@@ -1,8 +1,5 @@
-;;; iy-org --- config for Orgmode
-
 (require 'iy-dep)
 (require 'iy-daemon)
-(require 'iy-keymap)
 
 (push '(:name deft
               :after iy-el-get-after-deft)
@@ -140,15 +137,11 @@
 (define-key iy-map (kbd "<DEL>") 'org-clock-out)
 (define-key iy-map (kbd "r") 'org-capture)
 (define-key iy-map (kbd "M-r") 'org-capture)
-(autoload 'org-in-regexp "org" "for footnote")
+(autoload 'org-footnote-action "org-footnote" nil t)
 (define-key iy-map (kbd "t") 'org-footnote-action)
 
 (add-hook 'org-mode-hook 'iy-org-mode-init)
 (defun iy-org-mode-init ()
-  (define-key org-mode-map (kbd "C-'") 'set-mark-command)
-  (define-key org-mode-map (kbd "C-x C-'") 'pop-global-mark)
-  (define-key org-mode-map (kbd "C-M-'") 'mark-sexp)
-  (define-key org-mode-map (kbd "M-'") 'mark-word)
   (define-key org-mode-map (kbd "C-c ,") 'org-cycle-agenda-files)
   (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view)
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
@@ -313,10 +306,6 @@
                                  (if org-timer-current-timer
                                      (org-timer-cancel-timer))))
 
-;; TODO: org-toodledo
-(autoload 'org-toodledo-initialize-org "org-toodledo"
-  "toodledo" t)
-
 (defun org-agenda-3-days-view (&optional day-of-year)
   "Switch to 3-days (yesterday, today, tomorrow) view for agenda."
   (interactive "P")
@@ -342,4 +331,10 @@
   (interactive)
   (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets" )))
 
-(provide 'iy-org)
+(custom-set-variables
+ '(appt-display-format (quote window))
+ '(appt-message-warning-time 10)
+ '(calendar-week-start-day 1)
+ '(diary-file (concat iy-dropbox-dir "diary")))
+
+(provide 'iy-pim)

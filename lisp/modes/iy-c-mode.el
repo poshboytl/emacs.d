@@ -1,10 +1,3 @@
-(push 'doxymacs el-get-sources)
-
-(defun iy-doxymacs-font-lock-mode-init ()
-  (if (memq major-mode '(c-mode c++-mode objc-mode))
-      (doxymacs-font-lock)))
-(add-hook 'font-lock-mode-hook 'iy-doxymacs-font-lock-mode-init)
-
 (defconst my-c-style
   '((c-basic-offset             . 4)
     (c-comment-only-line-offset . (0 . 0))
@@ -146,4 +139,4 @@
 (add-hook 'objc-mode-hook 'iy-objc-mode-init)
 (add-hook 'java-mode-hook 'iy-java-mode-init)
 
-(provide 'iy-c)
+(provide 'iy-c-mode)

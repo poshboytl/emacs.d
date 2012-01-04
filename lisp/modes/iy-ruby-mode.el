@@ -32,16 +32,6 @@
       el-get-sources)
 (push 'rspec-mode el-get-sources)
 
-(push '(:name doxymacs-yard
-              :type git
-              :url "git://github.com/doitian/doxymacs-yard.git"
-              :after (lambda ()
-                       (autoload 'doxymacs-yard "doxymacs-yard" nil t)
-                       (autoload 'doxymacs-yard-font-lock "doxymacs-yard" nil t)
-                       (add-hook 'ruby-mode-hook 'doxymacs-yard)
-                       (add-hook 'ruby-mode-hook 'doxymacs-yard-font-lock)))
-      el-get-sources)
-
 (defun iy/ruby-mode-init ()
   (rinari-minor-mode t)
   (hs-minor-mode t)
@@ -50,7 +40,6 @@
   (turn-on-auto-fill)
   (local-set-key (kbd "<return>") 'newline-and-indent)
   (local-set-key (kbd "C-h h") 'yari)
-  ;; (local-set-key (kbd "C-h .") 'rct-complete-symbol)
   ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
   )
 
@@ -67,4 +56,4 @@
 
 (add-hook 'ruby-mode-hook 'iy/ruby-mode-init t)
 
-(provide 'iy-ruby)
+(provide 'iy-ruby-mode)

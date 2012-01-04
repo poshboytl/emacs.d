@@ -12,17 +12,8 @@
 
  '(mouse-yank-at-point t)
  '(x-select-enable-clipboard t)
- '(browse-url-browser-function (quote w3m-browse-url)))
-;;}}}
-
-;;{{{ Cleanup Buffers
-(custom-set-variables
- '(clean-buffer-list-delay-special 3600)
- '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
- '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
- '(midnight-mode t nil (midnight))
- '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
- '(uniquify-strip-common-suffix t))
+ '(browse-url-browser-function (quote w3m-browse-url))
+ '(tramp-default-method-alist (quote (("\\`localhost\\'" "\\`root\\'" "sudo")))))
 ;;}}}
 
 ;;{{{ Shortcuts

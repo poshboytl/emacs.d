@@ -41,4 +41,6 @@
 
 (recentf-mode)
 
+(push '(:name pick-backup :type elpa) el-get-sources)
+
 (provide 'iy-backup)

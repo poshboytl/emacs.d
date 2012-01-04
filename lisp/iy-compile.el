@@ -1,6 +1,11 @@
 (require 'iy-dep)
 (require 'flymake)
 
+(custom-set-variables
+ '(compilation-auto-jump-to-first-error nil)
+ '(compilation-context-lines 10)
+ '(compilation-scroll-output (quote first-error)))
+
 (add-to-list 'compilation-error-regexp-alist-alist
              '(maven "^\\[\\w+\\] \\(.*\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\] \\(.*\\)$" 1 2 3 (4)))
 (add-to-list 'compilation-error-regexp-alist 'maven)
@@ -37,21 +42,20 @@
 (defvar flymake-fringe-overlays nil)
 (make-variable-buffer-local 'flymake-fringe-overlays)
 
-(when (iy-require-maybe 'iy-packages)
-  (defadvice flymake-make-overlay (after add-to-fringe first
-                                         (beg end tooltip-text face mouse-face)
-                                         activate compile)
-    (push (fringe-helper-insert-region
-           beg end
-           (fringe-lib-load (if (eq face 'flymake-errline)
-                                (and (boundp 'fringe-lib-exclamation-mark) fringe-lib-exclamation-mark)
-                              (and (boundp 'fringe-lib-question-mark) fringe-lib-question-mark)))
-           'left-fringe 'font-lock-warning-face)
-          flymake-fringe-overlays))
+(defadvice flymake-make-overlay (after add-to-fringe first
+                                       (beg end tooltip-text face mouse-face)
+                                       activate compile)
+  (push (fringe-helper-insert-region
+         beg end
+         (fringe-lib-load (if (eq face 'flymake-errline)
+                              (and (boundp 'fringe-lib-exclamation-mark) fringe-lib-exclamation-mark)
+                            (and (boundp 'fringe-lib-question-mark) fringe-lib-question-mark)))
+         'left-fringe 'font-lock-warning-face)
+        flymake-fringe-overlays))
 
-  (defadvice flymake-delete-own-overlays (after remove-from-fringe activate
-                                                compile)
-    (mapc 'fringe-helper-remove flymake-fringe-overlays)
-    (setq flymake-fringe-overlays nil)))
+(defadvice flymake-delete-own-overlays (after remove-from-fringe activate
+                                              compile)
+  (mapc 'fringe-helper-remove flymake-fringe-overlays)
+  (setq flymake-fringe-overlays nil))
 
 (provide 'iy-compile)

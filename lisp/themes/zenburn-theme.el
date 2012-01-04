@@ -601,12 +601,24 @@
     '(wl-highlight-summary-displaying-face ((t (:underline t :weight bold))))
 
     ;; diredp
-    `(diredp-dir-priv ((t (:foreground ,zenburn-blue+1))))
+    `(diredp-dir-priv ((t (:foreground ,zenburn-blue+1 :background ,zenburn-bg))))
+    '(diredp-ignored-file-name ((t (:inherit 'font-lock-comment))))
+    `(diredp-compressed-file-suffix ((t (:foreground ,zenburn-magenta))))
     `(diredp-dir-heading ((t (:foreground ,zenburn-orange :background ,zenburn-green-4))))
     `(diredp-file-name ((t (:foreground ,zenburn-fg))))
     `(diredp-file-suffix ((t (:foreground ,zenburn-orange))))
-    `(diredp-ignored-file-name ((t (:foreground ,zenburn-green-4))))
     `(diredp-symlink ((t (:foreground ,zenburn-blue-1))))
+
+    ;; Anything / Anything config
+    '(anything-ff-directory ((t (:inherit 'diredp-dir-priv))))
+    '(anything-visible-mark ((t (:inherit ,region))))
+
+    ;; sml modeline
+    `(sml-modeline-end-face ((t (:foreground ,zenburn-blue-4 :background "#101211"))))
+    `(sml-modeline-vis-face ((t (:background ,zenburn-blue-4 :foreground "#1e2320"))))
+
+    ;; eproject
+    '(eproject-mode-line-project-name-face ((t (:inherit font-lock-doc-string-face))))
     ))
 
 (provide-theme 'zenburn)

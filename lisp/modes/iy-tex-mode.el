@@ -21,4 +21,4 @@
 
 (defalias 'tm 'TeX-master-file-ask)
 
-(provide 'iy-tex)
+(provide 'iy-tex-mode)

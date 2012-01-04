@@ -1,5 +1,4 @@
 (require 'iy-dep)
-(require 'iy-keymap)
 
 (defcustom iy-gpicker-cmd (executable-find "gpicker")
   "Default font"
@@ -24,7 +23,7 @@
   (iy-gpicker-find-file (or eproject-root
                             iy-codebase-dir)))
 
-(define-key iy-map (kbd "T") 'iy-gpicker-find-file-in-project)
-(define-key iy-map (kbd "t") 'iy-gpicker-find-file)
+(define-key iy-map (kbd "O") 'iy-gpicker-find-file-in-project)
+(define-key iy-map (kbd "o") 'iy-gpicker-find-file)
 
 (provide 'iy-gpicker)

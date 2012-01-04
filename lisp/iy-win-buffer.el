@@ -1,5 +1,18 @@
-; Buffer Window staff
-(require 'iy-keymap)
+(require 'iy-dep)
+
+;;{{{ Cleanup Buffers
+(custom-set-variables
+ '(clean-buffer-list-delay-special 3600)
+ '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
+ '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
+ '(midnight-mode t nil (midnight))
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
+ '(uniquify-strip-common-suffix t))
+;;}}}
+
+;;{{{ winring
+(custom-set-variables
+ '(winring-show-names t))
 
 (defun iy-ediff-before-setup-winring-jump ()
   (iy-winring-jump-or-create "*ediff*"))
@@ -57,7 +70,9 @@
         (setq item (ring-remove ring index))
         (winring-save-current-configuration)
         (winring-restore-configuration item)))))
+;;}}}
 
+;;{{{ win resize
 (defun win-resize-top-or-bot ()
   "Figure out if the current window is on top, bottom or in the
 middle"
@@ -116,6 +131,9 @@ middle"
 (global-set-key [S-down] 'win-resize-minimize-horiz)
 (global-set-key [S-left] 'win-resize-enlarge-vert)
 (global-set-key [S-right] 'win-resize-minimize-vert)
+;;}}}
+
+;;{{{ windmove
 
 (windmove-default-keybindings 'meta)
 
@@ -151,5 +169,7 @@ middle"
 (define-key iy-map "J" 'iy-wind-move-resize)
 (define-key iy-map "K" 'iy-wind-move-resize)
 (define-key iy-map "L" 'iy-wind-move-resize)
+
+;;}}}
 
 (provide 'iy-win-buffer)

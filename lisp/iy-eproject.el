@@ -1,3 +1,6 @@
+(custom-set-variables
+ '(eproject-completing-read-function (quote eproject--ido-completing-read)))
+
 (push '(:name eproject
               :type git
               :url "git://github.com/jrockway/eproject.git"

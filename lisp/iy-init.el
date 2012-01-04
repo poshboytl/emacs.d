@@ -14,6 +14,9 @@
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
 
+;; remove system org
+(delete-if (lambda (path) (string= "org" (file-name-nondirectory path))) load-path)
+
 (setq custom-file (concat iy-config-dir "custom.el"))
 (setq secrets-file (concat iy-config-dir "secrets.el"))
 (defvar el-get-packages nil)
@@ -41,6 +44,7 @@
 (defun iy-init ()
   "Emacs start entry"
   (require 'iy-theme)
+  (require 'iy-pim)
   (iy-init-load-modules)
 
   ;; reverse the list

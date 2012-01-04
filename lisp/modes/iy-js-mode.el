@@ -5,4 +5,7 @@
 
 (add-hook 'js-mode-hook 'iy-js-mode-init)
 
-(provide 'iy-js)
+(custom-set-variables
+ '(js-indent-level 2))
+
+(provide 'iy-js-mode)

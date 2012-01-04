@@ -1,6 +1,8 @@
 (require 'iy-dep)
-(require 'iy-keymap)
 (require 'iy-eproject)
+
+(custom-set-variables
+ '(anything-command-map-prefix-key "M-S"))
 
 ;;; Libraries
 (push '(:name anything

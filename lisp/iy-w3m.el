@@ -1,5 +1,15 @@
 ;;; iy-w3m.el --- w3m
 
+(custom-set-variables
+ '(w3m-coding-system (quote utf-8))
+ '(w3m-default-coding-system (quote utf-8))
+ '(w3m-enable-google-feeling-lucky t)
+ '(w3m-file-coding-system (quote utf-8))
+ '(w3m-file-name-coding-system (quote utf-8))
+ '(w3m-redirect-with-get t)
+ '(w3m-terminal-coding-system (quote utf-8))
+ '(w3m-use-cookies t))
+
 (push '(:name emacs-w3m
               :after iy-el-get-after-emacs-w3m)
       el-get-sources)
@@ -8,6 +18,7 @@
       (if (eq system-type 'darwin)
           "open"
         (or (executable-find "x-www-browser")
+            (executable-find "chromium")
             (executable-find "firefox-4.0")
             (executable-find "firefox")
             (executable-find "google-chrome"))))

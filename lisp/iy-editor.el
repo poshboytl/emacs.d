@@ -183,4 +183,63 @@
 
 ;;}}}
 
+;;{{{ Whitespace
+(custom-set-variables
+ '(whitespace-action nil)
+ '(whitespace-global-modes (quote (c-mode c++-mode makefile-gmail-mode sh-mode cmake-mode emacs-lisp-mode)))
+ '(whitespace-line-column fill-column)
+ '(whitespace-style (quote (tabs trailing lines-tail space-before-tab newline indentation space-after-tab tab-mark))))
+;;}}}
+
+;;{{{ Kill ring
+
+(push 'browse-kill-ring el-get-sources)
+
+(push '(:name kill-ring-search
+              :type elpa)
+      el-get-sources)
+
+(global-set-key (kbd "C-M-y") 'browse-kill-ring)
+(defadvice yank-pop (around kill-ring-search-maybe (arg) activate)
+  "If last action was not a yank, run `kill-ring-search' instead."
+  (interactive "p")
+  (if (not (eq last-command 'yank))
+      (kill-ring-search)
+    (barf-if-buffer-read-only)
+    ad-do-it))
+
+;;}}}
+
+;;{{{ Indention
+
+(push '(:name dtrt-indent
+              :features nil
+              :url "https://github.com/emacsmirror/dtrt-indent.git"
+              :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
+      el-get-sources)
+
+;;}}}
+
+;;{{{ Hilight
+(custom-set-variables
+ '(highlight-symbol-idle-delay 1)
+ '(highlight-symbol-on-navigation-p t)
+ '(hl-paren-colors (quote ("firebrick1" "IndianRed1" "IndianRed4" "grey")))
+ '(pulse-delay 0.03)
+ '(pulse-flag nil)
+ '(pulse-iterations 5))
+
+(push 'highlight-symbol el-get-sources)
+(push '(:name highlight-parentheses
+              :after (lambda ()
+                       (add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
+                       (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+                       (add-hook 'ruby-mode-hook 'highlight-parentheses-mode))
+              ) el-get-sources)
+
+(push 'autopair el-get-sources)
+(setq autopair-blink nil)
+
+;;}}}
+
 (provide 'iy-editor)

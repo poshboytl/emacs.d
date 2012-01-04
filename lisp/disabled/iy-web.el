@@ -1,5 +1,8 @@
 (require 'iy-dep)
-(require 'iy-keymap)
+(custom-set-variables
+ '(mumamo-chunk-coloring 1)
+ '(nxhtml-default-encoding (quote utf-8))
+ '(nxhtml-skip-welcome t))
 
 ;; add nxhtml in the end, because it will load old org
 (push
