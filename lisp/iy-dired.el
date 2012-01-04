@@ -13,6 +13,11 @@
          )
        el-get-sources))
 
+(custom-set-variables
+ '(dired-dwim-target t)
+ '(dired-recursive-copies (quote top))
+ '(dired-recursive-deletes (quote top)))
+
 (defun dired-launch-command ()
   (interactive)
   (dired-do-async-shell-command

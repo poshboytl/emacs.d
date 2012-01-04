@@ -68,4 +68,7 @@
   :group 'iy-config
   :type '(repeat symbol))
 
+(defvar iy-map (make-sparse-keymap))
+(global-set-key (kbd "M-s") iy-map)
+
 (provide 'iy-dep)
