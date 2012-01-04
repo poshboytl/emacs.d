@@ -1,10 +1,11 @@
-;;; iy-global-keys.el --- Global shortcut keys
+;; iy-global-keys.el --- Global shortcut keys
+;; 
 
-;;; Load libraries
 (require 'iy-dep)
-(require 'iy-keymap)
 
-;;; Move
+;;{{{ Move
+
+(setq outline-regexp ";;{{{")
 (global-set-key (kbd "M-g") 'goto-line)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
@@ -42,14 +43,16 @@
 
 (global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
 
-;;; Delete
+;;}}}
 
+;;{{{ Delete
 (define-key iy-map (kbd "d") 'zap-to-char)
 (define-key iy-map (kbd "D") 'iy-zap-back-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "M-Z") 'iy-zap-back-up-to-char)
+;;}}}
 
-;;; Insert
+;;{{{ Insert
 (define-key iy-map (kbd "q u") 'iy-insert-user)
 (define-key iy-map (kbd "q t") 'iy-insert-time)
 (define-key iy-map (kbd "q s") 'iy-insert-timestamp)
@@ -63,13 +66,15 @@
 (global-set-key (kbd "M-U") 'upcase-word)
 (global-set-key (kbd "M-l") (lambda () (interactive) (insert ?-)))
 (global-set-key (kbd "M-L") 'downcase-word)
+;;}}}
 
-;;; Mark
+;;{{{ Mark
 (global-set-key (kbd "C-2") 'set-mark-command)
 (global-set-key (kbd "C-x C-2") 'pop-global-mark)
 (global-set-key (kbd "C-M-2") 'mark-sexp)
+;;}}}
 
-;;; Highlight
+;;{{{ Highlight
 
 (define-key iy-map (kbd "9") 'iy-highlight-symbol-navigation)
 (define-key iy-map (kbd "0") 'iy-highlight-symbol-navigation)
@@ -106,18 +111,18 @@
         (setq ev (read-event))))
     (push ev unread-command-events)))
 
-;;; Organization
+;;}}}
 
-(if (fboundp 'fold-dwim-toggle)
-    (progn
-      (define-key iy-map (kbd "i") 'fold-dwim-toggle)
-      (define-key iy-map (kbd "I") 'fold-dwim-hide-all)
-      (define-key iy-map (kbd "M-i") 'fold-dwim-show-all))
-  (define-key iy-map (kbd "i") 'hs-toggle-hiding)
-  (define-key iy-map (kbd "I") 'hs-hide-all)
-  (define-key iy-map (kbd "M-i") 'hs-show-all))
+;;{{{ Organization
 
-;;; Buffer/File
+(define-key iy-map (kbd "<SPC>") 'fold-dwim-toggle)
+(define-key iy-map (kbd "M-<SPC>") 'fold-dwim-toggle)
+(define-key iy-map (kbd "C-<SPC>") 'fold-dwim-hide-all)
+(define-key iy-map (kbd "S-<SPC>") 'fold-dwim-show-all)
+
+;;}}}
+
+;;{{{ Buffer/File
 (global-set-key (kbd "C-M-l") 'iy-switch-to-previous-buffer)
 
 (global-set-key (kbd "M-o") 'other-window)
@@ -131,8 +136,24 @@
                                 (if (< (length (window-list)) 2)
                                     (kill-buffer)
                                   (kill-buffer-and-window))))
+;;}}}
 
-;;; Fx
+;;{{{ Bookmark
+(global-set-key (kbd "C-x j SPC") 'jump-to-register)
+
+(define-key iy-map (kbd "m") 'bookmark-set)
+(define-key iy-map (kbd "M-m") 'bookmark-set)
+(define-key iy-map (kbd ".") 'iy-bmkp-navigation)
+(define-key iy-map (kbd "M-.") 'iy-bmkp-navigation)
+(define-key iy-map (kbd ">") 'iy-bmkp-navigation)
+(define-key iy-map (kbd ",") 'iy-bmkp-navigation)
+(define-key iy-map (kbd "M-,") 'iy-bmkp-navigation)
+(define-key iy-map (kbd "<") 'iy-bmkp-navigation)
+(define-key iy-map (kbd "/") 'bookmark-bmenu-list)
+(define-key iy-map (kbd "M-/") 'bookmark-bmenu-list)
+;;}}}
+
+;;{{{ Fx
 (global-set-key (kbd "<f2>") 'recentf-open-files)
 
 (if (fboundp 'iy-compile)
@@ -147,10 +168,12 @@
 (global-set-key (kbd "<f12>") 'magit-status)
 (global-set-key (kbd "C-<f12>") 'git-status)
 (global-set-key (kbd "<ESC> <f12>") 'git-status)
+;;}}}
 
-;;; Misc
+;;{{{ Misc
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C--") 'undo)
 (global-set-key (kbd "C-x SPC") 'point-to-register)
+;;}}}
 
-(provide 'iy-global-keys)
+(provide 'iy-keybindings)

@@ -113,4 +113,4 @@
 
 (add-hook 'dired-mode-hook 'iy/dired-mode-init)
 
-(provide 'iy-dired)
+(provide 'iy-dired-mode)

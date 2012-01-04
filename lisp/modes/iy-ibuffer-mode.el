@@ -1,5 +1,11 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(custom-set-variables
+ '(ibuffer-always-show-last-buffer :nomini)
+ '(ibuffer-default-shrink-to-minimum-size t)
+ '(ibuffer-jump-offer-only-visible-buffers nil)
+ '(ibuffer-show-empty-filter-groups nil))
+
 (defun iy-ibuffer-mode-init ()
   ;; add another sorting method for ibuffer (allow the grouping of
   ;; filenames and dired buffers
@@ -31,16 +37,15 @@
                       (mode . cperl-mode)
                       (mode . perl-mode)
                       (mode . java-mode)
-                      (filename . "\\.rb\\'")))
-           ("web" (or
-                   (filename . "\\.js\\'")
-                   (filename . "\\.css\\'")
-                   (mode . html-mode)
-                   (mode . nxml-mode)
-                   (mode . nxhtml-mode)
-                   (mode . haml-mode)
-                   (mode . sass-mode)
-                   (filename . "\\.erb\\'")))
+                      (filename . "\\.rb\\'")
+                      (filename . "\\.js\\'")
+                      (filename . "\\.css\\'")
+                      (mode . html-mode)
+                      (mode . nxml-mode)
+                      (mode . nxhtml-mode)
+                      (mode . haml-mode)
+                      (mode . sass-mode)
+                      (filename . "\\.erb\\'")))
            ("doc" (or
                    (mode   . latex-mode)
                    (mode   . metapost-mode)
@@ -55,13 +60,6 @@
                    (name    . "^\\*Calendar\\*$")
                    (name    . "^diary$")
                    (mode    . org-mode)))
-           ("term" (or
-                    (mode . shell-mode)
-                    (mode . term-mode)))
-           ("jabber" (or
-                      (mode . jabber-chat-mode)
-                      (mode . jabber-roster-mode)))
-           ("irc" (mode . erc-mode))
            ("system" (or
                       (mode       . help-mode)
                       (mode       . completion-list-mode)
@@ -74,4 +72,4 @@
 
 (add-hook 'ibuffer-mode-hook 'iy-ibuffer-mode-init)
 
-(provide 'iy-ibuffer)
+(provide 'iy-ibuffer-mode)

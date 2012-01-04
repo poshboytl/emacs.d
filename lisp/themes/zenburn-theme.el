@@ -99,8 +99,8 @@
     '(italic ((t (:slant italic))))
     '(underline ((t (:underline t))))
 
-
-    '(fringe ((t (:inherit 'default))))
+    `(fringe ((t (:foreground "#88b090" :background ,zenburn-green-4))))
+    `(vertical-border ((t (:foreground ,zenburn-green-1 :background ,zenburn-green-4))))
     '(header-line ((t (:inherit 'zenburn-highlight-damp
 			:box (:color "#2e3330" :line-width 2)))))
     '(highlight ((t (:weight bold :underline t))))
@@ -599,6 +599,14 @@
     `(wl-highlight-thread-indent-face ((t (:foreground ,zenburn-magenta))))
     '(wl-highlight-summary-refiled-face ((t (:inherit 'zenburn-lowlight-2))))
     '(wl-highlight-summary-displaying-face ((t (:underline t :weight bold))))
+
+    ;; diredp
+    `(diredp-dir-priv ((t (:foreground ,zenburn-blue+1))))
+    `(diredp-dir-heading ((t (:foreground ,zenburn-orange :background ,zenburn-green-4))))
+    `(diredp-file-name ((t (:foreground ,zenburn-fg))))
+    `(diredp-file-suffix ((t (:foreground ,zenburn-orange))))
+    `(diredp-ignored-file-name ((t (:foreground ,zenburn-green-4))))
+    `(diredp-symlink ((t (:foreground ,zenburn-blue-1))))
     ))
 
 (provide-theme 'zenburn)

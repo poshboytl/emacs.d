@@ -17,4 +17,4 @@
 
 (add-hook 'ido-setup-hook 'iy-ido-mode-init)
 
-(provide 'iy-ido)
+(provide 'iy-ido-mode)

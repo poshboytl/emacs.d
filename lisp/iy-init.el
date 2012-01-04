@@ -10,6 +10,7 @@
 (require 'iy-dep)
 
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
+(add-to-list 'load-path (concat iy-lisp-dir "modes"))
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
 
@@ -27,7 +28,8 @@
 (defun iy-init-load-modules ()
   "Emacs load modules"
   ;; load modules in lisp directory
-  (dolist (file (file-expand-wildcards (concat iy-lisp-dir "iy-*.el")))
+  (dolist (file (nconc (file-expand-wildcards (concat iy-lisp-dir "iy-*.el"))
+                       (file-expand-wildcards (concat iy-lisp-dir "modes/iy-*.el"))))
     (let ((feature (file-name-nondirectory (file-name-sans-extension file)))
           (blacklist (append (list 'iy-init 'iy-dep) iy-blacklist)))
       (if (memq (intern feature) blacklist)

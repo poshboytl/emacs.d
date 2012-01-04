@@ -6,4 +6,4 @@
 
 (add-hook 'sh-mode-hook 'iy-sh-mode-init)
 
-(provide 'iy-sh)
+(provide 'iy-sh-mode)

@@ -1,28 +1,12 @@
 (eval-when-compile (require 'cl))
 
-(defvar isearch-initial-string nil)
-
-(defun isearch-set-initial-string ()
-  (remove-hook 'isearch-mode-hook 'isearch-set-initial-string)
-  (setq isearch-string isearch-initial-string)
-  (isearch-search-and-update))
-
-(defun isearch-forward-at-point (&optional regexp-p no-recursive-edit)
-  "Interactive search forward for the symbol at point."
-  (interactive "P\np")
-  (if regexp-p (isearch-forward regexp-p no-recursive-edit)
-    (let* ((end (progn (skip-syntax-forward "w_") (point)))
-           (begin (progn (skip-syntax-backward "w_") (point))))
-      (if (eq begin end)
-          (isearch-forward regexp-p no-recursive-edit)
-        (setq isearch-initial-string (buffer-substring begin end))
-        (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
-        (isearch-forward regexp-p no-recursive-edit)))))
-
+;;{{{ Buffer
 (defun iy-switch-to-previous-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
+;;}}}
 
+;;{{{ String functions
 (defun iy-string-camel-to-underscore (string)
   "Convert camel string to upcase one which concat words using underscore"
   (let ((case-fold-search nil))
@@ -36,7 +20,9 @@
   (let ((origin (buffer-substring start end)))
     (delete-region start end)
     (insert (iy-string-camel-to-underscore origin))))
+;;}}}
 
+;;{{{ Utilities
 (defun xsteve-save-current-directory ()
   "Save the current directory to the file ~/.emacs.d/data/pwd"
   (interactive)
@@ -53,19 +39,6 @@
     (find-alternate-file
      (concat "/sudo:root@localhost:"
              buffer-file-name))))
-
-(defun iy-multi-term-dedicated-toggle ()
-  ""
-  (interactive)
-  (multi-term-dedicated-toggle)
-  (if (multi-term-dedicated-exist-p)
-      (select-window multi-term-dedicated-window)))
-
-(defun back-to-indentation-or-beginning ()
-  (interactive)
-  (if (= (point) (save-excursion (back-to-indentation) (point)))
-      (beginning-of-line)
-    (back-to-indentation)))
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
@@ -84,7 +57,9 @@
       (set-buffer (window-buffer w))
       (when (eq major-mode 'help-mode)
         (delete-window w)))))
+;;}}}
 
+;;{{{ Insert
 (defun iy-insert-user ()
   (interactive)
   (insert (user-full-name)))
@@ -123,6 +98,15 @@
                                    nil nil initial)))
     (when (and (stringp name) (> (length name) 0))
       (insert name))))
+;;}}}
+
+;;{{{ Editing
+
+(defun back-to-indentation-or-beginning ()
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+      (beginning-of-line)
+    (back-to-indentation)))
 
 (defun iy-zap-back-to-char (arg char)
   (interactive "p\ncZap back to char: ")
@@ -137,5 +121,28 @@
   (unless (looking-at "[ 	]*$")
     (open-line 1))
   (indent-according-to-mode))
+
+;;}}}
+
+;;{{{ Move
+(defvar isearch-initial-string nil)
+
+(defun isearch-set-initial-string ()
+  (remove-hook 'isearch-mode-hook 'isearch-set-initial-string)
+  (setq isearch-string isearch-initial-string)
+  (isearch-search-and-update))
+
+(defun isearch-forward-at-point (&optional regexp-p no-recursive-edit)
+  "Interactive search forward for the symbol at point."
+  (interactive "P\np")
+  (if regexp-p (isearch-forward regexp-p no-recursive-edit)
+    (let* ((end (progn (skip-syntax-forward "w_") (point)))
+           (begin (progn (skip-syntax-backward "w_") (point))))
+      (if (eq begin end)
+          (isearch-forward regexp-p no-recursive-edit)
+        (setq isearch-initial-string (buffer-substring begin end))
+        (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
+        (isearch-forward regexp-p no-recursive-edit)))))
+;;}}}
 
 (provide 'iy-functions)
