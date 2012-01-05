@@ -27,29 +27,20 @@
          'anything-c-source-w3m-bookmarks
          'anything-c-source-locate))
 
+  (setq anything-enable-shortcuts 'prefix)
+  (define-key anything-map "@" 'anything-select-with-prefix-shortcut)
+
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
   (global-set-key (kbd "M-S") 'anything-command-map)
   (define-key iy-map (kbd "M-x") 'anything-M-x)
 
-  (setq anything-enable-digit-shortcuts t)
-  (define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-2") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-3") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-4") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-5") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-6") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-7") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-8") 'anything-select-with-digit-shortcut)
-  (define-key anything-map (kbd "M-9") 'anything-select-with-digit-shortcut)
-  (define-key anything-map "\C-u" 'anything-delete-minibuffer-contents)
-  (define-key anything-map "\M-N" 'anything-next-source)
-  (define-key anything-map "\M-P" 'anything-previous-source)
-  (define-key anything-map "\C-\M-n" 'anything-next-source)
-  (define-key anything-map "\C-\M-p" 'anything-previous-source)
-
-  (define-key minibuffer-local-map "\C-r" 'anything-minibuffer-history)
-  (define-key minibuffer-local-completion-map "\C-r" 'anything-minibuffer-history)
+  (define-key anything-map (kbd "C-u") 'anything-delete-minibuffer-contents)
+  (define-key anything-map (kbd "M-O") 'anything-next-source)
+  (define-key anything-map (kbd "M-N") 'anything-next-source)
+  (define-key anything-map (kbd "M-P") 'anything-previous-source)
+  (define-key anything-map (kbd "C-M-n") 'anything-next-source)
+  (define-key anything-map (kbd "C-M-p") 'anything-previous-source)
 
   (define-key anything-command-map (kbd "g") 'anything-do-grep)
   (define-key anything-command-map (kbd "o") 'anything-occur)

@@ -7,7 +7,7 @@
  '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
  '(midnight-mode t nil (midnight))
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
- '(uniquify-strip-common-suffix t))
+ '(uniquify-strip-common-suffix nil))
 ;;}}}
 
 ;;{{{ winring

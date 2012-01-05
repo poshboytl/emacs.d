@@ -6,7 +6,7 @@
  '(delete-old-versions t)
  '(desktop-base-file-name ".emacs.desktop")
  '(desktop-path (list "." iy-data-dir))
- '(desktop-restore-eager 3)
+ '(desktop-restore-eager 7)
  '(desktop-save (quote ask-if-new))
  '(kept-new-versions 20)
  '(kept-old-versions 5)
@@ -20,8 +20,8 @@
  '(version-control t)
  )
 
-(defcustom iy-session-enable-desktop
-  nil
+(defcustom iy-backup-enable-desktop
+  t
   "Whether to use desktop-save-mode"
   :group 'iy-config
   :type 'boolean)
@@ -30,7 +30,7 @@
   (add-hook 'after-init-hook 'session-initialize)
   (add-to-list 'session-globals-exclude 'org-mark-ring))
 
-(if iy-session-enable-desktop
+(if iy-backup-enable-desktop
     (progn
       (desktop-save-mode 1)
       (setq history-length 250)
