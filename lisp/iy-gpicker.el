@@ -5,25 +5,23 @@
   :type 'file
   :group 'iy-config)
 
-(defun iy-gpicker-find-file (&optional dir)
-  (interactive)
-  (let* ((dir (or dir
-                  (if dired-directory (expand-file-name dired-directory) default-directory)
-                  iy-codebase-dir)))
+(defun iy-gpicker-find-file (dir)
+  (interactive
+   (list
+    (or (and current-prefix-arg (ido-read-directory-name "gpicker: " nil nil t))
+        (and (boundp 'eproject-root) eproject-root)
+        (and (not current-prefix-arg) (ido-read-directory-name "gpicker: " nil nil t))
+        (if dired-directory (expand-file-name dired-directory) default-directory))))
+  (when dir
     (with-temp-buffer
       (call-process iy-gpicker-cmd nil (list (current-buffer) nil) nil
-                    "-m" dir)
+                    "-t" "guess" "-m" dir)
       (cd dir)
       (dolist (file (split-string (buffer-string) "\0"))
         (unless (string-equal file "")
           (find-file file))))))
 
-(defun iy-gpicker-find-file-in-project ()
-  (interactive)
-  (iy-gpicker-find-file (or eproject-root
-                            iy-codebase-dir)))
-
-(define-key iy-map (kbd "O") 'iy-gpicker-find-file-in-project)
 (define-key iy-map (kbd "o") 'iy-gpicker-find-file)
+(define-key iy-map (kbd "M-o") 'iy-gpicker-find-file)
 
 (provide 'iy-gpicker)

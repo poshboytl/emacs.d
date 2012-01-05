@@ -6,7 +6,10 @@
 
 ;; locate this file
 
-(eval-when-compile (require 'cl))
+(eval-and-compile
+  (progn
+    (require 'cl)
+    (load "cl-seq")))
 (require 'iy-dep)
 
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))

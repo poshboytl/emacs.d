@@ -98,7 +98,7 @@
   (define-key w3m-mode-map "." 'w3m-next-buffer)
   (define-key w3m-mode-map (kbd "C-w") 'w3m-delete-buffer)
   (define-key w3m-mode-map (kbd "C-c M-s") 'w3m-session-select)
-  (define-key w3m-mode-map (kbd "M-s") 'iy-map))
+  (define-key w3m-mode-map (kbd "M-s") iy-map))
 
 (global-set-key (kbd "<f8>") 'wicked-toggle-w3m)
 
