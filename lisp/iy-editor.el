@@ -23,7 +23,7 @@
 
 ;;}}}
 
-;;{{{ Folding
+  ;;{{{ Folding
 
 (defvar fringe-face 'fringe)
 (defvar mode-line-inactive-face 'mode-line-inactive)
@@ -82,9 +82,9 @@
         fold-dwim
         :type http
         :url "http://www.dur.ac.uk/p.j.heslin/Software/Emacs/Download/fold-dwim.el"
-        :features fold-dwim
-        :after (lambda ()
-                 (folding-mode-add-find-file-hook)))
+        :features fold-dwim)
+        ;; :after (lambda ()
+        ;;          (folding-mode-add-find-file-hook)))
       el-get-sources)
 
 (defun iy-folding-check-folded ()
@@ -94,7 +94,7 @@
     (save-excursion
       (goto-char (point-min))
       ;;  If we found both, we assume file is folded
-      (and (< (point-max) 10000)
+      (and (< (point-max) 1000)
            (re-search-forward folding-re1 nil t)
            ;; if file is folded, there are \r's
            (re-search-forward "[\r\n]" nil t)
@@ -147,14 +147,13 @@
       (overlay-put ov 'help-echo "Hiddent text. M-s <SPC> to show")
       (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
       (overlay-put ov 'before-string marker-string)
-      (put-text-property 0 (length display-string) 'face 'mode-line-inactive display-string)
+      (put-text-property 0 (length display-string) 'face 'fringe-face display-string)
       (overlay-put ov 'display display-string)
       )))
 (setq hs-set-up-overlay 'display-code-line-counts)
 
 (provide 'hideshow-fringe)
 
-;; \\r -> \\n  remove fringe
 (defadvice folding-subst-regions (around toggle-fringe (list find replace) activate)
   ad-do-it
   (save-excursion
@@ -164,14 +163,17 @@
              (marker-string "*fringe-dummy*")
              (marker-length (length marker-string)))
         (when (and (eq find ?\n) (eq replace ?\r))
+          ;; \\n -> \\r add fringe
           (goto-char begin)
+          (beginning-of-line)
+          (setq begin (point))
           (search-forward "\r")
           (forward-char -1)
           (let* ((ov (make-overlay begin (point)))
                  (display-string (format "%s (%d)" (buffer-substring begin (point)) (count-lines begin end))))
             (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
             (overlay-put ov 'before-string marker-string)
-            (put-text-property 0 (length display-string) 'face 'mode-line-inactive display-string)
+            (put-text-property 0 (length display-string) 'face 'fringe-face display-string)
             (overlay-put ov 'display display-string)
             (overlay-put ov 'fringe-folding-p t)))
         (when (and (eq find ?\r) (eq replace ?\n))
