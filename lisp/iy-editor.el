@@ -158,7 +158,8 @@
       (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
       (overlay-put ov 'before-string marker-string)
       (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
-      (overlay-put ov 'display display-string))))
+      (overlay-put ov 'display display-string)
+      (overlay-put ov 'evaporate t))))
 (setq hs-set-up-overlay 'display-code-line-counts)
 
 (defadvice folding-subst-regions (around toggle-fringe (list find replace) activate)
@@ -185,7 +186,8 @@
             (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
             (overlay-put ov 'display display-string)
             (overlay-put ov 'priority 9999)
-            (overlay-put ov 'fringe-folding-p t))))
+            (overlay-put ov 'fringe-folding-p t)
+            (overlay-put ov 'evaporate t))))
       (setq list (cdr (cdr list))))))
 
 ;;}}}
