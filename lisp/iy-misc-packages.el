@@ -51,4 +51,9 @@
   (local-set-key (kbd "M-o") 'other-window))
 (add-hook 'diff-mode-hook 'iy/diff-mode-init)
 
+(push '(:name
+        sml-modeline)
+      
+      el-get-sources)
+
 (provide 'iy-misc-packages)

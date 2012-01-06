@@ -117,8 +117,8 @@
 
 (define-key iy-map (kbd "<SPC>") 'fold-dwim-toggle)
 (define-key iy-map (kbd "M-<SPC>") 'fold-dwim-toggle)
-(define-key iy-map (kbd "C-<SPC>") 'fold-dwim-hide-all)
-(define-key iy-map (kbd "S-<SPC>") 'fold-dwim-show-all)
+(define-key iy-map (kbd "C-M-<SPC>") 'fold-dwim-hide-all)
+(define-key iy-map (kbd "C-<SPC>") 'fold-dwim-show-all)
 
 ;;}}}
 

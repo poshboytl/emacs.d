@@ -9,9 +9,8 @@
 (custom-set-variables
  '(tab-width 2)
  '(indent-tabs-mode nil)
+ '(show-paren-mode t)
  '(fill-column 78)
- '(kill-ring-max 500)
- '(kill-whole-line t)
 
  '(delete-active-region 'kill))
 
@@ -26,10 +25,11 @@
 ;;{{{ Folding
 
 (defvar fringe-face 'fringe)
-(defvar mode-line-inactive-face 'mode-line-inactive)
 (custom-set-variables
  '(folding-font-lock-begin-mark 'fringe-face)
  '(folding-font-lock-end-mark 'fringe-face))
+(defface collapsed-face '((t (:background "#e0cf9f" :foreground "#5f5f5f"))) "Collapsed Overlay")
+(defvar collapsed-face 'collapsed-face)
 
 (push '(:name
         folding
@@ -72,7 +72,8 @@
 
                  (defun folding-font-lock-support ()
                    "Add font lock support."
-                   (font-lock-add-keywords nil (folding-font-lock-keywords major-mode)))))
+                   (ignore-errors
+                     (font-lock-add-keywords nil (folding-font-lock-keywords major-mode))))))
       el-get-sources)
 
 (add-hook 'lisp-mode-hook 'hs-minor-mode)
@@ -94,7 +95,8 @@
     (save-excursion
       (goto-char (point-min))
       ;;  If we found both, we assume file is folded
-      (and (< (point-max) 1000)
+      (and (assq major-mode folding-mode-marks-alist)
+           (< (point-max) 10000)
            (re-search-forward folding-re1 nil t)
            ;; if file is folded, there are \r's
            (re-search-forward "[\r\n]" nil t)
@@ -120,11 +122,17 @@
         (while (and (> loop-times 0) ad-return-value)
           ad-do-it
           (when ad-return-value
-            (if (folding-marker-p)
-                (progn
-                  (end-of-line)
-                  (setq ad-return-value nil))
-              (setq loop-times (1- loop-times)))))))))
+            (if (> direction 0)
+              (if (folding-marker-p)
+                  (setq ad-return-value nil)
+                (when (folding-marker-p (- (point) 2))
+                  (setq ad-return-value nil)
+                  (forward-char -2)
+                  (beginning-of-line)))
+              (when (folding-marker-p)
+                (end-of-line)
+                (setq ad-return-value nil)))
+            (setq loop-times (1- loop-times))))))))
 
 (defadvice fold-dwim-hide-all (around folding-open-first activate)
   (if (and (boundp 'folding-mode) folding-mode)
@@ -143,16 +151,13 @@
   (when (eq 'code (overlay-get ov 'hs))
     (let* ((marker-string "*fringe-dummy*")
            (marker-length (length marker-string))
-           (display-string (format "(%d)..." (count-lines (overlay-start ov) (overlay-end ov)))))
+           (display-string (format " (%d)..." (count-lines (overlay-start ov) (overlay-end ov)))))
       (overlay-put ov 'help-echo "Hiddent text. M-s <SPC> to show")
       (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
       (overlay-put ov 'before-string marker-string)
-      (put-text-property 0 (length display-string) 'face 'fringe-face display-string)
-      (overlay-put ov 'display display-string)
-      )))
+      (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
+      (overlay-put ov 'display display-string))))
 (setq hs-set-up-overlay 'display-code-line-counts)
-
-(provide 'hideshow-fringe)
 
 (defadvice folding-subst-regions (around toggle-fringe (list find replace) activate)
   ad-do-it
@@ -160,27 +165,25 @@
     (while list
       (let* ((begin (car list))
              (end (cadr list))
+             bol eol
              (marker-string "*fringe-dummy*")
              (marker-length (length marker-string)))
+        (dolist (ov (overlays-in begin end))
+          (when (overlay-get ov 'fringe-folding-p)
+            (delete-overlay ov)))
         (when (and (eq find ?\n) (eq replace ?\r))
           ;; \\n -> \\r add fringe
           (goto-char begin)
-          (beginning-of-line)
-          (setq begin (point))
           (search-forward "\r")
           (forward-char -1)
-          (let* ((ov (make-overlay begin (point)))
-                 (display-string (format "%s (%d)" (buffer-substring begin (point)) (count-lines begin end))))
+          (let* ((ov (make-overlay (point) end))
+                 (display-string (format " (%d)..." (count-lines begin end))))
             (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
             (overlay-put ov 'before-string marker-string)
-            (put-text-property 0 (length display-string) 'face 'fringe-face display-string)
+            (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
             (overlay-put ov 'display display-string)
-            (overlay-put ov 'fringe-folding-p t)))
-        (when (and (eq find ?\r) (eq replace ?\n))
-          ;; \\r -> \\n  remove fringe
-          (dolist (ov (overlays-in begin end))
-            (when (overlay-get ov 'fringe-folding-p)
-              (delete-overlay ov)))))
+            (overlay-put ov 'priority 9999)
+            (overlay-put ov 'fringe-folding-p t))))
       (setq list (cdr (cdr list))))))
 
 ;;}}}
@@ -194,6 +197,10 @@
 ;;}}}
 
 ;;{{{ Kill ring
+
+(custom-set-variables
+ '(kill-ring-max 500)
+ '(kill-whole-line t))
 
 (push 'browse-kill-ring el-get-sources)
 

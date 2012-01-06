@@ -46,6 +46,11 @@
 
 (defun iy-init ()
   "Emacs start entry"
+
+  (setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("tromey" . "http://tromey.com/elpa/")
+                           ("gnu" . "http://elpa.gnu.org/packages/")))
+
   (require 'iy-theme)
   (require 'iy-pim)
   (iy-init-load-modules)

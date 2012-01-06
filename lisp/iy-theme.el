@@ -1,6 +1,7 @@
 (setq custom-theme-directory (concat iy-lisp-dir "themes"))
-(load (concat iy-lisp-dir "themes/zenburn-theme"))
-(load-theme 'zenburn t)
+(load
+
+asdfasdf
 
 (set-frame-font iy-frame-font)
 (set-fontset-font "fontset-default" 'chinese-gbk iy-frame-font-chinese)
@@ -11,7 +12,6 @@
  '(blink-cursor-mode t)
  '(blink-cursor-delay 2)
  '(blink-cursor-interval 0.5)
- '(indicate-empty-lines nil)
  '(indicate-buffer-boundaries 'right)
  '(inhibit-startup-screen t)
  '(show-paren-mode t)
@@ -22,4 +22,5 @@
 
 (global-hl-line-mode)
 
+asf
 (provide 'iy-theme)

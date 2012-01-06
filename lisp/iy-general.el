@@ -16,6 +16,11 @@
  '(tramp-default-method-alist (quote (("\\`localhost\\'" "\\`root\\'" "sudo")))))
 ;;}}}
 
+;;{{{ Enable Commands
+(put 'narrow-to-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
+;;}}}
+
 ;;{{{ Shortcuts
 (fset 'yes-or-no-p 'y-or-n-p)
 (defalias 'save-pwd 'xsteve-save-current-directory)
