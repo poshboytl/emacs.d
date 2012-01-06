@@ -416,6 +416,7 @@
  `(js2-magic-paren-face ((t (:underline t))))
  `(js2-external-variable-face ((t (:foreground ,zenburn-orange))))
 
+ `(vertical-border ((t (:foreground ,zenburn-bg+2))))
  ;; diredp
  `(diredp-dir-priv ((t (:foreground ,zenburn-blue+1 :background ,zenburn-bg))))
  '(diredp-ignored-file-name ((t (:inherit 'font-lock-comment))))
@@ -455,6 +456,10 @@
  `(ediff-fine-diff-Ancestor ((t (:background "#668b8b" :foreground ,zenburn-fg))))
  `(ediff-fine-diff-B ((t (:background "#668b8b" :foreground ,zenburn-fg))))
  `(ediff-fine-diff-C ((t (:background "#668b8b" :foreground ,zenburn-fg))))
-)
+
+ ;; ack
+ '(ack-file ((t (:inherit 'diredp-dir-priv))))
+ '(ack-match ((t (:inherit 'show-paren-match))))
+ )
 
 (provide-theme 'zenburn)

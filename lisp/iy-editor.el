@@ -12,7 +12,9 @@
  '(show-paren-mode t)
  '(fill-column 78)
 
- '(delete-active-region 'kill))
+ '(delete-active-region 'kill)
+
+ '(set-mark-command-repeat-pop t))
 
 (add-hook 'before-save-hook 'time-stamp)
 (setq time-stamp-active t
