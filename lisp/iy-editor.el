@@ -23,7 +23,7 @@
 
 ;;}}}
 
-  ;;{{{ Folding
+;;{{{ Folding
 
 (defvar fringe-face 'fringe)
 (defvar mode-line-inactive-face 'mode-line-inactive)
