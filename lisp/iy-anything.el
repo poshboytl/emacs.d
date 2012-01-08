@@ -13,6 +13,13 @@
   (require 'anything-config)
   (require 'anything-match-plugin)
 
+  (setq anything-c-locate-command
+        (case system-type
+          ('gnu/linux "locate -i -r %s")
+          ('berkeley-unix "locate -i %s")
+          ('windows-nt "es -i -r %s")
+          (t "locate %s")))
+
   ;;; Sources
   (setq anything-sources
         (list
