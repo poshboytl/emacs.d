@@ -30,7 +30,7 @@
       el-get-sources)
 
 (push 'yaml-mode el-get-sources)
-(push 'haml-mode el-get-sources)
+(push '(:name haml-mode :features haml-mode) el-get-sources)
 (push 'sass-mode el-get-sources)
 (push '(:name rainbow-mode
               :url "git://github.com/emacsmirror/rainbow-mode.git")
@@ -52,8 +52,8 @@
 (add-hook 'diff-mode-hook 'iy/diff-mode-init)
 
 (push '(:name
-        sml-modeline)
-      
+        sml-modeline
+        :after sml-modeline-mode)
       el-get-sources)
 
 (provide 'iy-misc-packages)
