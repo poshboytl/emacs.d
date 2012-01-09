@@ -431,6 +431,7 @@
  ;; Anything / Anything config
  '(anything-ff-directory ((t (:inherit 'diredp-dir-priv))))
  '(anything-visible-mark ((t (:inherit ,region))))
+ '(anything-candidate-number ((t (:inherit ,region))))
 
  ;; sml modeline
  `(sml-modeline-end-face ((t (:foreground ,zenburn-blue-4 :background "#101211"))))
@@ -462,6 +463,9 @@
  ;; ack
  '(ack-file ((t (:inherit 'diredp-dir-priv))))
  '(ack-match ((t (:inherit 'show-paren-match))))
+
+ ;; misc
+ `(eproject-mode-line-project-name-face ((t (:foreground ,zenburn-blue))))
  )
 
 (provide-theme 'zenburn)

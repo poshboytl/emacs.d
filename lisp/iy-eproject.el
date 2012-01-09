@@ -78,6 +78,10 @@
                    (expand-file-name default-directory))
                   (t nil)))))
 
+  (defadvice eproject-maybe-turn-on (around ignore-errors activate)
+    (ignore-errors
+      ad-do-it))
+
   (add-hook 'org-src-mode-hook 'eproject-maybe-turn-on)
   (add-hook 'magit-mode-hook 'eproject-maybe-turn-on)
   (add-hook 'term-mode-hook 'eproject-maybe-turn-on)

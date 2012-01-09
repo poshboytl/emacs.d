@@ -1,5 +1,6 @@
 (require 'iy-dep)
 (require 'iy-eproject)
+(eval-when-compile (require 'cl))
 
 (custom-set-variables
  '(anything-command-map-prefix-key "M-S"))
@@ -12,6 +13,13 @@
 (defun iy-el-get-after-anything ()
   (require 'anything-config)
   (require 'anything-match-plugin)
+
+  (setq anything-c-locate-command
+        (case system-type
+          ('gnu/linux "locate -i -r %s")
+          ('berkeley-unix "locate -i %s")
+          ('windows-nt "es -i -r %s")
+          (t "locate %s")))
 
   ;;; Sources
   (setq anything-sources

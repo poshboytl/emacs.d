@@ -50,6 +50,7 @@
          (n (1- (ring-length ring)))
          (current (winring-name-of-current))
          (lst (list (cons current -1)))
+         (def (if (>= n 0) (winring-name-of (ring-ref ring 0)) current))
          index item)
     (while (<= 0 n)
       (push (cons (winring-name-of (ring-ref ring n)) n) lst)
@@ -58,7 +59,7 @@
           (or name
               (ido-completing-read
                (format "Window configuration name (%s): " current)
-               (mapcar 'car lst) nil 'confirm nil 'winring-name-history current)))
+               (mapcar 'car lst) nil 'confirm nil 'winring-name-history def)))
     (setq index (cdr (assoc name lst)))
     (if (eq nil index)
         (progn
