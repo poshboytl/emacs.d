@@ -159,6 +159,25 @@ to select from, open file when selected."
           "Project file: "
           (mapcar (lambda (f) (file-relative-name f root)) files))))))
 
+  (defadvice eproject-list-project-files (around search-by-backend (&optional root) activate)
+    (let* ((root (or root (eproject-root)))
+           (relevant-files (eproject-attribute :relevant-files root)))
+      (if (symbolp (eproject-attribute :relevant-files root))
+          (setq ad-return-value
+                (funcall
+                 (intern (concat "eproject-list-project-files-by-" (prin1-to-string relevant-files)))
+                 root))
+        ad-do-it)))
+
+  (defun eproject-list-project-files-by-git (root)
+    (let ((default-directory root))
+      (with-temp-buffer
+        (call-process "git" nil (list (current-buffer) nil) nil
+                      "ls-files" "-c" "-o" "--exclude-standard" "-z")
+        (mapcar 
+         'expand-file-name
+         (split-string (buffer-string) "\0")))))
+
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)

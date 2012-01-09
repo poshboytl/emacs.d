@@ -1,1 +1,1 @@
-:irrelevant-files '("data" "^[.]" "^[#]" ".git" "el-get")
+:relevant-files 'git

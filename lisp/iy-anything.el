@@ -21,6 +21,22 @@
           ('windows-nt "es -i -r %s")
           (t "locate %s")))
 
+
+  (defvar anything-c-source-eproject-projects
+    '((name . "Projects")
+      (type . file)
+      (candidates . eproject--get-name-root-alist)))
+
+  (defvar anything-c-source-eproject-files-in-project
+     '((name . "Project Files")
+       (delayed)
+       (candidate-number-limit . 9999)
+       (requires-pattern . 3)
+       (candidates . (lambda ()
+                       (with-anything-current-buffer
+                         (iy-eproject-list-project-files-with-cache eproject-root))))
+                   (type . file)))
+
   ;;; Sources
   (setq anything-sources
         (list
@@ -31,24 +47,18 @@
          'anything-c-source-files-in-current-dir+
          'anything-c-source-recentf
          'anything-c-source-file-name-history
+         'anything-c-source-eproject-files-in-project
+         'anything-c-source-eproject-projects
          'anything-c-source-bookmarks
          'anything-c-source-w3m-bookmarks
          'anything-c-source-locate))
 
   (setq anything-enable-shortcuts 'prefix)
-  (define-key anything-map "@" 'anything-select-with-prefix-shortcut)
 
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
   (global-set-key (kbd "M-S") 'anything-command-map)
   (define-key iy-map (kbd "M-x") 'anything-M-x)
-
-  (define-key anything-map (kbd "C-u") 'anything-delete-minibuffer-contents)
-  (define-key anything-map (kbd "M-O") 'anything-next-source)
-  (define-key anything-map (kbd "M-N") 'anything-next-source)
-  (define-key anything-map (kbd "M-P") 'anything-previous-source)
-  (define-key anything-map (kbd "C-M-n") 'anything-next-source)
-  (define-key anything-map (kbd "C-M-p") 'anything-previous-source)
 
   (define-key anything-command-map (kbd "g") 'anything-do-grep)
   (define-key anything-command-map (kbd "o") 'anything-occur)
