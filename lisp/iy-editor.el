@@ -179,7 +179,7 @@
           (goto-char begin)
           (search-forward "\r")
           (forward-char -1)
-          (let* ((ov (make-overlay (point) end))
+          (let* ((ov (make-overlay (point) end nil 'front-advance))
                  (display-string (format " (%d)..." (count-lines begin end))))
             (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
             (overlay-put ov 'before-string marker-string)

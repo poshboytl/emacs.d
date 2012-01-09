@@ -41,7 +41,6 @@
 (defadvice vc-mode-line (after colorize-vc-mode-line activate)
   (when vc-mode
     ;; git is default
-    (setq vc-mode (replace-regexp-in-string " Git[-:]" " " vc-mode))
     (put-text-property 1 (length vc-mode) 'face 'font-lock-string-face vc-mode)))
 
 ;;}}}

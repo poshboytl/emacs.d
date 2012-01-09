@@ -5,7 +5,6 @@
 
 ;;{{{ Move
 
-(setq outline-regexp ";;{{{")
 (global-set-key (kbd "M-g") 'goto-line)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
