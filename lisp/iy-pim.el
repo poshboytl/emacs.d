@@ -128,6 +128,10 @@
 (setq org-ditaa-jar-path iy-ditaa-path)
 (setq org-extend-today-until 2)
 
+(setq org-file-apps
+      '((t . emacs)
+        (system . "xopen %s")))
+
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c L") 'org-insert-link-global)
 (global-set-key (kbd "C-c o") 'org-open-at-point-global)
