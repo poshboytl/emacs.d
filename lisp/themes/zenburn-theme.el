@@ -464,6 +464,12 @@
  '(ack-file ((t (:inherit 'diredp-dir-priv))))
  '(ack-match ((t (:inherit 'show-paren-match))))
 
+ ;; whitespa ce
+ `(whitespace-tab ((t (:foreground ,zenburn-bg+2))))
+ `(whitespace-newline ((t (:foreground ,zenburn-bg+1))))
+ `(whitespace-indentation ((t (:background "#2e3330" :foreground ,zenburn-bg+2))))
+ `(whitespace-trailing ((t (:background "#2e3330" :foreground ,zenburn-bg+2))))
+
  ;; misc
  `(eproject-mode-line-project-name-face ((t (:foreground ,zenburn-blue))))
  )

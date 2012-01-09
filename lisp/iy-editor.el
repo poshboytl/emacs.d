@@ -195,9 +195,11 @@
 ;;{{{ Whitespace
 (custom-set-variables
  '(whitespace-action nil)
- '(whitespace-global-modes (quote (c-mode c++-mode makefile-gmail-mode sh-mode cmake-mode emacs-lisp-mode)))
+ '(whitespace-global-modes t)
  '(whitespace-line-column fill-column)
- '(whitespace-style (quote (tabs trailing lines-tail space-before-tab newline indentation space-after-tab tab-mark))))
+ '(whitespace-style (quote (face tabs trailing newline indentation space-before-tab tab-mark newline-mark)))
+ '(coffee-cleanup-whitespace nil))
+(global-whitespace-mode)
 ;;}}}
 
 ;;{{{ Kill ring
