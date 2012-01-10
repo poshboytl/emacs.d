@@ -141,23 +141,23 @@ ROOT defaults to the current buffer's project-root."
         (eproject-set-attribute :compile-command compile-command))))
   (global-set-key (kbd "<f5>") 'iy-compile)
 
-  (defun* iy-eproject-list-project-files-with-cache (&optional (root (eproject-root)))
+  (defun* iy-eproject-list-project-files-with-cache (&optional (root (eproject-root)) force)
     (let ((files (eproject-attribute :project-files-cache root)))
-      (if files files
-        (eproject-set-attribute :project-files-cache (eproject-list-project-files) root))))
+      (if (and files (not force)) files
+        (eproject-set-attribute :project-files-cache (eproject-list-project-files-relative) root))))
 
-  (defun iy-eproject-find-file-with-cache ()
+  (defun iy-eproject-find-file-with-cache (&optional force)
     "Present the user with a list of files in the current project.
 to select from, open file when selected."
-    (interactive)
+    (interactive "P")
     (let* ((root (ignore-errors (eproject-root)))
            (default-directory root)
-           (files (and root (iy-eproject-list-project-files-with-cache root))))
+           (files (and root (iy-eproject-list-project-files-with-cache root force))))
       (when files
         (find-file
          (ido-completing-read
           "Project file: "
-          (mapcar (lambda (f) (file-relative-name f root)) files))))))
+          files)))))
 
   (defadvice eproject-list-project-files (around search-by-backend (&optional root) activate)
     (let* ((root (or root (eproject-root)))
@@ -174,15 +174,13 @@ to select from, open file when selected."
       (with-temp-buffer
         (call-process "git" nil (list (current-buffer) nil) nil
                       "ls-files" "-c" "-o" "--exclude-standard" "-z")
-        (mapcar 
-         'expand-file-name
-         (split-string (buffer-string) "\0")))))
+        (split-string (buffer-string) "\0"))))
 
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   (define-key iy-map (kbd "p o") 'iy-eproject-find-file-with-cache)
-  
+
   (defun eproject-root-safe ()
     (ignore-errors (eproject-root)))
 

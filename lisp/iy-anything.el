@@ -27,15 +27,18 @@
       (type . file)
       (candidates . eproject--get-name-root-alist)))
 
-  (defvar anything-c-source-eproject-files-in-project
+  (setq anything-c-source-eproject-files-in-project
      '((name . "Project Files")
        (delayed)
        (candidate-number-limit . 9999)
        (requires-pattern . 3)
        (candidates . (lambda ()
                        (with-anything-current-buffer
-                         (iy-eproject-list-project-files-with-cache eproject-root))))
-                   (type . file)))
+                         (mapcar
+                          (lambda (f)
+                            (cons f (expand-file-name f eproject-root)))
+                          (iy-eproject-list-project-files-with-cache eproject-root)))))
+       (type . file)))
 
   ;;; Sources
   (setq anything-sources
