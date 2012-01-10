@@ -194,7 +194,7 @@
 
 ;;{{{ Whitespace
 (custom-set-variables
- '(whitespace-action nil)
+ '(whitespace-action '(cleanup))
  '(whitespace-global-modes '(emacs-lisp-mode ruby-mode coffee-mode sass-mode css-mode haml-mode))
  '(whitespace-line-column fill-column)
  '(whitespace-style (quote (face tabs trailing newline indentation space-before-tab tab-mark newline-mark)))

@@ -30,6 +30,7 @@
 (defalias 'occ 'occur)
 (defalias 'mocc 'multi-occur)
 (defalias 'aa 'anything-apropos)
+(defalias 'wc 'whitespace-cleanup)
 
 (fset 'man 'woman)
 (defun backup-dired ()
