@@ -67,6 +67,7 @@
 (global-set-key (kbd "M-u") 'iy-dwim-underscore)
 (global-set-key (kbd "M-l") 'iy-dwim-dash)
 (global-set-key (kbd "M-L") 'downcase-word)
+(global-set-key (kbd "M-U") 'upcase-word)
 ;;}}}
 
 ;;{{{ Mark
