@@ -2,6 +2,9 @@
 ;; 
 
 (require 'iy-dep)
+(require 'iy-functions)
+
+(define-key iy-map (kbd "C-g") 'keyboard-quit)
 
 ;;{{{ Move
 
@@ -61,16 +64,43 @@
 
 (global-set-key (kbd "C-<return>") 'iy-next-line-and-open-it-if-not-empty)
 
-(global-set-key (kbd "M-u") (lambda () (interactive) (insert ?_)))
-(global-set-key (kbd "M-U") 'upcase-word)
-(global-set-key (kbd "M-l") (lambda () (interactive) (insert ?-)))
+(global-set-key (kbd "M-u") 'iy-dwim-underscore)
+(global-set-key (kbd "M-l") 'iy-dwim-dash)
 (global-set-key (kbd "M-L") 'downcase-word)
 ;;}}}
 
 ;;{{{ Mark
-(global-set-key (kbd "C-2") 'set-mark-command)
-(global-set-key (kbd "C-x C-2") 'pop-global-mark)
-(global-set-key (kbd "C-M-2") 'mark-sexp)
+(global-set-key (kbd "C-2") 'extend-selection)
+
+(global-set-key [(meta ?@)] 'mark-word)
+(global-set-key [(control meta ? )] 'mark-sexp)
+(global-set-key [(control meta shift ?u)] 'mark-enclosing-sexp)
+
+(setq iy-mark-keymap (make-sparse-keymap))
+(setq iy-mark-surround-keymap (make-sparse-keymap))
+(setq iy-forward-thing-keymap (make-sparse-keymap))
+(setq iy-backward-thing-keymap (make-sparse-keymap))
+(setq iy-begining-of-thing-keymap (make-sparse-keymap))
+(setq iy-end-of-thing-keymap (make-sparse-keymap))
+
+(global-set-key (kbd "M-SPC") iy-mark-keymap)
+(define-key iy-mark-keymap (kbd "M-SPC") 'iy-ido-mark-thing)
+(define-key iy-mark-keymap (kbd "C-g") 'keyboard-quit)
+(define-key iy-mark-keymap (kbd "M-s") iy-mark-surround-keymap)
+(define-key iy-mark-keymap (kbd "M-n") iy-forward-thing-keymap)
+(define-key iy-mark-keymap (kbd "M-p") iy-backward-thing-keymap)
+(define-key iy-mark-keymap (kbd "M-a") iy-begining-of-thing-keymap)
+(define-key iy-mark-keymap (kbd "M-e") iy-end-of-thing-keymap)
+
+(dolist (k (mapcar 'car things-map))
+  (define-key iy-mark-keymap (vector k) 'iy-mark-thing)
+  (define-key iy-mark-surround-keymap (vector k) 'iy-mark-surround-thing)
+  (define-key iy-forward-thing-keymap (vector k) 'iy-forward-thing)
+  (define-key iy-backward-thing-keymap (vector k) 'iy-backward-thing)
+  (define-key iy-begining-of-thing-keymap (vector k) 'iy-begining-of-thing)
+  (define-key iy-end-of-thing-keymap (vector k) 'iy-end-of-thing)
+)
+
 ;;}}}
 
 ;;{{{ Highlight
@@ -114,10 +144,9 @@
 
 ;;{{{ Organization
 
-(define-key iy-map (kbd "<SPC>") 'fold-dwim-toggle)
-(define-key iy-map (kbd "M-<SPC>") 'fold-dwim-toggle)
-(define-key iy-map (kbd "C-M-<SPC>") 'fold-dwim-hide-all)
-(define-key iy-map (kbd "C-<SPC>") 'fold-dwim-show-all)
+(define-key iy-map (kbd "<tab>") 'fold-dwim-toggle)
+(define-key iy-map (kbd "S-<tab>") 'fold-dwim-hide-all)
+(define-key iy-map (kbd "C-<tab>") 'fold-dwim-show-all)
 
 ;;}}}
 
@@ -149,7 +178,12 @@
 (define-key iy-map (kbd "M-,") 'iy-bmkp-navigation)
 (define-key iy-map (kbd "<") 'iy-bmkp-navigation)
 (define-key iy-map (kbd "/") 'bookmark-bmenu-list)
-(define-key iy-map (kbd "M-/") 'bookmark-bmenu-list)
+
+;;}}}
+
+;;{{{ Search/find
+(define-key iy-map (kbd "o") 'occur)
+(define-key iy-map (kbd "O") 'multi-occur)
 ;;}}}
 
 ;;{{{ Fx
@@ -173,6 +207,12 @@
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C--") 'undo)
 (global-set-key (kbd "C-x SPC") 'point-to-register)
+(global-set-key (kbd "C-.") 'repeat)
+(global-set-key (kbd "C-'") 'negative-argument)
+(global-set-key (kbd "M-'") 'negative-argument)
+(setq repeat-on-final-keystroke "z")
+(global-set-key (kbd "C-x C-o") 'shrink-whitespaces)
+
 ;;}}}
 
 (provide 'iy-keybindings)

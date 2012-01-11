@@ -90,9 +90,12 @@
 
 (defadvice ido-set-matches-1 (around my-ido-set-matches-1 activate)
   "Choose between the regular ido-set-matches-1 and my-ido-fuzzy-match"
-  (if my-ido-use-fuzzy-match
+  (if (and my-ido-use-fuzzy-match
+           (not ido-enable-regexp)
+           (not ido-enable-prefix))
       (setq ad-return-value (my-ido-fuzzy-match ido-text (ad-get-arg 0)))
     ad-do-it))
+
 ;;}}}
 
 (provide 'iy-ido-mode)

@@ -25,9 +25,9 @@
   (defvar anything-c-source-eproject-projects
     '((name . "Projects")
       (type . file)
-      (candidates . eproject--get-name-root-alist)))
+      (candidates . eproject-projects)))
 
-  (setq anything-c-source-eproject-files-in-project
+  (defvar anything-c-source-eproject-files-in-project
      '((name . "Project Files")
        (delayed)
        (candidate-number-limit . 9999)
@@ -40,6 +40,14 @@
                           (iy-eproject-list-project-files-with-cache eproject-root)))))
        (type . file)))
 
+  (defun anything-c-eproject-projects ()
+    (interactive)
+    (anything-other-buffer 'anything-c-source-eproject-projects "*anything projects*"))
+
+  (defun anything-c-eproject-files-in-project ()
+    (interactive)
+    (anything-other-buffer 'anything-c-source-eproject-files-in-project "*anything files in project*"))
+
   ;;; Sources
   (setq anything-sources
         (list
@@ -48,10 +56,10 @@
          'anything-c-source-buffers-list
          'anything-c-source-file-cache
          'anything-c-source-files-in-current-dir+
-         'anything-c-source-recentf
-         'anything-c-source-file-name-history
          'anything-c-source-eproject-files-in-project
          'anything-c-source-eproject-projects
+         'anything-c-source-recentf
+         'anything-c-source-file-name-history
          'anything-c-source-bookmarks
          'anything-c-source-w3m-bookmarks
          'anything-c-source-locate))
@@ -59,8 +67,8 @@
   (setq anything-enable-shortcuts 'prefix)
 
   ;;; Shortcuts
-  (global-set-key (kbd "M-X") 'anything-at-point)
-  (global-set-key (kbd "M-S") 'anything-command-map)
+  (global-set-key (kbd "C-M-s") 'anything-command-map)
+  (define-key iy-map (kbd "M-s") 'anything-at-point)
   (define-key iy-map (kbd "M-x") 'anything-M-x)
 
   (define-key anything-command-map (kbd "g") 'anything-do-grep)
@@ -68,7 +76,9 @@
   (define-key anything-command-map (kbd "r") 'anything-register)
   (define-key anything-command-map (kbd "R") 'anything-regexp)
   (define-key anything-command-map (kbd "b") 'anything-c-pp-bookmarks)
-  (define-key anything-command-map (kbd "'") 'anything-all-mark-rings))
+  (define-key anything-command-map (kbd "p") 'anything-c-eproject-projects)
+  (define-key anything-command-map (kbd "f") 'anything-c-eproject-files-in-project)
+  (define-key anything-command-map (kbd "<SPC>") 'anything-all-mark-rings))
 
 ;; Customization
 (setq anything-input-idle-delay 0)

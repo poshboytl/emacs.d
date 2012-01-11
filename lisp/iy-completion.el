@@ -55,9 +55,7 @@
 (defun yas/underscore-to-camel (string)
   (replace-regexp-in-string "_" "" (upcase-initials string)))
 
-(define-key iy-map (kbd "s s") 'yas/ido-insert-snippets)
-(define-key iy-map (kbd "s f") 'yas/find-snippets)
-(define-key iy-map (kbd "s n") 'yas/new-snippet)
+(define-key iy-map (kbd "M-/") 'yas/ido-insert-snippets)
 
 ;;}}}
 
@@ -94,6 +92,9 @@
 
 ;; fix flyspell
 (defadvice called-interactively-p (before iy-fix-interactively-p (&optional arg) activate))
+
+(custom-set-variables
+ '(flyspell-use-meta-tab nil))
 
 ;;}}}
 

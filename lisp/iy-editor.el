@@ -22,6 +22,11 @@
       time-stamp-start "[Uu]pdated\\(_at\\)?[ \t]*:?[ \t]+<"
       time-stamp-end ">")
 
+(push '(:name
+        whole-line-or-region 
+        :after whole-line-or-region-mode)
+      el-get-sources)
+
 ;;}}}
 
 ;;{{{ Folding
@@ -254,6 +259,22 @@
 
 (push 'autopair el-get-sources)
 (setq autopair-blink nil)
+
+;;}}}
+
+;;{{{ Mark
+
+(push '(:name
+        hide-comnt
+        :type emacswiki) el-get-sources)
+
+(push '(:name
+        thingatpt+
+        :type emacswiki) el-get-sources)
+
+(push '(:name
+        thing-cmds
+        :type emacswiki) el-get-sources)
 
 ;;}}}
 
