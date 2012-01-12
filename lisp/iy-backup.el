@@ -6,7 +6,7 @@
  '(delete-old-versions t)
  '(desktop-base-file-name ".emacs.desktop")
  '(desktop-path (list "." iy-data-dir))
- '(desktop-restore-eager 7)
+ '(desktop-restore-eager 14)
  '(desktop-save (quote ask-if-new))
  '(kept-new-versions 20)
  '(kept-old-versions 5)

@@ -51,7 +51,9 @@
 (define-key iy-map (kbd "d") 'zap-to-char)
 (define-key iy-map (kbd "D") 'iy-zap-back-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "M-Z") 'iy-zap-back-up-to-char)
+(global-set-key (kbd "M-r") 'backward-kill-word)
+(global-set-key (kbd "C-M-g") 'move-to-window-line-top-bottom)
+
 ;;}}}
 
 ;;{{{ Insert
