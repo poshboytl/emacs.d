@@ -22,10 +22,7 @@
       time-stamp-start "[Uu]pdated\\(_at\\)?[ \t]*:?[ \t]+<"
       time-stamp-end ">")
 
-(custom-set-variables
- '(whole-line-or-region-mode t))
-
-(push 'whole-line-or-region el-get-sources)
+(push '(:name whole-line-or-region :features whole-line-or-region :after (lambda () (whole-line-or-region-mode))) el-get-sources)
 
 ;;}}}
 
