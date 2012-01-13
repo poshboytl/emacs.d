@@ -8,6 +8,7 @@
  '(desktop-path (list "." iy-data-dir))
  '(desktop-restore-eager 14)
  '(desktop-save (quote ask-if-new))
+ '(desktop-load-locked-desktop t)
  '(kept-new-versions 20)
  '(kept-old-versions 5)
  '(recentf-arrange-rules (quote (("Elisp files (%d)" ".\\.el\\'") ("Java files (%d)" ".\\.java\\'") ("C/C++ files (%d)" ".\\.c\\(pp\\)?\\'" ".\\.h\\(pp\\)?\\'") ("Org files (%d)" ".\\.org\\'"))))

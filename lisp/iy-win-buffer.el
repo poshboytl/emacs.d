@@ -28,7 +28,7 @@
               :type bzr
               :url "lp:winring"
               :features winring
-              :after (lambda () 
+              :after (lambda ()
                        (setq winring-keymap-prefix (kbd "M-s w"))
                        (defun winring-create-frame-hook (frame)
                          (winring-set-name "default" frame))
@@ -78,9 +78,9 @@
   "Figure out if the current window is on top, bottom or in the
 middle"
   (let* ((win-edges (window-edges))
-	 (this-window-y-min (nth 1 win-edges))
-	 (this-window-y-max (nth 3 win-edges))
-	 (fr-height (frame-height)))
+   (this-window-y-min (nth 1 win-edges))
+   (this-window-y-max (nth 3 win-edges))
+   (fr-height (frame-height)))
     (cond
      ((eq 0 this-window-y-min) "top")
      ((eq (- fr-height 1) this-window-y-max) "bot")
@@ -90,9 +90,9 @@ middle"
   "Figure out if the current window is to the left, right or in the
 middle"
   (let* ((win-edges (window-edges))
-	 (this-window-x-min (nth 0 win-edges))
-	 (this-window-x-max (nth 2 win-edges))
-	 (fr-width (frame-width)))
+   (this-window-x-min (nth 0 win-edges))
+   (this-window-x-max (nth 2 win-edges))
+   (fr-width (frame-width)))
     (cond
      ((eq 0 this-window-x-min) "left")
      ((<= fr-width this-window-x-max) "right")

@@ -248,16 +248,16 @@ Subsequent calls expands the selection to larger semantic unit."
           (forward-sexp)))
       (mark-sexp -1))))
 
-(setq things-map
-  '((?s . sexp)
+(defvar things-map
+  '((?w . word)
+    (?W . symbol)
+    (?s . sexp)
     (?d . defun)
+    (?l . list)
+    (?n . line)
     (?. . sentence)
     (?p . paragraph)
     (?P . page)
-    (?w . word)
-    (?W . symbol)
-    (?n . line)
-    (?l . list)
     (?f . filename)
     (?u . url)
     (?c . comment)))
@@ -265,7 +265,7 @@ Subsequent calls expands the selection to larger semantic unit."
 (defun iy-ido-mark-thing ()
   (interactive)
   (thing-region
-   (ido-completing-read "thing: " thing-types t 'word)))
+   (ido-completing-read "thing: " (mapcar (lambda (th) (prin1-to-string (cdr th))) things-map) nil t)))
 
 (defun iy-mark-thing (arg)
   (interactive "P")

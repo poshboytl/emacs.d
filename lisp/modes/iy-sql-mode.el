@@ -15,3 +15,5 @@
                (symbol-name rval))))))
 
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
+
+(provide 'iy-sql-mode)
