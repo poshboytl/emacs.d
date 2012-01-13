@@ -54,10 +54,10 @@
          'anything-c-source-ffap-line
          'anything-c-source-ffap-guesser
          'anything-c-source-buffers-list
-         'anything-c-source-file-cache
          'anything-c-source-files-in-current-dir+
          'anything-c-source-eproject-files-in-project
          'anything-c-source-eproject-projects
+         'anything-c-source-file-cache
          'anything-c-source-recentf
          'anything-c-source-file-name-history
          'anything-c-source-bookmarks

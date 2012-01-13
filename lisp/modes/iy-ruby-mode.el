@@ -38,8 +38,10 @@
   (flyspell-prog-mode)
   (ruby-electric-mode t)
   (turn-on-auto-fill)
-  (local-set-key (kbd "<return>") 'newline-and-indent)
+  (local-set-key (kbd "<return>") 'ruby-reindent-then-newline-and-indent)
+  (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "C-h h") 'yari)
+  (subword-mode)
   ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
   )
 

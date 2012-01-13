@@ -202,7 +202,7 @@
     :prepend t :empty-lines 1)
 
    ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
-    "* %? %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC\n  %i\n#+END_SRC\n")))
+    "* %^{title} %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC %^{lang}\n  %i%?\n#+END_SRC\n")))
 
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
@@ -242,18 +242,18 @@
                       (org-agenda-skip-timestamp-if-done nil)
                       (org-agenda-skip-scheduled-if-done nil)))))
 
-        ("x" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
+        ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
-        ("q" . "Custom queries")
-        ("qa" "Archive tags search" tags "" 
+        ("x" . "Custom queries")
+        ("xa" "Archive tags search" tags "" 
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
-        ("qA" "Archive search" search ""
+        ("xA" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
 
-        ("qc" "Code snippets tags search" tags ""
+        ("xc" "Code snippets tags search" tags ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
-        ("qC" "Code snippets search" search ""
+        ("xC" "Code snippets search" search ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
         ))

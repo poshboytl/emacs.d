@@ -70,6 +70,16 @@
 (global-set-key (kbd "M-l") 'iy-dwim-dash)
 (global-set-key (kbd "M-L") 'downcase-word)
 (global-set-key (kbd "M-U") 'upcase-word)
+
+(defun iy-exchange-return-and-C-j ()
+  (local-set-key (kbd "<return>") 'newline-and-indent)
+  (local-set-key (kbd "C-j") 'newline))
+
+(add-hook 'ruby-mode-hook 'iy-exchange-return-and-C-j)
+(add-hook 'emacs-lisp-mode-hook 'iy-exchange-return-and-C-j)
+(add-hook 'c-mode-common-hook 'iy-exchange-return-and-C-j)
+(add-hook 'coffee-mode-hook 'iy-exchange-return-and-C-j)
+
 ;;}}}
 
 ;;{{{ Mark

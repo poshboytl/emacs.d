@@ -11,6 +11,7 @@
 
 (defun iy-ido-mode-init ()
   (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
+  (define-key ido-completion-map (kbd "M-l") 'iy-dwim-dash)
   (define-key ido-completion-map (kbd "M-s") iy-map)
   (define-key ido-completion-map (kbd "C-c") 'ido-toggle-case))
 
