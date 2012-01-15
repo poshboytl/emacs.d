@@ -3,7 +3,8 @@
 (eval-when-compile (require 'cl))
 
 (custom-set-variables
- '(anything-command-map-prefix-key "M-S"))
+ '(anything-command-map-prefix-key "M-S")
+ '(anything-c-adaptive-history-file (concat iy-data-dir "anything-c-adaptive-history")))
 
 ;;; Libraries
 (push '(:name anything

@@ -31,6 +31,9 @@
         ))
 
 ;;; Customization
+(setq org-clock-persist-file
+      (concat iy-data-dir "org-clock-save.el"))
+
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
