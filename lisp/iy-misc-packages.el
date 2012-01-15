@@ -42,6 +42,10 @@
  '(coffee-tab-width 2))
 (push 'coffee-mode el-get-sources)
 
+(defun iy-coffee-mode-init ()
+  (local-set-key (kbd "<return>") 'coffee-newline-and-indent))
+(add-hook 'coffee-mode-hook 'iy-coffee-mode-init)
+
 (unless (eq system-type 'darwin)
   (push 'haskell-mode el-get-sources))
 
