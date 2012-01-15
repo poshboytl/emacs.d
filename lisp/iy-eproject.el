@@ -64,8 +64,9 @@
                               ',metadata))))))))
 
 (defun iy-el-get-after-eproject ()
-  (define-project-type generic-bundle (generic) (look-for "Gemfile")
-    :irrelevant-files ("^[.]" "^[#]" ".git/" "vendor"))
+  ;; use git backend by default
+  (plist-put (car (last (assoc 'generic-git eproject-project-types)))
+             :relevant-files 'git)
 
   (defadvice eproject--buffer-file-name (after guess-directory activate)
     (when (and (boundp 'org-src-mode) org-src-mode
@@ -173,7 +174,7 @@ to select from, open file when selected."
     (let ((default-directory root))
       (with-temp-buffer
         (call-process "git" nil (list (current-buffer) nil) nil
-                      "ls-files" "-c" "-o" "--exclude-standard" "-z")
+                      "ls-files" "--full-names" "-c" "-o" "--exclude-standard" "-z")
         (split-string (buffer-string) "\0"))))
 
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
