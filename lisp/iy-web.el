@@ -12,7 +12,8 @@
 
 (defun iy-el-get-after-nxhtml ()
   (defun iy/nxhtml-mode-init ()
-    (zencoding-mode t))
+    (zencoding-mode t)
+    (local-set-key (kbd "<C-return>") 'zencoding-expand-line))
   (add-hook 'nxhtml-mode-hook 'iy/nxhtml-mode-init)
 
   ;; revert some mode

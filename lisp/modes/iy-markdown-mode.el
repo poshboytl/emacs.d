@@ -8,6 +8,11 @@
 (defun iy-markdown-mode-init ()
   (turn-on-auto-fill)
   (flyspell-mode 1)
+  (set (make-local-variable 'org-outline-regexp) "#+ ")
+  (set (make-local-variable 'org-outline-regexp-bol) "^#+ ")
+  (set (make-local-variable 'org-heading-regexp) "^\\(\\#+\\)\\(?: +\\(.*?\\)\\)?[ \t]*$")
+  (orgstruct-mode)
+
   (when (fboundp 'yas/fix-keybindings)
     (yas/fix-keybindings)))
 
