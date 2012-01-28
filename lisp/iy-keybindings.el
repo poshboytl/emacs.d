@@ -74,7 +74,7 @@
 ;;}}}
 
 ;;{{{ Mark
-(global-set-key (kbd "C-2") 'extend-selection)
+(global-set-key (kbd "C-2") 'er/expand-region)
 
 (global-set-key [(meta ?@)] 'mark-word)
 (global-set-key [(control meta ? )] 'mark-sexp)

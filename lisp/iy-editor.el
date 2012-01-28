@@ -13,6 +13,7 @@
  '(fill-column 78)
 
  '(delete-active-region 'kill)
+ '(delete-selection-mode t)
 
  '(set-mark-command-repeat-pop t))
 
@@ -272,6 +273,12 @@
 (push '(:name
         thing-cmds
         :type emacswiki) el-get-sources)
+
+(push '(:name
+        expand-region
+        :type git
+        :url "git://github.com/magnars/expand-region.el.git"
+        :features expand-region) el-get-sources)
 
 ;;}}}
 
