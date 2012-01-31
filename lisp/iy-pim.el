@@ -247,16 +247,15 @@
 
         ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
-        ("x" . "Custom queries")
-        ("xa" "Archive tags search" tags "" 
+        ("x" "Archive tags search" tags "" 
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
-        ("xA" "Archive search" search ""
+        ("X" "Archive search" search ""
          ((org-agenda-files (file-expand-wildcards (concat org-directory "/*.org_archive" )))))
 
-        ("xc" "Code snippets tags search" tags ""
+        ("c" "Code snippets tags search" tags ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
-        ("xC" "Code snippets search" search ""
+        ("C" "Code snippets search" search ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
         ))
