@@ -129,26 +129,47 @@
 (defun iy-dwim-dash (arg)
   (interactive "P")
   (when (consp arg) (setq arg 1))
-  (if (or arg
+  (if (or (region-active-p)
+          arg
           (and iy-last-is-case-transformation
                (memq last-command iy-case-tranformation-functions)))
       (progn
-        (downcase-word (prefix-numeric-value arg))
+        (iy-dwim-downcase (prefix-numeric-value arg))
         (setq iy-last-is-case-transformation t))
     (insert "-")
     (setq iy-last-is-case-transformation nil)))
 
+(defun iy-dwim-downcase (arg)
+  (interactive "p")
+  (if (region-active-p)
+      (downcase-region (region-beginning) (region-end))
+    (downcase-word arg)))
+
 (defun iy-dwim-underscore (arg)
   (interactive "P")
   (when (consp arg) (setq arg 1))
-  (if (or arg
+  (if (or (region-active-p)
+          arg
           (and iy-last-is-case-transformation
                (memq last-command iy-case-tranformation-functions)))
       (progn
-        (upcase-word (prefix-numeric-value arg))
+        (iy-dwim-upcase (prefix-numeric-value arg))
         (setq iy-last-is-case-transformation t))
     (insert "_")
     (setq iy-last-is-case-transformation nil)))
+
+(defun iy-dwim-upcase (arg)
+  (interactive "p")
+  (if (region-active-p)
+      (upcase-region (region-beginning) (region-end))
+    (upcase-word arg)))
+
+(defun iy-dwim-capitalize (arg)
+  (interactive "P")
+  (when (consp arg) (setq arg 1))
+  (if (region-active-p)
+      (capitalize-region (region-beginning) (region-end))
+    (capitalize-word (prefix-numeric-value arg))))
 
 (defun shrink-whitespaces ()
   "Remove white spaces around cursor to just one or none.
