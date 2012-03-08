@@ -12,8 +12,8 @@
  '(show-paren-mode t)
  '(fill-column 78)
 
- '(delete-active-region 'kill)
- '(delete-selection-mode t)
+ ;; '(delete-active-region 'kill)
+ ;; '(delete-selection-mode t)
 
  '(set-mark-command-repeat-pop t))
 
