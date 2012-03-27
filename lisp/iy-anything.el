@@ -70,8 +70,7 @@
   ;;; Shortcuts
   (global-set-key (kbd "M-X") 'anything-at-point)
   (define-key iy-map (kbd "M-s") 'anything-at-point)
-  (global-set-key (kbd "C-M-s") 'anything-command-map)
-  (global-set-key (kbd "M-S") 'anything-command-map)
+  (define-key iy-map (kbd "s") 'anything-command-map)
   (define-key iy-map (kbd "M-x") 'anything-M-x)
 
   (define-key anything-command-map (kbd "g") 'anything-do-grep)

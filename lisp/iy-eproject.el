@@ -174,7 +174,7 @@ to select from, open file when selected."
     (let ((default-directory root))
       (with-temp-buffer
         (call-process "git" nil (list (current-buffer) nil) nil
-                      "ls-files" "--full-names" "-c" "-o" "--exclude-standard" "-z")
+                      "ls-files" "--full-name" "-c" "-o" "--exclude-standard" "-z")
         (split-string (buffer-string) "\0"))))
 
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)

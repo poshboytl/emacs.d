@@ -11,8 +11,8 @@
 
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
-  (yas/initialize)
   (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
+  (yas/initialize)
   (yas/load-snippet-dirs))
 
 (push '(:name yasnippet
