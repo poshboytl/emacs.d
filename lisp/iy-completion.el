@@ -2,24 +2,24 @@
 
 ;;{{{ Autocomplate
 
-(push '(:name
-        auto-complete
-        :type http-tar
-        :options ("xjf")
-        :url "http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2"
-        :post-init iy-el-get-after-auto-complete)
-      el-get-sources)
+;; (push '(:name
+;;         auto-complete
+;;         :type http-tar
+;;         :options ("xjf")
+;;         :url "http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2"
+;;         :post-init iy-el-get-after-auto-complete)
+;;       el-get-sources)
 
-(defun iy-el-get-after-auto-complete ()
-  (require 'auto-complete)
-  (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
-  (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
-  (require 'auto-complete-config)
-  (ac-config-default))
+;; (defun iy-el-get-after-auto-complete ()
+;;   (require 'auto-complete)
+;;   (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
+;;   (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
+;;   (require 'auto-complete-config)
+;;   (ac-config-default))
 
-(custom-set-variables
- '(ac-trigger-key "TAB")
- '(ac-auto-start nil))
+;; (custom-set-variables
+;;  '(ac-trigger-key "TAB")
+;;  '(ac-auto-start nil))
 
 ;;}}}
 
@@ -32,24 +32,29 @@
 
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 
+
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
   (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
   (yas/initialize)
-  (yas/load-snippet-dirs))
+  (yas/load-snippet-dirs)
+  (ad-activate 'ruby-indent-line)
+  (ad-enable-advice 'ruby-indent-line 'around 'yas/ruby-noconflict)
+  (ad-activate 'markdown-cycle)
+  (ad-enable-advice 'markdown-cycle 'around 'yas/markdown-noconflict))
 
-(push '(:name yasnippet
-              :type git
-              :url "git://github.com/capitaomorte/yasnippet.git"
-              :features "yasnippet"
-              :description "YASnippet is a template system for Emacs."
-              :post-init iy-el-get-after-yasnippet)
-      el-get-sources)
+(push 'yasnippet el-get-package)
 
-(defun yas/fix-keybindings ()
-  (make-variable-buffer-local 'yas/trigger-key)
-  (setq yas/trigger-key "<tab>")
+(defun yas/very-safe-expand ()
+  (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+(defun yas/org-noconflict ()
+  (set (make-variable-buffer-local 'yas/trigger-key) [tab])
+  (add-to-list 'org-tab-first-hook 'yas/very-safe-expand)
   (define-key yas/keymap [tab] 'yas/next-field))
+(defadvice markdown-cycle (around yas/markdown-noconflict)
+  (unless (yas/very-safe-expand) ad-do-it))
+(defadvice ruby-indent-line (around yas/ruby-noconflict)
+  (unless (yas/very-safe-expand) ad-do-it))
 
 (defun yas/ido-insert-snippets (&optional no-condition)
   (interactive "P")
@@ -108,7 +113,7 @@
 (custom-set-variables
  '(abbrev-mode t)
  '(mail-abbrevs-mode t)
- '(abbrev-file-name iy-data-dir "abbrev_defs"))
+ '(abbrev-file-name (concat iy-data-dir "abbrev_defs")))
 ;;}}}
 
 ;;{{{ Spell

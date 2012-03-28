@@ -10,9 +10,7 @@
  '(w3m-terminal-coding-system (quote utf-8))
  '(w3m-use-cookies t))
 
-(push '(:name emacs-w3m
-              :after iy-el-get-after-emacs-w3m)
-      el-get-sources)
+(push 'emacs-w3m el-get-packages)
 
 (setq browse-url-generic-program
       (if (eq system-type 'darwin)

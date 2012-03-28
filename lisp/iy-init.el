@@ -14,6 +14,7 @@
 
 (add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path (concat iy-lisp-dir "modes"))
+(add-to-list 'load-path iy-el-get-dir)
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
 
@@ -31,18 +32,25 @@
 (when (file-exists-p secrets-file)
   (load secrets-file t t))
 
-(defun iy-init-load-modules ()
+(defun iy-init-load-modules (&optional before-modules after-modules)
   "Emacs load modules"
+
+  (dolist (feature before-modules)
+    (message "[iy-init] load %s" feature)
+    (require feature))
   ;; load modules in lisp directory
   (dolist (file (nconc (file-expand-wildcards (concat iy-lisp-dir "iy-*.el"))
                        (file-expand-wildcards (concat iy-lisp-dir "modes/iy-*.el"))))
     (let ((feature (file-name-nondirectory (file-name-sans-extension file)))
-          (blacklist (append (list 'iy-init 'iy-dep) iy-blacklist)))
-      (if (memq (intern feature) blacklist)
+          (exclude (append '(iy-init) before-modules after-modules)))
+      (if (memq (intern feature) iy-blacklist)
           (message "[iy-init] %s is in black list" feature)
-        (message "[iy-init] %s is loading" feature)
-        (require (intern feature))
-        (message "[iy-init] %s has been loaded" feature)))))
+        (unless (memq (intern feature) exclude)
+          (message "[iy-init] load %s" feature)
+          (require (intern feature))))))
+  (dolist (feature after-modules)
+    (message "[iy-init] load %s" feature)
+    (require feature)))
 
 (defun iy-init ()
   "Emacs start entry"
@@ -51,30 +59,17 @@
                            ("tromey" . "http://tromey.com/elpa/")
                            ("gnu" . "http://elpa.gnu.org/packages/")))
 
-  (require 'iy-theme)
-  (require 'iy-pim)
-  (iy-init-load-modules)
+  (iy-init-load-modules '(iy-theme iy-pim) '(iy-el-get))
 
-  ;; reverse the list
-  (setq el-get-sources (nreverse el-get-sources))
-
-  ;; extract out names from el-get-sources
-  (setq el-get-packages
-        (mapcar
-         (lambda (package)
-           (if (listp package)
-               (plist-get package :name)
-             package))
-         el-get-sources))
-
-  (el-get 'sync el-get-packages))
+  (el-get 'sync (nreverse el-get-packages)))
 
 (if (require 'el-get nil t)
     (iy-init)
   (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   "https://github.com/doitian/el-get/raw/master/el-get-install.el"
    (lambda (s)
-     (let (el-get-master-branch)
+     (let (el-get-master-branch
+           (el-get-git-install-url "git://github.com/doitian/el-get.git"))
        (end-of-buffer)
        (eval-print-last-sexp))
      (iy-init))))

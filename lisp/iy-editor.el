@@ -23,7 +23,9 @@
       time-stamp-start "[Uu]pdated\\(_at\\)?[ \t]*:?[ \t]+<"
       time-stamp-end ">")
 
-(push '(:name whole-line-or-region :features whole-line-or-region :after (lambda () (whole-line-or-region-mode))) el-get-sources)
+(push 'whole-line-or-region el-get-packages)
+(defun iy-el-get-after-whole-line-or-region ()
+  (whole-line-or-region-mode))
 
 ;;}}}
 
@@ -36,62 +38,53 @@
 (defface collapsed-face '((t (:background "#e0cf9f" :foreground "#5f5f5f"))) "Collapsed Overlay")
 (defvar collapsed-face 'collapsed-face)
 
-(push '(:name
-        folding
-        :after (lambda ()
-                 (setq folding-check-folded-file-function 'iy-folding-check-folded)
-                 (folding-add-to-marks-list 'ruby-mode "# {{{" "# }}}" nil t)
-                 (define-key iy-map (kbd "i") folding-mode-prefix-map)
-                 (define-key folding-mode-prefix-map (kbd "i") 'folding-shift-in)
-                 (define-key folding-mode-prefix-map (kbd "o") 'folding-shift-out)
-                 (define-key folding-mode-prefix-map (kbd "<SPC>") 'folding-context-next-action)
-                 (define-key folding-mode-prefix-map (kbd "j") 'folding-next-visible-heading)
-                 (define-key folding-mode-prefix-map (kbd "n") 'folding-next-visible-heading)
-                 (define-key folding-mode-prefix-map (kbd "k") 'folding-previous-visible-heading)
-                 (define-key folding-mode-prefix-map (kbd "p") 'folding-previous-visible-heading)
+(push 'folding el-get-packages)
+(defun el-get-after-folding ()
+  (setq folding-check-folded-file-function 'iy-folding-check-folded)
+  (folding-add-to-marks-list 'ruby-mode "# {{{" "# }}}" nil t)
+  (define-key iy-map (kbd "i") folding-mode-prefix-map)
+  (define-key folding-mode-prefix-map (kbd "i") 'folding-shift-in)
+  (define-key folding-mode-prefix-map (kbd "o") 'folding-shift-out)
+  (define-key folding-mode-prefix-map (kbd "<SPC>") 'folding-context-next-action)
+  (define-key folding-mode-prefix-map (kbd "j") 'folding-next-visible-heading)
+  (define-key folding-mode-prefix-map (kbd "n") 'folding-next-visible-heading)
+  (define-key folding-mode-prefix-map (kbd "k") 'folding-previous-visible-heading)
+  (define-key folding-mode-prefix-map (kbd "p") 'folding-previous-visible-heading)
 
-                 (defun folding-shift-in (&optional noerror)
-                   (interactive)
-                   (labels
-                       ((open-fold nil
-                                   (let ((data (folding-show-current-entry noerror t)))
-                                     (and data
-                                          (progn
-                                            (when folding-narrow-by-default
-                                              (setq folding-stack
-                                                    (if folding-stack
-                                                        (cons (cons (point-min-marker)
-                                                                    (point-max-marker))
-                                                              folding-stack)
-                                                      '(folded)))
-                                              (folding-set-mode-line))
-                                            (folding-narrow-to-region (car data) (nth 1 data)))))))
-                     (let ((goal (point)))
-                       (while (folding-skip-ellipsis-backward)
-                         (beginning-of-line)
-                         (open-fold)
-                         (goto-char goal))
-                       (if folding-narrow-by-default
-                           (open-fold)
-                         (widen)))))
+  (defun folding-shift-in (&optional noerror)
+    (interactive)
+    (labels
+        ((open-fold nil
+                    (let ((data (folding-show-current-entry noerror t)))
+                      (and data
+                           (progn
+                             (when folding-narrow-by-default
+                               (setq folding-stack
+                                     (if folding-stack
+                                         (cons (cons (point-min-marker)
+                                                     (point-max-marker))
+                                               folding-stack)
+                                       '(folded)))
+                               (folding-set-mode-line))
+                             (folding-narrow-to-region (car data) (nth 1 data)))))))
+      (let ((goal (point)))
+        (while (folding-skip-ellipsis-backward)
+          (beginning-of-line)
+          (open-fold)
+          (goto-char goal))
+        (if folding-narrow-by-default
+            (open-fold)
+          (widen)))))
 
-                 (defun folding-font-lock-support ()
-                   "Add font lock support."
-                   (ignore-errors
-                     (font-lock-add-keywords nil (folding-font-lock-keywords major-mode))))))
-      el-get-sources)
+  (defun folding-font-lock-support ()
+    "Add font lock support."
+    (ignore-errors
+      (font-lock-add-keywords nil (folding-font-lock-keywords major-mode)))))
 
 (add-hook 'lisp-mode-hook 'hs-minor-mode)
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
 
-(push '(:name
-        fold-dwim
-        :type http
-        :url "http://www.dur.ac.uk/p.j.heslin/Software/Emacs/Download/fold-dwim.el"
-        :features fold-dwim)
-        ;; :after (lambda ()
-        ;;          (folding-mode-add-find-file-hook)))
-      el-get-sources)
+(push 'fold-dwim el-get-packages)
 
 (defun iy-folding-check-folded ()
   "Function to determine if this file is in folded form."
@@ -211,11 +204,8 @@
  '(kill-ring-max 500)
  '(kill-whole-line t))
 
-(push 'browse-kill-ring el-get-sources)
-
-(push '(:name kill-ring-search
-              :type elpa)
-      el-get-sources)
+(push 'browse-kill-ring el-get-packages)
+(push 'kill-ring-search el-get-packages)
 
 (global-set-key (kbd "C-M-y") 'browse-kill-ring)
 (defadvice yank-pop (around kill-ring-search-maybe (arg) activate)
@@ -230,11 +220,8 @@
 
 ;;{{{ Indention
 
-(push '(:name dtrt-indent
-              :features nil
-              :url "https://github.com/emacsmirror/dtrt-indent.git"
-              :post-init (lambda () (autoload 'dtrt-indent-mode "dtrt-indent" nil t)))
-      el-get-sources)
+(push 'dtrt-indent el-get-packages)
+(autoload 'dtrt-indent-mode "dtrt-indent" nil t)
 
 ;;}}}
 
@@ -247,38 +234,25 @@
  '(pulse-flag nil)
  '(pulse-iterations 5))
 
-(push 'highlight-symbol el-get-sources)
-(push '(:name highlight-parentheses
-              :after (lambda ()
-                       (add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
-                       (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
-                       (add-hook 'ruby-mode-hook 'highlight-parentheses-mode))
-              ) el-get-sources)
+(push 'highlight-symbol el-get-packages)
+(push 'highlight-parentheses el-get-packages)
 
-(push 'autopair el-get-sources)
+(add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
+(add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+(add-hook 'ruby-mode-hook 'highlight-parentheses-mode)
+
+(push 'autopair el-get-packages)
 (setq autopair-blink nil)
 
 ;;}}}
 
 ;;{{{ Mark
 
-(push '(:name
-        hide-comnt
-        :type emacswiki) el-get-sources)
+(push hide-comnt el-get-packages)
+(push thingatpt+ el-get-packages)
+(push thing-cmds el-get-packages)
 
-(push '(:name
-        thingatpt+
-        :type emacswiki) el-get-sources)
-
-(push '(:name
-        thing-cmds
-        :type emacswiki) el-get-sources)
-
-(push '(:name
-        expand-region
-        :type git
-        :url "git://github.com/magnars/expand-region.el.git"
-        :features expand-region) el-get-sources)
+(push expand-region el-get-packages)
 
 ;;}}}
 

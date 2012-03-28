@@ -2,16 +2,10 @@
 
 (require 'iy-dep)
 
-(setq el-get-sources
-      (append
-       '(dired+
-         dired-details
-         (:name dired-details+ :features dired-details+ :type emacswiki)
-         ;; ls-lisp+
-         ;; dired-sort-menu
-         ;; dired-sort-menu+
-         )
-       el-get-sources))
+(setq
+ el-get-packages
+ (append
+  '(dired+ dired-details dired-details+) el-get-packages))
 
 (custom-set-variables
  '(dired-dwim-target t)

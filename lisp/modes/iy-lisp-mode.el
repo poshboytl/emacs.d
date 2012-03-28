@@ -1,5 +1,5 @@
 (defun iy-lisp-mode-init ()
-  (autopair-mode))
+  (when (fboundp 'autopair-mode) (autopair-mode)))
 
 (add-hook 'emacs-lisp-mode-hook 'iy-lisp-mode-init)
 

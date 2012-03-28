@@ -23,25 +23,22 @@
     (let ((prev (ring-remove (winring-get-ring) 0)))
       (winring-restore-configuration prev))))
 
-(push 'switch-window el-get-sources)
-(push '(:name winring
-              :type bzr
-              :url "lp:winring"
-              :features winring
-              :after (lambda ()
-                       (setq winring-keymap-prefix (kbd "M-s w"))
-                       (defun winring-create-frame-hook (frame)
-                         (winring-set-name "default" frame))
-                       (define-key winring-map (kbd "w") 'iy-winring-jump-or-create)
-                       (define-key winring-map (kbd "n") 'winring-next-configuration)
-                       (define-key winring-map (kbd "C-n") 'winring-prev-configuration)
-                       (define-key winring-map (kbd "C-p") 'winring-prev-configuration)
-                       (winring-initialize)
-                       (add-hook 'ediff-before-setup-hook 'iy-ediff-before-setup-winring-jump)
-                       (add-hook 'ediff-after-setup-windows-hook 'iy-ediff-after-setup-save-register
-                                 'append)
-                       (add-hook 'ediff-quit-hook 'iy-ediff-quit-winring-delete)))
-      el-get-sources)
+(push 'switch-window el-get-packages)
+(push 'winring el-get-packages)
+
+(defun iy-el-get-after-winring ()
+  (setq winring-keymap-prefix (kbd "M-s w"))
+  (defun winring-create-frame-hook (frame)
+    (winring-set-name "default" frame))
+  (define-key winring-map (kbd "w") 'iy-winring-jump-or-create)
+  (define-key winring-map (kbd "n") 'winring-next-configuration)
+  (define-key winring-map (kbd "C-n") 'winring-prev-configuration)
+  (define-key winring-map (kbd "C-p") 'winring-prev-configuration)
+  (winring-initialize)
+  (add-hook 'ediff-before-setup-hook 'iy-ediff-before-setup-winring-jump)
+  (add-hook 'ediff-after-setup-windows-hook 'iy-ediff-after-setup-save-register
+            'append)
+  (add-hook 'ediff-quit-hook 'iy-ediff-quit-winring-delete))
 
 (defun iy-winring-jump-or-create (&optional name)
   "Jump to or create configuration by name"

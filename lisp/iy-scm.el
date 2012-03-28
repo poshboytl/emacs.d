@@ -9,10 +9,8 @@
  '(magit-repo-dirs (list iy-codebase-dir))
  '(magit-repo-dirs-depth 1))
 
-(push '(:name git-emacs
-              :features git-emacs-autoloads)
-      el-get-sources)
-(push '(:name magit :features nil) el-get-sources)
+(push 'git-emacs el-get-packages)
+(push 'magit el-get-packages)
 
 (autoload 'magit-status "magit" nil t)
 

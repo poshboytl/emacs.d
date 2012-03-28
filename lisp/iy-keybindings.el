@@ -152,6 +152,7 @@
 
 (define-key iy-map (kbd "<tab>") 'fold-dwim-toggle)
 (define-key iy-map (kbd "S-<tab>") 'fold-dwim-hide-all)
+(define-key iy-map (kbd "<backtab>") 'fold-dwim-hide-all)
 (define-key iy-map (kbd "C-<tab>") 'fold-dwim-show-all)
 
 ;;}}}

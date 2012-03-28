@@ -4,10 +4,14 @@
 (unless (boundp 'el-get-sources)
   (setq el-get-sources nil))
 
+;;; list of el get packages to install. packages are installed in reverse order.
+(defvar el-get-packages nil)
+
 ;;; Constants
 
 (defconst iy-config-dir (file-name-as-directory user-emacs-directory))
 (defconst iy-data-dir (concat iy-config-dir "data/"))
+(defconst iy-bundle-dir (expand-file-name (concat iy-config-dir ".git/modules/bundle/")))
 (defconst iy-lisp-dir (file-name-directory (locate-file "iy-init.el" load-path)))
 (defconst iy-el-get-dir (concat iy-config-dir "el-get/"))
 

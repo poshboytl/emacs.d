@@ -10,9 +10,8 @@
 (custom-set-variables
  '(ack-prompt-for-directory t))
 
-(push 'full-ack el-get-sources)
-(push '(:name xcscope :after iy-el-get-after-xcscope :localname "xcscope.el")
-      el-get-sources)
+(push 'full-ack el-get-packages)
+(push 'xcscope el-get-packages)
 
 (defun ack-here ()
   (interactive)
@@ -51,16 +50,11 @@
 
 ;;{{{ Alternative File
 
-(push '(:name alternative-files
-              :compile "alternative-files.el"
-              :type git
-              :url "git://github.com/doitian/alternative-files-el.git"
-              :features alternative-files
-              :after (lambda ()
-                       (define-key iy-map "a" 'alternative-files-find-file)
-                       (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
-                       (define-key iy-map (kbd "A") 'alternative-files-create-file)))
-      el-get-sources)
+(push 'alternative-files el-get-sources)
+(defun iy-el-get-after-alternative-files ()
+  (define-key iy-map "a" 'alternative-files-find-file)
+  (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
+  (define-key iy-map (kbd "A") 'alternative-files-create-file))
 
 ;;}}}
 

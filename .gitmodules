@@ -1,0 +1,99 @@
+[submodule "bundle/anything"]
+	path = bundle/anything
+	url = http://repo.or.cz/r/anything-config.git
+[submodule "bundle/pick-backup"]
+	path = bundle/pick-backup
+	url = git://github.com/emacsmirror/pick-backup.git
+[submodule "bundle/org-mode"]
+	path = bundle/org-mode
+	url = git://orgmode.org/org-mode.git
+[submodule "bundle/eproject"]
+	path = bundle/eproject
+	url = git://github.com/jrockway/eproject.git
+[submodule "bundle/bookmark+"]
+	path = bundle/bookmark+
+	url = git://github.com/doitian/bookmark-plus.git
+[submodule "bundle/nxhtml"]
+	path = bundle/nxhtml
+	url = git://github.com/emacsmirror/nxhtml.git
+[submodule "bundle/yasnippet"]
+	path = bundle/yasnippet
+	url = git://github.com/capitaomorte/yasnippet.git
+[submodule "bundle/auctex"]
+	path = bundle/auctex
+	url = git://github.com/kjhealy/auctex.git
+[submodule "bundle/markdown-mode"]
+	path = bundle/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
+[submodule "bundle/doxymacs"]
+	path = bundle/doxymacs
+	url = git://doxymacs.git.sourceforge.net/gitroot/doxymacs/doxymacs
+[submodule "bundle/doxymacs-yard"]
+	path = bundle/doxymacs-yard
+	url = git://github.com/doitian/doxymacs-yard.git
+[submodule "bundle/rinari"]
+	path = bundle/rinari
+	url = http://github.com/eschulte/rinari.git
+[submodule "bundle/yari"]
+	path = bundle/yari
+	url = https://github.com/hron/yari.el.git
+[submodule "bundle/cucumber"]
+	path = bundle/cucumber
+	url = git://github.com/michaelklishin/cucumber.el.git
+[submodule "bundle/rspec-mode"]
+	path = bundle/rspec-mode
+	url = https://github.com/pezra/rspec-mode.git
+[submodule "bundle/gist"]
+	path = bundle/gist
+	url = git://github.com/defunkt/gist.el.git
+[submodule "bundle/cheat"]
+	path = bundle/cheat
+	url = git://github.com/defunkt/cheat.el
+[submodule "bundle/yaml-mode"]
+	path = bundle/yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git
+[submodule "bundle/haml-mode"]
+	path = bundle/haml-mode
+	url = git://github.com/nex3/haml-mode.git
+[submodule "bundle/rainbow-mode"]
+	path = bundle/rainbow-mode
+	url = git://github.com/emacsmirror/rainbow-mode.git
+[submodule "bundle/sass-mode"]
+	path = bundle/sass-mode
+	url = git://github.com/nex3/sass-mode.git
+[submodule "bundle/coffee-mode"]
+	path = bundle/coffee-mode
+	url = https://github.com/defunkt/coffee-mode.git
+[submodule "bundle/haskell-mode"]
+	path = bundle/haskell-mode
+	url = git://github.com/pheaver/haskell-mode.git
+[submodule "bundle/dtrt-indent"]
+	path = bundle/dtrt-indent
+	url = https://github.com/emacsmirror/dtrt-indent.git
+[submodule "bundle/expand-region"]
+	path = bundle/expand-region
+	url = git://github.com/magnars/expand-region.el.git
+[submodule "bundle/switch-window"]
+	path = bundle/switch-window
+	url = git://github.com/dimitri/switch-window.git
+[submodule "bundle/winring"]
+	path = bundle/winring
+	url = https://github.com/emacsmirror/winring
+[submodule "bundle/emacs-w3m"]
+	path = bundle/emacs-w3m
+	url = git://github.com:/doitian/emacs-w3m.git
+[submodule "bundle/git-emacs"]
+	path = bundle/git-emacs
+	url = git://github.com/tsgates/git-emacs.git
+[submodule "bundle/magit"]
+	path = bundle/magit
+	url = git://github.com/magit/magit.git
+[submodule "bundle/full-ack"]
+	path = bundle/full-ack
+	url = git://github.com/nschum/full-ack.git
+[submodule "bundle/xcscope"]
+	path = bundle/xcscope
+	url = git://github.com/To1ne/xcscope.git
+[submodule "bundle/alternative-files"]
+	path = bundle/alternative-files
+	url = git://github.com/doitian/alternative-files-el.git

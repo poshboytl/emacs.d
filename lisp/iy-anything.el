@@ -7,9 +7,7 @@
  '(anything-c-adaptive-history-file (concat iy-data-dir "anything-c-adaptive-history")))
 
 ;;; Libraries
-(push '(:name anything
-              :after iy-el-get-after-anything)
-      el-get-sources)
+(push 'anything el-get-packages)
 
 (defun iy-el-get-after-anything ()
   (require 'anything-config)
@@ -67,12 +65,6 @@
 
   (setq anything-enable-shortcuts 'prefix)
 
-  ;;; Shortcuts
-  (global-set-key (kbd "M-X") 'anything-at-point)
-  (define-key iy-map (kbd "M-s") 'anything-at-point)
-  (define-key iy-map (kbd "s") 'anything-command-map)
-  (define-key iy-map (kbd "M-x") 'anything-M-x)
-
   (define-key anything-command-map (kbd "g") 'anything-do-grep)
   (define-key anything-command-map (kbd "o") 'anything-occur)
   (define-key anything-command-map (kbd "r") 'anything-register)
@@ -81,6 +73,14 @@
   (define-key anything-command-map (kbd "p") 'anything-c-eproject-projects)
   (define-key anything-command-map (kbd "f") 'anything-c-eproject-files-in-project)
   (define-key anything-command-map (kbd "<SPC>") 'anything-all-mark-rings))
+
+(autoload 'anything-command-map "anything-config" nil nil 'keymap)
+
+;;; Shortcuts
+(global-set-key (kbd "M-X") 'anything-at-point)
+(define-key iy-map (kbd "M-s") 'anything-at-point)
+(define-key iy-map (kbd "s") 'anything-command-map)
+(define-key iy-map (kbd "M-x") 'anything-M-x)
 
 ;; Customization
 (setq anything-input-idle-delay 0)

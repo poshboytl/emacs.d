@@ -1,4 +1,4 @@
-(push 'auctex el-get-sources)
+(push 'auctex el-get-packages)
 
 (defun iy-tex-mode-init ()
   ;; (turn-on-cdlatex)

@@ -1,9 +1,7 @@
 (require 'iy-dep)
 (require 'iy-daemon)
 
-(push '(:name deft
-              :after iy-el-get-after-deft)
-      el-get-sources)
+(push 'deft el-get-packages)
 (defun iy-el-get-after-deft ()
   (setq
    deft-extension "md"
@@ -12,7 +10,7 @@
    deft-text-mode 'markdown-mode)
   (define-key iy-map (kbd "e") 'deft))
 
-(push 'org-mode el-get-sources)
+(push 'org-mode el-get-packages)
 
 ;;; Modules
 (setq org-modules
@@ -154,7 +152,7 @@
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
 
   (flyspell-mode 1)
-  (when (fboundp 'yas/fix-keybindings) (yas/fix-keybindings)))
+  (when (fboundp 'yas/org-noconflict) (yas/org-noconflict)))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
   ;; copy from org-faces.el

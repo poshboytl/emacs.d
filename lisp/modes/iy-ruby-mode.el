@@ -10,28 +10,22 @@
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 
 (setq rinari-minor-mode-prefixes '(";"))
-(push 'rinari el-get-sources)
+(push 'rinari el-get-packages)
 
-(push '(:name ruby-electric
-              :type http
-              :url "http://shylock.uw.hu/Emacs/ruby-electric.el")
-      el-get-sources)
+(push 'ruby-electric el-get-packages)
 (autoload 'ruby-electric-mode "ruby-electric")
 
-(push 'yari el-get-sources)
+(push 'yari el-get-packages)
 (defalias 'ri 'yari)
 
-(push 'ruby-block el-get-sources)
+(push 'ruby-block el-get-packages)
 (make-variable-buffer-local 'ruby-block-mode)
 
-(push '(:name cucumber
-              :type git
-              :url "git://github.com/michaelklishin/cucumber.el.git"
-              :after (lambda ()
-                       (autoload 'feature-mode "feature-mode" nil t)
-                       (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))))
-      el-get-sources)
-(push 'rspec-mode el-get-sources)
+(push 'cucumber el-get-packages)
+(autoload 'feature-mode "feature-mode" nil t)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
+(push 'rspec-mode el-get-packages)
 
 (defun iy-ruby-mode-init ()
   (rinari-minor-mode t)
@@ -44,17 +38,6 @@
   (subword-mode)
   ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
   )
-
-(defun yas/advise-indent-function (function-symbol)
-  (eval `(defadvice ,function-symbol (around yas/try-expand-first activate)
-           ,(format
-             "Try to expand a snippet before point, then call `%s' as usual"
-             function-symbol)
-           (let ((yas/fallback-behavior nil))
-             (unless (yas/expand)
-               ad-do-it)))))
-
-(yas/advise-indent-function 'ruby-indent-line)
 
 (add-hook 'ruby-mode-hook 'iy-ruby-mode-init t)
 
