@@ -51,9 +51,9 @@
 
 (push 'erlware-mode el-get-sources)
 
-(defun iy/diff-mode-init ()
+(defun iy-diff-mode-init ()
   (local-set-key (kbd "M-o") 'other-window))
-(add-hook 'diff-mode-hook 'iy/diff-mode-init)
+(add-hook 'diff-mode-hook 'iy-diff-mode-init)
 
 (push '(:name
         sml-modeline

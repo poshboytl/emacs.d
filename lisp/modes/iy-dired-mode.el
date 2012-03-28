@@ -96,7 +96,7 @@
                )))
 
 (autoload 'wdired-change-to-wdired-mode "wdired")
-(defun iy/dired-mode-init ()
+(defun iy-dired-mode-init ()
   (hl-line-mode)
   (dired-omit-mode 1)
   (define-key dired-mode-map "E" 'wdired-change-to-wdired-mode)
@@ -111,6 +111,6 @@
   (define-key dired-mode-map ")" 'dired-details-toggle)
   (define-key dired-mode-map (kbd "M-<return>") 'dired-launch-command))
 
-(add-hook 'dired-mode-hook 'iy/dired-mode-init)
+(add-hook 'dired-mode-hook 'iy-dired-mode-init)
 
 (provide 'iy-dired-mode)

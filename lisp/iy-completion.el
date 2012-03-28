@@ -2,26 +2,24 @@
 
 ;;{{{ Autocomplate
 
-;; (push '(:name
-;;         auto-complete
-;;         :type http-tar
-;;         :options ("xjf")
-;;         :url "http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2"
-;;         :post-init iy-el-get-after-auto-complete)
-;;       el-get-sources)
+(push '(:name
+        auto-complete
+        :type http-tar
+        :options ("xjf")
+        :url "http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2"
+        :post-init iy-el-get-after-auto-complete)
+      el-get-sources)
 
-;; (defun iy-el-get-after-auto-complete ()
-;;   (require 'auto-complete)
-;;   (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
-;;   (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
-;;   (require 'auto-complete-config)
-;;   (ac-config-default))
+(defun iy-el-get-after-auto-complete ()
+  (require 'auto-complete)
+  (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
+  (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
+  (require 'auto-complete-config)
+  (ac-config-default))
 
-;; (custom-set-variables
-;;  '(ac-trigger-key nil)
-;;  '(ac-delay 0.1)
-;;  '(ac-auto-show-menu 2)
-;;  '(ac-auto-start 4))
+(custom-set-variables
+ '(ac-trigger-key "TAB")
+ '(ac-auto-start nil))
 
 ;;}}}
 
@@ -72,9 +70,9 @@
      (file-name-sans-extension (file-name-nondirectory name)))))
 
 (defun yas/camel-to-underscore (string)
-  (iy/string-camel-to-underscore string))
+  (iy-string-camel-to-underscore string))
 (defun yas/camel-to-lower-underscore (string)
-  (downcase (iy/string-camel-to-underscore string)))
+  (downcase (iy-string-camel-to-underscore string)))
 
 (defun yas/underscore-to-camel (string)
   (replace-regexp-in-string "_" "" (upcase-initials string)))

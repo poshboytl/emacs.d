@@ -265,7 +265,7 @@
 ;; (ignore-errors (org-agenda-to-appt))
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
 
-(defun iy/appt-display (min-to-app new-time msg)
+(defun iy-appt-display (min-to-app new-time msg)
   (let ((title (format "Appointment in %d minute(s)" min-to-app)))
     (message (concat title ": " msg))
     (if (fboundp 'dbus-call-method)
@@ -283,7 +283,7 @@
          ':int32 -1)
       (el-get-notify title msg))))
 
-(defun iy/org-clock-display (msg)
+(defun iy-org-clock-display (msg)
   (message "Org Notification: %s" msg)
   (if (fboundp 'dbus-call-method)
       (dbus-call-method
@@ -300,8 +300,8 @@
        ':int32 -1)
     (el-get-notify "Org Notification" msg)))
 
-(setq appt-disp-window-function (function iy/appt-display))
-(setq org-show-notification-handler (function iy/org-clock-display))
+(setq appt-disp-window-function (function iy-appt-display))
+(setq org-show-notification-handler (function iy-org-clock-display))
 
 ;; timer for pomodoro
 (setq org-timer-default-timer 25)

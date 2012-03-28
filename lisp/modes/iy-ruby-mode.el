@@ -33,7 +33,7 @@
       el-get-sources)
 (push 'rspec-mode el-get-sources)
 
-(defun iy/ruby-mode-init ()
+(defun iy-ruby-mode-init ()
   (rinari-minor-mode t)
   (hs-minor-mode t)
   (flyspell-prog-mode)
@@ -56,7 +56,7 @@
 
 (yas/advise-indent-function 'ruby-indent-line)
 
-(add-hook 'ruby-mode-hook 'iy/ruby-mode-init t)
+(add-hook 'ruby-mode-hook 'iy-ruby-mode-init t)
 
 (font-lock-add-keywords
  'ruby-mode

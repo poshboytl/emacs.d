@@ -37,7 +37,7 @@
                                    (substatement-label . 0)
                                    (label . 0)
                                    (statement-cont c-lineup-string-cont c-lineup-assignments +)
-                                   ;; (template-args-cont iy/c-lineup-template-args-cont c-lineup-template-args +)
+                                   ;; (template-args-cont iy-c-lineup-template-args-cont c-lineup-template-args +)
                                    (case-label . 0)
                                    (do-while-closure . 0)
                                    (else-clause . 0)

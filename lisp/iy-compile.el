@@ -31,13 +31,13 @@
 
 (add-hook 'ruby-mode-hook 'flymake-init-hook)
 
-(defun iy/next-flymake-error ()
+(defun iy-next-flymake-error ()
   (interactive)
   (flymake-goto-next-error)
   (flymake-display-err-menu-for-current-line))
 
-(define-key iy-map (kbd "`") 'iy/next-flymake-error)
-(define-key iy-map (kbd "M-`") 'iy/next-flymake-error)
+(define-key iy-map (kbd "`") 'iy-next-flymake-error)
+(define-key iy-map (kbd "M-`") 'iy-next-flymake-error)
 
 (defvar flymake-fringe-overlays nil)
 (make-variable-buffer-local 'flymake-fringe-overlays)
