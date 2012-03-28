@@ -107,7 +107,8 @@
 ;;{{{ Abbrev
 (custom-set-variables
  '(abbrev-mode t)
- '(mail-abbrevs-mode t))
+ '(mail-abbrevs-mode t)
+ '(abbrev-file-name iy-data-dir "abbrev_defs"))
 ;;}}}
 
 ;;{{{ Spell

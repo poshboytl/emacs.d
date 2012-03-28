@@ -74,8 +74,9 @@
   (url-retrieve
    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
    (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp)
+     (let (el-get-master-branch)
+       (end-of-buffer)
+       (eval-print-last-sexp))
      (iy-init))))
 
 (provide 'iy-init)

@@ -1,6 +1,6 @@
 (custom-set-variables
  '(auto-save-interval 50)
- '(auto-save-list-file-prefix (concat iy-data-dir "autosaves-"))
+ '(auto-save-list-file-prefix (concat iy-data-dir "autosaves/saves-"))
  '(auto-save-timeout 10)
  '(backup-directory-alist (list (cons "." (expand-file-name "~/.backup/emacs"))))
  '(delete-old-versions t)
