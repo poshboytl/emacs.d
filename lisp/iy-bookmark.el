@@ -46,7 +46,7 @@ LAXP non-nil means use lax completion."
                                                (or hist 'bookmark-history) default)))
         (if (and (string-equal "" str) default) default str)))))
 
-(push bookmark+ el-get-packages)
+(push 'bookmark+ el-get-packages)
 
 (add-hook 'bookmark-bmenu-mode-hook 'iy-bookmark-bmenu-mode-init)
 (defun iy-bookmark-bmenu-mode-init ()

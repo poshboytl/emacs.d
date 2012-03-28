@@ -10,10 +10,9 @@
  '(iy-go-to-char-key-backward 58))
 (require 'iy-go-to-char)
 
-(push 'tumble el-get-packages)
+(push 'tumbl el-get-packages)
 
-(autoload 'cheat "cheat" nil t)
-(push cheat el-get-packages)
+(push 'cheat el-get-packages)
 
 (push 'yaml-mode el-get-packages)
 (push 'haml-mode el-get-packages)

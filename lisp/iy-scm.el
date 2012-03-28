@@ -12,8 +12,6 @@
 (push 'git-emacs el-get-packages)
 (push 'magit el-get-packages)
 
-(autoload 'magit-status "magit" nil t)
-
 (defadvice git-describe-commit (around git-ll activate)
   (with-temp-buffer
     (call-process "git" nil t nil

@@ -22,7 +22,6 @@
 (make-variable-buffer-local 'ruby-block-mode)
 
 (push 'cucumber el-get-packages)
-(autoload 'feature-mode "feature-mode" nil t)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 (push 'rspec-mode el-get-packages)

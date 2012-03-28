@@ -9,10 +9,7 @@
 (add-hook 'font-lock-mode-hook 'iy-doxymacs-font-lock-mode-init)
 
 (push 'doxymacs-yard el-get-packages)
-(defun iy-el-get-after-doxymacs-yard ()
-  (autoload 'doxymacs-yard "doxymacs-yard" nil t)
-  (autoload 'doxymacs-yard-font-lock "doxymacs-yard" nil t)
-  (add-hook 'ruby-mode-hook 'doxymacs-yard)
-  (add-hook 'ruby-mode-hook 'doxymacs-yard-font-lock))
+(add-hook 'ruby-mode-hook 'doxymacs-yard)
+(add-hook 'ruby-mode-hook 'doxymacs-yard-font-lock)
 
 (provide 'iy-doxymacs-mode)

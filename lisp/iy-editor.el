@@ -221,7 +221,6 @@
 ;;{{{ Indention
 
 (push 'dtrt-indent el-get-packages)
-(autoload 'dtrt-indent-mode "dtrt-indent" nil t)
 
 ;;}}}
 
@@ -248,11 +247,10 @@
 
 ;;{{{ Mark
 
-(push hide-comnt el-get-packages)
-(push thingatpt+ el-get-packages)
-(push thing-cmds el-get-packages)
-
-(push expand-region el-get-packages)
+(push 'hide-comnt el-get-packages)
+(push 'thingatpt+ el-get-packages)
+(push 'thing-cmds el-get-packages)
+(push 'expand-region el-get-packages)
 
 ;;}}}
 

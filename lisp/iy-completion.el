@@ -43,7 +43,7 @@
   (ad-activate 'markdown-cycle)
   (ad-enable-advice 'markdown-cycle 'around 'yas/markdown-noconflict))
 
-(push 'yasnippet el-get-package)
+(push 'yasnippet el-get-packages)
 
 (defun yas/very-safe-expand ()
   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
