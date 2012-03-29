@@ -18,8 +18,14 @@
   'iy-filter-el-get-sources
 
   `(
+    (:name helm
+           :website "https://github.com/emacs-helm/helm"
+           :description "Emacs incremental completion and selection narrowing framework"
+           :type git
+           :url bundle
+           :build `(,(concat "make EMACS='" el-get-emacs " -Q -batch'"))
+           :autoloads "helm-config")
 
-    (:name anything :url bundle :lazy t)
     (:name pick-backup :type git :url bundle :lazy t)
     (:name deft :lazy t)
     (:name org-mode :url bundle :lazy t)

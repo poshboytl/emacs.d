@@ -433,6 +433,13 @@
  '(anything-ff-directory ((t (:inherit 'diredp-dir-priv))))
  '(anything-visible-mark ((t (:inherit ,region))))
  '(anything-candidate-number ((t (:inherit ,region))))
+ `(anything-selection ((t (:background ,zenburn-blue-4 :foreground ,zenburn-fg))))
+
+ ;; Helm
+ '(helm-ff-directory ((t (:inherit 'diredp-dir-priv))))
+ '(helm-visible-mark ((t (:inherit region))))
+ '(helm-candidate-number ((t (:inherit region))))
+ `(helm-selection ((t (:background ,zenburn-blue-4 :foreground ,zenburn-fg))))
 
  ;; sml modeline
  `(sml-modeline-end-face ((t (:foreground ,zenburn-blue-4 :background "#101211"))))

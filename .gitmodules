@@ -1,6 +1,3 @@
-[submodule "bundle/anything"]
-	path = bundle/anything
-	url = http://repo.or.cz/r/anything-config.git
 [submodule "bundle/pick-backup"]
 	path = bundle/pick-backup
 	url = git://github.com/emacsmirror/pick-backup.git
@@ -103,3 +100,6 @@
 [submodule "bundle/fuzzy"]
 	path = bundle/fuzzy
 	url = https://github.com/m2ym/fuzzy-el.git
+[submodule "bundle/helm"]
+	path = bundle/helm
+	url = git://github.com/emacs-helm/helm.git

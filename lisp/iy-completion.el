@@ -17,6 +17,7 @@
   (define-key ac-complete-mode-map (kbd "<return>") nil)
   (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-/") 'ac-expand)
+
   (setq ac-trigger-commands
         (append 
          '(backward-delete-char-untabify
