@@ -24,6 +24,9 @@
       (winring-restore-configuration prev))))
 
 (push 'switch-window el-get-packages)
+(global-set-key (kbd "C-0") 'delete-window)
+(global-set-key (kbd "C-1") 'delete-other-window)
+
 (push 'winring el-get-packages)
 
 (defun iy-el-get-after-winring ()
