@@ -39,7 +39,7 @@
 (defvar collapsed-face 'collapsed-face)
 
 (push 'folding el-get-packages)
-(defun el-get-after-folding ()
+(defun iy-el-get-after-folding ()
   (setq folding-check-folded-file-function 'iy-folding-check-folded)
   (folding-add-to-marks-list 'ruby-mode "# {{{" "# }}}" nil t)
   (define-key iy-map (kbd "i") folding-mode-prefix-map)
