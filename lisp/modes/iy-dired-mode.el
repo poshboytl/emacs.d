@@ -47,63 +47,66 @@
     ad-do-it
     (kill-buffer orig)))
 
-(require 'dired-x)
-
-(setq dired-omit-files
-      (rx (or (seq bol "#")
-              (seq bol ".")
-              (seq "~" eol)
-              (seq bol "svn" eol)
-              (seq bol "_region_")
-              (seq bol "prv" (* anything) ".log" eol)
-              (seq bol "cscope.files" eol)
-              (seq bol "GPATH" eol)
-              (seq bol "GRTAGS" eol)
-              (seq bol "GSYMS" eol)
-              (seq bol "GTAGS" eol)
-              )))
-(setq dired-omit-extensions
-      (append dired-omit-extensions
-              (list
-               ".auxbbl.make"
-               ".auxdvi.make"
-               ".aux.make"
-               ".fls"
-               ".ilg"
-               ".ind"
-               ".out"
-               ".out.make"
-               ".prv"
-               ".temp"
-               ".toc.make"
-               ".gpi.log"
-               ".ps.log"
-               ".pdf.log"
-               ".bak"
-               ".mp.log"
-               ".mp.make"
-               ".mpx"
-               ".sdb"
-               ".nav"
-               ".snm"
-               ".fdb_latexmk"
-               )))
-
 (autoload 'wdired-change-to-wdired-mode "wdired")
+
+(eval-after-load 'dired
+  '(progn
+     (require 'dired-x)
+     (setq dired-omit-files
+           (rx (or (seq bol "#")
+                   (seq bol ".")
+                   (seq "~" eol)
+                   (seq bol "svn" eol)
+                   (seq bol "_region_")
+                   (seq bol "prv" (* anything) ".log" eol)
+                   (seq bol "cscope.files" eol)
+                   (seq bol "GPATH" eol)
+                   (seq bol "GRTAGS" eol)
+                   (seq bol "GSYMS" eol)
+                   (seq bol "GTAGS" eol)
+                   )))
+     (setq dired-omit-extensions
+           (append dired-omit-extensions
+                   (list
+                    ".auxbbl.make"
+                    ".auxdvi.make"
+                    ".aux.make"
+                    ".fls"
+                    ".ilg"
+                    ".ind"
+                    ".out"
+                    ".out.make"
+                    ".prv"
+                    ".temp"
+                    ".toc.make"
+                    ".gpi.log"
+                    ".ps.log"
+                    ".pdf.log"
+                    ".bak"
+                    ".mp.log"
+                    ".mp.make"
+                    ".mpx"
+                    ".sdb"
+                    ".nav"
+                    ".snm"
+                    ".fdb_latexmk"
+                    )))
+
+     (define-key dired-mode-map "E" 'wdired-change-to-wdired-mode)
+     (define-key dired-mode-map
+       [menu-bar immediate wdired-change-to-wdired-mode]
+       '("Edit File Names" . wdired-change-to-wdired-mode))
+     (define-key dired-mode-map (kbd "`") 'dired-clean-directory)
+     (define-key dired-mode-map (kbd ".") 'dired-omit-mode)
+     (define-key dired-mode-map (kbd "M-o") 'other-window)
+     (define-key dired-mode-map (kbd "/") 'diredp-omit-marked)
+     (define-key dired-mode-map "(" 'dired-details-toggle)
+     (define-key dired-mode-map ")" 'dired-details-toggle)
+     (define-key dired-mode-map (kbd "M-<return>") 'dired-launch-command)))
+
 (defun iy-dired-mode-init ()
   (hl-line-mode)
-  (dired-omit-mode 1)
-  (define-key dired-mode-map "E" 'wdired-change-to-wdired-mode)
-  (define-key dired-mode-map
-    [menu-bar immediate wdired-change-to-wdired-mode]
-    '("Edit File Names" . wdired-change-to-wdired-mode))
-  (define-key dired-mode-map (kbd "`") 'dired-clean-directory)
-  (define-key dired-mode-map (kbd ".") 'dired-omit-mode)
-  (define-key dired-mode-map (kbd "M-o") 'other-window)
-  (define-key dired-mode-map (kbd "/") 'diredp-omit-marked)
-  (define-key dired-mode-map "(" 'dired-details-toggle)
-  (define-key dired-mode-map ")" 'dired-details-toggle)
-  (define-key dired-mode-map (kbd "M-<return>") 'dired-launch-command))
+  (dired-omit-mode 1))
 
 (add-hook 'dired-mode-hook 'iy-dired-mode-init)
 

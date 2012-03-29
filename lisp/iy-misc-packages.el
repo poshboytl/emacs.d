@@ -14,23 +14,6 @@
 
 (push 'cheat el-get-packages)
 
-(push 'yaml-mode el-get-packages)
-(push 'haml-mode el-get-packages)
-(push 'sass-mode el-get-packages)
-(push 'rainbow-mode el-get-packages)
-(add-hook 'sass-mode-hook 'rainbow-mode)
-(add-hook 'css-mode-hook 'rainbow-mode)
-
-(custom-set-variables
- '(coffee-tab-width 2))
-(push 'coffee-mode el-get-packages)
-
-(defun iy-coffee-mode-init ()
-  (local-set-key (kbd "<return>") 'coffee-newline-and-indent))
-(defadvice coffee-newline-and-indent (around fix-error-when-bob activate)
-  (if (bobp) (newline) ad-do-it))
-(add-hook 'coffee-mode-hook 'iy-coffee-mode-init)
-
 (unless (eq system-type 'darwin)
   (push 'haskell-mode el-get-packages))
 
@@ -43,5 +26,7 @@
 (push 'sml-modeline el-get-packages)
 (defun iy-el-get-after-sml-modeline ()
   (sml-modeline-mode))
+
+(push 'pos-tip el-get-packages)
 
 (provide 'iy-misc-packages)

@@ -32,12 +32,16 @@
 (when (file-exists-p secrets-file)
   (load secrets-file t t))
 
+(defun iy-init-load-module (feature)
+  (message "[iy-init] load %s" feature)
+  (require feature))
+
 (defun iy-init-load-modules (&optional before-modules after-modules)
   "Emacs load modules"
 
   (dolist (feature before-modules)
-    (message "[iy-init] load %s" feature)
-    (require feature))
+    (iy-init-load-module feature))
+
   ;; load modules in lisp directory
   (dolist (file (nconc (file-expand-wildcards (concat iy-lisp-dir "iy-*.el"))
                        (file-expand-wildcards (concat iy-lisp-dir "modes/iy-*.el"))))
@@ -46,11 +50,9 @@
       (if (memq (intern feature) iy-blacklist)
           (message "[iy-init] %s is in black list" feature)
         (unless (memq (intern feature) exclude)
-          (message "[iy-init] load %s" feature)
-          (require (intern feature))))))
+          (iy-init-load-module (intern feature))))))
   (dolist (feature after-modules)
-    (message "[iy-init] load %s" feature)
-    (require feature)))
+    (iy-init-load-module feature)))
 
 (defun iy-init ()
   "Emacs start entry"

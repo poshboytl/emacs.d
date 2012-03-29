@@ -11,9 +11,11 @@
 (defcustom iy-daemon-delete-frame-functions
   '(anything-c-adaptive-save-history
     bookmark-exit-hook-internal
+    ac-comphist-save
     ido-kill-emacs-hook
     org-clock-save
     org-id-locations-save
+    org-babel-remove-temporary-directory
     recentf-save-list
     semanticdb-kill-emacs-hook
     session-save-session

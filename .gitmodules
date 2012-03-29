@@ -13,9 +13,6 @@
 [submodule "bundle/bookmark+"]
 	path = bundle/bookmark+
 	url = git://github.com/doitian/bookmark-plus.git
-[submodule "bundle/nxhtml"]
-	path = bundle/nxhtml
-	url = git://github.com/emacsmirror/nxhtml.git
 [submodule "bundle/yasnippet"]
 	path = bundle/yasnippet
 	url = git://github.com/capitaomorte/yasnippet.git
@@ -25,12 +22,6 @@
 [submodule "bundle/markdown-mode"]
 	path = bundle/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
-[submodule "bundle/doxymacs"]
-	path = bundle/doxymacs
-	url = git://doxymacs.git.sourceforge.net/gitroot/doxymacs/doxymacs
-[submodule "bundle/doxymacs-yard"]
-	path = bundle/doxymacs-yard
-	url = git://github.com/doitian/doxymacs-yard.git
 [submodule "bundle/rinari"]
 	path = bundle/rinari
 	url = http://github.com/eschulte/rinari.git
@@ -97,3 +88,18 @@
 [submodule "bundle/alternative-files"]
 	path = bundle/alternative-files
 	url = git://github.com/doitian/alternative-files-el.git
+[submodule "bundle/zencoding-mode"]
+	path = bundle/zencoding-mode
+	url = git://github.com/rooney/zencoding.git
+[submodule "bundle/rhtml-mode"]
+	path = bundle/rhtml-mode
+	url = git://github.com/eschulte/rhtml.git
+[submodule "bundle/auto-complete"]
+	path = bundle/auto-complete
+	url = git://github.com/m2ym/auto-complete.git
+[submodule "bundle/popup"]
+	path = bundle/popup
+	url = git://github.com/m2ym/popup-el.git
+[submodule "bundle/fuzzy"]
+	path = bundle/fuzzy
+	url = https://github.com/m2ym/fuzzy-el.git

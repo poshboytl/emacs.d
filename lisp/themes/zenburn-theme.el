@@ -41,6 +41,7 @@
 (defvar zenburn-bg "#3f3f3f")
 (defvar zenburn-bg+1 "#4f4f4f")
 (defvar zenburn-bg+2 "#5f5f5f")
+(defvar zenburn-bg+3 "#6f6f6f")
 (defvar zenburn-yellow+1 "#dfdfbf")
 (defvar zenburn-yellow "#f0dfaf")
 (defvar zenburn-yellow-1 "#e0cf9f")
@@ -461,8 +462,18 @@
  `(ediff-fine-diff-C ((t (:background "#668b8b" :foreground ,zenburn-fg))))
 
  ;; ack
+ `(ack-separator ((t (:foreground ,zenburn-fg))))
+ `(ack-line ((t (:foreground ,zenburn-yellow))))
  '(ack-file ((t (:inherit 'diredp-dir-priv))))
  '(ack-match ((t (:inherit 'show-paren-match))))
+
+ ;; auto-complete
+ `(ac-candidate-face ((t (:background ,zenburn-bg+3 :foreground "black"))))
+ `(ac-selection-face ((t (:background ,zenburn-blue-4 :foreground ,zenburn-fg))))
+ `(popup-tip-face ((t (:background ,zenburn-yellow-2 :foreground "black"))))
+ `(popup-scroll-bar-foreground-face ((t (:background ,zenburn-blue-5))))
+ `(popup-scroll-bar-background-face ((t (:background ,zenburn-bg-1))))
+ `(popup-isearch-match ((t (:background ,zenburn-bg :foreground ,zenburn-fg))))
 
  ;; whitespa ce
  `(whitespace-tab ((t (:foreground ,zenburn-bg+2))))
@@ -470,8 +481,47 @@
  `(whitespace-indentation ((t (:background "#2e3330" :foreground ,zenburn-bg+2))))
  `(whitespace-trailing ((t (:background "#2e3330" :foreground ,zenburn-bg+2))))
 
+ ;; zencoding
+ '(zencoding-preview-input  ((t (:inherit ,region))))
+
+ ;; eshell
+ `(eshell-prompt ((t (:foreground ,zenburn-yellow :weight bold))))
+ `(eshell-ls-archive ((t (:foreground ,zenburn-red-1 :weight bold))))
+ `(eshell-ls-backup ((t (:inherit font-lock-comment))))
+ `(eshell-ls-clutter ((t (:inherit font-lock-comment))))
+ `(eshell-ls-directory ((t (:foreground ,zenburn-blue+1 :weight bold))))
+ `(eshell-ls-executable ((t (:foreground ,zenburn-red+1 :weight bold))))
+ `(eshell-ls-unreadable ((t (:foreground ,zenburn-fg))))
+ `(eshell-ls-missing ((t (:inherit font-lock-warning))))
+ `(eshell-ls-product ((t (:inherit font-lock-doc))))
+ `(eshell-ls-special ((t (:foreground ,zenburn-yellow :weight bold))))
+ `(eshell-ls-symlink ((t (:foreground ,zenburn-cyan :weight bold))))
+
+ ;; erc
+ `(erc-action-face ((t (:inherit erc-default-face))))
+ `(erc-bold-face ((t (:weight bold))))
+ `(erc-current-nick-face ((t (:foreground ,zenburn-blue :weight bold))))
+ `(erc-dangerous-host-face ((t (:inherit font-lock-warning))))
+ `(erc-default-face ((t (:foreground ,zenburn-fg))))
+ `(erc-direct-msg-face ((t (:inherit erc-default))))
+ `(erc-error-face ((t (:inherit font-lock-warning))))
+ `(erc-fool-face ((t (:inherit erc-default))))
+ `(erc-highlight-face ((t (:inherit hover-highlight))))
+ `(erc-input-face ((t (:foreground ,zenburn-yellow))))
+ `(erc-keyword-face ((t (:foreground ,zenburn-blue :weight bold))))
+ `(erc-nick-default-face ((t (:foreground ,zenburn-yellow :weight bold))))
+ `(erc-my-nick-face ((t (:foreground ,zenburn-red :weigth bold))))
+ `(erc-nick-msg-face ((t (:inherit erc-default))))
+ `(erc-notice-face ((t (:foreground ,zenburn-green))))
+ `(erc-pal-face ((t (:foreground ,zenburn-orange :weight bold))))
+ `(erc-prompt-face ((t (:foreground ,zenburn-orange :background ,zenburn-bg :weight bold))))
+ `(erc-timestamp-face ((t (:foreground ,zenburn-green+1))))
+ `(erc-underline-face ((t (:underline t))))
+
  ;; misc
  `(eproject-mode-line-project-name-face ((t (:foreground ,zenburn-blue))))
+ `(tooltip ((t (:background ,zenburn-yellow-1 :foreground ,zenburn-bg+2))))
+
  )
 
 (provide-theme 'zenburn)

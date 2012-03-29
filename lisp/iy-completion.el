@@ -2,24 +2,39 @@
 
 ;;{{{ Autocomplate
 
-;; (push '(:name
-;;         auto-complete
-;;         :type http-tar
-;;         :options ("xjf")
-;;         :url "http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2"
-;;         :post-init iy-el-get-after-auto-complete)
-;;       el-get-sources)
+(push 'pos-tip el-get-packages)
+(push 'popup el-get-packages)
+(push 'fuzzy el-get-packages)
+(push 'auto-complete el-get-packages)
 
-;; (defun iy-el-get-after-auto-complete ()
-;;   (require 'auto-complete)
-;;   (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
-;;   (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
-;;   (require 'auto-complete-config)
-;;   (ac-config-default))
+(defun iy-el-get-after-auto-complete ()
+  (require 'auto-complete)
+  (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
+  (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
+  (require 'auto-complete-config)
 
-;; (custom-set-variables
-;;  '(ac-trigger-key "TAB")
-;;  '(ac-auto-start nil))
+  (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "M-/") 'ac-expand)
+  (setq ac-trigger-commands
+        (append 
+         '(backward-delete-char-untabify
+           delete-backward-char
+           autopair-backspace)
+         ac-trigger-commands))
+
+  (setq-default
+   ac-sources '(ac-source-yasnippet
+                ac-source-abbrev
+                ac-source-dictionary
+                ac-source-words-in-same-mode-buffers))
+  (ac-config-default))
+
+(custom-set-variables
+ '(ac-auto-start)
+ '(ac-trigger-key "M-/")
+ '(ac-use-menu-map t)
+ '(ac-comphist-file (expand-file-name (concat iy-data-dir "ac-comphist.dat")))
+ '(ac-use-quick-help nil))
 
 ;;}}}
 
@@ -34,26 +49,29 @@
 
 
 (defun iy-el-get-after-yasnippet ()
+  (add-to-list 'ac-modes 'markdown-mode)
+  (add-to-list 'ac-modes 'org-mode)
+
   (require 'dropdown-list nil t)
   (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
   (yas/initialize)
   (yas/load-snippet-dirs)
   (ad-activate 'ruby-indent-line)
-  (ad-enable-advice 'ruby-indent-line 'around 'yas/ruby-noconflict)
+  (ad-enable-advice 'ruby-indent-line 'around 'iy-tab-ruby-noconflict)
   (ad-activate 'markdown-cycle)
-  (ad-enable-advice 'markdown-cycle 'around 'yas/markdown-noconflict))
+  (ad-enable-advice 'markdown-cycle 'around 'iy-tab-markdown-noconflict))
 
 (push 'yasnippet el-get-packages)
 
 (defun yas/very-safe-expand ()
   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-(defun yas/org-noconflict ()
+(defun iy-tab-org-noconflict ()
   (set (make-variable-buffer-local 'yas/trigger-key) [tab])
   (add-to-list 'org-tab-first-hook 'yas/very-safe-expand)
   (define-key yas/keymap [tab] 'yas/next-field))
-(defadvice markdown-cycle (around yas/markdown-noconflict)
+(defadvice markdown-cycle (around iy-tab-markdown-noconflict)
   (unless (yas/very-safe-expand) ad-do-it))
-(defadvice ruby-indent-line (around yas/ruby-noconflict)
+(defadvice ruby-indent-line (around iy-tab-ruby-noconflict)
   (unless (yas/very-safe-expand) ad-do-it))
 
 (defun yas/ido-insert-snippets (&optional no-condition)

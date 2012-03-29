@@ -236,9 +236,10 @@
 (push 'highlight-symbol el-get-packages)
 (push 'highlight-parentheses el-get-packages)
 
-(add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
-(add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
-(add-hook 'ruby-mode-hook 'highlight-parentheses-mode)
+(defun iy-el-get-after-highlight-parentheses ()
+  (add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
+  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+  (add-hook 'ruby-mode-hook 'highlight-parentheses-mode))
 
 (push 'autopair el-get-packages)
 (setq autopair-blink nil)

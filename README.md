@@ -13,7 +13,7 @@ Install
 
 3. Secret settings can be added in `secrets.el`, e.g.
 
-       echo '(setq tumble-password "4E&$&2U9TKfTQ&ob")' >> secrets.el
+       echo '(setq tumble-password "xx")' >> secrets.el
 
 4. Start emacs
 

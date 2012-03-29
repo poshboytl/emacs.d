@@ -64,7 +64,7 @@
 (define-key iy-map (kbd "q f") 'iy-insert-file-name)
 (define-key iy-map (kbd "q b") 'jared/insert-file-or-buffer-name)
 
-;; (global-set-key (kbd "C-<return>") 'iy-next-line-and-open-it-if-not-empty)
+(global-set-key (kbd "M-<return>") 'iy-next-line-and-open-it-if-not-empty)
 
 (global-set-key (kbd "M-u") 'iy-dwim-underscore)
 (global-set-key (kbd "M-l") 'iy-dwim-dash)

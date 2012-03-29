@@ -31,6 +31,8 @@
 ;;; Customization
 (setq org-clock-persist-file
       (concat iy-data-dir "org-clock-save.el"))
+(setq org-id-locations-file
+      (concat iy-data-dir "org-id-locations.el"))
 
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
@@ -152,7 +154,7 @@
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
 
   (flyspell-mode 1)
-  (when (fboundp 'yas/org-noconflict) (yas/org-noconflict)))
+  (when (fboundp 'iy-tab-org-noconflict) (iy-tab-org-noconflict)))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
   ;; copy from org-faces.el

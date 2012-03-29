@@ -9,8 +9,14 @@
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 
+(push 'ruby-mode el-get-packages)
+
 (setq rinari-minor-mode-prefixes '(";"))
 (push 'rinari el-get-packages)
+
+(push 'rhtml-mode el-get-packages)
+(defun iy-el-get-after-rhtml-mode ()
+  (add-to-list 'auto-mode-alist '("\.eco$" . rhtml-mode)))
 
 (push 'ruby-electric el-get-packages)
 (autoload 'ruby-electric-mode "ruby-electric")
@@ -31,7 +37,9 @@
   (hs-minor-mode t)
   (flyspell-prog-mode)
   (ruby-electric-mode t)
+  (ruby-block-mode t)
   (turn-on-auto-fill)
+  (local-set-key (kbd "<return>") 'newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "C-h h") 'yari)
   (subword-mode)
@@ -39,6 +47,10 @@
   )
 
 (add-hook 'ruby-mode-hook 'iy-ruby-mode-init t)
+
+(custom-set-variables
+ '(ruby-block-highlight-toggle 'overlay)
+ '(ruby-block-highlight-face 'show-paren-match-face))
 
 (font-lock-add-keywords
  'ruby-mode
