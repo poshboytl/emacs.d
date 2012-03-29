@@ -12,7 +12,6 @@
     (load "cl-seq")))
 (require 'iy-dep)
 
-(add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path (concat iy-lisp-dir "modes"))
 (add-to-list 'load-path iy-el-get-dir)
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))

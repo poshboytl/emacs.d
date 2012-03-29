@@ -10,6 +10,7 @@
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 
 (push 'ruby-mode el-get-packages)
+(push 'ruby-electric el-get-packages)
 
 (setq rinari-minor-mode-prefixes '(";"))
 (push 'rinari el-get-packages)
@@ -17,9 +18,6 @@
 (push 'rhtml-mode el-get-packages)
 (defun iy-el-get-after-rhtml-mode ()
   (add-to-list 'auto-mode-alist '("\.eco$" . rhtml-mode)))
-
-(push 'ruby-electric el-get-packages)
-(autoload 'ruby-electric-mode "ruby-electric")
 
 (push 'yari el-get-packages)
 (defalias 'ri 'yari)
@@ -36,13 +34,15 @@
   (rinari-minor-mode t)
   (hs-minor-mode t)
   (flyspell-prog-mode)
-  (ruby-electric-mode t)
+  (autopair-mode t)
   (ruby-block-mode t)
   (turn-on-auto-fill)
   (local-set-key (kbd "<return>") 'newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "C-h h") 'yari)
   (subword-mode)
+
+  (setq autopair-extra-pairs '(:code ((?` . ?`))))
   ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
   )
 
@@ -50,7 +50,8 @@
 
 (custom-set-variables
  '(ruby-block-highlight-toggle 'overlay)
- '(ruby-block-highlight-face 'show-paren-match-face))
+ '(ruby-block-highlight-face 'show-paren-match-face)
+ '(ruby-electric-expand-delimiters-list '(?\|)))
 
 (font-lock-add-keywords
  'ruby-mode

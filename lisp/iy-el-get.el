@@ -50,8 +50,6 @@
     (:name dired+)
     (:name dired-details)
     (:name dired-details+ :features dired-details+ :type emacswiki)
-    ;; (:name ruby-mode)
-    ;; (:name ruby-electric)
     (:name rinari
            :type git
            :url bundle
