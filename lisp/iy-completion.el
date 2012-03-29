@@ -13,6 +13,8 @@
   (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
   (require 'auto-complete-config)
 
+  (define-key ac-complete-mode-map (kbd "RET") nil)
+  (define-key ac-complete-mode-map (kbd "<return>") nil)
   (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-/") 'ac-expand)
   (setq ac-trigger-commands

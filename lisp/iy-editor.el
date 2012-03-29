@@ -38,6 +38,32 @@
 (defface collapsed-face '((t (:background "#e0cf9f" :foreground "#5f5f5f"))) "Collapsed Overlay")
 (defvar collapsed-face 'collapsed-face)
 
+
+(defun iy-folding-open-fold (&optional noerror)
+  (let ((data (folding-show-current-entry noerror t)))
+    (and data
+         (progn
+           (when folding-narrow-by-default
+             (setq folding-stack
+                   (if folding-stack
+                       (cons (cons (point-min-marker)
+                                   (point-max-marker))
+                             folding-stack)
+                     '(folded)))
+             (folding-set-mode-line))
+           (folding-narrow-to-region (car data) (nth 1 data))))))
+
+(defun iy-folding-shift-in (&optional noerror)
+  (interactive)
+  (let ((goal (point)))
+    (while (folding-skip-ellipsis-backward)
+      (beginning-of-line)
+      (iy-folding-open-fold noerror)
+      (goto-char goal))
+    (if folding-narrow-by-default
+        (iy-folding-open-fold noerror)
+      (widen))))
+
 (push 'folding el-get-packages)
 (defun iy-el-get-after-folding ()
   (setq folding-check-folded-file-function 'iy-folding-check-folded)
@@ -51,30 +77,7 @@
   (define-key folding-mode-prefix-map (kbd "k") 'folding-previous-visible-heading)
   (define-key folding-mode-prefix-map (kbd "p") 'folding-previous-visible-heading)
 
-  (defun folding-shift-in (&optional noerror)
-    (interactive)
-    (labels
-        ((open-fold nil
-                    (let ((data (folding-show-current-entry noerror t)))
-                      (and data
-                           (progn
-                             (when folding-narrow-by-default
-                               (setq folding-stack
-                                     (if folding-stack
-                                         (cons (cons (point-min-marker)
-                                                     (point-max-marker))
-                                               folding-stack)
-                                       '(folded)))
-                               (folding-set-mode-line))
-                             (folding-narrow-to-region (car data) (nth 1 data)))))))
-      (let ((goal (point)))
-        (while (folding-skip-ellipsis-backward)
-          (beginning-of-line)
-          (open-fold)
-          (goto-char goal))
-        (if folding-narrow-by-default
-            (open-fold)
-          (widen)))))
+  (defalias 'folding-shift-in 'iy-folding-shift-in)
 
   (defun folding-font-lock-support ()
     "Add font lock support."
