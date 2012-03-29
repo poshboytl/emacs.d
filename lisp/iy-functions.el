@@ -327,4 +327,38 @@ Calling this command 3 times will always result in no whitespaces around cursor.
         (isearch-forward regexp-p no-recursive-edit)))))
 ;;}}}
 
+;;{{{ eshell
+
+;; hide -> show -> full screen -> hide
+;; inactive -> switch -> full screen -> hide
+(defun iy-eshell-toggle ()
+  (interactive)
+  (let ((eshell-buffer (get-buffer "*eshell*")))
+    (if (eq (current-buffer) eshell-buffer)
+        (if (eq (length (window-list)) 1)
+            ;; full screen
+            (switch-to-buffer (other-buffer))
+          ;; active, go to full screen
+          (delete-other-windows))
+
+      (unless eshell-buffer
+        (save-window-excursion
+          (setq eshll-buffer (eshell))))
+      (switch-to-buffer-other-window eshell-buffer))))
+
+(defun iy-eshell-here ()
+  (interactive)
+  (let ((dir default-directory)
+        (eshell-buffer
+         (or
+          (get-buffer "*eshell*")
+          (save-window-excursion (eshell)))))
+    (unless (eq (current-buffer) eshell-buffer)
+      (switch-to-buffer-other-window eshell-buffer)
+      (goto-char (point-max))
+      (insert (format "cd '%s'" dir))
+      (eshell-send-input))))
+
+;;}}}
+
 (provide 'iy-functions)

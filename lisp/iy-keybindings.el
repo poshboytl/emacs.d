@@ -220,6 +220,9 @@
 (setq repeat-on-final-keystroke "z")
 (global-set-key (kbd "C-x C-o") 'shrink-whitespaces)
 
+(define-key iy-map (kbd "e") 'iy-eshell-toggle)
+(define-key iy-map (kbd "E") 'iy-eshell-here)
+
 ;;}}}
 
 (provide 'iy-keybindings)
