@@ -10,6 +10,7 @@
 (push 'helm el-get-packages)
 
 (defun iy-el-get-after-helm ()
+  (require 'helm-mode)
   (require 'helm-match-plugin)
   (require 'helm-buffers)
   (require 'helm-files)

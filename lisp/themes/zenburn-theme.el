@@ -440,6 +440,9 @@
  '(helm-visible-mark ((t (:inherit region))))
  '(helm-candidate-number ((t (:inherit region))))
  `(helm-selection ((t (:background ,zenburn-blue-4 :foreground ,zenburn-fg))))
+ '(helm-grep-file ((t (:inherit diredp-dir-priv))))
+ `(helm-grep-match ((t (:foreground ,zenburn-fg :background "#506070"))))
+ `(helm-grep-lineno ((t (:foreground ,zenburn-yellow))))
 
  ;; sml modeline
  `(sml-modeline-end-face ((t (:foreground ,zenburn-blue-4 :background "#101211"))))
@@ -480,7 +483,7 @@
  `(popup-tip-face ((t (:background ,zenburn-yellow-2 :foreground "black"))))
  `(popup-scroll-bar-foreground-face ((t (:background ,zenburn-blue-5))))
  `(popup-scroll-bar-background-face ((t (:background ,zenburn-bg-1))))
- `(popup-isearch-match ((t (:background ,zenburn-bg :foreground ,zenburn-fg))))
+ `(popup-isearch-match ((t (:foreground ,zenburn-fg :background "#506070"))))
 
  ;; whitespa ce
  `(whitespace-tab ((t (:foreground ,zenburn-bg+2))))
