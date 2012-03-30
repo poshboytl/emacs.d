@@ -10,6 +10,8 @@
  '(enable-recursive-minibuffers t)
  '(minibuffer-depth-indicate-mode t)
 
+ '(delete-by-moving-to-trash t)
+
  '(mouse-yank-at-point t)
  '(x-select-enable-clipboard t)
  '(browse-url-browser-function (quote w3m-browse-url))

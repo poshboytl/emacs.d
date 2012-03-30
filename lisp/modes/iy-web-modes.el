@@ -10,15 +10,13 @@
   (if (bobp) (newline) ad-do-it))
 
 (defun iy-coffee-mode-init ()
-  (local-set-key (kbd "<return>") 'coffee-newline-and-indent)
   (autopair-mode)
+  (subword-mode)
+  (local-set-key (kbd "<return>") 'coffee-newline-and-indent)
+  (local-set-key (kbd "C-j") 'newline)
   (setq autopair-handle-action-fns
         (list 'autopair-default-handle-action
               'autopair-python-triple-quote-action)))
-
-(defun iy-html-mode-init ()
-  (zencoding-mode t)
-  (local-set-key (kbd "<C-return>") 'zencoding-expand-line))
 
 (defun iy-js-mode-init ()
   (local-set-key (kbd "M-.") 'find-tag))
@@ -26,7 +24,7 @@
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 (add-hook 'coffee-mode-hook 'iy-coffee-mode-init)
-(add-hook 'sgml-mode-hook 'iy-html-mode-init)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
 (add-hook 'js-mode-hook 'iy-js-mode-init)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
 

@@ -14,6 +14,9 @@
 
 (setq rinari-minor-mode-prefixes '(";"))
 (push 'rinari el-get-packages)
+(defun iy-rinari-minor-mode-init ()
+  (setq yas/extra-modes (cons 'rails-mode yas/extra-modes)))
+(add-hook 'rinari-minor-mode-hook 'iy-rinari-minor-mode-init)
 
 (push 'rhtml-mode el-get-packages)
 (defun iy-el-get-after-rhtml-mode ()
@@ -31,20 +34,20 @@
 (push 'rspec-mode el-get-packages)
 
 (defun iy-ruby-mode-init ()
+  (local-set-key (kbd "<return>") 'reindent-then-newline-and-indent)
+  (local-set-key (kbd "C-j") 'newline)
+  (local-set-key (kbd "C-h h") 'yari)
+
   (rinari-minor-mode t)
   (hs-minor-mode t)
   (flyspell-prog-mode)
   (autopair-mode t)
   (ruby-block-mode t)
   (turn-on-auto-fill)
-  (local-set-key (kbd "<return>") 'newline-and-indent)
-  (local-set-key (kbd "C-j") 'newline)
-  (local-set-key (kbd "C-h h") 'yari)
   (subword-mode)
 
-  (setq autopair-extra-pairs '(:code ((?` . ?`))))
   ;;(remove-hook 'before-save-hook 'ruby-mode-set-encoding)
-  )
+  (setq autopair-extra-pairs '(:code ((?` . ?`)))))
 
 (add-hook 'ruby-mode-hook 'iy-ruby-mode-init t)
 

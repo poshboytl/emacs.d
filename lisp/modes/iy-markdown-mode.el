@@ -13,11 +13,11 @@
   (setq autopair-handle-action-fns
         (list 'autopair-default-handle-action
               'autopair-python-triple-quote-action))
+  (modify-syntax-entry ?` "\"" markdown-mode-syntax-table)
 
   (when (fboundp 'yas/markdown-noconflict)
     (yas/markdown-noconflict)))
 
 (add-hook 'markdown-mode-hook 'iy-markdown-mode-init)
-(modify-syntax-entry ?` "\"" markdown-mode-syntax-table)
 
 (provide 'iy-markdown-mode)

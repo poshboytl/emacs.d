@@ -123,7 +123,7 @@
     (:name zencoding-mode :url bundle :lazy t)
     (:name rhtml-mode :url bundle)
     (:name pos-tip :features pos-tip)
-    (:name popup :url bundle :lazy)
+    (:name popup :url bundle)
     (:name fuzzy :type git :url bundle :lazy t)
     (:name auto-complete :url bundle
            :post-init nil
