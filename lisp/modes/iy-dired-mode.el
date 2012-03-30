@@ -12,6 +12,14 @@
  '(dired-recursive-copies (quote top))
  '(dired-recursive-deletes (quote top)))
 
+(defun iy-el-get-after-dired+ ()
+  (defadvice dired-up-directory (around dired-up-directory-single-buffer activate)
+    "Replace current buffer if file is a directory."
+    (interactive)
+    (let ((orig (current-buffer)))
+      ad-do-it
+      (kill-buffer orig))))
+
 (defun dired-launch-command ()
   (interactive)
   (dired-do-async-shell-command
@@ -40,12 +48,6 @@
     ad-do-it
     (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
       (kill-buffer orig))))
-(defadvice dired-up-directory (around dired-up-directory-single-buffer activate)
-  "Replace current buffer if file is a directory."
-  (interactive)
-  (let ((orig (current-buffer)))
-    ad-do-it
-    (kill-buffer orig)))
 
 (autoload 'wdired-change-to-wdired-mode "wdired")
 

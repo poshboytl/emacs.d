@@ -152,9 +152,7 @@
   (define-key org-mode-map (kbd "C-c ,") 'org-cycle-agenda-files)
   (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view)
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
-
-  (flyspell-mode 1)
-  (when (fboundp 'iy-tab-org-noconflict) (iy-tab-org-noconflict)))
+  (flyspell-mode 1))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
   ;; copy from org-faces.el
