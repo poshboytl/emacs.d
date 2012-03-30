@@ -35,6 +35,9 @@
   (push 'org-mode ac-modes)
   (push 'coffee-mode ac-modes)
 
+  (define-key ac-mode-map (kbd "M-<tab>") 'auto-complete)
+
+  (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-expand)
   (define-key ac-complete-mode-map (kbd "RET") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "<return>") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-<return>") 'ac-complete)
@@ -50,6 +53,7 @@
 
   (setq-default
    ac-sources '(ac-source-yasnippet
+                ac-source-imenu
                 ac-source-abbrev
                 ac-source-dictionary
                 ac-source-words-in-same-mode-buffers))

@@ -67,6 +67,7 @@
          'helm-c-source-locate))
 
   (setq helm-enable-shortcuts 'prefix)
+  (define-key helm-map (kbd "M-s") 'helm-select-with-prefix-shortcut)
 
   (define-key helm-command-map (kbd "g") 'helm-do-grep)
   (define-key helm-command-map (kbd "o") 'helm-occur)

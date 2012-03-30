@@ -329,30 +329,29 @@ Calling this command 3 times will always result in no whitespaces around cursor.
 
 ;;{{{ eshell
 
+;; get or create eshell buffer with specified name
+(defun iy-named-eshell (&optional name)
+  (let ((eshell-buffer-name (or name eshell-buffer-name)))
+    (save-window-excursion (eshell))))
+
 ;; hide -> show -> full screen -> hide
 ;; inactive -> switch -> full screen -> hide
-(defun iy-eshell-toggle ()
+(defun iy-eshell-toggle (&optional name)
   (interactive)
-  (let ((eshell-buffer (get-buffer "*eshell*")))
+  (let* ((eshell-buffer (iy-named-eshell name)))
     (if (eq (current-buffer) eshell-buffer)
         (if (eq (length (window-list)) 1)
             ;; full screen
             (switch-to-buffer (other-buffer))
           ;; active, go to full screen
           (delete-other-windows))
-
-      (unless eshell-buffer
-        (save-window-excursion
-          (setq eshll-buffer (eshell))))
+      ;; activate the eshell buffer
       (switch-to-buffer-other-window eshell-buffer))))
 
-(defun iy-eshell-here ()
+(defun iy-eshell-here (&optional name)
   (interactive)
   (let ((dir default-directory)
-        (eshell-buffer
-         (or
-          (get-buffer "*eshell*")
-          (save-window-excursion (eshell)))))
+        (eshell-buffer (iy-named-eshell name)))
     (unless (eq (current-buffer) eshell-buffer)
       (switch-to-buffer-other-window eshell-buffer)
       (goto-char (point-max))

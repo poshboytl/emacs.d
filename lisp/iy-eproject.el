@@ -1,3 +1,5 @@
+(require 'iy-functions)
+
 (custom-set-variables
  '(eproject-completing-read-function (quote eproject--ido-completing-read)))
 
@@ -159,10 +161,22 @@ to select from, open file when selected."
                       "ls-files" "--full-name" "-c" "-o" "--exclude-standard" "-z")
         (split-string (buffer-string) "\0"))))
 
+  (defun iy-eproject-eshell-toggle ()
+    (interactive)
+    (iy-eshell-toggle (ignore-errors (concat "*eshell*<" (eproject-name) ">"))))
+  (defun iy-eproject-eshell-here ()
+    (interactive)
+    (iy-eshell-here (ignore-errors (concat "*eshell*<" (eproject-name) ">"))))
+
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   (define-key iy-map (kbd "p o") 'iy-eproject-find-file-with-cache)
+  (define-key iy-map (kbd "p e") 'iy-eproject-eshell-toggle)
+  (define-key iy-map (kbd "p E") 'iy-eproject-eshell-here)
+
+  ;; generate TAGS, C-u to update
+  (define-key iy-map (kbd "p t") 'eproject-visit-tags-table)
 
   (defun eproject-root-safe ()
     (ignore-errors (eproject-root)))
