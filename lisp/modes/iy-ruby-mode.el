@@ -20,7 +20,10 @@
 
 (push 'rhtml-mode el-get-packages)
 (defun iy-el-get-after-rhtml-mode ()
-  (add-to-list 'auto-mode-alist '("\.eco$" . rhtml-mode)))
+  (add-to-list 'auto-mode-alist '("\.eco$" . rhtml-mode))
+
+  (add-to-list 'rhtml-in-erb-keywords
+               '("\\(\\b\\sw[_a-zA-Z0-9]*:\\)\\(?:\\s-\\|$\\)" . (1 font-lock-constant-face prepend))))
 
 (push 'yari el-get-packages)
 (defalias 'ri 'yari)
@@ -59,5 +62,6 @@
 (font-lock-add-keywords
  'ruby-mode
  '(("\\(\\b\\sw[_a-zA-Z0-9]*:\\)\\(?:\\s-\\|$\\)" (1 font-lock-constant-face))))
+
 
 (provide 'iy-ruby-mode)

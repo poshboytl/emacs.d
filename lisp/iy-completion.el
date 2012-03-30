@@ -130,8 +130,9 @@
       (iy-safe-ac-try-expand)
       ad-do-it))
 (defadvice ruby-indent-line (around iy-tab-ruby-noconflict)
-  (or (yas/very-safe-expand)
-      (iy-safe-ac-try-expand)
+  (or (when (called-interactively-p)
+          (or (yas/very-safe-expand)
+              (iy-safe-ac-try-expand)))
       ad-do-it))
 
 (defun yas/ido-insert-snippets (&optional no-condition)
