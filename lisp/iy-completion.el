@@ -1,86 +1,16 @@
 (require 'iy-dep)
 
-;;{{{ Autocomplate
-
 (push 'pos-tip el-get-packages)
 (push 'popup el-get-packages)
-(push 'fuzzy el-get-packages)
-(push 'auto-complete el-get-packages)
 
-(global-set-key (kbd "M-/") 'iy-safe-ac-try-expand)
-
-(defun iy-el-get-after-popup ()
-  (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
-  (define-key popup-menu-keymap (kbd "TAB") 'popup-next)
-  (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
-  (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
-  (define-key popup-menu-keymap (kbd "M-p") 'popup-previous))
-
-(defun iy-safe-ac-try-expand ()
-  (interactive)
-  (when (ac-trigger-command-p last-command)
-    (let ((before (point))
-          (ac-use-fuzzy nil))
-      (auto-complete)
-      (or (ac-menu-live-p)
-          (not (eq before (point)))))))
-
-(defun iy-el-get-after-auto-complete ()
-  (require 'auto-complete)
-  (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
-  (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
-  (require 'auto-complete-config)
-
-  (push 'markdown-mode ac-modes)
-  (push 'org-mode ac-modes)
-  (push 'coffee-mode ac-modes)
-
-  (define-key ac-mode-map (kbd "M-<tab>") 'auto-complete)
-
-  (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-expand)
-  (define-key ac-complete-mode-map (kbd "RET") 'ac-complete)
-  (define-key ac-complete-mode-map (kbd "<return>") 'ac-complete)
-  (define-key ac-complete-mode-map (kbd "M-<return>") 'ac-complete)
-  (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
-  (define-key ac-complete-mode-map (kbd "M-g") 'ac-stop)
-
-  (setq ac-trigger-commands
-        (append
-         '(backward-delete-char-untabify
-           delete-backward-char
-           autopair-backspace)
-         ac-trigger-commands))
-
-  (setq-default
-   ac-sources '(ac-source-yasnippet
-                ac-source-imenu
-                ac-source-abbrev
-                ac-source-dictionary
-                ac-source-words-in-same-mode-buffers))
-  (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
-  (global-auto-complete-mode t))
-
-(defun iy-ac-emacs-lisp-mode-setup ()
-  (setq ac-sources
-        '(
-          ac-source-yasnippet
-          ac-source-features
-          ac-source-functions
-          ac-source-variables
-          ac-source-symbols
-          ac-source-abbrev
-          ac-source-dictionary
-          ac-source-words-in-same-mode-buffers)))
-
-(custom-set-variables
- '(ac-use-fuzzy t)
- '(ac-trigger-key "TAB")
- '(ac-auto-start nil)
- '(ac-use-menu-map t)
- '(ac-show-menu nil)
- '(ac-comphist-file (expand-file-name (concat iy-data-dir "ac-comphist.dat")))
- '(ac-use-quick-help nil))
-
+;;{{{ Tab
+(defun iy-tab-noconflict ()
+  (let ((command (key-binding [tab])))
+    (local-unset-key [tab])
+    (local-set-key (kbd "TAB") command)))
+(add-hook 'ruby-mode-hook 'iy-ac-tab-noconflict)
+(add-hook 'markdown-mode-hook 'iy-ac-tab-noconflict)
+(add-hook 'org-mode-hook 'iy-ac-tab-noconflict)
 ;;}}}
 
 ;;{{{ Snippet
@@ -114,30 +44,9 @@
   (require 'dropdown-list nil t)
   (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
   (yas/initialize)
-  (yas/load-snippet-dirs)
-  (ad-activate 'ruby-indent-line)
-  (ad-enable-advice 'ruby-indent-line 'around 'iy-tab-ruby-noconflict)
-  (ad-activate 'markdown-cycle)
-  (ad-enable-advice 'markdown-cycle 'around 'iy-tab-markdown-noconflict))
+  (yas/load-snippet-dirs))
 
 (push 'yasnippet el-get-packages)
-
-(defun yas/very-safe-expand ()
-  (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-(defun iy-tab-org-noconflict ()
-  (set (make-variable-buffer-local 'yas/trigger-key) [tab])
-  (add-to-list 'org-tab-first-hook 'iy-safe-ac-try-expand)
-  (add-to-list 'org-tab-first-hook 'yas/very-safe-expand)
-  (define-key yas/keymap [tab] 'yas/next-field))
-(defadvice markdown-cycle (around iy-tab-markdown-noconflict)
-  (or (yas/very-safe-expand)
-      (iy-safe-ac-try-expand)
-      ad-do-it))
-(defadvice ruby-indent-line (around iy-tab-ruby-noconflict)
-  (or (when (called-interactively-p)
-          (or (yas/very-safe-expand)
-              (iy-safe-ac-try-expand)))
-      ad-do-it))
 
 (defun yas/ido-insert-snippets (&optional no-condition)
   (interactive "P")
@@ -169,6 +78,93 @@
 
 ;;}}}
 
+;;{{{ Autocomplate
+
+(push 'fuzzy el-get-packages)
+(push 'auto-complete el-get-packages)
+
+(defun iy-el-get-after-popup ()
+  (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+  (define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+  (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+  (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+  (define-key popup-menu-keymap (kbd "M-p") 'popup-previous))
+
+(defun iy-el-get-after-auto-complete ()
+  (require 'auto-complete)
+  (add-to-list 'ac-dictionary-directories (concat iy-el-get-dir "auto-complete/dict"))
+  (add-to-list 'ac-dictionary-directories (concat iy-config-dir "ac-dict"))
+  (require 'auto-complete-config)
+
+  (push 'markdown-mode ac-modes)
+  (push 'org-mode ac-modes)
+  (push 'coffee-mode ac-modes)
+
+  (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-expand)
+  (define-key ac-complete-mode-map (kbd "RET") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "<return>") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "M-<return>") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "M-g") 'ac-stop)
+
+  (setq ac-trigger-commands
+        (append
+         '(backward-delete-char-untabify
+           delete-backward-char
+           autopair-backspace)
+         ac-trigger-commands))
+
+  (setq-default
+   ac-sources '(ac-source-yasnippet
+                ac-source-imenu
+                ac-source-abbrev
+                ac-source-dictionary
+                ac-source-words-in-same-mode-buffers))
+
+  (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
+  (add-hook 'ruby-mode-hook 'iy-ac-ruby-mode-setup)
+
+  (global-auto-complete-mode t)
+
+  ;; temporarily disable ac when prefix is C-u, use C-u C-u to force ac
+  (defadvice ac-trigger-key-command (around disable-by-negative-prefix (&optional force) activate)
+    (interactive "P")
+    (if (eq (prefix-numeric-value force) 4)
+        (let* ((auto-complete-mode nil)
+               (keys (this-command-keys-vector))
+               ;; hardcode to get the last key, works for single keystroke trigger key.
+               (key (if keys (vector (elt keys (1- (length keys))))))
+               (command (if key (key-binding key))))
+          (when (and command
+                     (not (eq command 'ac-trigger-key-command)))
+            (call-interactively command)))
+      ad-do-it)))
+
+(defun iy-ac-emacs-lisp-mode-setup ()
+  (setq ac-sources
+        '(
+          ac-source-yasnippet
+          ac-source-features
+          ac-source-functions
+          ac-source-variables
+          ac-source-symbols
+          ac-source-abbrev
+          ac-source-dictionary
+          ac-source-words-in-same-mode-buffers)))
+(defun iy-ac-ruby-mode-setup ()
+  (set (make-variable-buffer-local 'ac-stop-words) '("end")))
+
+(custom-set-variables
+ '(ac-use-fuzzy t)
+ '(ac-trigger-key "TAB")
+ '(ac-auto-start nil)
+ '(ac-use-menu-map t)
+ '(ac-show-menu nil)
+ '(ac-comphist-file (expand-file-name (concat iy-data-dir "ac-comphist.dat")))
+ '(ac-use-quick-help nil))
+
+;;}}}
+
 ;;{{{ Hippie Exapnd
 
 (setq hippie-expand-try-functions-list
@@ -195,9 +191,6 @@
 ;;}}}
 
 ;;{{{ Spell
-
-;; fix flyspell
-(defadvice called-interactively-p (before iy-fix-interactively-p (&optional arg) activate))
 
 (custom-set-variables
  '(flyspell-use-meta-tab nil))
