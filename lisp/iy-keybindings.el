@@ -8,7 +8,7 @@
 
 ;;{{{ Move
 
-(global-set-key (kbd "M-g") 'goto-line)
+;; (global-set-key (kbd "M-g") 'goto-line)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
 (global-set-key (kbd "M-B") (lambda (arg)
