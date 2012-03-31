@@ -69,7 +69,7 @@
 	url = https://github.com/emacsmirror/winring
 [submodule "bundle/emacs-w3m"]
 	path = bundle/emacs-w3m
-	url = git://github.com:/doitian/emacs-w3m.git
+	url = git://github.com/doitian/emacs-w3m.git
 [submodule "bundle/git-emacs"]
 	path = bundle/git-emacs
 	url = git://github.com/tsgates/git-emacs.git
