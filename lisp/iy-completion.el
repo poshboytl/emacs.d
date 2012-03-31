@@ -8,9 +8,9 @@
   (let ((command (key-binding [tab])))
     (local-unset-key [tab])
     (local-set-key (kbd "TAB") command)))
-(add-hook 'ruby-mode-hook 'iy-ac-tab-noconflict)
-(add-hook 'markdown-mode-hook 'iy-ac-tab-noconflict)
-(add-hook 'org-mode-hook 'iy-ac-tab-noconflict)
+(add-hook 'ruby-mode-hook 'iy-tab-noconflict)
+(add-hook 'markdown-mode-hook 'iy-tab-noconflict)
+(add-hook 'org-mode-hook 'iy-tab-noconflict)
 ;;}}}
 
 ;;{{{ Snippet

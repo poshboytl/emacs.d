@@ -62,7 +62,7 @@
 
   (iy-init-load-modules '(iy-theme iy-pim) '(iy-el-get))
 
-  (el-get 'sync (nreverse el-get-packages)))
+  (el-get 'sync (reverse el-get-packages)))
 
 (if (require 'el-get nil t)
     (iy-init)

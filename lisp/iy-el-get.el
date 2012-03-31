@@ -23,12 +23,13 @@
            :description "Emacs incremental completion and selection narrowing framework"
            :type git
            :url bundle
-           :build `(,(concat "make EMACS='" el-get-emacs " -Q -batch'"))
+           :depends (org-mode emacs-w3m)
+           :build `(,(concat "make LOADPATH='-L . -L ../org-mode/lisp' EMACS='" el-get-emacs " -Q -batch'"))
            :autoloads "helm-config")
 
     (:name pick-backup :type git :url bundle :lazy t)
     (:name deft :lazy t)
-    (:name org-mode :url bundle :lazy t)
+    (:name org-mode :url bundle)
     (:name eproject :type git :url bundle :features eproject)
     (:name bookmark+ :url bundle)
     (:name nxhtml :url bundle)
@@ -40,7 +41,13 @@
            :type git
            :url bundle
            :lazy t
-           :build `(,(concat "./configure --with-lispdir=`pwd` --with-emacs=" el-get-emacs) "make MAKEINFO=: clean all")
+           :build `(,(concat "./configure --with-lispdir=`pwd` --with-emacs=" el-get-emacs)
+                    "make MAKEINFO=: clean all")
+           :build/darwin `(,(concat
+                             "./configure --with-lispdir=`pwd` "
+                             "--with-texmf-dir=/usr/local/texlive/texmf-local "
+                             "--with-emacs=" el-get-emacs)
+                           "make MAKEINFO=: clean all")
            :load-path ("." "preview")
            :load  ("tex-site.el" "preview/preview-latex.el")
            :info "doc")
