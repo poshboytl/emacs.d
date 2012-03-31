@@ -9,6 +9,7 @@
 ;;{{{ Move
 
 ;; (global-set-key (kbd "M-g") 'goto-line)
+(define-key goto-map (kbd "w") 'move-to-window-line-top-bottom)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
 (global-set-key (kbd "M-B") (lambda (arg)
@@ -26,6 +27,8 @@
 (define-key iy-map (kbd "8") 'isearch-forward-at-point)
 (define-key iy-map (kbd "C-s") 'isearch-forward-at-point)
 (define-key iy-map (kbd "C-r") 'isearch-forward-at-point)
+
+(global-set-key (kbd "C-8") 'pop-tag-mark)
 
 (global-set-key [end] 'end-of-line)
 (global-set-key [home] 'beginning-of-line)
@@ -52,7 +55,6 @@
 (define-key iy-map (kbd "D") 'iy-zap-back-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "M-r") 'backward-kill-word)
-(global-set-key (kbd "C-M-g") 'move-to-window-line-top-bottom)
 
 ;;}}}
 
