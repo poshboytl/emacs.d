@@ -129,16 +129,31 @@
   ;; temporarily disable ac when prefix is C-u, use C-u C-u to force ac
   (defadvice ac-trigger-key-command (around disable-by-negative-prefix (&optional force) activate)
     (interactive "P")
-    (if (eq (prefix-numeric-value force) 4)
-        (let* ((auto-complete-mode nil)
-               (keys (this-command-keys-vector))
-               ;; hardcode to get the last key, works for single keystroke trigger key.
-               (key (if keys (vector (elt keys (1- (length keys))))))
-               (command (if key (key-binding key))))
-          (when (and command
-                     (not (eq command 'ac-trigger-key-command)))
-            (call-interactively command)))
-      ad-do-it)))
+    (let* ((ac-fuzzy-enable nil) ; cannot test whether ac expanded when fuzzy enabled, and it is slow
+           (before-point (point))
+           (auto-complete-mode nil)
+           (keys (this-command-keys-vector))
+           ;; hardcode to get the last key, works for single keystroke trigger key.
+           (key (if keys (vector (elt keys (1- (length keys))))))
+           (command (if key (key-binding key)))
+           ac-expanded)
+      ;; skip ac if prefix is C-u
+      (if (eq (prefix-numeric-value force) 4)
+          (setq ac-expanded nil)
+        ;; no ac if last-command not in trigger commands,
+        ;; but C-u C-u force ac
+        (if (or force (ac-trigger-command-p last-command))
+            (let ((auto-complete-mode t))
+              (auto-complete)
+              ;; expanded if menu is live or point has moved
+              (setq ac-expanded (or (ac-menu-live-p)
+                                    (not (equal (point) before-point)))))
+          (setq ac-expanded nil)))
+
+      (when (and (not ac-expanded)
+                 command
+                 (not (eq command 'ac-trigger-key-command)))
+            (call-interactively command)))))
 
 (defun iy-ac-emacs-lisp-mode-setup ()
   (setq ac-sources
