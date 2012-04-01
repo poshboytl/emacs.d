@@ -33,6 +33,10 @@
 (defalias 'mocc 'multi-occur)
 (defalias 'aa 'anything-apropos)
 (defalias 'wc 'whitespace-cleanup)
+(defalias 'flb 'add-file-local-variable)
+(defalias 'fll 'add-file-local-variable-prop-line)
+(defalias 'fl 'add-file-local-variable-prop-line)
+(defalias 'dl 'add-dir-local-variable)
 
 (fset 'man 'woman)
 (defun backup-dired ()
