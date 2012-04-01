@@ -136,6 +136,7 @@
            :post-init nil
            :build `(,(concat el-get-emacs " -Q -L . -L ../popup -batch -f batch-byte-compile auto-complete.el auto-complete-config.el")))
     (:name diminish)
+    (:name sequential-command :type emacswiki :features sequential-command)
 
     )))
 

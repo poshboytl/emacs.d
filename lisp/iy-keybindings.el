@@ -71,9 +71,19 @@
 (global-set-key (kbd "M-u") 'iy-dwim-underscore)
 (global-set-key (kbd "M-l") 'iy-dwim-dash)
 (global-set-key (kbd "M-c") 'iy-dwim-capitalize)
-(global-set-key (kbd "M-U") 'iy-dwim-upcase)
-(global-set-key (kbd "M-L") 'iy-dwim-downcase)
-(global-set-key (kbd "M-C") 'iy-dwim-capitalize)
+
+(defun seq-upcase-backward-word ()
+  (interactive)
+  (upcase-word (- (1+ (seq-count)))))
+(defun seq-capitalize-backward-word ()
+  (interactive)
+  (capitalize-word (- (1+ (seq-count)))))
+(defun seq-downcase-backward-word ()
+  (interactive)
+  (downcase-word (- (1+ (seq-count)))))
+(global-set-key (kbd "M-U") 'seq-upcase-backward-word)
+(global-set-key (kbd "M-L") 'seq-downcase-backward-word)
+(global-set-key (kbd "M-C") 'seq-capitalize-backward-word)
 
 ;;}}}
 
