@@ -129,7 +129,7 @@ ROOT defaults to the current buffer's project-root."
   (defun* iy-eproject-list-project-files-with-cache (&optional (root (eproject-root)) force)
     (let ((files (eproject-attribute :project-files-cache root)))
       (if (and files (not force)) files
-        (eproject-set-attribute :project-files-cache (eproject-list-project-files-relative) root))))
+        (eproject-set-attribute :project-files-cache (eproject-list-project-files) root))))
 
   (defun iy-eproject-find-file-with-cache (&optional force)
     "Present the user with a list of files in the current project.
@@ -159,7 +159,8 @@ to select from, open file when selected."
       (with-temp-buffer
         (call-process "git" nil (list (current-buffer) nil) nil
                       "ls-files" "--full-name" "-c" "-o" "--exclude-standard" "-z")
-        (split-string (buffer-string) "\0"))))
+        (mapcar 'expand-file-name
+                (split-string (buffer-string) "\0")))))
 
   (defun iy-eproject-eshell-toggle ()
     (interactive)

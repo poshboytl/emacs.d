@@ -27,20 +27,22 @@
 
   (defvar helm-c-source-eproject-projects
     '((name . "Projects")
-      (type . file)
-      (candidates . eproject-projects)))
+      (candidates . (lambda ()
+                      (mapcar 'cdr (eproject-projects))))
+      (real-to-display . (lambda (e)
+                           (file-name-nondirectory (directory-file-name e))))
+      (type . file)))
 
   (defvar helm-c-source-eproject-files-in-project
      '((name . "Project Files")
        (delayed)
        (candidate-number-limit . 9999)
        (requires-pattern . 3)
+       (real-to-display . (lambda (e) 
+                            (file-relative-name e eproject-root)))
        (candidates . (lambda ()
                        (with-helm-current-buffer
-                         (mapcar
-                          (lambda (f)
-                            (cons f (expand-file-name f eproject-root)))
-                          (iy-eproject-list-project-files-with-cache eproject-root)))))
+                         (iy-eproject-list-project-files-with-cache eproject-root))))
        (type . file)))
 
   (defun helm-c-eproject-projects ()
@@ -52,7 +54,7 @@
     (helm-other-buffer 'helm-c-source-eproject-files-in-project "*helm files in project*"))
 
   ;;; Sources
-  (setq helm-sources
+  (setq helm-for-files-prefered-list
         (list
          'helm-c-source-ffap-line
          'helm-c-source-ffap-guesser
@@ -82,8 +84,8 @@
 (autoload 'helm-command-prefix "helm-config" nil nil 'keymap)
 
 ;;; Shortcuts
-(global-set-key (kbd "M-X") 'helm-at-point)
-(define-key iy-map (kbd "M-s") 'helm-at-point)
+(global-set-key (kbd "M-X") 'helm-for-files)
+(define-key iy-map (kbd "M-s") 'helm-for-files)
 (define-key iy-map (kbd "s") 'helm-command-prefix)
 (define-key iy-map (kbd "M-x") 'helm-M-x)
 
