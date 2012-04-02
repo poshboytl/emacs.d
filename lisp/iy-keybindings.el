@@ -8,8 +8,8 @@
 
 ;;{{{ Move
 
-;; (global-set-key (kbd "M-g") 'goto-line)
-(define-key goto-map (kbd "w") 'move-to-window-line-top-bottom)
+(global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "M-G") 'move-to-window-line-top-bottom)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
 (global-set-key (kbd "M-B") (lambda (arg)
