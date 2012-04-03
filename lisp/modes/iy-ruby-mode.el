@@ -10,7 +10,6 @@
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 
 (push 'ruby-mode el-get-packages)
-(push 'ruby-electric el-get-packages)
 
 (setq rinari-minor-mode-prefixes '(";"))
 (push 'rinari el-get-packages)
@@ -54,11 +53,6 @@
   (setq autopair-extra-pairs '(:code ((?` . ?`)))))
 
 (add-hook 'ruby-mode-hook 'iy-ruby-mode-init t)
-
-(custom-set-variables
- '(ruby-block-highlight-toggle 'overlay)
- '(ruby-block-highlight-face 'show-paren-match-face)
- '(ruby-electric-expand-delimiters-list '(?\|)))
 
 (font-lock-add-keywords
  'ruby-mode

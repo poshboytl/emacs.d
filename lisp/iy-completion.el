@@ -123,6 +123,7 @@
 
   (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
   (add-hook 'ruby-mode-hook 'iy-ac-ruby-mode-setup)
+  (add-hook 'sh-mode-hook 'iy-ac-sh-mode-setup)
 
   (global-auto-complete-mode t)
 
@@ -168,6 +169,9 @@
           ac-source-words-in-same-mode-buffers)))
 (defun iy-ac-ruby-mode-setup ()
   (set (make-variable-buffer-local 'ac-stop-words) '("end")))
+
+(defun iy-ac-sh-mode-setup ()
+  (set (make-variable-buffer-local 'ac-stop-words) '("fi" "done" "esac")))
 
 (custom-set-variables
  '(ac-use-fuzzy t)

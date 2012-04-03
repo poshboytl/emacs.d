@@ -32,6 +32,11 @@
   (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
   (eval-after-load "abbrev" '(diminish 'abbrev-mode))
   (eval-after-load "whitespace" '(diminish 'global-whitespace-mode))
-  (eval-after-load "hideshow" '(diminish 'hs-minor-mode)))
+  (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
+  (eval-after-load "ruby-block" '(diminish 'ruby-block-mode))
+  (eval-after-load "rinari" '(diminish 'rinari-minor-mode " R"))
+  (eval-after-load "flyspell" '(diminish 'flyspell-mode " fs"))
+  (eval-after-load "flymake" '(diminish 'flymake-mode " fm"))
+  (diminish 'auto-fill-function " F"))
 
 (provide 'iy-theme)
