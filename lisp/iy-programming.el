@@ -65,6 +65,8 @@
 (eval-when-compile (require 'compile))
 
 (define-compilation-mode recoll-mode "recoll" "recoll search" nil)
+(define-key recoll-mode-map "n" 'compilation-next-error)
+(define-key recoll-mode-map "p" 'compilation-previous-error)
 
 (defun recoll-parse-results ()
   "Count the matches printed by `recoll' in the current buffer."
