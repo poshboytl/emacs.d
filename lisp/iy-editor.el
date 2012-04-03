@@ -227,6 +227,22 @@
 
 ;;}}}
 
+;;{{{ Electric
+
+(push 'autopair el-get-packages)
+(setq autopair-blink nil)
+
+(push 'paredit el-get-packages)
+(defun iy-el-get-after-paredit ()
+  (define-key paredit-mode-map (kbd "M-r") 'paredit-backward-kill-word)
+  (define-key paredit-mode-map (kbd "M-s") nil)
+  (define-key paredit-mode-map (kbd "M-S") nil)
+  (define-key paredit-mode-map (kbd "M-p") 'paredit-raise-sexp)
+  (define-key paredit-mode-map (kbd "M-n") 'paredit-splice-sexp)
+  (define-key paredit-mode-map (kbd "M-N") 'paredit-split-sexp))
+
+;;}}}
+
 ;;{{{ Hilight
 (custom-set-variables
  '(highlight-symbol-idle-delay 1)
@@ -243,10 +259,6 @@
   (add-hook 'c-mode-common-hook 'highlight-parentheses-mode)
   (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
   (add-hook 'ruby-mode-hook 'highlight-parentheses-mode))
-
-(push 'autopair el-get-packages)
-(setq autopair-blink nil)
-
 ;;}}}
 
 ;;{{{ Mark

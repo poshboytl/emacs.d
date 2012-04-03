@@ -37,6 +37,7 @@
   (eval-after-load "rinari" '(diminish 'rinari-minor-mode " R"))
   (eval-after-load "flyspell" '(diminish 'flyspell-mode " fs"))
   (eval-after-load "flymake" '(diminish 'flymake-mode " fm"))
+  (eval-after-load "paredit" '(diminish 'paredit-mode " par"))
   (diminish 'auto-fill-function " F"))
 
 (provide 'iy-theme)

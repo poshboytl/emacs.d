@@ -103,7 +103,6 @@
   (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-expand)
   (define-key ac-complete-mode-map (kbd "RET") 'nil)
   (define-key ac-complete-mode-map (kbd "<return>") 'nil)
-  (define-key ac-complete-mode-map (kbd "M-<return>") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-g") 'ac-stop)
 
