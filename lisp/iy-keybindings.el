@@ -205,7 +205,7 @@
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
 
-(global-set-key (kbd "<f10>") 'grep-find)
+(global-set-key (kbd "<f10>") 'rgrep)
 (global-set-key (kbd "<f11>") 'occur)
 (global-set-key (kbd "<f12>") 'magit-status)
 (global-set-key (kbd "C-<f12>") 'git-status)

@@ -84,7 +84,7 @@
     (:name haml-mode :url bundle :lazy t)
     (:name sass-mode :url bundle :lazy t
            :depends haml-mode
-           :build `(,(concat el-get-emacs " -Q -L . -L ../haml-mode -batch -f batch-byte-compile sass-mode.el")))
+           :build `(,(concat el-get-emacs " -Q -L . -L ../haml-mode -batch --eval \"(require 'cl)\" -f batch-byte-compile sass-mode.el")))
     (:name rainbow-mode :url bundle :lazy t)
     (:name coffee-mode :url bundle :lazy t)
     (:name haskell-mode :url bundle :lazy t)

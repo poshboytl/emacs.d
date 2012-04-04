@@ -233,6 +233,8 @@
 (setq autopair-blink nil)
 
 (push 'paredit el-get-packages)
+
+;; Using local-set-key in a mode-hook is a better idea.
 (defun iy-el-get-after-paredit ()
   (define-key paredit-mode-map (kbd "M-r") 'paredit-backward-kill-word)
   (define-key paredit-mode-map (kbd "M-s") nil)

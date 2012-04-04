@@ -38,8 +38,9 @@
        (delayed)
        (candidate-number-limit . 9999)
        (requires-pattern . 3)
-       (real-to-display . (lambda (e) 
-                            (file-relative-name e eproject-root)))
+       (real-to-display . (lambda (e)
+                            (with-helm-current-buffer
+                               (file-relative-name e (eproject-root-safe)))))
        (candidates . (lambda ()
                        (with-helm-current-buffer
                          (iy-eproject-list-project-files-with-cache eproject-root))))
