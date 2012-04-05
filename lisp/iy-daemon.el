@@ -42,4 +42,13 @@
 
       (server-start)))
 
+(defun iy-server-visit-setup ()
+  (cond ((string= "COMMIT_EDITMSG" (file-name-nondirectory (buffer-file-name)))
+         (flyspell-mode 1)
+         (auto-fill-mode t)
+         (setq fill-column 72)
+         (local-set-key (kbd "C-c C-c") 'server-edit)))
+  (message (buffer-file-name)))
+(add-hook 'server-visit-hook 'iy-server-visit-setup)
+
 (provide 'iy-daemon)

@@ -1,3 +1,9 @@
+;;{{{ General
+(custom-set-variables
+ '(vc-follow-symlinks t)
+ '(revert-without-query '("COMMIT_EDITMSG\\'")))
+;;}}}
+
 ;;{{{ GIT
 
 (add-to-list 'auto-mode-alist '("\\.gitconfig\\'" . conf-mode))
@@ -29,6 +35,7 @@
   (setq fill-column 72))
 
 (add-hook 'magit-log-edit-mode-hook 'iy-magit-log-edit-mode-init)
+
 
 ;;}}}
 
