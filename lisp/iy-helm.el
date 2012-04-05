@@ -109,7 +109,7 @@
 ;;    however, it is still order related.
 (defun helm-pattern-to-regexp (string)
   (prin1-to-string
-   (if (string-match-p "[\\[\\]*+$^]" string) string
+   (if (string-match-p "[][*+$^]" string) string
      (let ((parts (split-string string "[ \t]+" t)))
        (if (eq 2 (length parts))
            ;; for two parts a,b we make a.*b\|b.*a
