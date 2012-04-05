@@ -138,6 +138,7 @@
     (:name diminish)
     (:name sequential-command :type emacswiki :features sequential-command)
     (:name paredit :lazy t)
+    (:name command-log-mode :type git :url bundle :lazy t)
 
     )))
 

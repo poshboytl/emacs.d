@@ -103,3 +103,6 @@
 [submodule "bundle/helm"]
 	path = bundle/helm
 	url = git://github.com/emacs-helm/helm.git
+[submodule "bundle/command-log-mode"]
+	path = bundle/command-log-mode
+	url = git://github.com/lewang/command-log-mode.git

@@ -55,7 +55,7 @@
     (helm-other-buffer 'helm-c-source-eproject-files-in-project "*helm files in project*"))
 
   ;;; Sources
-  (setq helm-for-files-prefered-list
+  (setq helm-sources
         (list
          'helm-c-source-ffap-line
          'helm-c-source-ffap-guesser
@@ -85,8 +85,8 @@
 (autoload 'helm-command-prefix "helm-config" nil nil 'keymap)
 
 ;;; Shortcuts
-(global-set-key (kbd "M-X") 'helm-for-files)
-(define-key iy-map (kbd "M-s") 'helm-for-files)
+(global-set-key (kbd "M-X") 'helm-at-point)
+(define-key iy-map (kbd "M-s") 'helm-at-point)
 (define-key iy-map (kbd "s") 'helm-command-prefix)
 (define-key iy-map (kbd "M-x") 'helm-M-x)
 

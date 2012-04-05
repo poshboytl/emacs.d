@@ -168,11 +168,13 @@
 (global-set-key (kbd "C-<prior>") 'previous-buffer)
 
 (global-set-key (kbd "M-O") 'other-frame)
-(global-set-key (kbd "C-x K") (lambda ()
-                                (interactive)
-                                (if (< (length (window-list)) 2)
-                                    (kill-buffer)
-                                  (kill-buffer-and-window))))
+(defun iy-kill-buffer-and-window ()
+  (interactive)
+  (if (< (length (window-list)) 2)
+      (kill-buffer)
+    (kill-buffer-and-window)))
+(global-set-key (kbd "C-x K") 'iy-kill-buffer-and-window)
+
 ;;}}}
 
 ;;{{{ Bookmark
