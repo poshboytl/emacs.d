@@ -36,7 +36,6 @@
 
 (add-hook 'magit-log-edit-mode-hook 'iy-magit-log-edit-mode-init)
 
-
 ;;}}}
 
 ;;{{{ Mode Line
