@@ -20,7 +20,7 @@
 
 (push 'rhtml-mode el-get-packages)
 (defun iy-el-get-after-rhtml-mode ()
-  (add-to-list 'auto-mode-alist '("\.eco$" . rhtml-mode))
+  (add-to-list 'auto-mode-alist '("\\.eco$" . rhtml-mode))
   (eval-after-load "rhtml-mode"
     '(add-to-list
       'rhtml-in-erb-keywords
