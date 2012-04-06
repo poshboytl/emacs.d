@@ -9,6 +9,11 @@
 
 (setq next-error-highlight 'fringe-arrow)
 
+(add-hook 'after-make-frame-functions
+          '(lambda ()
+             (set-frame-font iy-frame-font)
+             (set-fontset-font "fontset-default" 'chinese-gbk iy-frame-font-chinese)))
+
 (custom-set-variables
  '(blink-cursor-mode t)
  '(blink-cursor-delay 2)
