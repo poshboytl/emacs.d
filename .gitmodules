@@ -106,3 +106,6 @@
 [submodule "bundle/command-log-mode"]
 	path = bundle/command-log-mode
 	url = git://github.com/lewang/command-log-mode.git
+[submodule "bundle/flymake-coffee"]
+	path = bundle/flymake-coffee
+	url = git://github.com/purcell/flymake-coffee

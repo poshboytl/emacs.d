@@ -5,6 +5,7 @@
 (push 'sass-mode el-get-packages)
 (push 'rainbow-mode el-get-packages)
 (push 'coffee-mode el-get-packages)
+(push 'flymake-coffee el-get-packages)
 
 (defadvice coffee-newline-and-indent (around fix-error-when-bob activate)
   (if (bobp) (newline) ad-do-it))
@@ -14,6 +15,8 @@
   (subword-mode)
   (local-set-key (kbd "<return>") 'coffee-newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
+  (when (fboundp 'flymake-coffee-load)
+    (flymake-coffee-load))
   (setq autopair-handle-action-fns
         (list 'autopair-default-handle-action
               'autopair-python-triple-quote-action)))

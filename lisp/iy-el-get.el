@@ -139,6 +139,10 @@
     (:name sequential-command :type emacswiki :features sequential-command)
     (:name paredit :lazy t)
     (:name command-log-mode :type git :url bundle :lazy t)
+    (:name flymake-coffee :type git :url bundle :lazy t)
+    (:name flymake-coffeelint :type git :url bundle
+           :build `(,(concat el-get-emacs " -Q -batch -f batch-byte-compile flymake-coffeelint.el")
+                    ("npm")))
 
     )))
 
