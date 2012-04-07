@@ -8,15 +8,17 @@
 ;;{{{ ACK
 
 (custom-set-variables
+ '(ack-root-directory-functions nil)
  '(ack-prompt-for-directory t))
 
 (push 'full-ack el-get-packages)
 (push 'xcscope el-get-packages)
 
-(defun ack-here ()
-  (interactive)
-  (let ((ack-root-directory-functions nil)
-        (ack-prompt-for-directory t))
+(defun ack-root (&optional force)
+  (interactive "P")
+  (let ((ack-prompt-for-directory force)
+        (ack-root-directory-functions
+         '(eproject-root-safe ack-guess-project-root)))
     (call-interactively 'ack)))
 
 ;;}}}

@@ -13,21 +13,23 @@
 
 (defun eproject-maybe-create-tags-table ()
   (let* ((root (eproject-root))
+         (ctags (eproject-attribute :ctags root))
          (default-directory root))
-    (when (and root (eproject-attribute :create-etags root))
-      (shell-command "ctags -e -R")
+    (when (and root ctags (eproject-attribute :ctags-first root))
       (ignore-errors
+        (shell-command ctags)
         (visit-tags-table (concat root "TAGS") t)))))
 (add-hook 'eproject-first-buffer-hook 'eproject-maybe-create-tags-table)
 
 (defun eproject-visit-tags-table (&optional create)
   (interactive "P")
   (let* ((root (eproject-root))
+         (ctags (eproject-attribute :ctags root))
          (file (concat root "TAGS")))
     (when root
-      (when create
+      (when (and create ctags)
         (let ((default-directory root))
-          (shell-command "ctags -e -R")))
+          (shell-command ctags)))
       (when (file-exists-p file)
         (ignore-errors
           (visit-tags-table file t))))))
@@ -188,7 +190,7 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p e") 'iy-eproject-eshell-toggle)
   (define-key iy-map (kbd "p E") 'iy-eproject-eshell-here)
   (define-key iy-map (kbd "p r") (iy-eproject-call-interactively-in-root 'rgrep))
-  (define-key iy-map (kbd "p a") 'ack)
+  (define-key iy-map (kbd "p a") 'ack-root)
   (define-key iy-map (kbd "p g") (iy-eproject-call-interactively-in-root 'git-grep))
 
   ;; generate TAGS, C-u to update
