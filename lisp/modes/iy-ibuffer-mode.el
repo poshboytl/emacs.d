@@ -26,7 +26,9 @@
                (expand-file-name dired-directory))
            ;; so that all non pathnames are at the end
            "~"))))
-  (define-key ibuffer-mode-map (kbd "s p")     'ibuffer-do-sort-by-filename-or-dired)
+  (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-filename-or-dired)
+  (define-key ibuffer-mode-map (kbd "M-o") 'other-window)
+
   (setq ibuffer-saved-filter-groups
         '(("default"
            ("dired" (mode . dired-mode))
