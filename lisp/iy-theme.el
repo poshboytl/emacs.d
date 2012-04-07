@@ -9,6 +9,10 @@
 
 (setq next-error-highlight 'fringe-arrow)
 
+(add-to-list
+ 'default-frame-alist
+ (cons 'font iy-frame-font))
+
 ;; (add-hook 'after-make-frame-functions
 ;;           '(lambda ()
 ;;              (set-frame-font iy-frame-font)
