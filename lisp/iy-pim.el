@@ -7,8 +7,7 @@
    deft-extension "md"
    deft-directory (concat iy-dropbox-dir "g/notes")
    deft-use-filename-as-title t
-   deft-text-mode 'markdown-mode)
-  (define-key iy-map (kbd "e") 'deft))
+   deft-text-mode 'markdown-mode))
 
 (push 'org-mode el-get-packages)
 
