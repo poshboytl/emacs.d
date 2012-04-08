@@ -6,26 +6,27 @@
  '(ibuffer-jump-offer-only-visible-buffers nil)
  '(ibuffer-show-empty-filter-groups nil))
 
-(defun iy-ibuffer-mode-init ()
+(define-ibuffer-sorter filename-or-dired
+  "Sort the buffers by their pathname."
+  (:description "filenames plus dired")
+  (string-lessp
+   (with-current-buffer (car a)
+
+     (or buffer-file-name
+         (if (eq major-mode 'dired-mode)
+             (expand-file-name dired-directory))
+         ;; so that all non pathnames are at the end
+         "~"))
+   (with-current-buffer (car b)
+     (or buffer-file-name
+         (if (eq major-mode 'dired-mode)
+             (expand-file-name dired-directory))
+         ;; so that all non pathnames are at the end
+         "~"))))
+
+(defun iy-ibuffer-mode-setup ()
   ;; add another sorting method for ibuffer (allow the grouping of
   ;; filenames and dired buffers
-  (define-ibuffer-sorter filename-or-dired
-    "Sort the buffers by their pathname."
-    (:description "filenames plus dired")
-    (string-lessp
-     (with-current-buffer (car a)
-
-       (or buffer-file-name
-           (if (eq major-mode 'dired-mode)
-               (expand-file-name dired-directory))
-           ;; so that all non pathnames are at the end
-           "~"))
-     (with-current-buffer (car b)
-       (or buffer-file-name
-           (if (eq major-mode 'dired-mode)
-               (expand-file-name dired-directory))
-           ;; so that all non pathnames are at the end
-           "~"))))
   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-filename-or-dired)
   (define-key ibuffer-mode-map (kbd "M-o") 'other-window)
 
@@ -72,10 +73,14 @@
                       (mode       . apropos-mode)
                       (name      . "^\\*.*\\*$")
                       (filename . "\.emacs\.d")
-                      (mode     . custom-mode))))))
-  (ibuffer-switch-to-saved-filter-groups "default")
-  (hl-line-mode))
+                      (mode     . custom-mode)))))))
 
+(defun iy-ibuffer-mode-init ()
+
+   (ibuffer-switch-to-saved-filter-groups "default")
+   (hl-line-mode))
+
+(eval-after-load "ibuffer" '(iy-ibuffer-mode-setup))
 (add-hook 'ibuffer-mode-hook 'iy-ibuffer-mode-init)
 
 (provide 'iy-ibuffer-mode)
