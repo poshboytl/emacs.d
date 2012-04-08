@@ -31,6 +31,7 @@
 (defalias 'rb 'revert-buffer-no-confirm)
 (defalias 'occ 'occur)
 (defalias 'mocc 'multi-occur)
+(defalias 'moccr 'multi-occur-in-matching-buffers)
 (defalias 'aa 'anything-apropos)
 (defalias 'wc 'whitespace-cleanup)
 (defalias 'flb 'add-file-local-variable)

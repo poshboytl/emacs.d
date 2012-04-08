@@ -31,6 +31,9 @@
 
 (push 'ruby-block el-get-packages)
 (make-variable-buffer-local 'ruby-block-mode)
+(custom-set-variables
+ '(ruby-block-highlight-toggle 'overlay)
+ '(ruby-block-highlight-face 'show-paren-match))
 
 (push 'cucumber el-get-packages)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))

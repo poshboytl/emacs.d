@@ -42,12 +42,17 @@
 
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
+
   (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
   (yas/initialize)
   (yas/load-snippet-dirs))
 
 (push 'yasnippet el-get-packages)
 
+(defun yas/safer-expand ()
+  (let ((yas/fallback-behavior 'return-nil))
+    (call-interactively 'yas/expand)))
+  
 (defun yas/ido-insert-snippets (&optional no-condition)
   (interactive "P")
   (let ((yas/prompt-functions '(yas/ido-prompt)))
@@ -126,7 +131,6 @@
 
   (global-auto-complete-mode t)
 
-  ;; temporarily disable ac when prefix is C-u, use C-u C-u to force ac
   (defadvice ac-trigger-key-command (around disable-by-negative-prefix (&optional force) activate)
     (interactive "P")
     (let* ((ac-fuzzy-enable nil) ; cannot test whether ac expanded when fuzzy enabled, and it is slow
@@ -137,23 +141,23 @@
            (key (if keys (vector (elt keys (1- (length keys))))))
            (command (if key (key-binding key)))
            ac-expanded)
-      ;; skip ac if prefix is C-u
-      (if (eq (prefix-numeric-value force) 4)
-          (setq ac-expanded nil)
-        ;; no ac if last-command not in trigger commands,
-        ;; but C-u C-u force ac
-        (if (or force (ac-trigger-command-p last-command))
-            (let ((auto-complete-mode t))
-              (auto-complete)
-              ;; expanded if menu is live or point has moved
-              (setq ac-expanded (or (ac-menu-live-p)
-                                    (not (equal (point) before-point)))))
-          (setq ac-expanded nil)))
+      ;; skip if prefix is negative
+      (unless (< (prefix-numeric-value force) 0)
+        (when (not force)
+          (setq ac-expanded (yas/safer-expand)))
+        (when (and (not ac-expanded)
+                   (or force (ac-trigger-command-p last-command)))
+          (let ((auto-complete-mode t))
+            (auto-complete)
+            ;; expanded if menu is live or point has moved
+            (setq ac-expanded (or (ac-menu-live-p)
+                                  (not (equal (point) before-point)))))))
 
       (when (and (not ac-expanded)
                  command
                  (not (eq command 'ac-trigger-key-command)))
-            (call-interactively command)))))
+        (call-interactively command))))
+  )
 
 (defun iy-ac-emacs-lisp-mode-setup ()
   (setq ac-sources
