@@ -43,11 +43,18 @@
       (server-start)))
 
 (defun iy-server-visit-setup ()
-  (cond ((string= "COMMIT_EDITMSG" (file-name-nondirectory (buffer-file-name)))
-         (flyspell-mode 1)
-         (auto-fill-mode t)
-         (setq fill-column 72)
-         (local-set-key (kbd "C-c C-c") 'server-edit)))
+  (let ((base (file-name-nondirectory (buffer-file-name))))
+    (cond ((member base '("MERGE_MSG" "COMMIT_EDITMSG"))
+           (flyspell-mode 1)
+           (auto-fill-mode t)
+           (setq fill-column 72)
+           (local-set-key (kbd "C-c C-c") 'server-edit))
+          ((string-match-p "^mutt-" base)
+           (mail-mode)
+           (mail-text)
+           (local-set-key (kbd "C-c C-c") 'server-edit))
+
+          ))
   (message (buffer-file-name)))
 (add-hook 'server-visit-hook 'iy-server-visit-setup)
 
