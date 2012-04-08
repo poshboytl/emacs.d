@@ -315,8 +315,12 @@
 
  `(hl-line ((t (:background ,zenburn-bg-1))))
 
- `(magit-section-title ((t (:inherit zenburn-primary-1))))
+ '(magit-section-title ((t (:inherit zenburn-primary-1))))
+ `(magit-item-highlight ((t (:background ,zenburn-bg-1))))
  `(magit-branch ((t (:inherit zenburn-primary-2))))
+ `(magit-diff-file-header ((t (:inherit 'diff-file-header))))
+ `(magit-diff-hunk-header ((t (:inherit 'diff-hunk-header))))
+ '(magit-diff-none ((t (:foreground "#9a9a9a"))))
 
  `(elscreen-tab-current-screen ((t (:inherit zenburn-primary-1))))
  `(elscreen-tab-other-screen ((t (:foreground ,zenburn-yellow
@@ -401,6 +405,9 @@
  `(diff-changed ((t (:foreground ,zenburn-yellow))))
  `(diff-refine-change ((t (:background "grey35" :bold t))))
  `(diff-context ((t (:inherit default))))
+ `(diff-file-header ((t (:bold t :background ,zenburn-green-4))))
+ `(diff-hunk-header ((t (:foreground ,zenburn-yellow :background ,zenburn-green-4))))
+ `(diff-header ((t (:background ,zenburn-green-4))))
 
  `(flymake-errline ((t (:underline ,zenburn-red-2))))
  `(flymake-warnline ((t (:underline ,zenburn-blue))))
