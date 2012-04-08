@@ -11,9 +11,14 @@
   '((t (:inherit font-lock-string :bold t)))
   "Face for displaying the project name in the modeline." :group 'eproject)
 
+(defun eproject-ctags-command (&optional root)
+  (let ((ctags (eproject-attribute :ctags (or root (eproject-root)))))
+    (cond ((eq ctags 'rails) "ctags -a -e -f TAGS --tag-relative -R app lib vendor")
+          (t ctags))))
+
 (defun eproject-maybe-create-tags-table ()
   (let* ((root (eproject-root))
-         (ctags (eproject-attribute :ctags root))
+         (ctags (eproject-ctags-command root))
          (default-directory root))
     (when (and root ctags (eproject-attribute :ctags-first root))
       (ignore-errors
@@ -24,7 +29,7 @@
 (defun eproject-visit-tags-table (&optional create)
   (interactive "P")
   (let* ((root (eproject-root))
-         (ctags (eproject-attribute :ctags root))
+         (ctags (eproject-ctags-command root))
          (file (concat root "TAGS")))
     (when root
       (when (and create ctags)
