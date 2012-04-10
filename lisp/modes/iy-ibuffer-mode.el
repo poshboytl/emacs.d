@@ -6,25 +6,25 @@
  '(ibuffer-jump-offer-only-visible-buffers nil)
  '(ibuffer-show-empty-filter-groups nil))
 
-(define-ibuffer-sorter filename-or-dired
-  "Sort the buffers by their pathname."
-  (:description "filenames plus dired")
-  (string-lessp
-   (with-current-buffer (car a)
-
-     (or buffer-file-name
-         (if (eq major-mode 'dired-mode)
-             (expand-file-name dired-directory))
-         ;; so that all non pathnames are at the end
-         "~"))
-   (with-current-buffer (car b)
-     (or buffer-file-name
-         (if (eq major-mode 'dired-mode)
-             (expand-file-name dired-directory))
-         ;; so that all non pathnames are at the end
-         "~"))))
-
 (defun iy-ibuffer-mode-setup ()
+  (define-ibuffer-sorter filename-or-dired
+    "Sort the buffers by their pathname."
+    (:description "filenames plus dired")
+    (string-lessp
+     (with-current-buffer (car a)
+
+       (or buffer-file-name
+           (if (eq major-mode 'dired-mode)
+               (expand-file-name dired-directory))
+           ;; so that all non pathnames are at the end
+           "~"))
+     (with-current-buffer (car b)
+       (or buffer-file-name
+           (if (eq major-mode 'dired-mode)
+               (expand-file-name dired-directory))
+           ;; so that all non pathnames are at the end
+           "~"))))
+
   ;; add another sorting method for ibuffer (allow the grouping of
   ;; filenames and dired buffers
   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-filename-or-dired)
