@@ -15,6 +15,7 @@
   (subword-mode)
   (local-set-key (kbd "<return>") 'coffee-newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
+  (local-set-key (kbd "M-j") 'coffee-newline-and-indent)
   (when (fboundp 'flymake-coffee-load)
     (flymake-coffee-load))
   (setq autopair-handle-action-fns

@@ -105,10 +105,10 @@
   (push 'org-mode ac-modes)
   (push 'coffee-mode ac-modes)
 
-  (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-expand)
   (define-key ac-complete-mode-map (kbd "RET") 'nil)
   (define-key ac-complete-mode-map (kbd "<return>") 'nil)
   (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-g") 'ac-stop)
 
   (setq ac-trigger-commands
@@ -177,7 +177,7 @@
   (set (make-variable-buffer-local 'ac-stop-words) '("fi" "done" "esac")))
 
 (custom-set-variables
- '(ac-use-fuzzy t)
+ '(ac-use-fuzzy nil)
  '(ac-trigger-key "TAB")
  '(ac-auto-start nil)
  '(ac-use-menu-map t)
