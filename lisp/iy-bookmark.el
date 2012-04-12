@@ -1,50 +1,9 @@
 (eval-when-compile (require 'cl))
-(eval-when-compile (require 'ido))
 (require 'iy-dep)
 
 (custom-set-variables
  '(bookmark-default-file (concat iy-data-dir "bookmark"))
  '(bookmark-use-annotations nil))
-
-(defun iy-el-get-after-bookmark+ ()
-  ;; Redifine `bmkp-completing-read-1'.
-  ;;
-  ;; I have tried to use `flet' in `advice' to redefine `completing-read' but
-  ;; failed because of `max-specpdl-size'.
-  ;;
-  ;; The redefined version use `ido-completing-read' to read user input.
-  (defun bmkp-completing-read-1 (prompt default alist pred hist laxp)
-    "Helper for `bookmark-completing-read(-lax)'.
-LAXP non-nil means use lax completion."
-    (bookmark-maybe-load-default-file)
-    (setq alist  (or alist bookmark-alist))
-    (if (and (not laxp)
-             (listp last-nonmenu-event)
-             (or (eq t bmkp-menu-popup-max-length)
-                 (and (integerp bmkp-menu-popup-max-length)
-                      (< (length alist) bmkp-menu-popup-max-length))))
-        (bookmark-menu-popup-paned-menu
-         t prompt
-         (if bmkp-sort-comparer           ; Test whether to sort, but always use `string-lessp'.
-             (sort (bookmark-all-names alist) 'string-lessp)
-           (bookmark-all-names alist)))
-      (let* ((icicle-delete-candidate-object  (lambda (cand) ; For `S-delete' in Icicles.
-                                                (bookmark-delete
-                                                 (icicle-transform-multi-completion cand))))
-             (completion-ignore-case          bookmark-completion-ignore-case)
-             (default                         default)
-             (prompt                          (if default
-                                                  (concat prompt (format " (%s): " default))
-                                                (concat prompt ": ")))
-             (str                             (ido-completing-read
-                                               prompt
-                                               (mapcar
-                                                (lambda (e)
-                                                  (if (listp e) (car e) e))
-                                                alist)
-                                               pred (not laxp) nil
-                                               (or hist 'bookmark-history) default)))
-        (if (and (string-equal "" str) default) default str)))))
 
 (push 'bookmark+ el-get-packages)
 

@@ -109,3 +109,6 @@
 [submodule "bundle/flymake-coffee"]
 	path = bundle/flymake-coffee
 	url = git://github.com/purcell/flymake-coffee
+[submodule "bundle/ido-ubiquitous"]
+	path = bundle/ido-ubiquitous
+	url = git://github.com/technomancy/ido-ubiquitous.git

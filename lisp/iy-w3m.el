@@ -88,8 +88,12 @@
                        (car match) (cdr match) my-url)))))
 
 (defun iy-el-get-after-emacs-w3m ()
-  (require 'w3m-lnum)
+  (require 'w3m-lnum))
+
+(defun iy-el-w3m-init ()
   (w3m-lnum-mode)
+  (define-key w3m-mode-map ";" w3m-lnum-mode-map)
+  (define-key w3m-mode-map "f" 'w3m-lnum-goto)
   (define-key w3m-mode-map "o" 'wicked-w3m-open-current-page-in-default-browser)
   (define-key w3m-mode-map "O" 'wicked-w3m-open-link-or-image-in-default-browser)
   (define-key w3m-mode-map "," 'w3m-previous-buffer)
@@ -97,6 +101,8 @@
   (define-key w3m-mode-map (kbd "C-w") 'w3m-delete-buffer)
   (define-key w3m-mode-map (kbd "C-c M-s") 'w3m-session-select)
   (define-key w3m-mode-map (kbd "M-s") iy-map))
+
+(add-hook 'w3m-mode-hook 'iy-el-w3m-init)
 
 (global-set-key (kbd "<f8>") 'wicked-toggle-w3m)
 
@@ -108,24 +114,26 @@
   '(progn
      (setq
       webjump-sites
-      (append
-       '(
-         ("STL" .
-          [simple-query
-           "http://www.sgi.com/tech/stl/index.html"
-           "http://www.google.com/search?q="
-           "+site%3Awww.sgi.com%2Ftech%2Fstl"])
-         ("Boost" .
-          [simple-query
-           "http://www.boost.org/doc/libs/1_39_0/libs/libraries.htm"
-           "http://www.google.com/search?domains=www.boost.org%3Blists.boost.org&hq=site%3Awww.boost.org+OR+site%3Alists.boost.org&q="
-           ""
-           ])
-         ("CPP" .
-          [simple-query
-           "http://www.cplusplus.com/reference/"
-           "http://www.cplusplus.com/query/search.cgi?q=" ""])
-         )
-       webjump-sample-sites))))
+      '(
+        ("stl" .
+         [simple-query
+          "http://www.sgi.com/tech/stl/index.html"
+          "http://www.google.com/search?q="
+          "+site%3Awww.sgi.com%2Ftech%2Fstl"])
+        ("boost" .
+         [simple-query
+          "http://www.boost.org/doc/libs/1_39_0/libs/libraries.htm"
+          "http://www.google.com/search?domains=www.boost.org%3Blists.boost.org&hq=site%3Awww.boost.org+OR+site%3Alists.boost.org&q="
+          ""
+          ])
+        ("cpp" .
+         [simple-query
+          "http://www.cplusplus.com/reference/"
+          "http://www.cplusplus.com/query/search.cgi?q=" ""])
+        ("youdao" .
+         [simple-query
+          "http://dict.youdao.com/"
+          "http://dict.youdao.com/search?q=" ""])
+      ))))
 
 (provide 'iy-w3m)

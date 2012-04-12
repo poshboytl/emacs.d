@@ -58,12 +58,6 @@
   (let ((yas/prompt-functions '(yas/ido-prompt)))
     (yas/insert-snippet)))
 
-(defun yas/ido-choose-value (possibilities)
-  "Prompt for a string in the list POSSIBILITIES and return it."
-  (unless (or yas/moving-away-p
-              yas/modified-p)
-    (ido-completing-read "Choose: " possibilities)))
-
 (defun yas/buffer-name-stub ()
   (let ((name (or (buffer-file-name)
                   (buffer-name))))

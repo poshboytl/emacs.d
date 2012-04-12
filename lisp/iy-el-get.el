@@ -143,6 +143,7 @@
     (:name flymake-coffeelint :type git :url bundle
            :build `(,(concat el-get-emacs " -Q -batch -f batch-byte-compile flymake-coffeelint.el")
                     ("npm")))
+    (:name ido-ubiquitous :type git :url bundle :features ido-ubiquitous)
 
     )))
 

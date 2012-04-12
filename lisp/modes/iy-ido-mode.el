@@ -9,6 +9,10 @@
 (ido-mode t)
 (ido-load-history)
 
+(push 'ido-ubiquitous el-get-packages)
+(defun iy-el-get-after-ido-ubiquitous ()
+  (ido-ubiquitous-disable-in execute-extended-command))
+
 (defun iy-ido-mode-init ()
   (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
   (define-key ido-completion-map (kbd "M-l") 'iy-dwim-dash)
