@@ -10,8 +10,9 @@
 (ido-load-history)
 
 (push 'ido-ubiquitous el-get-packages)
-(defun iy-el-get-after-ido-ubiquitous ()
-  (ido-ubiquitous-disable-in execute-extended-command))
+(custom-set-variables
+ '(ido-ubiquitous-command-exceptions '(execute-extended-command))
+ '(ido-ubiquitous t))
 
 (defun iy-ido-mode-init ()
   (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
