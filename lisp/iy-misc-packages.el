@@ -10,6 +10,8 @@
  '(iy-go-to-char-key-backward 58))
 (require 'iy-go-to-char)
 
+(push 'ace-jump-mode el-get-packages)
+
 (push 'tumbl el-get-packages)
 
 (push 'cheat el-get-packages)

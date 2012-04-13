@@ -112,3 +112,6 @@
 [submodule "bundle/ido-ubiquitous"]
 	path = bundle/ido-ubiquitous
 	url = git://github.com/technomancy/ido-ubiquitous.git
+[submodule "bundle/ace-jump-mode"]
+	path = bundle/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git

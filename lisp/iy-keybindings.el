@@ -15,13 +15,16 @@
 (global-set-key (kbd "M-B") (lambda (arg)
                               (interactive "p")
                               (forward-symbol (- arg))))
+(global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
-(define-key iy-map (kbd "f") 'iy-go-to-char)
-(define-key iy-map (kbd "F") 'iy-go-to-char-backward)
+(define-key iy-map (kbd "f") 'ace-jump-mode)
+(define-key iy-map (kbd "F") 'ace-jump-line-mode)
 (define-key iy-map (kbd ";") 'iy-go-to-char-continue)
 (define-key iy-map (kbd ":") 'iy-go-to-char-continue-backward)
 (global-set-key (kbd "C-z") 'iy-go-to-char)
+(global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key (kbd "C-S-z") 'iy-go-to-char-backward)
+(global-set-key (kbd "M-M") 'iy-go-to-char-backward)
 
 (define-key iy-map (kbd "*") 'isearch-forward-at-point)
 (define-key iy-map (kbd "8") 'isearch-forward-at-point)

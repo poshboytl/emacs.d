@@ -144,6 +144,7 @@
            :build `(,(concat el-get-emacs " -Q -batch -f batch-byte-compile flymake-coffeelint.el")
                     ("npm")))
     (:name ido-ubiquitous :type git :url bundle :features ido-ubiquitous)
+    (:name ace-jump-mode :url bundle :lazy t)
 
     )))
 
