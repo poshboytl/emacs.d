@@ -105,6 +105,11 @@
   "last char used in iy-go-to-char"
   )
 
+(defun iy-go-to-char-isearch-setup ()
+  (remove-hook 'isearch-mode-hook 'iy-go-to-char-isearch-setup)
+  (setq isearch-string (if iy-go-to-char-last-char (string iy-go-to-char-last-char) ""))
+  (isearch-search-and-update))
+
 ;;;###autoload
 (defun iy-go-to-char (n char)
   "Move forward to Nth occurence of CHAR.
@@ -152,15 +157,8 @@ Unless quit using C-g or the region is activated before searching, the start
       (push-mark orig t)
       (cond
        ((or (eq ev ?\C-s) (eq ev ?\C-r))
-        (let ((begin (match-beginning 0))
-              (end (match-end 0))
-              isearch-initial-string
-              )
-          (if (eq begin end)
-              (if (eq ev ?\C-s) (isearch-forward) (isearch-backward))
-            (setq isearch-initial-string (buffer-substring begin end))
-            (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
-            (if (eq ev ?\C-s) (isearch-forward) (isearch-backward)))))
+        (add-hook 'isearch-mode-hook 'iy-go-to-char-isearch-setup)
+        (if (eq ev ?\C-s) (isearch-forward) (isearch-backward)))
        ((eq ev ?\C-w)
         (goto-char pt)
         (push-mark orig t)
