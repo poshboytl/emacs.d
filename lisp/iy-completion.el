@@ -114,9 +114,10 @@
 
   (setq-default
    ac-sources '(ac-source-yasnippet
-                ac-source-imenu
                 ac-source-abbrev
                 ac-source-dictionary
+                ac-source-imenu
+                ac-source-words-in-buffer
                 ac-source-words-in-same-mode-buffers))
 
   (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
@@ -163,6 +164,8 @@
           ac-source-symbols
           ac-source-abbrev
           ac-source-dictionary
+          ac-source-imenu
+          ac-source-words-in-buffer
           ac-source-words-in-same-mode-buffers)))
 (defun iy-ac-ruby-mode-setup ()
   (set (make-variable-buffer-local 'ac-stop-words) '("end")))
