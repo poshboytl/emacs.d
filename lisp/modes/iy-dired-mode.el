@@ -22,7 +22,7 @@
 
 (defun dired-launch-command ()
   (interactive)
-  (dired-do-async-shell-command
+  (dired-do-shell-command
    (if (eq system-type 'darwin) "open" "xopen")
    nil
    (dired-get-marked-files t current-prefix-arg)))
