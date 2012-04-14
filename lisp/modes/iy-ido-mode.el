@@ -11,7 +11,10 @@
 
 (push 'ido-ubiquitous el-get-packages)
 (custom-set-variables
- '(ido-ubiquitous-command-exceptions '(execute-extended-command describe-function man))
+ '(ido-ubiquitous-command-exceptions '(execute-extended-command
+                                       describe-function
+                                       describe-variable
+                                       man))
  '(ido-ubiquitous t))
 
 (defun iy-ido-mode-init ()
