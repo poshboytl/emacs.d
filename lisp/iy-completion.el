@@ -40,6 +40,13 @@
 
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 
+(defadvice yas/load-directory (around load-bundle (top-level-dir)  activate)
+  (if (and (file-directory-p top-level-dir) (file-exists-p (concat top-level-dir "/.yas-bundled-snippets.el")))
+      (progn
+        (message "load yas bundled snippets")
+        (load (concat top-level-dir "/.yas-bundled-snippets")))
+    ad-do-it))
+
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
 

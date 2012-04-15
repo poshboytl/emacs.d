@@ -14,6 +14,13 @@
  '(ido-ubiquitous-command-exceptions '(execute-extended-command
                                        describe-function
                                        describe-variable
+                                       customize-variable
+                                       customize-variable-other-window
+                                       customize-option
+                                       customize-option-other-window
+                                       customize-face
+                                       customize-face-other-window
+                                       load-library
                                        man))
  '(ido-ubiquitous t))
 

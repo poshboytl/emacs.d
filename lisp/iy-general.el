@@ -21,6 +21,8 @@
 ;;{{{ Enable Commands
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(put 'scroll-right 'disabled nil)
 ;;}}}
 
 ;;{{{ Shortcuts

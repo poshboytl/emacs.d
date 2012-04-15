@@ -9,3 +9,5 @@
 TAGS
 /secrets.el
 /elpa
+.yas-compiled-snippets.el
+.yas-bundled-snippets.el
