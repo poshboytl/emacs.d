@@ -21,6 +21,8 @@
                                        customize-face
                                        customize-face-other-window
                                        load-library
+                                       w3m-goto-url-new-session
+                                       w3m-goto-url
                                        man))
  '(ido-ubiquitous t))
 
