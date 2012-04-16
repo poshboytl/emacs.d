@@ -7,8 +7,8 @@
 ;; Filename: iy-go-to-char.el
 ;; Description: Go to char
 ;; Created: 2009-08-23 01:27:34
-;; Version: 1.0
-;; Last-Updated: 2009-08-23 05:17:50
+;; Version: 1.1
+;; Last-Updated: 2012-04-16 08:42:00
 ;; URL: http://www.emacswiki.org/emacs/download/iy-go-to-char.el
 ;; Compatibility: GNU Emacs 23.1.1
 
@@ -83,6 +83,10 @@
 ;; does be the same even when the search char is ";" or ",". Also the
 ;; search can cross lines. To continue search last char, use
 ;; `iy-go-to-char-continue' and `iy-go-to-char-continue-backward'.
+
+;;; Change Log:
+;; 2012-04-16 (1.1)
+;;    fix C-s/C-r to enter isearch
 
 ;;; Code:
 
