@@ -3,15 +3,17 @@
 (push 'pos-tip el-get-packages)
 (push 'popup el-get-packages)
 
+
 ;;{{{ Tab
-(defun iy-tab-noconflict ()
-  (let ((command (key-binding [tab])))
-    (local-unset-key [tab])
-    (local-set-key (kbd "TAB") command)))
-(add-hook 'ruby-mode-hook 'iy-tab-noconflict)
-(add-hook 'markdown-mode-hook 'iy-tab-noconflict)
-(add-hook 'org-mode-hook 'iy-tab-noconflict)
-;;}}}
+(defun iy-fix-tab-in-map (map)
+  (let ((binding (assoc 'tab map)))
+    (when binding
+      (setcar binding 9))))
+
+(eval-after-load "org"
+  '(progn (iy-fix-tab-in-map org-mode-map)))
+(eval-after-load "markdown-mode"
+  '(progn (iy-fix-tab-in-map markdown-mode-map)))
 
 ;;{{{ Snippet
 
