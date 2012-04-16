@@ -23,6 +23,7 @@
                                        load-library
                                        w3m-goto-url-new-session
                                        w3m-goto-url
+                                       where-is
                                        man))
  '(ido-ubiquitous t))
 
