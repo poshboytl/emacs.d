@@ -58,7 +58,6 @@
 (define-key iy-map (kbd "D") 'iy-zap-back-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "M-r") 'backward-kill-word)
-
 ;;}}}
 
 ;;{{{ Insert
@@ -201,6 +200,7 @@
 ;;}}}
 
 ;;{{{ Fx
+(global-set-key (kbd "<f1>") help-map)
 (global-set-key (kbd "<f2>") 'recentf-open-files)
 
 (if (fboundp 'iy-compile)
@@ -229,6 +229,8 @@
 
 (define-key iy-map (kbd "e") 'iy-eshell-toggle)
 (define-key iy-map (kbd "E") 'iy-eshell-here)
+
+(global-set-key (kbd "C-4") 'ispell-word)
 
 ;;}}}
 

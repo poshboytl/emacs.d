@@ -221,6 +221,11 @@
 (custom-set-variables
  '(flyspell-use-meta-tab nil))
 
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mode-map [(control ?\,)] nil)
+     (define-key flyspell-mode-map [(control ?\.)] nil)))
+
 ;;}}}
 
 (provide 'iy-completion)
