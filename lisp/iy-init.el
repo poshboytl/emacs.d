@@ -56,9 +56,12 @@
 (defun iy-init ()
   "Emacs start entry"
 
-  (setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("tromey" . "http://tromey.com/elpa/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")))
+  (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
+
+  (setq exec-path
+        (append
+         exec-path
+         '("~/.rbenv/bin")))
 
   (iy-init-load-modules '(iy-theme iy-pim) '(iy-el-get))
 
