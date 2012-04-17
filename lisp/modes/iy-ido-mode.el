@@ -20,7 +20,7 @@
  '(ido-enable-regexp t)
  '(ido-enable-flex-matching nil)
  '(ido-save-directory-list-file (concat iy-data-dir "ido.last"))
- '(ido-everywhere nil)
+ '(ido-everywhere t)
  '(ido-read-file-name-as-directory-commands nil)
  '(ido-use-filename-at-point nil))
 
