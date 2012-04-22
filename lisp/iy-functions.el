@@ -139,6 +139,13 @@
     (insert "-")
     (setq iy-last-is-case-transformation nil)))
 
+(defun iy-isearch-dash ()
+  (interactive)
+  (let ((last-command-event ?-)) (isearch-printing-char)))
+(defun iy-isearch-underscore ()
+  (interactive)
+  (let ((last-command-event ?_)) (isearch-printing-char)))
+
 (defun iy-dwim-downcase (arg)
   (interactive "p")
   (if (region-active-p)

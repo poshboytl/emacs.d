@@ -58,6 +58,7 @@
 (define-key iy-map (kbd "D") 'iy-zap-back-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "M-r") 'backward-kill-word)
+(keyboard-translate ?\C-h 'backspace)
 ;;}}}
 
 ;;{{{ Insert
@@ -76,7 +77,11 @@
 (global-set-key (kbd "M-U") 'iy-dwim-upcase)
 (global-set-key (kbd "M-L") 'iy-dwim-downcase)
 (global-set-key (kbd "M-C") 'iy-dwim-capitalize)
+;;}}}
 
+;;{{{ isearch
+(define-key isearch-mode-map (kbd "M-l") 'iy-isearch-dash)
+(define-key isearch-mode-map (kbd "M-u") 'iy-isearch-underscore)
 ;;}}}
 
 ;;{{{ Mark

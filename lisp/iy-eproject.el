@@ -200,8 +200,6 @@ to select from, open file when selected."
 
   ;; generate TAGS, C-u to update
   (define-key iy-map (kbd "p t") 'eproject-visit-tags-table)
-
-  (setq ack-root-directory-functions '(eproject-root-safe))
   )
 
 (provide 'iy-eproject)
