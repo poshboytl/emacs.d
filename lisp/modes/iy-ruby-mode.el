@@ -11,6 +11,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
 
 (push 'ruby-mode el-get-packages)
+(push 'ruby-end el-get-packages)
 
 (setq rinari-minor-mode-prefixes '(";"))
 (push 'rinari el-get-packages)
@@ -50,6 +51,7 @@
   (flyspell-prog-mode)
   (autopair-mode t)
   (ruby-block-mode t)
+  (ruby-end-mode t)
   (turn-on-auto-fill)
   (subword-mode)
 

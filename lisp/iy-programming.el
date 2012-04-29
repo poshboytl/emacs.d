@@ -52,7 +52,7 @@
 
 ;;{{{ Alternative File
 
-(push 'alternative-files el-get-sources)
+(push 'alternative-files el-get-packages)
 (define-key iy-map "a" 'alternative-files-find-file)
 (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
 (define-key iy-map (kbd "A") 'alternative-files-create-file)
