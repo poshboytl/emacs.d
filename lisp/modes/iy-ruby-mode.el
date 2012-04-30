@@ -39,6 +39,7 @@
 (push 'cucumber el-get-packages)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
+(setq rspec-key-command-prefix (kbd "C-c ,"))
 (push 'rspec-mode el-get-packages)
 
 (defun iy-ruby-mode-init ()
