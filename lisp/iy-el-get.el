@@ -145,6 +145,7 @@
                     ("npm")))
     (:name ido-ubiquitous :type git :url bundle :features ido-ubiquitous)
     (:name ace-jump-mode :url bundle :lazy t)
+    (:name pivotal-tracker :type git :url bundle :lazy t)
 
     )))
 

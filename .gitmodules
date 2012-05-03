@@ -115,3 +115,6 @@
 [submodule "bundle/ace-jump-mode"]
 	path = bundle/ace-jump-mode
 	url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule "bundle/pivotal-tracker"]
+	path = bundle/pivotal-tracker
+	url = git://github.com/jxa/pivotal-tracker.git
