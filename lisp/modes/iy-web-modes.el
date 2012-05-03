@@ -6,6 +6,7 @@
 (push 'rainbow-mode el-get-packages)
 (push 'coffee-mode el-get-packages)
 (push 'flymake-coffee el-get-packages)
+(push 'zencoding-mode el-get-packages)
 
 (defadvice coffee-newline-and-indent (around fix-error-when-bob activate)
   (if (bobp) (newline) ad-do-it))
