@@ -49,7 +49,7 @@
 (defun Q ()
   (interactive)
   (desktop-save-in-desktop-dir)
-  (session-save-session)
+  (when (fboundp 'session-save-session) (session-save-session))
   (kill-emacs))
 (defalias 'af 'auto-fill-mode)
 ;;}}}
