@@ -70,12 +70,11 @@
 (if (require 'el-get nil t)
     (iy-init)
   (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    "https://github.com/doitian/el-get/raw/master/el-get-install.el"
    (lambda (s)
-     (let (el-get-master-branch
-           (el-get-git-install-url "git://github.com/doitian/el-get.git"))
-       (end-of-buffer)
-       (eval-print-last-sexp))
+     (end-of-buffer)
+     (eval-print-last-sexp)
      (iy-init))))
 
 (provide 'iy-init)
