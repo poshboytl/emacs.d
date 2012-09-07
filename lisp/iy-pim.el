@@ -167,17 +167,16 @@
 ;;; Clock
 (defun sacha-org-clock-in-if-starting ()
   "Clock in when the task is marked GOING."
-  (message last-state)
-  (when (and (string= state "GOING")
-             (not (string= last-state state)))
+  (when (and (string= org-state "GOING")
+             (not (string= org-last-state org-state)))
     (org-clock-in)))
 (add-hook 'org-after-todo-state-change-hook
           'sacha-org-clock-in-if-starting)
 
 (defun iy-org-clock-out-if-pause ()
   "Clock out when the task is marked PAUSE."
-  (when (and (string= state "PAUSE")
-             (not (string= last-state state)))
+  (when (and (string= org-state "PAUSE")
+             (not (string= org-last-state org-state)))
     (org-clock-out t)))
 (add-hook 'org-after-todo-state-change-hook
           'iy-org-clock-out-if-pause)
