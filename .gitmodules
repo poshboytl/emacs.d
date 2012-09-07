@@ -91,9 +91,6 @@
 [submodule "bundle/rhtml-mode"]
 	path = bundle/rhtml-mode
 	url = git://github.com/eschulte/rhtml.git
-[submodule "bundle/auto-complete"]
-	path = bundle/auto-complete
-	url = git://github.com/m2ym/auto-complete.git
 [submodule "bundle/popup"]
 	path = bundle/popup
 	url = git://github.com/m2ym/popup-el.git
@@ -118,3 +115,6 @@
 [submodule "bundle/pivotal-tracker"]
 	path = bundle/pivotal-tracker
 	url = git://github.com/jxa/pivotal-tracker.git
+[submodule "bundle/auto-complete"]
+	path = bundle/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git
