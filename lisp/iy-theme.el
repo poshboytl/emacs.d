@@ -38,7 +38,7 @@
   (eval-after-load "whole-line-or-region" '(diminish 'whole-line-or-region-mode))
   (eval-after-load "eproject" '(diminish 'eproject-mode))
   (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
-  (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
+  (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
   (eval-after-load "abbrev" '(diminish 'abbrev-mode))
   (eval-after-load "whitespace" '(diminish 'global-whitespace-mode))
   (eval-after-load "hideshow" '(diminish 'hs-minor-mode))

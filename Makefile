@@ -11,15 +11,12 @@ BATCH=$(EMACS) -batch -q -no-site-file \
 
 ELC= $(BATCH) -f batch-byte-compile
 
-ELFILES=$(wildcard lisp/*.el) $(wildcard lisp/3rdparty/*.el) $(wildcard lisp/modes/*.el) snippets/.yas-bundled-snippets.el
+ELFILES=$(wildcard lisp/*.el) $(wildcard lisp/3rdparty/*.el) $(wildcard lisp/modes/*.el)
 ELCFILES=$(ELFILES:%.el=%.elc)
 
 .SUFFIXES: .el .elc
 
-compile: yas $(ELCFILES)
-
-yas:
-	$(BATCH) -L el-get/yasnippet -eval "(require 'yasnippet)" -l yasnippet-bundle.el -f batch-bundle-snippets snippets
+compile: $(ELCFILES)
 
 .el.elc:
 	$(ELC) $<

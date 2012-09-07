@@ -17,7 +17,7 @@
 
 ;;{{{ Snippet
 
-(defun yas/popup-isearch-prompt (prompt choices &optional display-fn)
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
   (when (featurep 'popup)
     (popup-menu*
      (mapcar
@@ -32,57 +32,52 @@
      )))
 
 (custom-set-variables
- '(yas/trigger-key "TAB")
- '(yas/choose-keys-first nil)
- '(yas/prompt-functions (quote (yas/popup-isearch-prompt
-                                yas/ido-prompt
-                                yas/x-prompt
-                                yas/no-prompt)))
- '(yas/use-menu nil))
+ '(yas-trigger-key "TAB")
+ '(yas-choose-keys-first nil)
+ '(yas-prompt-functions (quote (yas-popup-isearch-prompt
+                                yas-ido-prompt
+                                yas-x-prompt
+                                yas-no-prompt)))
+ '(yas-use-menu nil))
 
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 
-(defadvice yas/load-directory (around load-bundle (top-level-dir)  activate)
-  (if (and (file-directory-p top-level-dir) (file-exists-p (concat top-level-dir "/.yas-bundled-snippets.el")))
-      (progn
-        (message "load yas bundled snippets")
-        (load (concat top-level-dir "/.yas-bundled-snippets")))
-    ad-do-it))
+(defadvice yas--menu-keymap-get-create (around ignore (mode) activate))
 
 (defun iy-el-get-after-yasnippet ()
   (require 'dropdown-list nil t)
 
-  (setq yas/snippet-dirs (list (concat iy-config-dir "snippets")))
-  (yas/initialize)
-  (yas/load-snippet-dirs))
+  (setq yas-snippet-dirs (list (concat iy-config-dir "snippets")))
+  (setq yas-use-menu nil)
+  (yas-global-mode 1))
 
 (push 'yasnippet el-get-packages)
 
-(defun yas/safer-expand ()
-  (let ((yas/fallback-behavior 'return-nil))
-    (call-interactively 'yas/expand)))
+(defun yas-safer-expand ()
+  (let ((yas-fallback-behavior 'return-nil))
+    (call-interactively 'yas-expand)))
   
-(defun yas/ido-insert-snippets (&optional no-condition)
+(defun yas-ido-insert-snippets (&optional no-condition)
   (interactive "P")
-  (let ((yas/prompt-functions '(yas/ido-prompt)))
-    (yas/insert-snippet)))
+  (let ((yas-prompt-functions '(yas-ido-prompt)))
+    (yas-insert-snippet)))
 
-(defun yas/buffer-name-stub ()
+(defun yas-buffer-name-stub ()
   (let ((name (or (buffer-file-name)
                   (buffer-name))))
     (replace-regexp-in-string
      "^t_\\|_test$\\|_spec$" ""
      (file-name-sans-extension (file-name-nondirectory name)))))
 
-(defun yas/camel-to-underscore (string)
+(defun yas-camel-to-underscore (string)
   (iy-string-camel-to-underscore string))
-(defun yas/camel-to-lower-underscore (string)
+(defun yas-camel-to-lower-underscore (string)
   (downcase (iy-string-camel-to-underscore string)))
 
-(defun yas/underscore-to-camel (string)
+(defun yas-underscore-to-camel (string)
   (replace-regexp-in-string "_" "" (upcase-initials string)))
 
-(define-key iy-map (kbd "M-/") 'yas/ido-insert-snippets)
+(define-key iy-map (kbd "M-/") 'yas-ido-insert-snippets)
 
 ;;}}}
 
@@ -148,7 +143,7 @@
       ;; skip if prefix is negative
       (unless (< (prefix-numeric-value force) 0)
         (when (not force)
-          (setq ac-expanded (yas/safer-expand)))
+          (setq ac-expanded (yas-safer-expand)))
         (when (and (not ac-expanded)
                    (or force (ac-trigger-command-p last-command)))
           (let ((auto-complete-mode t))
