@@ -84,9 +84,14 @@
 
 (autoload 'helm-command-prefix "helm-config" nil nil 'keymap)
 
+(defun iy-helm ()
+  "Preconfigured `helm' to fidn fiels"
+  (interactive)
+  (helm-other-buffer helm-sources "*helm*"))
+
 ;;; Shortcuts
-(global-set-key (kbd "M-X") 'helm-at-point)
-(define-key iy-map (kbd "M-s") 'helm-at-point)
+(global-set-key (kbd "M-X") 'iy-helm)
+(define-key iy-map (kbd "M-s") 'iy-helm)
 (define-key iy-map (kbd "s") 'helm-command-prefix)
 (define-key iy-map (kbd "M-x") 'helm-M-x)
 
