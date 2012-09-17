@@ -199,6 +199,8 @@
    ("x" "Clipboard" entry (file+headline (concat org-directory "/inbox.org") "Notes")
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %x"
     :prepend t :empty-lines 1)
+   ("i" "Idea" entry (file (concat org-directory "/spark.org") "")
+    "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
 
    ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
     "* %^{title} %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC %^{lang}\n  %i%?\n#+END_SRC\n")))
