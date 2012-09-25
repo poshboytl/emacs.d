@@ -118,3 +118,6 @@
 [submodule "bundle/auto-complete"]
 	path = bundle/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git
+[submodule "bundle/multiple-cursors"]
+	path = bundle/multiple-cursors
+	url = git@github.com:magnars/multiple-cursors.el
