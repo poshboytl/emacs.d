@@ -33,11 +33,12 @@
 
 (global-set-key (kbd "C-r") ctl-x-r-map)
 (define-key ctl-x-r-map (kbd "C-r") 'isearch-backward)
-(global-set-key (kbd "C-x r") 'set-rectangular-region-anchor)
 (define-key ctl-x-r-map (kbd "a") 'mc/mark-all-like-this)
 (define-key ctl-x-r-map (kbd ".") 'mc/mark-next-like-this)
 (define-key ctl-x-r-map (kbd ",") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-3") 'mc/mark-all-like-this)
+(eval-after-load 'bookmark+
+  '(global-set-key (kbd "C-x r") 'set-rectangular-region-anchor))
 
 (global-set-key (kbd "C-8") 'pop-tag-mark)
 
