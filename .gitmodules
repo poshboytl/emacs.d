@@ -91,12 +91,6 @@
 [submodule "bundle/rhtml-mode"]
 	path = bundle/rhtml-mode
 	url = git://github.com/eschulte/rhtml.git
-[submodule "bundle/popup"]
-	path = bundle/popup
-	url = git://github.com/m2ym/popup-el.git
-[submodule "bundle/fuzzy"]
-	path = bundle/fuzzy
-	url = https://github.com/m2ym/fuzzy-el.git
 [submodule "bundle/helm"]
 	path = bundle/helm
 	url = git://github.com/emacs-helm/helm.git
@@ -121,3 +115,9 @@
 [submodule "bundle/multiple-cursors"]
 	path = bundle/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el
+[submodule "bundle/popup"]
+	path = bundle/popup
+	url = git://github.com/auto-complete/popup-el.git
+[submodule "bundle/fuzzy"]
+	path = bundle/fuzzy
+	url = git://github.com/auto-complete/fuzzy-el.git
