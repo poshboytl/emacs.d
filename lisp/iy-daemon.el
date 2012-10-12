@@ -26,6 +26,11 @@
   :group 'iy-config
   :type '(repeat symbol))
 
+(push 'edit-server el-get-packages)
+(setq edit-server-default-major-mode 'markdown-mode)
+;; (setq edit-server-url-major-mode-alist
+;;         '(("github\\.com" . markdown-mode)))
+
 (if iy-daemon-enable-daemon
     (progn
       (defun iy-daemon-run-delete-frame-hooks (frame)
@@ -40,7 +45,10 @@
       (unless (eq system-type 'darwin)
         (add-hook 'delete-frame-functions 'iy-daemon-run-delete-frame-hooks))
 
-      (server-start)))
+      (server-start)
+      (when (require 'edit-server nil t)
+        ;; (setq edit-server-new-frame nil)
+        (edit-server-start))))
 
 (defun iy-server-visit-setup ()
   (let ((base (file-name-nondirectory (buffer-file-name))))
