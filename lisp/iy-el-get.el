@@ -7,7 +7,7 @@
 
     ;; use iy-el-get-after-* as after function if defined
     (when (fboundp func)
-      (plist-put recipe :after (symbol-function func)))
+      (plist-put recipe :after (list func)))
     (when (eq url 'bundle)
       (plist-put recipe :url (concat iy-bundle-dir name)))
     recipe))
@@ -73,8 +73,7 @@
                      "util/jump/which-func.el"))
     (:name yari :url bundle :lazy t)
     (:name ruby-block :features nil
-           :post-init (lambda ()
-                        (autoload 'ruby-block-mode "ruby-block" nil t)))
+           :post-init (autoload 'ruby-block-mode "ruby-block" nil t))
     (:name cucumber :type git :url bundle :lazy t)
     (:name rspec-mode :url bundle :compile nil :lazy t)
     ;; (:name fringe-helper)
@@ -91,7 +90,7 @@
     (:name erlware-mode :lazy t)
     (:name sml-modeline)
     (:name whole-line-or-region :features whole-line-or-region)
-    (:name folding)
+    (:name folding :post-init (folding-mode-add-find-file-hook))
     (:name fold-dwim
            :type http
            :url "http://www.dur.ac.uk/p.j.heslin/Software/Emacs/Download/fold-dwim.el"
