@@ -111,7 +111,7 @@
 	url = git://github.com/jxa/pivotal-tracker.git
 [submodule "bundle/auto-complete"]
 	path = bundle/auto-complete
-	url = git://github.com/auto-complete/auto-complete.git
+	url = git://github.com/doitian/auto-complete.git
 [submodule "bundle/multiple-cursors"]
 	path = bundle/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el
