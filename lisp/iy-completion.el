@@ -117,6 +117,8 @@
            autopair-backspace)
          ac-trigger-commands))
 
+  (setq ac-trigger-on-stop-words-when-manually nil)
+
   (setq-default
    ac-sources '(ac-source-yasnippet
                 ac-source-abbrev
