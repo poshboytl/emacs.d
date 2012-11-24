@@ -121,3 +121,6 @@
 [submodule "bundle/fuzzy"]
 	path = bundle/fuzzy
 	url = git://github.com/auto-complete/fuzzy-el.git
+[submodule "bundle/jade-mode"]
+	path = bundle/jade-mode
+	url = https://github.com/brianc/jade-mode

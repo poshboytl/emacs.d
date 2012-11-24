@@ -7,6 +7,7 @@
 (push 'coffee-mode el-get-packages)
 (push 'flymake-coffee el-get-packages)
 (push 'zencoding-mode el-get-packages)
+(push 'jade-mode el-get-packages)
 
 (defadvice coffee-newline-and-indent (around fix-error-when-bob activate)
   (if (bobp) (newline) ad-do-it))
@@ -32,6 +33,7 @@
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 (add-hook 'js-mode-hook 'iy-js-mode-init)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.jade\\'" . jade-mode))
 
 (custom-set-variables
  '(js-indent-level 2)

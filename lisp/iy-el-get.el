@@ -145,6 +145,7 @@
     (:name ido-ubiquitous :type git :url bundle :features ido-ubiquitous)
     (:name ace-jump-mode :url bundle :lazy t)
     (:name multiple-cursors :type git :url bundle :lazy t)
+    (:name jade-mode :type git :url bundle :lazy t)
 
     )))
 
