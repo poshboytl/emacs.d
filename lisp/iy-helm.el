@@ -80,7 +80,10 @@
   (define-key helm-command-map (kbd "b") 'helm-c-pp-bookmarks)
   (define-key helm-command-map (kbd "p") 'helm-c-eproject-projects)
   (define-key helm-command-map (kbd "f") 'helm-c-eproject-files-in-project)
-  (define-key helm-command-map (kbd "<SPC>") 'helm-all-mark-rings))
+  (define-key helm-command-map (kbd "<SPC>") 'helm-all-mark-rings)
+
+  (fset 'helm-command-prefix helm-command-map)
+  (setq  helm-command-prefix helm-command-map))
 
 (autoload 'helm-command-prefix "helm-config" nil nil 'keymap)
 

@@ -132,6 +132,7 @@
     (:name popup :url bundle)
     (:name fuzzy :type git :url bundle :lazy t)
     (:name auto-complete :url bundle
+           :branch "topic/customize-trigger-on-stop-words"
            :post-init nil
            :build `(,(concat el-get-emacs " -Q -L . -L ../popup -batch -f batch-byte-compile auto-complete.el auto-complete-config.el")))
     (:name diminish)

@@ -12,3 +12,4 @@ TAGS
 .yas-compiled-snippets.el
 .yas-bundled-snippets.el
 /.mc-lists.el
+/ac-comphist.dat
