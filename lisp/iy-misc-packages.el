@@ -17,7 +17,8 @@
 (push 'cheat el-get-packages)
 
 (unless (eq system-type 'darwin)
-  (push 'haskell-mode el-get-packages))
+  (push 'haskell-mode el-get-packages)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))
 
 (push 'erlware-mode el-get-packages)
 
