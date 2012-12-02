@@ -91,11 +91,14 @@
 ;;}}}
 
 ;;{{{ fix isearch/minibuffer
+
 (define-key isearch-mode-map (kbd "M-l") 'iy-isearch-dash)
 (define-key isearch-mode-map (kbd "M-u") 'iy-isearch-underscore)
+
 ;;}}}
 
 ;;{{{ Mark
+
 (global-set-key (kbd "C-2") 'er/expand-region)
 
 (global-set-key [(meta ?@)] 'mark-word)

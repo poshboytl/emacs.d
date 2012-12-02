@@ -1,6 +1,7 @@
 (require 'iy-dep)
 
 ;;{{{ Basic
+
 (custom-set-variables
  '(current-language-environment "UTF-8")
  '(default-major-mode (quote text-mode) t)
@@ -16,6 +17,7 @@
  '(x-select-enable-clipboard t)
  '(browse-url-browser-function (quote w3m-browse-url))
  '(tramp-default-method-alist (quote (("\\`localhost\\'" "\\`root\\'" "sudo")))))
+
 ;;}}}
 
 ;;{{{ Enable Commands
@@ -52,6 +54,14 @@
   (when (fboundp 'session-save-session) (session-save-session))
   (kill-emacs))
 (defalias 'af 'auto-fill-mode)
+
+(defun blog ()
+  (interactive)
+  (ido-find-file-in-dir "~/CodeBase/iany.me/content/blog/posts"))
+(defun wiki ()
+  (interactive)
+  (ido-find-file-in-dir "~/CodeBase/iany.me/content/wiki/pages"))
+
 ;;}}}
 
 (provide 'iy-general)

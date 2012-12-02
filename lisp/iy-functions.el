@@ -254,7 +254,8 @@ Calling this command 3 times will always result in no whitespaces around cursor.
     (?P . page)
     (?f . filename)
     (?u . url)
-    (?c . comment)))
+    (?c . comment))
+  "Map key to thing")
 
 (defun iy-ido-mark-thing ()
   (interactive)
@@ -262,6 +263,21 @@ Calling this command 3 times will always result in no whitespaces around cursor.
    (ido-completing-read "thing: " (mapcar (lambda (th) (prin1-to-string (cdr th))) things-map) nil t)))
 
 (defun iy-mark-thing (arg)
+  "key . thing
+
+(?w . word)
+(?W . symbol)
+(?s . sexp)
+(?d . defun)
+(?l . list)
+(?n . line)
+(?. . sentence)
+(?p . paragraph)
+(?P . page)
+(?f . filename)
+(?u . url)
+(?c . comment)"
+
   (interactive "P")
   (condition-case e
       (let* ((echo-keystrokes nil)

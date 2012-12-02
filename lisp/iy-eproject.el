@@ -197,6 +197,7 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p r") (iy-eproject-call-interactively-in-root 'rgrep))
   (define-key iy-map (kbd "p a") 'ack-root)
   (define-key iy-map (kbd "p g") (iy-eproject-call-interactively-in-root 'git-grep))
+  (define-key iy-map (kbd "p !") (iy-eproject-call-interactively-in-root 'shell-command))
 
   ;; generate TAGS, C-u to update
   (define-key iy-map (kbd "p t") 'eproject-visit-tags-table)
