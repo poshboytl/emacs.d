@@ -18,13 +18,6 @@
   (require 'helm-locate)
   (require 'helm-w3m)
 
-  (setq helm-c-locate-command
-        (case system-type
-          ('gnu/linux "locate -i -r %s")
-          ('berkeley-unix "locate -i %s")
-          ('windows-nt "es -i -r %s")
-          (t "locate %s")))
-
   (defvar helm-c-source-eproject-projects
     '((name . "Projects")
       (candidates . (lambda ()
@@ -103,6 +96,7 @@
 (setq helm-idle-delay 0.3)
 (setq helm-quick-update t)
 (setq helm-c-use-standard-keys t)
+(setq helm-quick-update t)
 
 ;;; Bindings
 (defun helm-insert-buffer-base-name ()

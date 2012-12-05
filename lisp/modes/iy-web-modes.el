@@ -34,9 +34,11 @@
 (add-hook 'js-mode-hook 'iy-js-mode-init)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jade\\'" . jade-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
 
 (custom-set-variables
  '(js-indent-level 2)
+ '(css-indent-offset 2)
  '(coffee-tab-width 2)
  '(zencoding-indentation 2))
 
