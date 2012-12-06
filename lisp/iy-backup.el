@@ -1,5 +1,5 @@
 (custom-set-variables
- '(auto-save-interval 50)
+ '(auto-save-interval 300)
  '(auto-save-list-file-prefix (concat iy-data-dir "autosaves/saves-"))
  '(auto-save-timeout 10)
  '(backup-directory-alist (list (cons "." (expand-file-name "~/.backup/emacs"))))
@@ -18,8 +18,7 @@
  '(session-initialize (quote (de-saveplace session)))
  '(session-save-file (concat iy-data-dir "session"))
  '(vc-make-backup-files t)
- '(version-control t)
- )
+ '(version-control t))
 
 (defcustom iy-backup-enable-desktop
   t

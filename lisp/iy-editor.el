@@ -275,4 +275,13 @@
 
 ;;}}}
 
+;;{{{ Misc
+
+;; diactivate mark after narrow
+
+(defadvice narrow-to-region (after deactivate-mark (start end) activate)
+  (deactivate-mark))
+
+;;}}}
+
 (provide 'iy-editor)

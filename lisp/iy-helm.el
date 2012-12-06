@@ -18,7 +18,10 @@
   (require 'helm-locate)
   (require 'helm-w3m)
 
-  (defvar helm-c-source-eproject-projects
+  (defvar helm-c-source-eproject-projects nil)
+  (defvar helm-c-source-eproject-files-in-project nil)
+
+  (setq helm-c-source-eproject-projects
     '((name . "Projects")
       (candidates . (lambda ()
                       (mapcar 'cdr (eproject-projects))))
@@ -26,9 +29,9 @@
                            (file-name-nondirectory (directory-file-name e))))
       (type . file)))
 
-  (defvar helm-c-source-eproject-files-in-project
+  (setq helm-c-source-eproject-files-in-project
      '((name . "Project Files")
-       (delayed)
+       ;;(delayed)
        (candidate-number-limit . 9999)
        (requires-pattern . 3)
        (real-to-display . (lambda (e)
@@ -47,21 +50,21 @@
     (interactive)
     (helm-other-buffer 'helm-c-source-eproject-files-in-project "*helm files in project*"))
 
+  
   ;;; Sources
-  (setq helm-sources
-        (list
-         'helm-c-source-ffap-line
-         'helm-c-source-ffap-guesser
-         'helm-c-source-buffers-list
-         'helm-c-source-files-in-current-dir
-         'helm-c-source-eproject-files-in-project
-         'helm-c-source-eproject-projects
-         'helm-c-source-file-cache
-         'helm-c-source-recentf
-         'helm-c-source-file-name-history
-         'helm-c-source-bookmarks
-         'helm-c-source-w3m-bookmarks
-         'helm-c-source-locate))
+  (defvar iy-helm-sources nil)
+  (setq iy-helm-sources
+        '(helm-c-source-ffap-line
+          helm-c-source-ffap-guesser
+          helm-c-source-buffers-list
+          helm-c-source-files-in-current-dir
+          helm-c-source-eproject-files-in-project
+          helm-c-source-eproject-projects
+          helm-c-source-file-cache
+          helm-c-source-recentf
+          helm-c-source-file-name-history
+          helm-c-source-bookmarks
+          helm-c-source-w3m-bookmarks))
 
   (setq helm-enable-shortcuts 'prefix)
   (define-key helm-map (kbd "M-s") 'helm-select-with-prefix-shortcut)
@@ -80,14 +83,14 @@
 
 (autoload 'helm-command-prefix "helm-config" nil nil 'keymap)
 
-(defun iy-helm ()
+(defun iy-helm-go ()
   "Preconfigured `helm' to fidn fiels"
   (interactive)
-  (helm-other-buffer helm-sources "*helm*"))
+  (helm-other-buffer iy-helm-sources "*helm go*"))
 
 ;;; Shortcuts
-(global-set-key (kbd "M-X") 'iy-helm)
-(define-key iy-map (kbd "M-s") 'iy-helm)
+(global-set-key (kbd "M-X") 'iy-helm-go)
+(define-key iy-map (kbd "M-s") 'iy-helm-go)
 (define-key iy-map (kbd "s") 'helm-command-prefix)
 (define-key iy-map (kbd "M-x") 'helm-M-x)
 
