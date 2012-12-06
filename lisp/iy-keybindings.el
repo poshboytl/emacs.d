@@ -251,6 +251,8 @@
 
 (global-set-key (kbd "C-4") 'ispell-word)
 
+(define-key iy-map (kbd "n") 'deft)
+
 ;;}}}
 
 (provide 'iy-keybindings)
