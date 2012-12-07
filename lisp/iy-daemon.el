@@ -47,9 +47,9 @@
       (server-start)
 
       (push 'edit-server el-get-packages)
-      (eval-after-load 'edit-server
-	'(progn
-	   (edit-server-start)))))
+      (eval-after-load "edit-server"
+        '(progn
+           (edit-server-start)))))
 
 (defun iy-server-visit-setup ()
   (let ((base (file-name-nondirectory (buffer-file-name))))
