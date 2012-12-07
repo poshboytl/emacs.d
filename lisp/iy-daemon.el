@@ -45,9 +45,11 @@
         (add-hook 'delete-frame-functions 'iy-daemon-run-delete-frame-hooks))
 
       (server-start)
-      (push 'edit-server el-get-packages)
 
-      (eval-after-load "edit-server" (edit-server-start))))
+      (push 'edit-server el-get-packages)
+      (eval-after-load 'edit-server
+	'(progn
+	   (edit-server-start)))))
 
 (defun iy-server-visit-setup ()
   (let ((base (file-name-nondirectory (buffer-file-name))))

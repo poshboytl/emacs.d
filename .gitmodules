@@ -124,3 +124,9 @@
 [submodule "bundle/jade-mode"]
 	path = bundle/jade-mode
 	url = https://github.com/brianc/jade-mode
+[submodule "bundle/smex"]
+	path = bundle/smex
+	url = git://github.com/nonsequitur/smex.git
+[submodule "bundle/ido-complete-space-or-hyphen"]
+	path = bundle/ido-complete-space-or-hyphen
+	url = git://github.com/doitian/ido-complete-space-or-hyphen.git

@@ -147,6 +147,8 @@
     (:name ace-jump-mode :url bundle :lazy t)
     (:name multiple-cursors :type git :url bundle :lazy t)
     (:name jade-mode :type git :url bundle :lazy t)
+    (:name ido-complete-space-or-hyphen :type git :url bundle :features ido-complete-space-or-hyphen)
+    (:name smex :url bundle)
 
     )))
 

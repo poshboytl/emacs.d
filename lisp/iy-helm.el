@@ -92,7 +92,6 @@
 (global-set-key (kbd "M-X") 'iy-helm-go)
 (define-key iy-map (kbd "M-s") 'iy-helm-go)
 (define-key iy-map (kbd "s") 'helm-command-prefix)
-(define-key iy-map (kbd "M-x") 'helm-M-x)
 
 ;; Customization
 (setq helm-input-idle-delay 0)
