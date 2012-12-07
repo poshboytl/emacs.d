@@ -31,7 +31,7 @@
 
   (setq helm-c-source-eproject-files-in-project
      '((name . "Project Files")
-       ;;(delayed)
+       ;; (delayed)
        (candidate-number-limit . 9999)
        (requires-pattern . 3)
        (real-to-display . (lambda (e)
@@ -99,7 +99,7 @@
 (setq helm-idle-delay 0.3)
 (setq helm-quick-update t)
 (setq helm-c-use-standard-keys t)
-(setq helm-quick-update t)
+(setq helm-quick-update nil)
 
 ;;; Bindings
 (defun helm-insert-buffer-base-name ()
