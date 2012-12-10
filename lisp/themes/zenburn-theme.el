@@ -540,6 +540,11 @@
  `(eproject-mode-line-project-name-face ((t (:foreground ,zenburn-blue))))
  `(tooltip ((t (:background ,zenburn-yellow-1 :foreground ,zenburn-bg+2))))
 
+ `(hi-yellow ((t (:background "#534626"))))
+ `(hi-pink ((t (:background "#310602"))))
+ `(hi-green ((t (:background "#013009"))))
+ `(hi-blue ((t (:background "#02052B"))))
+
  )
 
 (provide-theme 'zenburn)
