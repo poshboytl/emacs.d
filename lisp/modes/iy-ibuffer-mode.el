@@ -30,6 +30,12 @@
   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-filename-or-dired)
   (define-key ibuffer-mode-map (kbd "M-o") 'other-window)
 
+  (defun ibuffer-filter-by-extname (qualifier)
+    (interactive "sFilter by extname: ")
+    (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
+
+  (define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
+
   (setq ibuffer-saved-filter-groups
         '(("default"
            ("dired" (mode . dired-mode))
