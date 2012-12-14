@@ -49,12 +49,12 @@
                       (filename . "\\.rb\\'")))
            ("web" (or
                    (filename . "\\.js\\'")
-                   (filename . "\\.css\\'")
                    (filename . "\\.erb\\'")
                    (mode . html-mode)
                    (mode . nxml-mode)
                    (mode . nxhtml-mode)
                    (mode . haml-mode)
+                   (mode . css-mode)
                    (mode . sass-mode)
                    (mode . coffee-mode)))
            ("doc" (or
