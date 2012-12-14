@@ -1,12 +1,26 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md.hb\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md.erb\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 
 (push 'markdown-mode el-get-packages)
+(defvar markdown-imenu-generic-expression
+  '(("title"  "^\\(.*\\)[\n]=+$" 1)
+    ("h2-"    "^\\(.*\\)[\n]-+$" 1)
+    ("h1"   "^# \\(.*\\)$" 1)
+    ("h2"   "^## \\(.*\\)$" 1)
+    ("h3"   "^### \\(.*\\)$" 1)
+    ("h4"   "^#### \\(.*\\)$" 1)
+    ("h5"   "^##### \\(.*\\)$" 1)
+    ("h6"   "^###### \\(.*\\)$" 1)
+    ("fn"   "^\\[\\^\\(.*\\)\\]" 1)))
 
 (defun iy-markdown-mode-init ()
   (turn-on-auto-fill)
   (flyspell-mode 1)
   (autopair-mode 1)
+
+  (setq imenu-generic-expression markdown-imenu-generic-expression)
 
   (setq autopair-extra-pairs
         '(:everywhere ((?` . ?`))))
