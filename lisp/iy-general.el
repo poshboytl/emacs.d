@@ -59,10 +59,10 @@
 
 (defun blog ()
   (interactive)
-  (ido-find-file-in-dir "~/CodeBase/iany.me/content/blog/posts"))
+  (ido-find-file-in-dir "~/CodeBase/iany.me/content/posts"))
 (defun wiki ()
   (interactive)
-  (ido-find-file-in-dir "~/CodeBase/iany.me/content/wiki/pages"))
+  (ido-find-file-in-dir "~/CodeBase/iany.me/content/wiki"))
 
 ;;}}}
 
