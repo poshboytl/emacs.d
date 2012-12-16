@@ -29,8 +29,8 @@
 (defun wicked-w3m-open-link-or-image-in-default-browser ()
   "Open the current link or image in GUI."
   (interactive)
-  (browse-url-generic (or (w3m-anchor)
-                          (w3m-image))))
+  (browse-url-generic (or (w3m-anchor (point))
+                          (w3m-image (point)))))
 
 (defun wicked-toggle-w3m ()
   "Switch to a w3m buffer or return to the previous buffer."
@@ -99,7 +99,8 @@
   (define-key w3m-mode-map "," 'w3m-previous-buffer)
   (define-key w3m-mode-map "." 'w3m-next-buffer)
   (define-key w3m-mode-map (kbd "C-w") 'w3m-delete-buffer)
-  (define-key w3m-mode-map (kbd "C-c M-s") 'w3m-session-select)
+  (define-key w3m-mode-map (kbd "C-c s") 'w3m-session-select)
+  (define-key w3m-mode-map (kbd "C-<tab>") 'w3m-select-buffer)
   (define-key w3m-mode-map (kbd "M-s") iy-map))
 
 (add-hook 'w3m-mode-hook 'iy-el-w3m-init)
@@ -134,6 +135,12 @@
          [simple-query
           "http://dict.youdao.com/"
           "http://dict.youdao.com/search?q=" ""])
-      ))))
+        ("gems" . "http://gems.dev")
+        ("jquery" . "http://docs.local/jquery")
+        ("rails" . "http://docs.local/rails")
+        ("ruby" . "http://docs.local/ruby")
+        ))))
+
+(defun iy-)
 
 (provide 'iy-w3m)
