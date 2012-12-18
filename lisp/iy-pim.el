@@ -322,7 +322,7 @@
          (sd (and sd (1- sd)))
          (org-agenda-overriding-arguments
           (or org-agenda-overriding-arguments
-              (list (car org-agenda-last-arguments) sd 3 t))))
+              (list (car (get-text-property (point) 'org-last-args)) sd 3 t))))
     (org-agenda-redo)
     (org-agenda-find-same-or-today-or-agenda))
   (org-agenda-set-mode-name)
