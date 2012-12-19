@@ -103,6 +103,7 @@
   (push 'markdown-mode ac-modes)
   (push 'org-mode ac-modes)
   (push 'coffee-mode ac-modes)
+  (push 'inferior-emacs-lisp-mode ac-modes)
 
   (define-key ac-complete-mode-map (kbd "RET") 'nil)
   (define-key ac-complete-mode-map (kbd "<return>") 'nil)
@@ -130,6 +131,7 @@
   (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
   (add-hook 'ruby-mode-hook 'iy-ac-ruby-mode-setup)
   (add-hook 'sh-mode-hook 'iy-ac-sh-mode-setup)
+  (add-hook 'ielm-mode-hook 'iy-ac-ielm-mode-setup)
 
   (global-auto-complete-mode t)
 
@@ -179,6 +181,15 @@
 
 (defun iy-ac-sh-mode-setup ()
   (set (make-variable-buffer-local 'ac-stop-words) '("fi" "done" "esac")))
+
+(defun iy-ac-ielm-mode-setup ()
+ "Enables `auto-complete' support in \\[ielm]."
+ (setq ac-sources '(ac-source-yasnippet
+                    ac-source-features
+                     ac-source-functions
+                     ac-source-variables
+                     ac-source-symbols
+                     ac-source-words-in-same-mode-buffers)))
 
 (custom-set-variables
  '(ac-use-fuzzy nil)
