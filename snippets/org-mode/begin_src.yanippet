@@ -2,6 +2,6 @@
 # name: begin_src
 # key: bs
 # --
-#+begin_src ${1:text}
+#+BEGIN_SRC ${1:text}
   $0
-#+end_src
+#+END_SRC

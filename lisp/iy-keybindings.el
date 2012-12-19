@@ -73,6 +73,7 @@
 ;;}}}
 
 ;;{{{ Insert
+
 (define-key iy-map (kbd "q u") 'iy-insert-user)
 (define-key iy-map (kbd "q t") 'iy-insert-time)
 (define-key iy-map (kbd "q s") 'iy-insert-timestamp)
@@ -88,6 +89,7 @@
 (global-set-key (kbd "M-U") 'iy-dwim-upcase)
 (global-set-key (kbd "M-L") 'iy-dwim-downcase)
 (global-set-key (kbd "M-C") 'iy-dwim-capitalize)
+
 ;;}}}
 
 ;;{{{ fix isearch/minibuffer

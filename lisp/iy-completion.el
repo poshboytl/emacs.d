@@ -105,11 +105,11 @@
   (push 'coffee-mode ac-modes)
   (push 'inferior-emacs-lisp-mode ac-modes)
 
-  (define-key ac-complete-mode-map (kbd "RET") 'nil)
-  (define-key ac-complete-mode-map (kbd "<return>") 'nil)
+  (define-key ac-complete-mode-map (kbd "RET") 'ac-complete)
+  (define-key ac-complete-mode-map (kbd "<return>") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-SPC") 'ac-complete)
   (define-key ac-complete-mode-map (kbd "M-<tab>") 'ac-complete)
-  (define-key ac-complete-mode-map (kbd "M-g") 'ac-stop)
+  (define-key ac-complete-mode-map (kbd "C-g") 'ac-stop)
 
   (setq ac-trigger-commands
         (append
