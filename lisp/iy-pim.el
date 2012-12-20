@@ -43,9 +43,13 @@
                   "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELED(c@)")))
 
 (setq org-todo-keyword-faces
-      '(("TODO" :foreground "red" :weight bold)
+      '(("TODO" :foreground "coral3" :weight bold)
         ("GOING" :foreground "green" :weight bold)
         ("PAUSE" :foreground "yellow" :weight bold)))
+(setq org-priority-faces
+      '((?A :foreground "red" :weight bold)
+        (?B :foreground "#94bff3" :weight bold)
+        (?C :foreground "#6f6f6f")))
 
 ;; example:
 ;;   (:startgroup . nil)
@@ -78,11 +82,11 @@
         ("GOING") ("next") ""))
 
 (setq org-global-properties
-      '(("STYLE_ALL" . "habit")
-        ("Effort_ALL" . "0:30 1:00 1:30 2:00 2:30 3:00 3:30 4:00")))
+      '(("STYLE_ALL" . "habit")))
 
 (setq org-tags-exclude-from-inheritance '("project"))
-(setq org-columns-default-format "%42ITEM %TODO %5Effort(E){:} %6CLOCKSUM(R){Total} %SCHEDULED")
+(setq org-columns-default-format
+      "%42ITEM %TODO %5Effort(E){:} %6CLOCKSUM(R) %SCHEDULED")
 (setq org-read-date-prefer-future 'time)
 (setq org-completion-use-ido t)
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
@@ -90,7 +94,7 @@
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-clock-history-length 35)
-(setq org-clock-in-resume t)
+(setq org-clock-in-resume nil)
 (setq org-clock-in-switch-to-state "GOING")
 (setq org-clock-out-switch-to-state
       (function iy-clock-out-switch-to-pause-if-going))
@@ -104,7 +108,7 @@
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-skip-timestamp-if-done t)
-(setq org-agenda-span 'day)
+(setq org-agenda-span 7)
 (setq org-tags-column -80)
 (setq org-agenda-tags-column -80)
 (setq org-enforce-todo-checkbox-dependencies t)
@@ -168,7 +172,8 @@
 (defun sacha-org-clock-in-if-starting ()
   "Clock in when the task is marked GOING."
   (when (and (string= org-state "GOING")
-             (not (string= org-last-state org-state)))
+             (not (string= org-last-state org-state))
+             (not org-clock-current-task))
     (org-clock-in)))
 (add-hook 'org-after-todo-state-change-hook
           'sacha-org-clock-in-if-starting)
@@ -176,7 +181,8 @@
 (defun iy-org-clock-out-if-pause ()
   "Clock out when the task is marked PAUSE."
   (when (and (string= org-state "PAUSE")
-             (not (string= org-last-state org-state)))
+             (not (string= org-last-state org-state))
+             (org-clock-is-active))
     (org-clock-out t)))
 (add-hook 'org-after-todo-state-change-hook
           'iy-org-clock-out-if-pause)
@@ -216,8 +222,8 @@
          ((tags-todo "@computer/GOING|PAUSE|TODO")))
         ("lp" "Phone"
          ((tags-todo "@phone/GOING|PAUSE|TODO")))
-        ("lm" "Mail"
-         ((tags-todo "@mail/GOING|PAUSE|TODO")))
+        ("lm" "Message"
+         ((tags-todo "@message/GOING|PAUSE|TODO")))
         ("lr" "Reading"
          ((tags-todo "@reading/GOING|PAUSE|TODO")))
         ("T" "TODO List"
@@ -301,14 +307,101 @@
 (setq appt-disp-window-function (function iy-appt-display))
 (setq org-show-notification-handler (function iy-org-clock-display))
 
-;; timer for pomodoro
-(setq org-timer-default-timer 25)
-(add-hook 'org-clock-in-hook '(lambda ()
-      (if (not org-timer-current-timer)
-      (org-timer-set-timer '(25)))))
-(add-hook 'org-clock-out-hook '(lambda ()
-                                 (if org-timer-current-timer
-                                     (org-timer-cancel-timer))))
+;; pomodoro
+
+(defvar org-pomodoro-minutes 1)
+(defvar org-pomodoro-cancelling nil)
+(defvar org-pomodoro-process nil)
+(defvar org-pomodoro-command (locate-file "pomodoro" exec-path))
+
+(defun org-pomodoro-on-org-load ()
+  (push (cons "p" org-pomodoro-minutes) org-effort-durations)
+  (push '("Effort_ALL" . "1p 2p 3p 4p 5p 6p 7p 8p") org-global-properties))
+
+(eval-after-load "org" '(org-pomodoro-on-org-load))
+
+(defadvice org-minutes-to-hh:mm-string (around org-pomodoro-minutes-to-pomodoros activate)
+  (setq ad-return-value (format "%dp" (round (/ m (float org-pomodoro-minutes-to-pomodoros))))))
+(defadvice org-columns-number-to-string (around org-pomodoro-minutes-to-pomodoros activate)
+  (if (memq fmt '(add_times max_times min_times mean_times))
+      (setq ad-return-value (format "%dp" (round (/ (n * 60) org-pomodoro-minutes))))
+    ad-do-it))
+
+(defun org-pomodoro-after-clock-in ()
+  (when (not org-timer-current-timer)
+    (org-timer-set-timer org-pomodoro-minutes)
+    (when org-pomodoro-process
+      (kill-process org-pomodoro-process))
+    (when org-pomodoro-command
+        (setq org-pomodoro-process
+            (start-process "pomodoro" "*pomodoro*" "pomodoro" "-l" (number-to-string org-pomodoro-minutes))))))
+
+(defun org-pomodoro-after-clock-out ()
+  (unless org-pomodoro-cancelling
+    (when org-pomodoro-process
+      (kill-process org-pomodoro-process)
+      (setq org-pomodoro-process nil))
+    (org-pomodoro-cancel-timer-safe)))
+
+(defun org-pomodoro-is-indivisible! ()
+  (let ((org-clock-out-remove-zero-time-clocks nil)
+        (org-pomodoro-cancelling t)
+        (buffer (current-buffer))
+        (point (point)))
+    (when (org-clock-is-active)
+      (setq buffer (marker-buffer org-clock-marker)
+            point (marker-position org-clock-marker))
+      (org-clock-out))
+    (save-excursion
+      (with-current-buffer buffer
+        (save-restriction
+          (widen)
+          (goto-char point)
+          (beginning-of-line 1)
+          (when (and (not remove)
+                     (looking-at (concat "[ \t]*" org-keyword-time-regexp))
+                     (equal (match-string 1) org-clock-string))
+            (goto-char (match-end 0))
+            (beginning-of-line 1)
+            (kill-line 1)
+            (message "Pomodoro is cancelled")))))))
+
+(defun org-pomodoro-done ()
+  (when (org-clock-is-active) (org-clock-out)))
+
+(defun org-pomodoro-cancel-timer-safe ()
+  (when org-timer-current-timer (org-timer-cancel-timer)))
+
+(add-hook 'org-timer-pause-hook 'org-pomodoro-cancel-timer-safe)
+(add-hook 'org-timer-continue-hook 'org-pomodoro-cancel-timer-safe)
+(add-hook 'org-timer-stop-hook 'org-pomodoro-cancel-timer-safe)
+(add-hook 'org-timer-cancel-hook 'org-pomodoro-is-indivisible!)
+(add-hook 'org-timer-done-hook 'org-pomodoro-done)
+(add-hook 'org-clock-in-hook 'org-pomodoro-after-clock-in)
+(add-hook 'org-clock-out-hook 'org-pomodoro-after-clock-out)
+
+(defvar org-pomodoro-columns-format
+  "%42ITEM %SCHEDULED %CATEGORY %2Effort(E){:} %2CLOCKSUM(R) %POMODORO_INTERRUPTIONS(I){+}")
+
+(defun org-pomodoro-columns ()
+  (interactive)
+  (org-columns org-pomodoro-columns-format))
+
+(defun org-pomodoro-record-interuptions (char)
+  (interactive (list
+                (if (string=
+                     "internal"
+                     (completing-read "type: " '("internal" "external") nil t nil nil "internal"))
+                    ?' ?-)))
+  (if (and org-clock-current-task org-clock-marker)
+      (save-excursion
+        (with-current-buffer (marker-buffer org-clock-marker)
+          (goto-char org-clock-marker)
+          (let ((value (concat (sort (cons char (string-to-list (org-entry-get nil "POMODORO_INTERUPTIONS"))) '<))))
+            (org-entry-put nil "POMODORO_INTERUPTIONS" value)
+            (org-entry-put nil "POMODORO_INTERUPTIONS_COUNT" (number-to-string (length value)))
+            (message "Interuptions: %s" value))))
+    (error "no active pomodoro")))
 
 (defun org-agenda-3-days-view (&optional day-of-year)
   "Switch to 3-days (yesterday, today, tomorrow) view for agenda."
