@@ -100,9 +100,6 @@
 [submodule "bundle/flymake-coffee"]
 	path = bundle/flymake-coffee
 	url = git://github.com/purcell/flymake-coffee
-[submodule "bundle/ido-ubiquitous"]
-	path = bundle/ido-ubiquitous
-	url = git://github.com/technomancy/ido-ubiquitous.git
 [submodule "bundle/ace-jump-mode"]
 	path = bundle/ace-jump-mode
 	url = git://github.com/winterTTr/ace-jump-mode.git
@@ -130,3 +127,6 @@
 [submodule "bundle/ido-complete-space-or-hyphen"]
 	path = bundle/ido-complete-space-or-hyphen
 	url = git://github.com/doitian/ido-complete-space-or-hyphen.git
+[submodule "bundle/ido-hacks"]
+	path = bundle/ido-hacks
+	url = git://github.com/scottjad/ido-hacks.git

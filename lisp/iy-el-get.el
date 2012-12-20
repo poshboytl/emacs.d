@@ -150,6 +150,7 @@
     (:name ido-complete-space-or-hyphen :type git :url bundle :features ido-complete-space-or-hyphen)
     (:name smex :url bundle)
     (:name edit-server :features edit-server)
+    (:name ido-hacks :type git :url bundle :features ido-hacks :build nil)
     )))
 
 (provide 'iy-el-get)

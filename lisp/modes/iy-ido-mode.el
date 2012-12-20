@@ -3,31 +3,18 @@
 ;; customization
 
 (custom-set-variables
- '(ido-ubiquitous-command-exceptions '(execute-extended-command
-                                       ;; describe-function
-                                       ;; describe-variable
-                                       ;; customize-variable
-                                       ;; customize-variable-other-window
-                                       ;; customize-option
-                                       ;; customize-option-other-window
-                                       ;; customize-face
-                                       ;; customize-face-other-window
-                                       ;; load-library
-                                       w3m-goto-url-new-session
-                                       w3m-goto-url
-                                       where-is))
- '(ido-ubiquitous t)
+ '(ido-hacks-mode t)
  '(ido-enable-regexp nil)
  '(ido-enable-flex-matching t)
  '(ido-save-directory-list-file (concat iy-data-dir "ido.last"))
  '(ido-everywhere t)
  '(ido-read-file-name-as-directory-commands nil)
- '(ido-use-filename-at-point nil))
+ '(ido-use-filename-at-point t))
 
 (ido-mode t)
 (ido-load-history)
 
-(push 'ido-ubiquitous el-get-packages)
+(push 'ido-hacks el-get-packages)
 (push 'ido-complete-space-or-hyphen el-get-packages)
 (push 'smex el-get-packages)
 
@@ -41,6 +28,12 @@
   (global-set-key (kbd "M-x") 'smex)
   (define-key iy-map (kbd "M-x") 'smex-major-mode-commands))
 
+(defun iy-el-get-after-ido-hacks ()
+  (ido-hacks-mode t)
+  (iy-el-get-after-smex)
+  (ad-enable-advice 'ido-read-internal 'around 'ido-completing-read-use-initial-input-as-default)
+  (ad-activate 'ido-read-internal))
+
 (defvar ido-completing-read-use-initial-input-as-default-commands nil
   "Use initial input as default in list commands")
 
@@ -50,14 +43,15 @@
       '(ibuffer-filter-by-mode
         ibuffer-filter-by-used-mode))
 
-(defadvice ido-completing-read (around ido-completing-read-use-initial-input-as-default activate)
+(defadvice ido-read-internal (around ido-completing-read-use-initial-input-as-default)
+  ;;(defun ido-read-internal (item prompt history &optional default require-match initial)
   (if (and
        (not ido-completing-read-use-initial-input--running)
        (memq this-command ido-completing-read-use-initial-input-as-default-commands))
       (let ((ido-completing-read-use-initial-input--running t))
-        (setq ad-return-value (ido-completing-read prompt choices _predicate require-match nil hist
-                                                   (or def initial-input)
-                                                   _inherit-input-method)))
+        (setq default (or default initial))
+        (setq initial nil)
+        ad-do-it)
     ad-do-it))
 
 (add-hook 'ido-setup-hook 'iy-ido-mode-init)
