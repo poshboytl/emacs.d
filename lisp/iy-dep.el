@@ -49,7 +49,7 @@
          (set-default symbol value)
          (set-fontset-font "fontset-default" 'chinese-gbk value)))
 
-(defcustom iy-codebase-dir (expand-file-name "~/CodeBase/")
+(defcustom iy-codebase-dir (expand-file-name "~/codebase/")
   "Root directory of projects source"
   :group 'iy-config
   :type 'directory
