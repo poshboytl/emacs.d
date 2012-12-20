@@ -10,7 +10,8 @@
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
 
-(push 'ruby-mode el-get-packages)
+;; (push 'ruby-mode el-get-packages)
+(push 'Enhanced-Ruby-Mode el-get-packages)
 (push 'ruby-end el-get-packages)
 
 (setq rinari-minor-mode-prefixes '(";"))
@@ -43,6 +44,8 @@
   (local-set-key (kbd "<return>") 'reindent-then-newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "C-h h") 'yari)
+  (local-set-key (kbd "M-s `") 'ruby-find-error)
+  (local-set-key (kbd "M-s M-`") 'ruby-find-error)
 
   (rinari-minor-mode t)
   (hs-minor-mode t)

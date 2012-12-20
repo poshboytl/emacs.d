@@ -545,6 +545,12 @@
  `(hi-green ((t (:background "#013009"))))
  `(hi-blue ((t (:background "#02052B"))))
 
+ `(ruby-string-delimiter-face ((t (:foreground ,zenburn-red-2))))
+ `(ruby-heredoc-delimiter-face ((t (:foreground ,zenburn-red-2))))
+ `(ruby-regexp-delimiter-face ((t (:foreground ,zenburn-red-2))))
+ `(ruby-op-face ((t (:foreground ,zenburn-fg :bold t))))
+ `(erm-syn-warnline ((t (:underline ,zenburn-orange))))
+ `(erm-syn-errline ((t (:box (:line-width 1 :color "coral3")))))
  )
 
 (provide-theme 'zenburn)

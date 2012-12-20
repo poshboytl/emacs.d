@@ -151,6 +151,7 @@
     (:name smex :url bundle)
     (:name edit-server :features edit-server)
     (:name ido-hacks :type git :url bundle :features ido-hacks :build nil)
+    (:name Enhanced-Ruby-Mode :type git :url bundle)
     )))
 
 (provide 'iy-el-get)

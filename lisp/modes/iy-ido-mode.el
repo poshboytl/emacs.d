@@ -9,7 +9,7 @@
  '(ido-save-directory-list-file (concat iy-data-dir "ido.last"))
  '(ido-everywhere t)
  '(ido-read-file-name-as-directory-commands nil)
- '(ido-use-filename-at-point t))
+ '(ido-use-filename-at-point nil))
 
 (ido-mode t)
 (ido-load-history)
