@@ -8,7 +8,9 @@
 (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
+
 
 ;; (push 'ruby-mode el-get-packages)
 (push 'Enhanced-Ruby-Mode el-get-packages)

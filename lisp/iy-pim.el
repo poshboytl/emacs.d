@@ -86,7 +86,7 @@
 
 (setq org-tags-exclude-from-inheritance '("project"))
 (setq org-columns-default-format
-      "%42ITEM %TODO %5Effort(E){:} %6CLOCKSUM_T(R) %SCHEDULED")
+      "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
 (setq org-read-date-prefer-future 'time)
 (setq org-completion-use-ido t)
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
@@ -149,6 +149,7 @@
 (define-key iy-map (kbd "M-r") 'org-capture)
 (autoload 'org-footnote-action "org-footnote" nil t)
 (define-key iy-map (kbd "t") 'org-footnote-action)
+(define-key iy-map (kbd "'") 'org-pomodoro-record-interuptions)
 
 (add-hook 'org-mode-hook 'iy-org-mode-init)
 (defun iy-org-mode-init ()
@@ -323,7 +324,7 @@
 (eval-after-load "org" '(org-pomodoro-on-org-load))
 
 (defadvice org-minutes-to-hh:mm-string (around org-pomodoro-minutes-to-pomodoros activate)
-  (setq ad-return-value (format "%dp" (round (/ m (float org-pomodoro-minutes-to-pomodoros))))))
+  (setq ad-return-value (format "%dp" (round (/ m (float org-pomodoro-minutes))))))
 (defadvice org-columns-number-to-string (around org-pomodoro-minutes-to-pomodoros activate)
   (if (memq fmt '(add_times max_times min_times mean_times))
       (setq ad-return-value (format "%dp" (round (/ (* n 60) org-pomodoro-minutes))))
@@ -332,18 +333,24 @@
 (defun org-pomodoro-after-clock-in ()
   (when (not org-timer-current-timer)
     (org-timer-set-timer org-pomodoro-minutes)
-    (when org-pomodoro-process
-      (kill-process org-pomodoro-process))
+    (when (and org-pomodoro-process
+               (eq 'run (process-status org-pomodoro-process)))
+      (interrupt-process org-pomodoro-process))
     (when org-pomodoro-command
-        (setq org-pomodoro-process
-            (start-process "pomodoro" "*pomodoro*" "pomodoro" "-l" (number-to-string org-pomodoro-minutes))))))
+      (setq org-pomodoro-process
+            (let ((process-connection-type nil))
+              (start-process "pomodoro" "*pomodoro*" "pomodoro" "-l" (number-to-string org-pomodoro-minutes)))))))
 
 (defun org-pomodoro-after-clock-out ()
+  (org-pomodoro-stop-process)
   (unless org-pomodoro-cancelling
-    (when org-pomodoro-process
-      (kill-process org-pomodoro-process)
-      (setq org-pomodoro-process nil))
     (org-pomodoro-cancel-timer-safe)))
+
+(defun org-pomodoro-stop-process ()
+  (when (and org-pomodoro-process
+             (eq 'run (process-status org-pomodoro-process)))
+    (interrupt-process org-pomodoro-process)
+    (setq org-pomodoro-process nil)))
 
 (defun org-pomodoro-is-indivisible! ()
   (let ((org-clock-out-remove-zero-time-clocks nil)
@@ -383,7 +390,7 @@
 (add-hook 'org-clock-out-hook 'org-pomodoro-after-clock-out)
 
 (defvar org-pomodoro-columns-format
-  "%22SCHEDULED %CATEGORY %42ITEM %2Effort(E){:} %2CLOCKSUM_T(R) %POMODORO_INTERRUPTIONS(I){+}")
+  "%22SCHEDULED %CATEGORY %42ITEM %3Effort(E){:} %3CLOCKSUM_T(R) %POMODORO_INTERRUPTIONS(I){+}")
 
 (defun org-pomodoro-columns ()
   (interactive)
