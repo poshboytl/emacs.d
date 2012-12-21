@@ -86,7 +86,7 @@
 
 (setq org-tags-exclude-from-inheritance '("project"))
 (setq org-columns-default-format
-      "%42ITEM %TODO %5Effort(E){:} %6CLOCKSUM(R) %SCHEDULED")
+      "%42ITEM %TODO %5Effort(E){:} %6CLOCKSUM_T(R) %SCHEDULED")
 (setq org-read-date-prefer-future 'time)
 (setq org-completion-use-ido t)
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
@@ -316,7 +316,9 @@
 
 (defun org-pomodoro-on-org-load ()
   (push (cons "p" org-pomodoro-minutes) org-effort-durations)
-  (push '("Effort_ALL" . "1p 2p 3p 4p 5p 6p 7p 8p") org-global-properties))
+  (push '("Effort_ALL" . "1p 2p 3p 4p 5p 6p 7p 8p") org-global-properties)
+  (define-key org-mode-map "\C-c\C-x'" 'org-pomodoro-columns)
+  (define-key org-agenda-mode-map "\C-c\C-x'" 'org-pomodoro-agenda-columns))
 
 (eval-after-load "org" '(org-pomodoro-on-org-load))
 
@@ -324,7 +326,7 @@
   (setq ad-return-value (format "%dp" (round (/ m (float org-pomodoro-minutes-to-pomodoros))))))
 (defadvice org-columns-number-to-string (around org-pomodoro-minutes-to-pomodoros activate)
   (if (memq fmt '(add_times max_times min_times mean_times))
-      (setq ad-return-value (format "%dp" (round (/ (n * 60) org-pomodoro-minutes))))
+      (setq ad-return-value (format "%dp" (round (/ (* n 60) org-pomodoro-minutes))))
     ad-do-it))
 
 (defun org-pomodoro-after-clock-in ()
@@ -381,11 +383,16 @@
 (add-hook 'org-clock-out-hook 'org-pomodoro-after-clock-out)
 
 (defvar org-pomodoro-columns-format
-  "%42ITEM %SCHEDULED %CATEGORY %2Effort(E){:} %2CLOCKSUM(R) %POMODORO_INTERRUPTIONS(I){+}")
+  "%22SCHEDULED %CATEGORY %42ITEM %2Effort(E){:} %2CLOCKSUM_T(R) %POMODORO_INTERRUPTIONS(I){+}")
 
 (defun org-pomodoro-columns ()
   (interactive)
   (org-columns org-pomodoro-columns-format))
+
+(defun org-pomodoro-agenda-columns ()
+  (interactive)
+  (let ((org-agenda-overriding-columns-format org-pomodoro-columns-format))
+   (org-agenda-columns)))
 
 (defun org-pomodoro-record-interuptions (char)
   (interactive (list
