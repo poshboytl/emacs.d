@@ -309,7 +309,7 @@
 
 ;; pomodoro
 
-(defvar org-pomodoro-minutes 1)
+(defvar org-pomodoro-minutes 25)
 (defvar org-pomodoro-cancelling nil)
 (defvar org-pomodoro-process nil)
 (defvar org-pomodoro-command (locate-file "pomodoro" exec-path))
