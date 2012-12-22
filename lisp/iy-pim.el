@@ -337,8 +337,7 @@
       (interrupt-process org-pomodoro-process))
     (when org-pomodoro-command
       (setq org-pomodoro-process
-            (let ((process-connection-type nil))
-              (start-process "pomodoro" "*pomodoro*" "pomodoro" "-l" (number-to-string org-pomodoro-minutes)))))))
+            (start-process "pomodoro" nil "pomodoro" "-l" (number-to-string org-pomodoro-minutes))))))
 
 (defun org-pomodoro-after-clock-out ()
   (org-pomodoro-stop-process)
@@ -375,7 +374,9 @@
             (message "Pomodoro is cancelled")))))))
 
 (defun org-pomodoro-done ()
-  (when (org-clock-is-active) (org-clock-out)))
+  (when (org-clock-is-active)
+    (org-clock-out)
+    (start-process-shell-command "pomodoro-ring" nil "mplayer ~/Dropbox/resources/audio/ring.mp3")))
 
 (defun org-pomodoro-cancel-timer-safe ()
   (when org-timer-current-timer (org-timer-cancel-timer)))
