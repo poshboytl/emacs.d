@@ -156,7 +156,8 @@
   (define-key org-mode-map (kbd "C-c ,") 'org-cycle-agenda-files)
   (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view)
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
-  (flyspell-mode 1))
+  (flyspell-mode 1)
+  (org-pomodoro-on-org-load))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
   ;; copy from org-faces.el
@@ -320,8 +321,6 @@
   (push '("Effort_ALL" . "1p 2p 3p 4p 5p 6p 7p 8p") org-global-properties)
   (define-key org-mode-map "\C-c\C-x'" 'org-pomodoro-columns)
   (define-key org-agenda-mode-map "\C-c\C-x'" 'org-pomodoro-agenda-columns))
-
-(eval-after-load "org" '(org-pomodoro-on-org-load))
 
 (defadvice org-minutes-to-hh:mm-string (around org-pomodoro-minutes-to-pomodoros activate)
   (setq ad-return-value (format "%dp" (round (/ m (float org-pomodoro-minutes))))))
