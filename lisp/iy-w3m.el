@@ -33,26 +33,45 @@
   (browse-url-generic (or (w3m-anchor (point))
                           (w3m-image (point)))))
 
+(defadvice w3m-close-window (before iy-w3m-change-winring activate)
+  (when (string= (winring-name-of-current) "*w3m*")
+    (let ((prev (ring-remove (winring-get-ring) 0)))
+      (winring-restore-configuration prev))))
+(defadvice w3m-quit (before iy-w3m-change-winring activate)
+  (when (string= (winring-name-of-current) "*w3m*")
+    (let ((prev (ring-remove (winring-get-ring) 0)))
+      (winring-restore-configuration prev))))
+
 (defun wicked-toggle-w3m ()
-  "Switch to a w3m buffer or return to the previous buffer."
+  "Switch to a w3m buffer or return to the previous buffer.
+
+Changed to use winring
+"
   (interactive)
   (if (derived-mode-p 'w3m-mode)
-      ;; Currently in a w3m buffer
-      ;; Bury buffers until you reach a non-w3m one
-      (while (derived-mode-p 'w3m-mode)
-        (bury-buffer))
+      (w3m-close-window)
     ;; Not in w3m
     ;; Find the first w3m buffer
-    (let ((list (buffer-list)))
+    (iy-winring-jump-or-create "*w3m*")
+    (let ((list (window-list)))
       (while list
-        (if (with-current-buffer (car list)
+        (if (with-current-buffer (window-buffer (car list))
               (derived-mode-p 'w3m-mode))
             (progn
-              (switch-to-buffer (car list))
+              (select-window (car list))
               (setq list nil))
-          (setq list (cdr list))))
-      (unless (derived-mode-p 'w3m-mode)
-        (call-interactively 'w3m)))))
+          (setq list (cdr list)))))
+    (unless (derived-mode-p 'w3m-mode)
+      (let ((list (buffer-list)))
+        (while list
+          (if (with-current-buffer (car list)
+                (derived-mode-p 'w3m-mode))
+              (progn
+                (switch-to-buffer (car list))
+                (setq list nil))
+            (setq list (cdr list))))
+        (unless (derived-mode-p 'w3m-mode)
+          (call-interactively 'w3m))))))
 
 (setq wicked-quick-search-alist
       '(("^g?:? +\\(.*\\)" . ;; Google Web
@@ -111,7 +130,7 @@
 ;; Webjump
 (global-set-key (kbd "C-<f8>") 'webjump)
 (global-set-key (kbd "<ESC> <f8>") 'webjump)
-(define-key iy-map (kbd "M-g") 'webjump)
+(define-key iy-map (kbd "M-g") 'wicked-toggle-w3m)
 (define-key iy-map (kbd "g") 'webjump)
 
 (eval-after-load "webjump"
