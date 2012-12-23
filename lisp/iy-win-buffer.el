@@ -6,8 +6,8 @@
  '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
  '(clean-buffer-list-kill-regexps (quote ("\\`\\*Customize Group:" "\\`\\*Man " "\\`\\*magit" "\\`\\*RNC Input")))
  '(midnight-mode t nil (midnight))
- '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(uniquify-strip-common-suffix t))
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
+ '(uniquify-strip-common-suffix nil))
 ;;}}}
 
 ;;{{{ winring
