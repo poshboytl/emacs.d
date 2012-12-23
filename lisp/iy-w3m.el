@@ -1,5 +1,6 @@
 ;;; iy-w3m.el --- w3m
 
+(require 'iy-dep)
 (custom-set-variables
  '(w3m-coding-system (quote utf-8))
  '(w3m-default-coding-system (quote utf-8))
@@ -110,6 +111,8 @@
 ;; Webjump
 (global-set-key (kbd "C-<f8>") 'webjump)
 (global-set-key (kbd "<ESC> <f8>") 'webjump)
+(define-key iy-map (kbd "M-g") 'webjump)
+(define-key iy-map (kbd "g") 'webjump)
 
 (eval-after-load "webjump"
   '(progn
