@@ -43,6 +43,9 @@
       '(ibuffer-filter-by-mode
         ibuffer-filter-by-used-mode))
 
+(put 'diredp-do-bookmark-in-bookmark-file 'ido 'ignore)
+(put 'diredp-set-bookmark-file-bookmark-for-marked 'ido 'ignore)
+
 (defadvice ido-read-internal (around ido-completing-read-use-initial-input-as-default)
   ;;(defun ido-read-internal (item prompt history &optional default require-match initial)
   (if (and
