@@ -445,6 +445,7 @@
   (interactive)
   (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets" )))
 
+(setq org-fontify-done-headline t)
 (custom-set-variables
  '(appt-display-format (quote window))
  '(appt-message-warning-time 10)
