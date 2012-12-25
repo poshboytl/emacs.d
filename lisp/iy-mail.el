@@ -6,25 +6,26 @@
 (define-key iy-map (kbd "M") 'mu4e)
 
 (autoload 'mu4e "mu4e" nil t)
-(eval-after-load 'mu4e
-  (progn
-    (custom-set-variables
-     '(mu4e-maildir (expand-file-name "~/Mail"))
-     '(mu4e-drafts-folder "/drafts")
-     '(mu4e-use-fancy-chars nil)
-     '(mu4e-maildir-shortcuts
-       '(("/INBOX" . ?i)))
-     ;; (lambda (msg)
-     ;;   (if (mu4e-message-contact-field-matches msg :to "ian@xxx")
-     ;;      "/xxx/archive" "/archive"))
-     '(mu4e-refile-folder "/archive")
-     '(mu4e-view-show-images t)
-     '(mu4e-view-image-max-width 800)
-     '(mu4e-confirm-quit nil)
-     '(mu4e-headers-date-format "%d/%b/%Y %H:%M")
-     '(mu4e-html2text-command "html2text -utf8 -width 72"))
-    (define-key mu4e-main-mode-map (kbd "<menu>") 'mu4e-quit)
-    (define-key mu4e-main-mode-map (kbd "M") 'mu4e-quit)))
+(custom-set-variables
+ '(mu4e-maildir (expand-file-name "~/Mail"))
+ '(mu4e-drafts-folder "/drafts")
+ '(mu4e-use-fancy-chars nil)
+ '(mu4e-maildir-shortcuts
+   '(("/INBOX" . ?i)))
+ ;; (lambda (msg)
+ ;;   (if (mu4e-message-contact-field-matches msg :to "ian@xxx")
+ ;;      "/xxx/archive" "/archive"))
+ '(mu4e-refile-folder "/archive")
+ '(mu4e-view-show-images t)
+ '(mu4e-view-image-max-width 800)
+ '(mu4e-confirm-quit nil)
+ '(mu4e-headers-date-format "%d/%b/%Y %H:%M")
+ '(mu4e-html2text-command "html2text -utf8 -width 72"))
+
+(defun iy-mu4e-main-mode-init ()
+  (local-set-key (kbd "<menu>") 'mu4e-quit)
+  (local-set-key (kbd "M") 'mu4e-quit))
+(add-hook 'mu4e-main-mode-hook 'iy-mu4e-main-mode-init)
 
 (setq message-kill-buffer-on-exit t)
 (setq message-sendmail-envelope-from 'header)
