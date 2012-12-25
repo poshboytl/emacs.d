@@ -4,10 +4,10 @@
 (push 'deft el-get-packages)
 (defun iy-el-get-after-deft ()
   (setq
-   deft-extension "md"
-   deft-directory (concat iy-dropbox-dir "g/notes")
+   deft-extension "org"
+   deft-directory (concat iy-dropbox-dir "g/snippets")
    deft-use-filename-as-title t
-   deft-text-mode 'markdown-mode))
+   deft-text-mode 'org-mode))
 
 (push 'org-mode el-get-packages)
 
