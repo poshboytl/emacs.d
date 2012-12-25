@@ -18,9 +18,8 @@
                        (file-name-directory buffer-file-name))))
     (list "ruby" (list "-c" local-file))))
 
-;; switched to Enhanced-Ruby-Mode
-;; (push '("\\.rb\\'" flymake-ruby-init) flymake-allowed-file-name-masks)
-;; (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
+(push '("\\.rb\\'" flymake-ruby-init) flymake-allowed-file-name-masks)
+(push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
 (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
 
 (defun flymake-init-hook ()
