@@ -19,9 +19,6 @@
 [submodule "bundle/markdown-mode"]
 	path = bundle/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
-[submodule "bundle/rinari"]
-	path = bundle/rinari
-	url = http://github.com/eschulte/rinari.git
 [submodule "bundle/yari"]
 	path = bundle/yari
 	url = https://github.com/hron/yari.el.git
@@ -130,6 +127,9 @@
 [submodule "bundle/ido-hacks"]
 	path = bundle/ido-hacks
 	url = git://github.com/scottjad/ido-hacks.git
-[submodule "bundle/Enhanced-Ruby-Mode"]
-	path = bundle/Enhanced-Ruby-Mode
-	url = git://github.com/jacott/Enhanced-Ruby-Mode.git
+[submodule "bundle/emacs-rails"]
+	path = bundle/emacs-rails
+	url = git://github.com/remvee/emacs-rails.git
+[submodule "bundle/mmm-mode"]
+	path = bundle/mmm-mode
+	url = git://github.com/purcell/mmm-mode.git

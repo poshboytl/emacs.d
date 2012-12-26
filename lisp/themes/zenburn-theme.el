@@ -551,6 +551,10 @@
  `(ruby-op-face ((t (:foreground ,zenburn-fg :bold t))))
  `(erm-syn-warnline ((t (:underline ,zenburn-orange))))
  `(erm-syn-errline ((t (:box (:line-width 1 :color "coral3")))))
+
+ `(mmm-code-submode-face ((t (:background ,zenburn-bg+1))))
+ `(mmm-output-submode-face ((t (:background ,zenburn-green-4))))
+ `(mmm-comment-submode-face ((t (:background ,zenburn-green-4))))
  )
 
 (provide-theme 'zenburn)

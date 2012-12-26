@@ -52,7 +52,7 @@
            (edit-server-start)))))
 
 (defun iy-server-visit-setup ()
-  (let ((base (file-name-nondirectory (buffer-file-name))))
+  (let ((base (file-name-nondirectory (or (buffer-file-name) default-directory))))
     (cond ((member base '("MERGE_MSG" "COMMIT_EDITMSG"))
            (flyspell-mode 1)
            (auto-fill-mode t)
@@ -61,10 +61,7 @@
           ((string-match-p "^mutt-" base)
            (mail-mode)
            (mail-text)
-           (local-set-key (kbd "C-c C-c") 'server-edit))
-
-          ))
-  (message (buffer-file-name)))
+           (local-set-key (kbd "C-c C-c") 'server-edit)))))
 (add-hook 'server-visit-hook 'iy-server-visit-setup)
 
 (provide 'iy-daemon)

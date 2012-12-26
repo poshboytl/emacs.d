@@ -13,7 +13,7 @@
 
 (defun eproject-ctags-command (&optional root)
   (let ((ctags (eproject-attribute :ctags (or root (eproject-root)))))
-    (cond ((eq ctags 'rails) "ctags -a -e -f TAGS --tag-relative -R app lib vendor")
+    (cond ((eq ctags 'rails) "ctags -u -e -f TAGS --tag-relative -R app lib vendor")
           (t ctags))))
 
 (defun eproject-maybe-create-tags-table ()

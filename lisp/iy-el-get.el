@@ -143,7 +143,6 @@
     (:name flymake-coffeelint :type git :url bundle
            :build `(,(concat el-get-emacs " -Q -batch -f batch-byte-compile flymake-coffeelint.el")
                     ("npm")))
-    (:name ido-ubiquitous :type git :url bundle :features ido-ubiquitous)
     (:name ace-jump-mode :url bundle :lazy t)
     (:name multiple-cursors :type git :url bundle :lazy t)
     (:name jade-mode :type git :url bundle :lazy t)
@@ -151,7 +150,8 @@
     (:name smex :url bundle)
     (:name edit-server :features edit-server)
     (:name ido-hacks :type git :url bundle :features ido-hacks :build nil)
-    (:name Enhanced-Ruby-Mode :type git :url bundle)
+    (:name emacs-rails :type git :url bundle :features rails)
+    (:name mmm-mode :type git :url bundle :features mmm-auto)
     )))
 
 (provide 'iy-el-get)

@@ -41,7 +41,8 @@
 
 (setq ido-completing-read-use-initial-input-as-default-commands
       '(ibuffer-filter-by-mode
-        ibuffer-filter-by-used-mode))
+        ibuffer-filter-by-used-mode
+        rails-lib:run-primary-switch))
 
 (put 'diredp-do-bookmark-in-bookmark-file 'ido 'ignore)
 (put 'diredp-set-bookmark-file-bookmark-for-marked 'ido 'ignore)

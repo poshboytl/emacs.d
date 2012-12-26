@@ -57,6 +57,24 @@
 (define-key iy-map (kbd "M-a") 'alternative-files-find-file)
 (define-key iy-map (kbd "A") 'alternative-files-create-file)
 
+(defun alternative-files-factories-finder (&optional file)
+  (let ((file (or file (alternative-files--detect-file-name))))
+    (cond
+     ((string-match "^\\(.*\\)/app/models/\\(.+\\)\\.rb$" file)
+      (let ((root (match-string 1 file))
+            (name (match-string 2 file)))
+        (list
+         (concat root "/spec/factories/" (alternative-files--pluralize-string name) ".rb"))))
+
+     ((string-match "^\\(.*\\)/spec/factories/\\(.+\\).rb$" file)
+      (let ((root (match-string 1 file))
+            (name (match-string 2 file)))
+        (list
+         (concat root "/app/models/" (alternative-files--singularize-string name) ".rb")))))))
+
+(defun iy-el-get-after-alternative-files ()
+  (push 'alternative-files-factories-finder alternative-files-functions))
+
 ;;}}}
 
 ;;{{{ recoll

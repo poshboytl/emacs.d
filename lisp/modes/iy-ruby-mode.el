@@ -12,23 +12,33 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
 
 
+;; fix emacs-rails loading error
+(defun decamelize (string)
+  "Convert from CamelCaseString to camel_case_string."
+  (let ((case-fold-search nil))
+    (downcase
+     (replace-regexp-in-string
+      "\\([A-Z]+\\)\\([A-Z][a-z]\\)" "\\1_\\2"
+      (replace-regexp-in-string
+       "\\([a-z0-9]\\)\\([A-Z]\\)" "\\1_\\2"
+       string)))))
+
 (push 'ruby-mode el-get-packages)
-;; (push 'Enhanced-Ruby-Mode el-get-packages)
+(push 'inf-ruby el-get-packages)
 (push 'ruby-end el-get-packages)
+(push 'emacs-rails el-get-packages)
 
-(setq rinari-minor-mode-prefixes '(";"))
-(push 'rinari el-get-packages)
-(defun iy-rinari-minor-mode-init ()
-  (setq yas/extra-modes (cons 'rails-mode yas/extra-modes)))
-(add-hook 'rinari-minor-mode-hook 'iy-rinari-minor-mode-init)
+(custom-set-variables
+ '(rails-always-use-text-menus t)
+ '(rails-browse-api-with-w3m t))
 
-(push 'rhtml-mode el-get-packages)
-(defun iy-el-get-after-rhtml-mode ()
-  (add-to-list 'auto-mode-alist '("\\.eco$" . rhtml-mode))
-  (eval-after-load "rhtml-mode"
-    '(add-to-list
-      'rhtml-in-erb-keywords
-      '("\\(\\b\\sw[_a-zA-Z0-9]*:\\)\\(?:\\s-\\|$\\)" . (1 font-lock-constant-face prepend)))))
+(defun iy-el-get-after-emacs-rails ()
+  (define-key rails-minor-mode-map  (kbd "C-c C-c #")  'rails-spec:run-last)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c .")  'rails-spec:run-current)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c /")  'rails-spec:run-this-spec)
+  (define-key rails-minor-mode-map  (kbd "M-s SPC")  'rails-lib:run-primary-switch)
+  (define-key rails-minor-mode-map  (kbd "M-s M-SPC")  'rails-lib:run-secondary-switch)
+  (define-key rails-minor-mode-map  (kbd "<f9>") nil))
 
 (push 'yari el-get-packages)
 (defalias 'ri 'yari)
@@ -49,7 +59,6 @@
   ;; (local-set-key (kbd "M-s `") 'ruby-find-error)
   ;; (local-set-key (kbd "M-s M-`") 'ruby-find-error)
 
-  (rinari-minor-mode t)
   (hs-minor-mode t)
   (flyspell-prog-mode)
   (autopair-mode t)
@@ -67,5 +76,14 @@
  'ruby-mode
  '(("\\(\\b\\sw[_a-zA-Z0-9]*:\\)\\(?:\\s-\\|$\\)" (1 font-lock-constant-face))))
 
+(eval-after-load 'inf-ruby
+  '(progn
+     (add-to-list 'inf-ruby-implementations '("pry" . "gemset debug pry"))
+     (setq inf-ruby-default-implementation "pry")
+     (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
+     (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")))
+
+(defalias 'irb 'inf-ruby)
+(defalias 'pry 'inf-ruby)
 
 (provide 'iy-ruby-mode)
