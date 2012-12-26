@@ -20,7 +20,7 @@
  '(mu4e-view-image-max-width 800)
  '(mu4e-confirm-quit nil)
  '(mu4e-headers-date-format "%d/%b/%Y %H:%M")
- '(mu4e-html2text-command "html2text -utf8 -width 72"))
+ '(mu4e-html2text-command "html2text -width 72"))
 
 (defun iy-mu4e-main-mode-init ()
   (local-set-key (kbd "<menu>") 'mu4e-quit)
