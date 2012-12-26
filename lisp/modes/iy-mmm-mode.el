@@ -13,7 +13,7 @@
   (global-set-key (kbd "C-5 <t>") 'mmm-insert-region)
   (mmm-add-classes
    '((yaml-header-matters
-      :submode yaml
+      :submode yaml-mode
       :face mmm-code-submode-face
       :front "\\`---"
       :back "---")))
