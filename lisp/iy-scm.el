@@ -29,6 +29,7 @@
 
 (defun iy-magit-mode-init ()
   (define-key magit-mode-map (kbd "M-s") iy-map)
+  (define-key magit-mode-map (kbd "W") 'magit-toggle-whitespace)
   (local-set-key (kbd "<f12>") 'magit-quit-window))
 
 (add-hook 'magit-mode-hook 'iy-magit-mode-init)
@@ -39,6 +40,22 @@
   (setq fill-column 72))
 
 (add-hook 'magit-log-edit-mode-hook 'iy-magit-log-edit-mode-init)
+
+(defun magit-toggle-whitespace ()
+  (interactive)
+  (if (member "-w" magit-diff-options)
+      (magit-dont-ignore-whitespace)
+    (magit-ignore-whitespace)))
+
+(defun magit-ignore-whitespace ()
+  (interactive)
+  (add-to-list 'magit-diff-options "-w")
+  (magit-refresh))
+
+(defun magit-dont-ignore-whitespace ()
+  (interactive)
+  (setq magit-diff-options (remove "-w" magit-diff-options))
+  (magit-refresh))
 
 ;;}}}
 

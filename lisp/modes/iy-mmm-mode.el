@@ -10,7 +10,6 @@
 (defun iy-el-get-after-mmm-mode ()
   (require 'mmm-auto)
 
-  (global-set-key (kbd "C-5 <t>") 'mmm-insert-region)
   (mmm-add-classes
    '((yaml-header-matters
       :submode yaml-mode
