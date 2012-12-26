@@ -8,6 +8,7 @@
   '(dired+ dired-details dired-details+) el-get-packages))
 
 (custom-set-variables
+ '(dired-omit-verbose nil)
  '(dired-dwim-target t)
  '(dired-recursive-copies (quote top))
  '(dired-recursive-deletes (quote top)))
