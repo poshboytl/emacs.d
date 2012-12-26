@@ -1,7 +1,9 @@
 ;;{{{ General
+
 (custom-set-variables
  '(vc-follow-symlinks t)
  '(revert-without-query '("COMMIT_EDITMSG\\'")))
+
 ;;}}}
 
 ;;{{{ GIT
@@ -17,20 +19,6 @@
 
 (push 'git-emacs el-get-packages)
 (push 'magit el-get-packages)
-
-(defun iy-magit-status ()
-  (interactive)
-  "Start magit in winring configuration"
-  (let ((buffer (current-buffer)))
-    (iy-winring-jump-or-create "*magit*")
-    (with-current-buffer buffer
-        (call-interactively 'magit-status))
-    (delete-other-windows)))
-
-(defadvice magit-quit-window (after iy-kill-magit-winring activate)
-  (when (string= (winring-name-of-current) "*magit*")
-    (let ((prev (ring-remove (winring-get-ring) 0)))
-      (winring-restore-configuration prev))))
 
 (defadvice git-describe-commit (around git-ll activate)
   (with-temp-buffer

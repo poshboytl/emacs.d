@@ -1,6 +1,7 @@
 (require 'iy-dep)
 
 ;;{{{ Cleanup Buffers
+
 (custom-set-variables
  '(clean-buffer-list-delay-special 3600)
  '(clean-buffer-list-kill-buffer-names (quote ("*Help*" "*Apropos*" "*Buffer List*" "*Compile-Log*" "*info*" "*vc*" "*vc-diff*" "*diff*" "bbdb" "*RE-Builder*" "*Shell Command Output*" "*ESS*" "*WoMan-Log*" "*magit-process*" "*Dired log*" "*anything*" "*CEDET Global*" "*Pp Eval Output*" "*Completions*")))
@@ -8,18 +9,79 @@
  '(midnight-mode t nil (midnight))
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
  '(uniquify-strip-common-suffix nil))
+
 ;;}}}
 
 ;;{{{ winring
 (custom-set-variables
  '(winring-show-names t))
 
+;;; winring for ediff
 (defun iy-ediff-before-setup-winring-jump ()
   (iy-winring-jump-or-create "*ediff*"))
 (defun iy-ediff-after-setup-save-register ()
   (set-register ?e (list (current-window-configuration) (point-marker))))
 (defun iy-ediff-quit-winring-delete ()
   (when (string= (winring-name-of-current) "*ediff*")
+    (let ((prev (ring-remove (winring-get-ring) 0)))
+      (winring-restore-configuration prev))))
+
+;;; winring for w3m
+(defadvice w3m-close-window (before iy-w3m-change-winring activate)
+  (when (string= (winring-name-of-current) "*w3m*")
+    (let ((prev (ring-remove (winring-get-ring) 0)))
+      (winring-restore-configuration prev))))
+(defadvice w3m-quit (before iy-w3m-change-winring activate)
+  (when (string= (winring-name-of-current) "*w3m*")
+    (let ((prev (ring-remove (winring-get-ring) 0)))
+      (winring-restore-configuration prev))))
+
+(defun wicked-toggle-w3m ()
+  "Switch to a w3m buffer or return to the previous buffer.
+
+Changed to use winring
+"
+  (interactive)
+  (if (derived-mode-p 'w3m-mode)
+      (w3m-close-window)
+    ;; Not in w3m
+    ;; Find the first w3m buffer
+    (iy-winring-jump-or-create "*w3m*")
+    (let ((list (window-list)))
+      (while list
+        (if (with-current-buffer (window-buffer (car list))
+              (derived-mode-p 'w3m-mode))
+            (progn
+              (select-window (car list))
+              (setq list nil))
+          (setq list (cdr list)))))
+    (unless (derived-mode-p 'w3m-mode)
+      (let ((list (buffer-list)))
+        (while list
+          (if (with-current-buffer (car list)
+                (derived-mode-p 'w3m-mode))
+              (progn
+                (switch-to-buffer (car list))
+                (setq list nil))
+            (setq list (cdr list))))
+        (unless (derived-mode-p 'w3m-mode)
+          (call-interactively 'w3m))))))
+
+(global-set-key (kbd "<f8>") 'wicked-toggle-w3m)
+(define-key iy-map (kbd "M-g") 'wicked-toggle-w3m)
+
+;; winring for magit
+(defun iy-magit-status ()
+  (interactive)
+  "Start magit in winring configuration"
+  (let ((buffer (current-buffer)))
+    (iy-winring-jump-or-create "*magit*")
+    (with-current-buffer buffer
+        (call-interactively 'magit-status))
+    (delete-other-windows)))
+
+(defadvice magit-quit-window (after iy-kill-magit-winring activate)
+  (when (string= (winring-name-of-current) "*magit*")
     (let ((prev (ring-remove (winring-get-ring) 0)))
       (winring-restore-configuration prev))))
 

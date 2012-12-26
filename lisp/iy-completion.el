@@ -126,7 +126,8 @@
                 ac-source-dictionary
                 ac-source-imenu
                 ac-source-words-in-buffer
-                ac-source-words-in-same-mode-buffers))
+                ac-source-words-in-same-mode-buffers
+                ac-source-words-in-all-buffer))
 
   (add-hook 'emacs-lisp-mode-hook 'iy-ac-emacs-lisp-mode-setup)
   (add-hook 'ruby-mode-hook 'iy-ac-ruby-mode-setup)
@@ -189,6 +190,7 @@
                      ac-source-functions
                      ac-source-variables
                      ac-source-symbols
+                     ac-source-words-in-buffer
                      ac-source-words-in-same-mode-buffers)))
 
 (custom-set-variables
@@ -199,6 +201,16 @@
  '(ac-show-menu nil)
  '(ac-comphist-file (expand-file-name (concat iy-data-dir "ac-comphist.dat")))
  '(ac-use-quick-help nil))
+
+;;}}}
+
+;;{{{ Dabbrev
+
+;; Exclude very large buffers from dabbrev
+(defun sanityinc/dabbrev-friend-buffer (other-buffer)
+  (< (buffer-size other-buffer) (* 1 1024 1024)))
+
+(setq dabbrev-friend-buffer-function 'sanityinc/dabbrev-friend-buffer)
 
 ;;}}}
 
