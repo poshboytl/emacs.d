@@ -4,8 +4,7 @@
 (custom-set-variables
  '(mmm-global-mode 'maybe)
  '(mmm-submode-decoration-level 2)
- '(mmm-parse-when-idle t)
- '(mmm-mode-prefix-key [(control 5)]))
+ '(mmm-parse-when-idle t))
 
 (defun iy-el-get-after-mmm-mode ()
   (require 'mmm-auto)
