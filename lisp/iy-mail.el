@@ -22,11 +22,12 @@
  '(mu4e-headers-date-format "%d/%b/%Y %H:%M")
  '(mu4e-html2text-command "w3m -T text/html")
  '(mu4e-msg2pdf "/usr/bin/msg2pdf")
- '(mu4e-org-contacts-file (concat iy-dropbox-dir "g/org/contacts.org"))
- '(mu4e-view-actions '(("capture message" . mu4e-action-capture-message)
-                      ("view as pdf" . mu4e-action-view-as-pdf)
-                      ("open in browser" . mu4e-action-view-in-browser)
-                      ("save contact" . mu4e-action-add-org-contact))))
+ '(mu4e-org-contacts-file (concat iy-dropbox-dir "g/org/contacts.org")))
+
+(setq mu4e-view-actions '(("capture message" . mu4e-action-capture-message)
+                          ("view as pdf" . mu4e-action-view-as-pdf)
+                          ("open in browser" . mu4e-action-view-in-browser)
+                          ("save contact" . mu4e-action-add-org-contact)))
 
 (defun iy-mu4e-main-mode-init ()
   (local-set-key (kbd "<menu>") 'mu4e-quit)
