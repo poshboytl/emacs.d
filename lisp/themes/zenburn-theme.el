@@ -553,8 +553,9 @@
  `(erm-syn-errline ((t (:box (:line-width 1 :color "coral3")))))
 
  `(mmm-code-submode-face ((t (:background ,zenburn-bg+1))))
- `(mmm-output-submode-face ((t (:background ,zenburn-green-4))))
- `(mmm-comment-submode-face ((t (:background ,zenburn-green-4))))
+ `(mmm-output-submode-face ((t (:background ,zenburn-bg+1))))
+ `(mmm-comment-submode-face ((t (:background ,zenburn-bg+1))))
+ `(mmm-delimiter-face ((t (:foreground ,zenburn-bg+1 :background ,zenburn-bg+1))))
  )
 
 (provide-theme 'zenburn)

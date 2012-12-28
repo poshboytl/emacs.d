@@ -25,7 +25,7 @@
 (defun flymake-init-hook ()
   (if (and (not (null buffer-file-name))
            (file-writable-p buffer-file-name)
-           (not (string-match "flymake" buffer-file-name)))
+           (not (string-match "^<\\|flymake" buffer-file-name)))
       (flymake-mode t)))
 
 (add-hook 'ruby-mode-hook 'flymake-init-hook)

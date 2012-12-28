@@ -127,7 +127,6 @@
            :features alternative-files
            :lazy t)
     (:name zencoding-mode :url bundle :lazy t)
-    (:name rhtml-mode :url bundle)
     (:name pos-tip :features pos-tip)
     (:name popup :url bundle)
     (:name fuzzy :type git :url bundle :lazy t)

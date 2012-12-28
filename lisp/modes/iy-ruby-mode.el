@@ -9,8 +9,6 @@
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
-
 
 ;; fix emacs-rails loading error
 (defun decamelize (string)
@@ -22,6 +20,9 @@
       (replace-regexp-in-string
        "\\([a-z0-9]\\)\\([A-Z]\\)" "\\1_\\2"
        string)))))
+
+;; Thank you, I'll handle it myself
+(defvar rails-auto-mode-alist nil)
 
 (push 'ruby-mode el-get-packages)
 (push 'inf-ruby el-get-packages)

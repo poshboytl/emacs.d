@@ -13,10 +13,20 @@
  'default-frame-alist
  (cons 'font iy-frame-font))
 
-;; (add-hook 'after-make-frame-functions
-;;           '(lambda ()
-;;              (set-frame-font iy-frame-font)
-;;              (set-fontset-font "fontset-default" 'chinese-gbk iy-frame-font-chinese)))
+(defvar after-make-console-frame-hooks '()
+  "Hooks to run after creating a new TTY frame")
+(defvar after-make-window-system-frame-hooks '()
+  "Hooks to run after creating a new window-system frame")
+
+(defun run-after-make-frame-hooks (frame)
+  "Selectively run either `after-make-console-frame-hooks' or
+`after-make-window-system-frame-hooks'"
+  (select-frame frame)
+  (run-hooks (if window-system
+                 'after-make-window-system-frame-hooks
+               'after-make-console-frame-hooks)))
+
+(add-hook 'after-make-frame-functions 'run-after-make-frame-hooks)
 
 (custom-set-variables
  '(blink-cursor-mode t)
@@ -24,12 +34,15 @@
  '(blink-cursor-interval 0.5)
  '(indicate-empty-lines nil)
  '(indicate-buffer-boundaries 'right)
+ '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(visible-bell t)
  '(menu-bar-mode nil)
- '(scroll-bar-mode nil))
+ '(scroll-bar-mode nil)
+ '(use-file-dialog nil)
+ '(use-dialog-box nil))
 
 (global-hl-line-mode)
 
