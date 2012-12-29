@@ -9,7 +9,7 @@
 ;;{{{ Move
 
 (global-set-key (kbd "M-g") 'goto-line)
-(global-set-key (kbd "M-G") 'move-to-window-line-top-bottom)
+(global-set-key (kbd "M-C-g") 'move-to-window-line-top-bottom)
 
 (global-set-key (kbd "M-F") 'forward-symbol)
 (global-set-key (kbd "M-B") (lambda (arg)
@@ -19,6 +19,7 @@
 
 (define-key iy-map (kbd "f") 'ace-jump-mode)
 (define-key iy-map (kbd "F") 'ace-jump-line-mode)
+(define-key iy-map (kbd "M-f") 'ace-jump-line-mode)
 (define-key iy-map (kbd ";") 'iy-go-to-char-continue)
 (define-key iy-map (kbd ":") 'iy-go-to-char-continue-backward)
 (global-set-key (kbd "C-z") 'iy-go-to-char)
