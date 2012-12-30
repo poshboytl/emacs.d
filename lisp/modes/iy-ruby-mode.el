@@ -35,6 +35,7 @@
 
 (defun iy-el-get-after-emacs-rails ()
   (define-key rails-minor-mode-map  (kbd "C-c C-c #")  'rails-spec:run-last)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c 3")  'rails-spec:run-last)
   (define-key rails-minor-mode-map  (kbd "C-c C-c .")  'rails-spec:run-current)
   (define-key rails-minor-mode-map  (kbd "C-c C-c /")  'rails-spec:run-this-spec)
   (define-key rails-minor-mode-map  (kbd "M-s SPC")  'rails-lib:run-primary-switch)
@@ -52,6 +53,23 @@
 
 (push 'cucumber el-get-packages)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
+(defvar gem-hist nil)
+;; open gem interactively
+(defun gem (&optional other-window)
+  (interactive "P")
+  (let ((file (ido-read-file-name
+               "File: "
+               (cadr
+                (let ((choises
+                       (mapcar
+                        (lambda (line) (split-string line " "))
+                        (butlast (split-string (with-output-to-string (shell-command "gem la" standard-output))
+                                               "\n")))))
+                  (assoc (ido-completing-read "Gem: " choises nil t nil gem-hist) choises))))))
+    (if other-window
+        (find-file-other-window file)
+      (find-file file))))
 
 (defun iy-ruby-mode-init ()
   (local-set-key (kbd "<return>") 'reindent-then-newline-and-indent)

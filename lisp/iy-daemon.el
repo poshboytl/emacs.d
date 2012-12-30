@@ -57,6 +57,8 @@
            (flyspell-mode 1)
            (auto-fill-mode t)
            (setq fill-column 72)
+           (when (fboundp 'rails-minor-mode)
+             (rails-minor-mode 0))
            (local-set-key (kbd "C-c C-c") 'server-edit))
           ((string-match-p "^mutt-" base)
            (mail-mode)
