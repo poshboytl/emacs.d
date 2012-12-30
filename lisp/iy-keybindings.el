@@ -198,6 +198,7 @@
       (kill-buffer)
     (kill-buffer-and-window)))
 (global-set-key (kbd "C-x K") 'iy-kill-buffer-and-window)
+(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 
 ;;}}}
 
