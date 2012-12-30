@@ -25,7 +25,7 @@
         org-w3m
         org-clock
         org-timer
-        ))
+        org-protocol))
 
 ;;; Customization
 (setq org-clock-persist-file
@@ -202,6 +202,9 @@
     "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
    ("j" "Journal" plain (file+datetree (concat org-directory "/journal.org"))
     "\n%?\n" :empty-lines 1)
+   ("d" "Dump" plain (file+olp (concat org-directory "/inbox.org") "Quick Notes" "Plain")
+    "\n--%U--------------------------------------------------\n%?\n" :empty-lines 1)
+   ("l" "List" item (file+olp (concat org-directory "/inbox.org") "Quick Notes" "List") "%?\n" :empty-lines 1)
    ("s" "SOMEDAY" entry (file+headline (concat org-directory "/inbox.org") "Someday")
     "* SOMEDAY %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
    ("x" "Clipboard" entry (file+headline (concat org-directory "/inbox.org") "Notes")
@@ -211,7 +214,10 @@
     "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
 
    ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
-    "* %^{title} %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC %^{lang}\n  %i%?\n#+END_SRC\n")))
+    "* %^{title} %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC %^{lang}\n  %i%?\n#+END_SRC\n")
+   ("b" "Default template" entry (file+headline "inbox.org" "Bookmarks")
+    "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n\n  %i"
+    :prepend t :empty-lines 1 :immediate-finish t)))
 
 ;;; Custom Agenda
 (setq org-agenda-custom-commands
