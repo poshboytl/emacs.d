@@ -13,6 +13,7 @@
 ;;}}}
 
 ;;{{{ winring
+
 (custom-set-variables
  '(winring-show-names t))
 
@@ -93,6 +94,10 @@ Changed to use winring
 
 (defun iy-el-get-after-winring ()
   (setq winring-keymap-prefix (kbd "M-s w"))
+  (winner-mode 1)
+  (define-key winring-map (kbd ",") 'winner-undo)
+  (define-key winring-map (kbd ".") 'winner-redo)
+
   (defun winring-create-frame-hook (frame)
     (winring-set-name "W" frame))
   (define-key winring-map (kbd "w") 'iy-winring-jump-or-create)
@@ -133,6 +138,7 @@ Changed to use winring
         (setq item (ring-remove ring index))
         (winring-save-current-configuration)
         (winring-restore-configuration item)))))
+
 ;;}}}
 
 ;;{{{ win resize
