@@ -188,6 +188,7 @@
    ((t (:background "#2e3330" :foreground "#88b090"
                     :box (:color "#2e3330" :line-width 2)))))
  '(region ((t (:foreground "#71d3b4" :background "#233323"))))
+ '(cua-rectangle ((t (:foreground "#71d3b4" :background "#233323"))))
  `(minibuffer-prompt ((t (:foreground ,zenburn-yellow))))
  `(Buffer-menu-buffer ((t (:inherit zenburn-primary-1))))
 
