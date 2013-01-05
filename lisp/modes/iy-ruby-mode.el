@@ -42,6 +42,13 @@
   (define-key rails-minor-mode-map  (kbd "M-s M-SPC")  'rails-lib:run-secondary-switch)
   (define-key rails-minor-mode-map  (kbd "<f9>") nil))
 
+(defun iy-turn-of-rails-minor-mode-for-modes ()
+  (when (memq major-mode '(rebase-mode))
+    (if rails-minor-mode
+        (rails-minor-mode 0))))
+
+(add-hook 'rails-minor-mode-hook 'iy-turn-of-rails-minor-mode-for-modes)
+
 (push 'yari el-get-packages)
 (defalias 'ri 'yari)
 

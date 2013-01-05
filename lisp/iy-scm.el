@@ -2,7 +2,7 @@
 
 (custom-set-variables
  '(vc-follow-symlinks t)
- '(revert-without-query '("COMMIT_EDITMSG\\'")))
+ '(revert-without-query '("COMMIT_EDITMSG\\'" "git-rebase-todo")))
 
 ;;}}}
 
