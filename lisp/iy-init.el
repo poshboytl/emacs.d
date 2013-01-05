@@ -20,6 +20,7 @@
 ;; remove system org
 (delete-if (lambda (path) (string= "org" (file-name-nondirectory path))) load-path)
 
+(setq custom-readonly-file (concat iy-config-dir "custom.readonly.el"))
 (setq custom-file (concat iy-config-dir "custom.el"))
 (setq secrets-file (concat iy-config-dir "secrets.el"))
 (defvar el-get-packages nil)
@@ -27,7 +28,8 @@
 ;; Once user has customized and saved, use user custom file.
 (when (file-exists-p custom-file)
   (load custom-file t t))
-
+(when (file-exists-p custom-readonly-file)
+  (load custom-readonly-file t t))
 (when (file-exists-p secrets-file)
   (load secrets-file t t))
 

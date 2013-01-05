@@ -5,6 +5,7 @@
 /.org-id-locations
 /org-clock-save.el
 /custom.el
+/custom.readonly.el
 /tramp
 TAGS
 /secrets.el

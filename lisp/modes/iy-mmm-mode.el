@@ -1,15 +1,13 @@
 (push 'mmm-mode el-get-packages)
 
-(custom-set-variables
- '(mmm-global-mode 'maybe)
- '(mmm-submode-decoration-level 2)
- '(mmm-parse-when-idle t))
-
 (add-hook 'after-make-window-system-frame-hooks
           '(lambda ()
              (setq mmm-font-lock-available-p t)))
 
 (defun iy-el-get-after-mmm-mode ()
+  (setq mmm-global-mode 'maybe)
+  (setq mmm-submode-decoration-level 2)
+  (setq mmm-parse-when-idle t)
   (require 'mmm-auto)
 
   (mmm-add-classes

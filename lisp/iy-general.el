@@ -29,6 +29,11 @@
 (put 'upcase-region 'disabled nil)
 ;;}}}
 
+;;{{{ Safe variables
+(custom-set-variables
+ '(safe-local-variable-values '((encoding . utf-8))))
+;;}}}
+
 ;;{{{ Shortcuts
 (fset 'yes-or-no-p 'y-or-n-p)
 (defalias 'save-pwd 'xsteve-save-current-directory)
