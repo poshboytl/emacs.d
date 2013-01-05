@@ -24,6 +24,9 @@
 (defun iy-set-exec-path (sym val)
   (setq exec-path (append val iy-original-exec-path))
   (setenv "PATH" (mapconcat 'identity (cons iy-original-env-path val) ":")))
+(defun iy-remove-exec-path (val)
+  (setq exec-path (append val iy-original-exec-path))
+  (setenv "PATH" (mapconcat 'identity (cons iy-original-env-path val) ":")))
 
 (defun iy-require-maybe (feature &optional filename noerror)
   (unless (memq feature iy-blacklist)

@@ -81,10 +81,13 @@ Changed to use winring
         (call-interactively 'magit-status))
     (delete-other-windows)))
 
-(defadvice magit-quit-window (after iy-kill-magit-winring activate)
-  (when (string= (winring-name-of-current) "*magit*")
-    (let ((prev (ring-remove (winring-get-ring) 0)))
-      (winring-restore-configuration prev))))
+(defadvice magit-quit-window (around iy-kill-magit-winring activate)
+  (if (and (string= (winring-name-of-current) "*magit*")
+           (eq major-mode 'magit-status-mode))
+      (let ((prev (ring-remove (winring-get-ring) 0)))
+        ad-do-it
+        (winring-restore-configuration prev))
+    ad-do-it))
 
 (push 'switch-window el-get-packages)
 (global-set-key (kbd "C-0") 'delete-window)
