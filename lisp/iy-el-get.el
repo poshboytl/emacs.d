@@ -151,6 +151,12 @@
     (:name ido-hacks :type git :url bundle :features ido-hacks :build nil)
     (:name emacs-rails :type git :url bundle :features rails)
     (:name mmm-mode :type git :url bundle :features mmm-auto)
+    (:name ESS :type git :url bundle :build `,(mapcar
+                                               (lambda (target)
+                                                 (concat "make " target " EMACS=" el-get-emacs))
+                                               '("clean" "all"))
+           :load-path ("lisp")
+           :features ess-site)
     )))
 
 (provide 'iy-el-get)

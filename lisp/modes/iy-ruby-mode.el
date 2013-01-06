@@ -40,7 +40,9 @@
   (define-key rails-minor-mode-map  (kbd "C-c C-c /")  'rails-spec:run-this-spec)
   (define-key rails-minor-mode-map  (kbd "M-s SPC")  'rails-lib:run-primary-switch)
   (define-key rails-minor-mode-map  (kbd "M-s M-SPC")  'rails-lib:run-secondary-switch)
-  (define-key rails-minor-mode-map  (kbd "<f9>") nil))
+  (define-key rails-minor-mode-map  (kbd "<f9>") nil)
+
+  (push "html.slim" rails-templates-list))
 
 (defun iy-turn-of-rails-minor-mode-for-modes ()
   (when (memq major-mode '(rebase-mode))

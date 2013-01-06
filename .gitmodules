@@ -133,3 +133,6 @@
 [submodule "bundle/mmm-mode"]
 	path = bundle/mmm-mode
 	url = git://github.com/purcell/mmm-mode.git
+[submodule "bundle/ESS"]
+	path = bundle/ESS
+	url = git://github.com/emacs-ess/ESS.git

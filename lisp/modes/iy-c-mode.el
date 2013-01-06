@@ -1,5 +1,5 @@
 (defconst my-c-style
-  '((c-basic-offset             . 4)
+  '((c-basic-offset             . 2)
     (c-comment-only-line-offset . (0 . 0))
     (c-ignore-auto-fill         . nil)
     (c-tab-always-indent        . t)
@@ -58,7 +58,7 @@
 ;; Customizations for all modes in CC Mode.
 (defun iy-c-mode-common-init ()
   (c-add-style "cust" my-c-style t)
-  (setq tab-width 4
+  (setq tab-width 2
         indent-tabs-mode nil)
   (dtrt-indent-mode t)
   (c-toggle-auto-hungry-state 1))

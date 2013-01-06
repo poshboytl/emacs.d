@@ -57,4 +57,24 @@
   (mapc 'fringe-helper-remove flymake-fringe-overlays)
   (setq flymake-fringe-overlays nil))
 
+(autoload 'smart-compile "smart-compile" nil t)
+(autoload 'smart-run "smart-compile" nil t)
+(eval-after-load 'smart-compile+
+  '(progn
+     (setq smart-run-alist
+           (append
+            (list
+             (cons "_spec\\.rb\\'" '(compile (concat "cd " (eproject-root) "; rr rspec --no-color " (file-relative-name (buffer-file-name) (eproject-root)))))
+             (cons "\\.rb\\'" "rr ruby %F"))
+            smart-run-alist))
+     (setq smart-executable-alist
+           (append '("%n.rb") smart-executable-alist))))
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (provide 'iy-compile)

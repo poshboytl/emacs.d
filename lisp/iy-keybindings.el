@@ -17,6 +17,7 @@
                               (forward-symbol (- arg))))
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
+(autoload 'ace-jump-mode "ace-jump-mode" nil t)
 (define-key iy-map (kbd "f") 'ace-jump-mode)
 (define-key iy-map (kbd "F") 'ace-jump-line-mode)
 (define-key iy-map (kbd "M-f") 'ace-jump-line-mode)
@@ -226,6 +227,7 @@
 ;;}}}
 
 ;;{{{ Fx
+
 (global-set-key (kbd "<f1>") help-map)
 (global-set-key (kbd "<f2>") 'recentf-open-files)
 
@@ -241,6 +243,7 @@
 (global-set-key (kbd "<f12>") 'iy-magit-status)
 (global-set-key (kbd "C-<f12>") 'git-status)
 (global-set-key (kbd "<ESC> <f12>") 'git-status)
+
 ;;}}}
 
 ;;{{{ Misc
@@ -259,6 +262,10 @@
 (global-set-key (kbd "C-4") 'ispell-word)
 
 (define-key iy-map (kbd "n") 'deft)
+
+(define-key iy-map (kbd "c") 'smart-compile)
+(define-key iy-map (kbd "M-c") 'recompile)
+(define-key iy-map (kbd "x") 'smart-run)
 
 ;;}}}
 

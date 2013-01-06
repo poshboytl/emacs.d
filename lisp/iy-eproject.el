@@ -67,7 +67,7 @@ ROOT defaults to the current buffer's project-root."
      ((or (file-exists-p "Makefile") (file-exists-p "makefile"))
       (concat "cd " root "; make -k"))
      ((or (file-exists-p "Rakefile"))
-      "rake ")
+      (concat "cd " root "; rake "))
      ((or (file-exists-p "pom.xml"))
       (concat "cd " root "; mvn test"))
      (t nil))))
@@ -139,6 +139,18 @@ to select from, open file when selected."
       (mapcar 'expand-file-name
               (split-string (buffer-string) "\0")))))
 
+(defun iy-eproject-open-session ()
+  (interactive)
+  (let ((dir (eproject-root-safe)))
+    (when dir
+      (desktop-change-dir dir)
+      (dired dir))))
+
+(defun iy-eproject-open-project (&optional force)
+  (interactive "P")
+  (let ((current-prefix-arg (if force 8 4)))
+    (call-interactively 'magit-status)))
+
 (defun iy-eproject-eshell-toggle ()
   (interactive)
   (iy-eshell-toggle (ignore-errors (concat "*eshell*<" (eproject-name) ">"))))
@@ -188,7 +200,10 @@ to select from, open file when selected."
   (add-hook 'eproject-mode-hook 'iy-eproject-mode-init)
   (global-set-key (kbd "<f5>") 'iy-compile)
 
+  (define-key iy-map (kbd "p P") 'iy-eproject-open-project)
+  (define-key iy-map (kbd "p s") 'iy-eproject-open-session)
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
+  (define-key iy-map (kbd "p c") 'iy-compile)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   (define-key iy-map (kbd "p o") 'iy-eproject-find-file-with-cache)
@@ -198,7 +213,7 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p a") 'ack-root)
   (define-key iy-map (kbd "p g") (iy-eproject-call-interactively-in-root 'git-grep))
   (define-key iy-map (kbd "p !") (iy-eproject-call-interactively-in-root 'shell-command))
-
+  
   ;; generate TAGS, C-u to update
   (define-key iy-map (kbd "p t") 'eproject-visit-tags-table)
   )
