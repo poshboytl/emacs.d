@@ -101,7 +101,7 @@
 (setq org-clock-idle-time 30)
 (setq org-drawers '("PROPERTIES" "LOGBOOK" "CLOCK"))
 (setq org-clock-into-drawer "CLOCK")
-(setq org-clock-out-remove-zero-time-clocks t)
+;; handle by pomodoro
 (setq org-clock-out-when-done t)
 (setq org-clock-persist (quote history))
 (setq org-agenda-todo-ignore-with-date t)
@@ -381,9 +381,9 @@ this with to-do items than with projects or headings."
     (interrupt-process org-pomodoro-process)
     (setq org-pomodoro-process nil)))
 
+(setq org-clock-out-remove-zero-time-clocks nil)
 (defun org-pomodoro-is-indivisible! ()
-  (let ((org-clock-out-remove-zero-time-clocks nil)
-        (org-pomodoro-cancelling t)
+  (let ((org-pomodoro-cancelling t)
         (buffer (current-buffer))
         (point (point)))
     (when (org-clock-is-active)
@@ -401,7 +401,9 @@ this with to-do items than with projects or headings."
                      (equal (match-string 1) org-clock-string))
             (goto-char (match-end 0))
             (beginning-of-line 1)
-            (kill-line 1)
+            (delete-region (point) (point-at-eol))
+            (and (looking-at "\n") (> (point-max) (1+ (point)))
+                 (delete-char 1))
             (message "Pomodoro is cancelled")))))))
 
 (defun org-pomodoro-done ()
