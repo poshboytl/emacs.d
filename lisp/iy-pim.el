@@ -466,6 +466,35 @@ this with to-do items than with projects or headings."
   (org-agenda-set-mode-name)
   (message "Switched to %s view" 3))
 
+;; export ical
+
+(setq org-icalendar-use-scheduled '(todo-start event-if-todo))
+
+(defun iy-org-ical-verify ()
+  (let* (tags subtree-start subtree-end)
+    (save-excursion
+      (org-back-to-heading t)
+      (setq subtree-start (point))
+      (setq tags (org-get-tags))
+      (org-end-of-subtree)
+      (setq subtree-end (point))
+      (goto-char subtree-start)
+      (and (member "@errands" tags)))))
+
+;;; activate filter and call export function
+(defun org-ical ()
+  (interactive)
+  (let ((org-icalendar-verify-function 'iy-org-ical-verify))
+    (org-export-icalendar-combine-agenda-files))
+  (async-shell-command (format "scp %s iany.me:/mnt/iany.me/shared/static/org.ics" org-combined-agenda-icalendar-file) nil nil))
+
+(setq org-combined-agenda-icalendar-file (concat iy-dropbox-dir "g/ical/org.ics"))
+
+;;; activate filter and call export function
+(defun org-mycal-export () 
+  (let ((org-icalendar-verify-function 'org-mycal-export-limit))
+    (org-export-icalendar-combine-agenda-files)))
+
 (defun org ()
   (interactive)
   (ido-find-file-in-dir org-directory))
