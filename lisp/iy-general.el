@@ -15,7 +15,6 @@
 
  '(mouse-yank-at-point t)
  '(x-select-enable-clipboard t)
- '(browse-url-browser-function (quote w3m-browse-url))
  '(tramp-default-method-alist (quote (("\\`localhost\\'" "\\`root\\'" "sudo")))))
 
 ;;}}}

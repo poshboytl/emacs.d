@@ -33,42 +33,11 @@
   (browse-url-generic (or (w3m-anchor (point))
                           (w3m-image (point)))))
 
-(setq wicked-quick-search-alist
-      '(("^g?:? +\\(.*\\)" . ;; Google Web
-         "http://www.google.com/search?q=\\1")
-
-        ("^g!:? +\\(.*\\)" . ;; Google Lucky
-         "http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=\\1")
-
-        ("^dict:? +\\(.*\\)" . ;; Dictionary
-         "http://dictionary.reference.com/search?q=\\1")))
-
-(defadvice w3m-goto-url (before wicked activate)
-  "Use the quick searches defined in `wicked-quick-search-alist'."
-  (let* ((my-url (replace-regexp-in-string
-                  "^ *\\| *$" ""
-                  (replace-regexp-in-string "[ \t\n]+" " " (ad-get-arg 0))))
-         (match (assoc-if
-                 (lambda (a) (string-match a my-url))
-                 wicked-quick-search-alist)))
-    (if match
-        (ad-set-arg 0 (replace-regexp-in-string
-                       (car match) (cdr match) my-url)))))
-
-(defadvice browse-url (before wicked activate)
-  "Use the quick searches defined in `wicked-quick-search-alist'."
-  (let* ((my-url (replace-regexp-in-string
-                  "^ *\\| *$" ""
-                  (replace-regexp-in-string "[ \t\n]+" " " (ad-get-arg 0))))
-         (match (assoc-if
-                 (lambda (a) (string-match a my-url))
-                 wicked-quick-search-alist)))
-    (if match
-        (ad-set-arg 0 (replace-regexp-in-string
-                       (car match) (cdr match) my-url)))))
-
 (defun iy-el-get-after-emacs-w3m ()
-  (require 'w3m-lnum))
+  (require 'w3m-lnum)
+  (setq browse-url-browser-function
+        '(("ticket\\.opower\\.com" . browse-url-generic)
+          ("." . w3m-browse-url))))
 
 (defun iy-el-w3m-init ()
   (w3m-lnum-mode)
