@@ -153,8 +153,36 @@
   (define-key org-mode-map (kbd "C-c ,") 'org-cycle-agenda-files)
   (define-key org-agenda-mode-map "#" 'org-agenda-3-days-view)
   (define-key org-agenda-mode-map "M" 'org-agenda-month-view)
+  (define-key org-agenda-mode-map "x" 'sacha/org-agenda-done)
+  (define-key org-agenda-mode-map "X" 'sacha/org-agenda-mark-done-and-add-followup)
+  (define-key org-agenda-mode-map "N" 'sacha/org-agenda-new)
   (flyspell-mode 1)
   (org-pomodoro-on-org-load))
+
+
+(defun sacha/org-agenda-done (&optional arg)
+  "Mark current TODO as done.
+This changes the line at point, all other lines in the agenda referring to
+the same tree node, and the headline of the tree node in the Org-mode file."
+  (interactive "P")
+  (org-agenda-todo "DONE"))
+
+(defun sacha/org-agenda-mark-done-and-add-followup ()
+    "Mark the current TODO as done and add another task after it.
+Creates it at the same level as the previous task, so it's better to use
+this with to-do items than with projects or headings."
+    (interactive)
+    (org-agenda-todo "DONE")
+    (org-agenda-switch-to)
+    (org-capture 0 "t"))
+
+(defun sacha/org-agenda-new ()
+  "Create a new note or task at the current agenda item.
+Creates it at the same level as the previous task, so it's better to use
+this with to-do items than with projects or headings."
+  (interactive)
+  (org-agenda-switch-to)
+  (org-capture 0))
 
 (defun wl-org-column-view-uses-fixed-width-face ()
   ;; copy from org-faces.el
