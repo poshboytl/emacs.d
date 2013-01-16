@@ -12,9 +12,6 @@
  '(mu4e-use-fancy-chars nil)
  '(mu4e-maildir-shortcuts
    '(("/INBOX" . ?i)))
- ;; (lambda (msg)
- ;;   (if (mu4e-message-contact-field-matches msg :to "ian@xxx")
- ;;      "/xxx/archive" "/archive"))
  '(mu4e-refile-folder "/archive")
  '(mu4e-view-show-images t)
  '(mu4e-view-image-max-width 800)
@@ -41,6 +38,35 @@
 (setq sendmail-program "msmtp")
 (setq message-sendmail-extra-arguments '("-a" "ianyme"))
 (setq mail-host-address "iany.me")
+
+(defvar iy-message-address-list nil)
+
+(defun iy-message-set-address (&optional address)
+  (interactive (list (ido-completing-read "From: " (mapcar 'car iy-message-address-list))))
+
+  (let* ((plist (cdr (assoc address iy-message-address-list)))
+         (signature (plist-get plist :signature)))
+    (setq user-mail-address address)
+    (setq mail-signature-file (or signature "~/.signature"))
+    (setq message-signature-file mail-signature-file)))
+
+(defun iy-message-switch-address (&optional address)
+  (interactive (list (ido-completing-read "From: " (mapcar 'car iy-message-address-list))))
+
+  (iy-message-set-address address)
+
+  (message-goto-from)
+  (message-beginning-of-line 1)
+  (delete-region (point) (point-at-eol))
+  (insert (format "%s <%s>" user-full-name user-mail-address))
+
+  (message-goto-signature)
+  (previous-line 1)
+  (when (looking-at-p "--")
+    (delete-region (point) (point-max))
+    (when (looking-back "[\r\n]")
+      (delete-region (match-beginning 0) (match-end 0))))
+  (message-insert-signature))
 
 ;; http://zmalltalker.com/linux/mu.html
 (require 'gnus-dired)
