@@ -33,6 +33,7 @@
   (browse-url-generic (or (w3m-anchor (point))
                           (w3m-image (point)))))
 
+(setq browse-url-browser-function 'browse-url-generic)
 (defun iy-el-get-after-emacs-w3m ()
   (require 'w3m-lnum)
   (setq browse-url-browser-function
