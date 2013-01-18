@@ -37,7 +37,7 @@
 (defun iy-el-get-after-emacs-w3m ()
   (require 'w3m-lnum)
   (setq browse-url-browser-function
-        '(("ticket\\.opower\\.com" . browse-url-generic)
+        '(("ticket\\.opower\\.com\\|bitbucket\\.org" . browse-url-generic)
           ("." . w3m-browse-url))))
 
 (defun iy-el-w3m-init ()
