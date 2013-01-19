@@ -227,6 +227,8 @@ this with to-do items than with projects or headings."
     "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %a\n  %i")
    ("j" "Journal" plain (file+datetree (concat org-directory "/journal.org"))
     "\n%?\n" :empty-lines 1)
+   ("p" "Pomodoro" plain (file+datetree (concat org-directory "/pomodoro.org"))
+    "\n%?\n" :empty-lines 1)
    ("d" "Dump" plain (file+olp (concat org-directory "/inbox.org") "Quick Notes" "Plain")
     "\n--%U--------------------------------------------------\n%?\n" :empty-lines 1)
    ("l" "List" item (file+olp (concat org-directory "/inbox.org") "Quick Notes" "List") "%?\n" :empty-lines 1)
@@ -259,6 +261,13 @@ this with to-do items than with projects or headings."
          ((tags-todo "@message/GOING|PAUSE|TODO")))
         ("lr" "Reading"
          ((tags-todo "@reading/GOING|PAUSE|TODO")))
+        ("L" "Combined Context List"
+         ((tags-todo "@home/GOING|PAUSE|TODO")
+          (tags-todo "@errands/GOING|PAUSE|TODO")
+          (tags-todo "@computer/GOING|PAUSE|TODO")
+          (tags-todo "@phone/GOING|PAUSE|TODO")
+          (tags-todo "@message/GOING|PAUSE|TODO")
+          (tags-todo "@reading/GOING|PAUSE|TODO")))
         ("T" "TODO List"
          ((todo "GOING|PAUSE|TODO"))
          ((org-agenda-todo-ignore-with-date nil)))
@@ -271,7 +280,9 @@ this with to-do items than with projects or headings."
          ((agenda "" ((org-agenda-span 'day)
                       (org-agenda-sorting-strategy
                        (quote ((agenda time-up priority-down tag-up) )))
-                      (org-deadline-warning-days 0)))))
+                      (org-deadline-warning-days 0)))
+          (todo "GOING|PAUSE|TODO"))
+         ((org-agenda-todo-ignore-with-date t)))
 
         ("r" "Review"
          ((agenda "" ((org-agenda-span 'day)
