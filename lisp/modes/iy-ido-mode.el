@@ -105,9 +105,8 @@
 (defalias 'extb 'iy-ido-switch-buffer-by-ext-name)
 
 ;; Or bind to key
-;; (global-set-key (kbd "M-s b") 'iy-ido-switch-buffer-by-major-mode)
-;; (global-set-key (kbd "M-s B") 'iy-ido-switch-buffer-by-ext-name)
-
+(define-key iy-map (kbd "b") 'iy-ido-switch-buffer-by-major-mode)
+(define-key iy-map (kbd "B") 'iy-ido-switch-buffer-by-ext-name)
 
 ;;}}}
 
