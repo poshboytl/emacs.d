@@ -28,6 +28,7 @@
 (push 'inf-ruby el-get-packages)
 (push 'ruby-end el-get-packages)
 (push 'emacs-rails el-get-packages)
+(push 'rspec-mode el-get-packages)
 
 (custom-set-variables
  '(rails-always-use-text-menus t)
