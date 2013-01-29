@@ -32,7 +32,10 @@
 
 (custom-set-variables
  '(rails-always-use-text-menus t)
- '(rails-browse-api-with-w3m t))
+ '(rails-browse-api-with-w3m t)
+ ;; already handled by ~/bin/rspec
+ '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-zeus-when-possible nil))
 
 (defun iy-el-get-after-emacs-rails ()
   (define-key rails-minor-mode-map  (kbd "C-c C-c #")  'rails-spec:run-last)
