@@ -115,4 +115,10 @@
 (defalias 'irb 'inf-ruby)
 (defalias 'pry 'inf-ruby)
 
+(defadvice rails-core:prepare-command (around zeus-maybe (command) activate)
+  (if (or (file-exists-p (rails-core:file ".zeus.sock"))
+          (file-exists-p (rails-core:file "zeus.json")))
+      (setq ad-return-value (concat "zeus-maybe " command))
+    ad-do-it))
+
 (provide 'iy-ruby-mode)
