@@ -25,7 +25,8 @@
         org-w3m
         org-clock
         org-timer
-        org-protocol))
+        org-protocol
+        org-mu4e))
 
 ;;; Customization
 (setq org-clock-persist-file

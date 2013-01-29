@@ -29,6 +29,9 @@
   (define-key iy-map (kbd "M-x") 'smex-major-mode-commands))
 
 (defun iy-el-get-after-ido-hacks ()
+  (put 'dired-do-rename 'ido-hacks-fix-default nil)
+  (put 'dired-do-copy 'ido-hacks-fix-default nil)
+
   (ido-hacks-mode t)
   (iy-el-get-after-smex)
   (ad-enable-advice 'ido-read-internal 'around 'ido-completing-read-use-initial-input-as-default)
