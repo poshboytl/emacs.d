@@ -1,6 +1,7 @@
 ;;; iy-w3m.el --- w3m
 
 (require 'iy-dep)
+
 (custom-set-variables
  '(w3m-coding-system (quote utf-8))
  '(w3m-default-coding-system (quote utf-8))
@@ -40,8 +41,8 @@
 (defun wicked-w3m-open-link-or-image-in-default-browser ()
   "Open the current link or image in GUI."
   (interactive)
-  (browse-url-generic (or (w3m-anchor (point))
-                          (w3m-image (point)))))
+  (browse-url-generic (or (get-text-property (point) 'w3m-href-anchor)
+                          (get-text-property (point) 'w3m-image))))
 
 ;; (setq browse-url-browser-function 'browse-url-generic)
 (setq browse-url-browser-function
@@ -52,40 +53,60 @@
 
 (defun w3m-anchor-markdown (&optional pos)
   (setq pos (or pos (point)))
-  (unless (or (w3m-image pos) (w3m-anchor-sequence pos))
+  (unless (or (get-text-property pos 'w3m-image)
+              (get-text-property pos 'w3m-anchor-sequence))
     (setq pos (w3m-goto-next-anchor-or-image)))
-  (if (w3m-image pos)
+  (if (get-text-property pos 'w3m-image)
       (format "![%s](%s)"
-              (or (w3m-image-alt pos)
-                  (w3m-image pos))
-              (w3m-image pos))
+              (or (get-text-property pos 'w3m-image-alt)
+                  (get-text-property pos 'w3m-image))
+              (get-text-property pos 'w3m-image))
     (format "[%s](%s)"
             (or
-             (w3m-anchor-title pos)
+             (get-text-property pos 'w3m-anchor-title)
              (buffer-substring-no-properties
               (let ((pre (previous-single-property-change pos 'w3m-anchor-sequence)))
-                (if (and pre (w3m-anchor-sequence pre) (= (w3m-anchor-sequence pre) (w3m-anchor-sequence pos)))
+                (if (and pre
+                         (get-text-property pre 'w3m-anchor-sequence)
+                         (= (get-text-property pre 'w3m-anchor-sequence)
+                            (get-text-property pos 'w3m-anchor-sequence)))
                     pre pos))
               (next-single-property-change pos 'w3m-anchor-sequence)))
-            (w3m-anchor pos))))
+            (get-text-property pos 'w3m-href-anchor))))
+
+(defun w3m-markdown-this-url (&optional pos)
+  (setq pos (or pos (point)))
+  (let ((markdown (w3m-anchor-markdown pos)))
+    (if markdown
+        (progn
+          (message "%s" ())
+          (kill-new markdown)
+          (w3m-message "Copied: %s" markdown))
+      (w3m-message "No URL found"))))
 
 (defun w3m-lnum-markdown-this-url ()
   "Display the url under point in the echo area and put markdown format of it into `kill-ring'.
 If no url under point, activate numbering and select one."
   (interactive)
-  (if (or (w3m-anchor) (w3m-image))
-      (w3m-print-this-url t)
-    (let ((link (w3m-lnum-get-action "Select URL to copy: " 1)))
-      (if link
-          (let* ((pos (cadr link))
-                 (markdown (w3m-anchor-markdown pos)))
-            (message "%s" ())
-            (kill-new markdown)
-            (w3m-message "%s%s" (let ((im-alt (nth 3 link)))
-                                  (if (zerop (length im-alt)) ""
-                                    (concat im-alt ": ")))
-                         markdown))
-        (w3m-message "No URL selected")))))
+  
+  (let ((pos (point)))
+    (if (or (get-text-property pos 'w3m-href-anchor)
+            (get-text-property pos 'w3m-image)
+            (and (not (bolp))
+                 (or
+                  (get-text-property (1- pos) 'w3m-href-anchor)
+                  (get-text-property (1- pos) 'w3m-image))
+                 (setq pos (1- pos)))
+            (and (not (eolp))
+                 (or
+                  (get-text-property (1+ pos) 'w3m-href-anchor)
+                  (get-text-property (1+ pos) 'w3m-image))
+                 (goto-char (1+ pos))))
+        (w3m-markdown-this-url pos)
+      (let ((link (w3m-lnum-get-action "Select URL to copy: " 1)))
+        (if link
+            (w3m-markdown-this-url pos)
+          (w3m-message "No URL selected"))))))
 
 (defun iy-el-w3m-init ()
   (w3m-lnum-mode)
