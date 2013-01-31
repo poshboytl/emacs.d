@@ -29,6 +29,13 @@
               'autopair-python-triple-quote-action))
   (modify-syntax-entry ?` "\"" markdown-mode-syntax-table)
 
+  (local-set-key (kbd "C-c C-f") 'outline-forward-same-level)
+  (local-set-key (kbd "C-c C-b") 'outline-backward-same-level)
+  (local-set-key (kbd "C-c C-n") 'outline-next-visible-heading)
+  (local-set-key (kbd "C-c C-p") 'outline-previous-visible-heading)
+  (local-set-key (kbd "C-M-f") 'forward-sexp)
+  (local-set-key (kbd "C-M-b") 'backward-sexp)
+
   (when (fboundp 'yas/markdown-noconflict)
     (yas/markdown-noconflict)))
 

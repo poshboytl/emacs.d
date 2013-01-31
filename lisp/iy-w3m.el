@@ -104,8 +104,7 @@ If no url under point, activate numbering and select one."
                  (goto-char (1+ pos))))
         (w3m-markdown-this-url pos)
       (let ((link (w3m-lnum-get-action "Select URL to copy: " 1)))
-        (if link
-            (w3m-markdown-this-url pos)
+        (if link (w3m-markdown-this-url (cadr link))
           (w3m-message "No URL selected"))))))
 
 (defun iy-el-w3m-init ()
