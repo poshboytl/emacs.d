@@ -266,6 +266,7 @@
 (define-key iy-map (kbd "c") 'smart-compile)
 (define-key iy-map (kbd "M-c") 'recompile)
 (define-key iy-map (kbd "x") 'smart-run)
+(define-key iy-map (kbd "M-1") 'run-this)
 
 ;;}}}
 

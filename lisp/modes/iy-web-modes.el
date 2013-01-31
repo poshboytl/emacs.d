@@ -25,7 +25,10 @@
               'autopair-python-triple-quote-action)))
 
 (defun iy-js-mode-init ()
-  (local-set-key (kbd "M-.") 'find-tag))
+  (local-set-key (kbd "M-.") 'find-tag)
+  (local-set-key (kbd "C-j") 'newline)
+  (local-set-key (kbd "<return>") 'newline-and-indent)
+  (autopair-mode 1))
 
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)

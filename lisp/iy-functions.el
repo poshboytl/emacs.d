@@ -435,4 +435,8 @@ Calling this command 3 times will always result in no whitespaces around cursor.
     (setenv "PATH" (concat python2-bin-dir ":" (getenv "PATH")))
     (message "activate python2")))
 
+(defun run-this (command)
+  (interactive "MShell command: ")
+  (compile (smart-compile-replace command)))
+
 (provide 'iy-functions)

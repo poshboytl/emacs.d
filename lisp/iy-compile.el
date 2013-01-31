@@ -57,8 +57,8 @@
   (mapc 'fringe-helper-remove flymake-fringe-overlays)
   (setq flymake-fringe-overlays nil))
 
-(autoload 'smart-compile "smart-compile" nil t)
-(autoload 'smart-run "smart-compile" nil t)
+(autoload 'smart-compile "smart-compile+" nil t)
+(autoload 'smart-run "smart-compile+" nil t)
 (eval-after-load 'smart-compile+
   '(progn
      (setq smart-run-alist
