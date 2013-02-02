@@ -67,6 +67,11 @@
              (cons "_spec\\.rb\\'" '(compile (concat "cd " (eproject-root) "; rr rspec --no-color " (file-relative-name (buffer-file-name) (eproject-root)))))
              (cons "\\.rb\\'" "rr ruby %F"))
             smart-run-alist))
+     (setq smart-compile-alist
+           (append
+            (list
+             (cons "\\.coffee$" "coffee -c %f"))
+            smart-compile-alist))
      (setq smart-executable-alist
            (append '("%n.rb") smart-executable-alist))))
 
