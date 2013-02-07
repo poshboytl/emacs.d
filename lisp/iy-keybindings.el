@@ -203,6 +203,7 @@
     (kill-buffer-and-window)))
 (global-set-key (kbd "C-x K") 'iy-kill-buffer-and-window)
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
+(global-set-key (kbd "C-x M-f") 'find-alternative-file-with-sudo)
 
 ;;}}}
 

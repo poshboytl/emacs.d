@@ -504,11 +504,6 @@ this with to-do items than with projects or headings."
 
 (setq org-combined-agenda-icalendar-file (concat iy-dropbox-dir "g/ical/org.ics"))
 
-;;; activate filter and call export function
-(defun org-mycal-export () 
-  (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-    (org-export-icalendar-combine-agenda-files)))
-
 (defun org ()
   (interactive)
   (ido-find-file-in-dir org-directory))
