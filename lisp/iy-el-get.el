@@ -157,6 +157,7 @@
                                                '("clean" "all"))
            :load-path ("lisp")
            :features ess-site)
+    (:name undo-tree :url bundle)
     )))
 
 (provide 'iy-el-get)

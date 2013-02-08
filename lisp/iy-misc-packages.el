@@ -34,6 +34,6 @@
 
 (push 'multiple-cursors el-get-packages)
 
-;; (push 'sequential-command el-get-packages)
+(push 'undo-tree el-get-packages)
 
 (provide 'iy-misc-packages)

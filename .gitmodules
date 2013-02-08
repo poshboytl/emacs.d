@@ -136,3 +136,6 @@
 [submodule "bundle/ESS"]
 	path = bundle/ESS
 	url = git://github.com/emacs-ess/ESS.git
+[submodule "bundle/undo-tree"]
+	path = bundle/undo-tree
+	url = git://github.com/emacsmirror/undo-tree.git

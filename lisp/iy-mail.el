@@ -8,6 +8,7 @@
 (autoload 'mu4e "mu4e" nil t)
 (custom-set-variables
  '(mu4e-maildir (expand-file-name "~/Mail"))
+ '(mu4e-attachment-dir (expand-file-name "~/Dump/Downloads/"))
  '(mu4e-drafts-folder "/drafts")
  '(mu4e-use-fancy-chars nil)
  '(mu4e-maildir-shortcuts
