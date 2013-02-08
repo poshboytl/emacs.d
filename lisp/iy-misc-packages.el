@@ -35,5 +35,7 @@
 (push 'multiple-cursors el-get-packages)
 
 (push 'undo-tree el-get-packages)
+(defun iy-el-get-after-undo-tree ()
+  (global-undo-tree-mode))
 
 (provide 'iy-misc-packages)
