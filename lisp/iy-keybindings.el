@@ -44,9 +44,9 @@
 (custom-set-variables
  '(cua-rectangle-mark-key [(control ?r) return]))
 (cua-selection-mode 2)
-                    
+
 (global-set-key (kbd "C-8") 'pop-tag-mark)
-                    
+
 (global-set-key [end] 'end-of-line)
 (global-set-key [home] 'beginning-of-line)
 
