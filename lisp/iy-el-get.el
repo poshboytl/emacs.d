@@ -158,6 +158,8 @@
            :load-path ("lisp")
            :features ess-site)
     (:name undo-tree :url bundle)
+    (:name git-gutter :type git :url bundle)
+    (:name git-gutter-fringe :type git :url bundle :depends (git-gutter) :features git-gutter-fringe)
     )))
 
 (provide 'iy-el-get)

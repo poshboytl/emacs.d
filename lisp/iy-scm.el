@@ -1,8 +1,19 @@
 ;;{{{ General
 
 (custom-set-variables
- '(vc-follow-symlinks t)
- '(revert-without-query '("COMMIT_EDITMSG\\'" "git-rebase-todo")))
+  '(vc-follow-symlinks t)
+  '(revert-without-query '("COMMIT_EDITMSG\\'" "git-rebase-todo")))
+
+(push 'git-gutter el-get-packages)
+(push 'git-gutter-fringe el-get-packages)
+
+(defadvice git-gutter:in-git-repository-p (around safe-call-process-shell-command () activate)
+  (if (and default-directory (file-directory-p default-directory))
+      ad-do-it
+    (setq ad-return-value 1)))
+
+(defun iy-el-get-after-git-gutter-fringe ()
+  (global-git-gutter-mode t))
 
 ;;}}}
 

@@ -1,5 +1,5 @@
 ;; iy-global-keys.el --- Global shortcut keys
-;; 
+;;
 
 (require 'iy-dep)
 (require 'iy-functions)
@@ -269,6 +269,7 @@
 (define-key iy-map (kbd "x") 'smart-run)
 (define-key iy-map (kbd "M-1") 'run-this)
 
+(global-set-key (kbd "C-x C-g") 'git-gutter:toggle)
 ;;}}}
 
 (provide 'iy-keybindings)

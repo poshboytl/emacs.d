@@ -557,6 +557,13 @@
  `(mmm-output-submode-face ((t (:background ,zenburn-bg+1))))
  `(mmm-comment-submode-face ((t (:background ,zenburn-bg+1))))
  `(mmm-delimiter-face ((t (:foreground ,zenburn-bg+1 :background ,zenburn-bg+1))))
+
+ `(git-gutter:modified ((t (:foreground ,zenburn-bg+3 :background "#534626" :weight bold))))
+ `(git-gutter:added ((t (:foreground ,zenburn-bg+3 :background "#013009" :weight bold))))
+ `(git-gutter:deleted ((t (:foreground ,zenburn-bg+3 :background "#310602" :weight bold))))
+ `(git-gutter-fr:modified ((t (:foreground ,zenburn-yellow))))
+ `(git-gutter-fr:added ((t (:foreground ,zenburn-green+1))))
+ `(git-gutter-fr:deleted ((t (:foreground ,zenburn-red+1))))
  )
 
 (provide-theme 'zenburn)

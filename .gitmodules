@@ -139,3 +139,9 @@
 [submodule "bundle/undo-tree"]
 	path = bundle/undo-tree
 	url = git://github.com/emacsmirror/undo-tree.git
+[submodule "bundle/git-gutter"]
+	path = bundle/git-gutter
+	url = git://github.com/syohex/emacs-git-gutter.git
+[submodule "bundle/git-gutter-fringe"]
+	path = bundle/git-gutter-fringe
+	url = git://github.com/syohex/emacs-git-gutter-fringe.git
