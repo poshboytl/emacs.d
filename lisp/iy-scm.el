@@ -8,12 +8,9 @@
 (push 'git-gutter-fringe el-get-packages)
 
 (defadvice git-gutter:in-git-repository-p (around safe-call-process-shell-command () activate)
-  (if (and default-directory (file-directory-p default-directory))
-      ad-do-it
-    (setq ad-return-value 1)))
-
-(defun iy-el-get-after-git-gutter-fringe ()
-  (global-git-gutter-mode t))
+           (if (and default-directory (file-directory-p default-directory))
+             ad-do-it
+             (setq ad-return-value 1)))
 
 ;;}}}
 
