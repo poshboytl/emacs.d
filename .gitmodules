@@ -73,9 +73,6 @@
 [submodule "bundle/magit"]
 	path = bundle/magit
 	url = git://github.com/magit/magit.git
-[submodule "bundle/full-ack"]
-	path = bundle/full-ack
-	url = git://github.com/nschum/full-ack.git
 [submodule "bundle/xcscope"]
 	path = bundle/xcscope
 	url = git://github.com/To1ne/xcscope.git

@@ -118,7 +118,7 @@
            :info "doc")
     (:name git-emacs :url bundle :features git-emacs-autoloads)
     (:name magit :url bundle :lazy t)
-    (:name full-ack :url bundle :lazy t)
+    (:name ag :type git :url bundle :lazy t)
     (:name xcscope :url bundle :lazy t)
     (:name alternative-files
            :compile "alternative-files.el"

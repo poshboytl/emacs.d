@@ -11,7 +11,7 @@
  '(ack-root-directory-functions nil)
  '(ack-prompt-for-directory t))
 
-(push 'full-ack el-get-packages)
+(push 'ag el-get-packages)
 (push 'xcscope el-get-packages)
 
 (defun ack-root (&optional force)
