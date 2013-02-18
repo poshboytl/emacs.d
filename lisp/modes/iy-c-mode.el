@@ -135,4 +135,6 @@
 (add-hook 'objc-mode-hook 'iy-objc-mode-init)
 (add-hook 'java-mode-hook 'iy-java-mode-init)
 
+(push 'cmake-mode el-get-packages)
+
 (provide 'iy-c-mode)
