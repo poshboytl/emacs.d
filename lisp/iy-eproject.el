@@ -210,7 +210,8 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p e") 'iy-eproject-eshell-toggle)
   (define-key iy-map (kbd "p E") 'iy-eproject-eshell-here)
   (define-key iy-map (kbd "p r") (iy-eproject-call-interactively-in-root 'rgrep))
-  (define-key iy-map (kbd "p a") 'ack-root)
+  (define-key iy-map (kbd "p a") 'ag-project-at-point)
+  (define-key iy-map (kbd "p A") 'ag-regexp-project-at-point)
   (define-key iy-map (kbd "p g") (iy-eproject-call-interactively-in-root 'git-grep))
   (define-key iy-map (kbd "p !") (iy-eproject-call-interactively-in-root 'shell-command))
   

@@ -142,3 +142,6 @@
 [submodule "bundle/git-gutter-fringe"]
 	path = bundle/git-gutter-fringe
 	url = git://github.com/syohex/emacs-git-gutter-fringe.git
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = git://github.com/Wilfred/ag.el.git

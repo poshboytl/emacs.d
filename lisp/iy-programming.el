@@ -11,15 +11,30 @@
  '(ack-root-directory-functions nil)
  '(ack-prompt-for-directory t))
 
-(push 'ag el-get-packages)
 (push 'xcscope el-get-packages)
 
-(defun ack-root (&optional force)
-  (interactive "P")
-  (let ((ack-prompt-for-directory force)
-        (ack-root-directory-functions
-         '(eproject-root-safe ack-guess-project-root)))
-    (call-interactively 'ack)))
+(push 'ag el-get-packages)
+
+(autoload 'ag/search "ag" nil nil)
+(autoload 'ag "ag" nil t)
+(autoload 'ag-regexp "ag" nil t)
+(autoload 'ag-project "ag" nil t)
+(autoload 'ag-project-regexp "ag" nil t)
+(autoload 'ag-project-at-point "ag" nil t)
+(autoload 'ag-regexp-project-at-point "ag" nil t)
+
+(defun agap (string dir is-regexp)
+  "Search string at point inside current directory. Use prefix arg to search by regexp."
+  (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))
+                     (ido-read-directory-name default-directory)
+                     current-prefix-arg))
+  (ag/search string dir is-regexp))
+
+(defun agap-regexp (string dir)
+  "Search string at point inside current directory."
+  (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))
+                     (ido-read-directory-name default-directory)))
+  (ag/search string dir t))
 
 ;;}}}
 
