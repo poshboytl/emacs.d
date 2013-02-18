@@ -273,7 +273,8 @@ this with to-do items than with projects or headings."
          ((todo "GOING|PAUSE|TODO"))
          ((org-agenda-todo-ignore-with-date nil)))
         ("M" "Maybe"
-         ((todo "WAITING|LATER"))
+         ((todo "WAITING|LATER")
+          (todo "SOMEDAY"))
          ((org-agenda-todo-ignore-with-date nil)))
         ("i" "Inbox" tags "inbox-CONTAINER=\"true\"")
 
