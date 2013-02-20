@@ -48,6 +48,7 @@
 (defalias 'fll 'add-file-local-variable-prop-line)
 (defalias 'fl 'add-file-local-variable-prop-line)
 (defalias 'dl 'add-dir-local-variable)
+(defalias 'ack 'agap)
 
 (fset 'man 'woman)
 (defun backup-dired ()

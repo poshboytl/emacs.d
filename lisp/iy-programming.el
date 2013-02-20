@@ -36,6 +36,11 @@
                      (ido-read-directory-name default-directory)))
   (ag/search string dir t))
 
+(eval-after-load 'ag
+  '(progn
+     (fset 'ag (function agap))
+     (fset 'ag-regexp (function agap-regexp))))
+
 ;;}}}
 
 ;;{{{ cscope
