@@ -43,7 +43,6 @@
 
 (global-set-key (kbd "C-3") 'mc/mark-all-like-this)
 
-(global-set-key (kbd "C-x r") 'set-rectangular-region-anchor)
 (eval-after-load 'bookmark+
   '(global-set-key (kbd "C-x r") 'set-rectangular-region-anchor))
 
