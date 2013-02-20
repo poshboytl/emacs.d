@@ -33,6 +33,10 @@
 (push 'pos-tip el-get-packages)
 
 (push 'multiple-cursors el-get-packages)
+(defadvice set-rectangular-region-anchor (around edit-lines-when-region-is-active activate)
+  (if (region-active-p)
+      (call-interactively 'mc/edit-lines)
+    ad-do-it))
 
 (push 'undo-tree el-get-packages)
 (defun iy-el-get-after-undo-tree ()
