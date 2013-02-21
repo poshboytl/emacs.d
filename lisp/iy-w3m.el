@@ -46,7 +46,7 @@
 
 ;; (setq browse-url-browser-function 'browse-url-generic)
 (setq browse-url-browser-function
-      '(("ticket\\.opower\\.com\\|bitbucket\\.org\\|docs.local/\\(?:jquery\\|rails\\|ruby\\)\\|gems.dev\\|trello.com" . browse-url-generic)
+      '(("ticket\\.opower\\.com\\|bitbucket\\.org\\|docs.local/\\(?:jquery\\|rails\\|ruby\\)\\|gems.dev\\|trello.com\\|github.com" . browse-url-generic)
         ("." . w3m-browse-url)))
 (defun iy-el-get-after-emacs-w3m ()
   (require 'w3m-lnum))
