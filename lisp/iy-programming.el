@@ -87,13 +87,20 @@
          (concat root "/spec/factories/" (alternative-files--pluralize-string name) ".rb"))))
 
      ((string-match "^\\(.*\\)/spec/factories/\\(.+\\).rb$" file)
-      (let ((root (match-string 1 file))
-            (name (match-string 2 file)))
+      (let* ((root (match-string 1 file))
+             (name (match-string 2 file))
+             (singular-name (alternative-files--singularize-string name)))
         (list
-         (concat root "/app/models/" (alternative-files--singularize-string name) ".rb")))))))
+         (concat root "/app/models/" singular-name ".rb")
+         (concat root "/spec/models/" singular-name "_spec.rb")
+         (concat root "/app/controllers/" name "_controller.rb")
+         (concat root "/spec/controllers/" name "_controller.rb")
+         (concat root "/app/helpers/" name "_helper.rb")
+         (concat root "/spec/helpers/" name "_helper.rb")
+         (concat root "/app/views/" name "/")))))))
 
 (defun iy-el-get-after-alternative-files ()
-  (push 'alternative-files-factories-finder alternative-files-functions))
+  (add-to-list 'alternative-files-functions 'alternative-files-factories-finder 'append))
 
 ;;}}}
 
