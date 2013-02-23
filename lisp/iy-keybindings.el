@@ -107,6 +107,8 @@
 (global-set-key (kbd "M-L") 'iy-dwim-downcase)
 (global-set-key (kbd "M-C") 'iy-dwim-capitalize)
 
+(define-key iy-map (kbd "<tab>") 'auto-insert)
+
 ;;}}}
 
 ;;{{{ fix isearch/minibuffer
@@ -192,10 +194,9 @@
 
 ;;{{{ Organization
 
-(define-key iy-map (kbd "<tab>") 'fold-dwim-toggle)
-(define-key iy-map (kbd "S-<tab>") 'fold-dwim-hide-all)
-(define-key iy-map (kbd "<backtab>") 'fold-dwim-hide-all)
-(define-key iy-map (kbd "C-<tab>") 'fold-dwim-show-all)
+(define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
+(define-key iy-map (kbd "I") 'fold-dwim-show-all)
+(define-key iy-map (kbd "C-i") 'fold-dwim-hide-all)
 
 ;;}}}
 
