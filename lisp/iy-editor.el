@@ -39,117 +39,14 @@
 ;;{{{ Folding
 
 (defvar fringe-face 'fringe)
-(custom-set-variables
- '(folding-font-lock-begin-mark 'fringe-face)
- '(folding-font-lock-end-mark 'fringe-face))
 (defface collapsed-face '((t (:background "#e0cf9f" :foreground "#5f5f5f"))) "Collapsed Overlay")
 (defvar collapsed-face 'collapsed-face)
 
-
-(defun iy-folding-open-fold (&optional noerror)
-  (let ((data (folding-show-current-entry noerror t)))
-    (and data
-         (progn
-           (when folding-narrow-by-default
-             (setq folding-stack
-                   (if folding-stack
-                       (cons (cons (point-min-marker)
-                                   (point-max-marker))
-                             folding-stack)
-                     '(folded)))
-             (folding-set-mode-line))
-           (folding-narrow-to-region (car data) (nth 1 data))))))
-
-(defun iy-folding-shift-in (&optional noerror)
-  (interactive)
-  (let ((goal (point)))
-    (while (folding-skip-ellipsis-backward)
-      (beginning-of-line)
-      (iy-folding-open-fold noerror)
-      (goto-char goal))
-    (if folding-narrow-by-default
-        (iy-folding-open-fold noerror)
-      (widen))))
-
-(push 'folding el-get-packages)
-(defun iy-el-get-after-folding ()
-  (setq folding-check-folded-file-function 'iy-folding-check-folded)
-  (folding-add-to-marks-list 'ruby-mode "# {{{" "# }}}" nil t)
-  (define-key iy-map (kbd "i") folding-mode-prefix-map)
-  (define-key folding-mode-prefix-map (kbd "i") 'folding-shift-in)
-  (define-key folding-mode-prefix-map (kbd "o") 'folding-shift-out)
-  (define-key folding-mode-prefix-map (kbd "<SPC>") 'folding-context-next-action)
-  (define-key folding-mode-prefix-map (kbd "j") 'folding-next-visible-heading)
-  (define-key folding-mode-prefix-map (kbd "n") 'folding-next-visible-heading)
-  (define-key folding-mode-prefix-map (kbd "k") 'folding-previous-visible-heading)
-  (define-key folding-mode-prefix-map (kbd "p") 'folding-previous-visible-heading)
-
-  (defalias 'folding-shift-in 'iy-folding-shift-in)
-
-  (defun folding-font-lock-support ()
-    "Add font lock support."
-    (ignore-errors
-      (font-lock-add-keywords nil (folding-font-lock-keywords major-mode)))))
-
 (add-hook 'lisp-mode-hook 'hs-minor-mode)
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'ruby-mode-hook 'hs-minor-mode)
 
 (push 'fold-dwim el-get-packages)
-
-(defun iy-folding-check-folded ()
-  "Function to determine if this file is in folded form."
-  (let ((folding-re1 "^.?.?.?{{{")
-        (folding-re2 "[\r\n].*}}}"))
-    (save-excursion
-      (goto-char (point-min))
-      ;;  If we found both, we assume file is folded
-      (and (assq major-mode folding-mode-marks-alist)
-           (< (point-max) 10000)
-           (re-search-forward folding-re1 nil t)
-           ;; if file is folded, there are \r's
-           (re-search-forward "[\r\n]" nil t)
-           (re-search-forward folding-re2 nil t)))))
-
-(defun folding-marker-p (&optional pos)
-  (eq (get-char-property (or pos (point)) 'face) 'fringe))
-
-(defadvice fold-dwim-toggle (around toggle-folding-on-folding-marker activate)
-  (if (folding-marker-p)
-      (folding-toggle-show-hide)
-    ad-do-it))
-
-(defadvice forward-comment (around stop-at-folding-header (count) activate)
-  (if (= 0 (ad-get-arg 0))
-      (progn ad-do-it)
-    (if (folding-marker-p)
-        (setq ad-return-value nil)
-      (let ((loop-times (abs count))
-            (direction (/ count (abs count))))
-        (ad-set-arg 0 direction)
-        (setq ad-return-value t)
-        (while (and (> loop-times 0) ad-return-value)
-          ad-do-it
-          (when ad-return-value
-            (if (> direction 0)
-              (if (folding-marker-p)
-                  (setq ad-return-value nil)
-                (when (folding-marker-p (- (point) 2))
-                  (setq ad-return-value nil)
-                  (forward-char -2)
-                  (beginning-of-line)))
-              (when (folding-marker-p)
-                (end-of-line)
-                (setq ad-return-value nil)))
-            (setq loop-times (1- loop-times))))))))
-
-(defadvice fold-dwim-hide-all (around folding-open-first activate)
-  (if (and (boundp 'folding-mode) folding-mode)
-      (progn
-        (folding-uninstall)
-        (let ((hs-hide-comments-when-hiding-all nil))
-          ad-do-it)
-        (folding-mode))
-    ad-do-it))
 
 (require 'hideshow)
 
@@ -168,33 +65,37 @@
       (overlay-put ov 'evaporate t))))
 (setq hs-set-up-overlay 'display-code-line-counts)
 
-(defadvice folding-subst-regions (around toggle-fringe (list find replace) activate)
-  ad-do-it
-  (save-excursion
-    (while list
-      (let* ((begin (car list))
-             (end (cadr list))
-             bol eol
-             (marker-string "*fringe-dummy*")
-             (marker-length (length marker-string)))
-        (dolist (ov (overlays-in begin end))
-          (when (overlay-get ov 'fringe-folding-p)
-            (delete-overlay ov)))
-        (when (and (eq find ?\n) (eq replace ?\r))
-          ;; \\n -> \\r add fringe
-          (goto-char begin)
-          (search-forward "\r")
-          (forward-char -1)
-          (let* ((ov (make-overlay (point) end nil 'front-advance))
-                 (display-string (format " (%d)..." (count-lines begin end))))
-            (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
-            (overlay-put ov 'before-string marker-string)
-            (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
-            (overlay-put ov 'display display-string)
-            (overlay-put ov 'priority 9999)
-            (overlay-put ov 'fringe-folding-p t)
-            (overlay-put ov 'evaporate t))))
-      (setq list (cdr (cdr list))))))
+(add-to-list 'hs-special-modes-alist
+             '(ruby-mode
+               "\\(def\\|do\\|{\\)" "\\(end\\|}\\)" "#"
+               (lambda (arg) (ruby-end-of-block)) nil))
+
+
+;; TODO
+;; (defadvice forward-comment (around stop-at-outline-header (count) activate)
+;;   (if (or (= 0 (ad-get-arg 0)) (not (or outline-minor-mode (eq major-mode 'outline-mode))))
+;;       (progn ad-do-it)
+;;     (if (outline-on-heading-p)
+;;         (setq ad-return-value nil)
+;;       (let ((loop-times (abs count))
+;;             (direction (/ count (abs count))))
+;;         (ad-set-arg 0 direction)
+;;         (setq ad-return-value t)
+;;         (while (and (> loop-times 0) ad-return-value)
+;;           ad-do-it
+;;           (when ad-return-value
+;;             (if (> direction 0)
+;;               (if (folding-marker-p)
+;;                   (setq ad-return-value nil)
+;;                 ;; (when (folding-marker-p (- (point) 2))
+;;                 ;;   (setq ad-return-value nil)
+;;                 ;;   (forward-char -2)
+;;                 ;;   (beginning-of-line))
+;;                 )
+;;               (when (outline-on-heading-p)
+;;                 (end-of-line)
+;;                 (setq ad-return-value nil)))
+;;             (setq loop-times (1- loop-times))))))))
 
 ;;}}}
 

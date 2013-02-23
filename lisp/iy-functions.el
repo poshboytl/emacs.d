@@ -67,12 +67,6 @@
   "Revert buffer without confirmation."
   (interactive) (flet ((yes-or-no-p (prompt) t)) (revert-buffer)))
 
-(defun iy-set-folding-marks (b e &optional mode)
-  (interactive "sBegin Mark: \nsEnd Mark: ")
-  (let* ((mode (or mode major-mode))
-         (ptr (assq mode folding-mode-marks-alist)))
-    (setcdr ptr (list b e))))
-
 (defun iy-close-help ()
   (interactive)
   (save-excursion

@@ -194,9 +194,35 @@
 
 ;;{{{ Organization
 
-(define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
+(define-key iy-map (kbd "i") 'fold-dwim-toggle)
 (define-key iy-map (kbd "I") 'fold-dwim-show-all)
 (define-key iy-map (kbd "C-i") 'fold-dwim-hide-all)
+
+; Outline-minor-mode key map
+(define-prefix-command 'iy-outline-map nil "Outline-")
+
+;; HIDE
+(define-key iy-outline-map "q" 'hide-sublevels)    ; Hide everything but the top-level headings
+(define-key iy-outline-map "t" 'hide-body)         ; Hide everything but headings (all body lines)
+(define-key iy-outline-map "o" 'hide-other)        ; Hide other branches
+(define-key iy-outline-map "c" 'hide-entry)        ; Hide this entry's body
+(define-key iy-outline-map "l" 'hide-leaves)       ; Hide body lines in this entry and sub-entries
+(define-key iy-outline-map "d" 'hide-subtree)      ; Hide everything in this entry and sub-entries
+
+;; SHOW
+(define-key iy-outline-map "a" 'show-all)          ; Show (expand) everything
+(define-key iy-outline-map "e" 'show-entry)        ; Show this heading's body
+(define-key iy-outline-map "i" 'show-children)     ; Show this heading's immediate child sub-headings
+(define-key iy-outline-map "k" 'show-branches)     ; Show all sub-headings under this heading
+(define-key iy-outline-map "s" 'show-subtree)      ; Show (expand) everything in this heading & below
+
+;; MOVE
+(define-key iy-outline-map "u" 'outline-up-heading)                ; Up
+(define-key iy-outline-map "n" 'outline-next-visible-heading)      ; Next
+(define-key iy-outline-map "p" 'outline-previous-visible-heading)  ; Previous
+(define-key iy-outline-map "f" 'outline-forward-same-level)        ; Forward - same level
+(define-key iy-outline-map "b" 'outline-backward-same-level)       ; Backward - same level
+(define-key iy-map (kbd "M-i") iy-outline-map)
 
 ;;}}}
 

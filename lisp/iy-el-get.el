@@ -90,7 +90,6 @@
     (:name erlware-mode :lazy t)
     (:name sml-modeline)
     (:name whole-line-or-region :features whole-line-or-region)
-    (:name folding :post-init (folding-mode-add-find-file-hook))
     (:name fold-dwim
            :type http
            :url "http://www.dur.ac.uk/p.j.heslin/Software/Emacs/Download/fold-dwim.el"
