@@ -1,4 +1,5 @@
 (eval-when-compile (require 'cl))
+(eval-and-compile (require 'sequential-command))
 
 ;;{{{ Buffer
 (defun iy-switch-to-previous-buffer ()
@@ -148,6 +149,14 @@
 (defvar iy-case-tranformation-functions
   '(iy-dwim-dash iy-dwim-underscore))
 
+(defun iy-case-transformation-seq-count (arg)
+  (if (< arg 0)
+      (- (setq seq-store-count (- arg)))
+    (let ((seq (seq-count)))
+      (if (zerop seq)
+          arg
+        (- seq)))))
+
 (defun iy-dwim-dash (arg)
   (interactive "P")
   (when (consp arg) (setq arg 1))
@@ -156,7 +165,7 @@
           (and iy-last-is-case-transformation
                (memq last-command iy-case-tranformation-functions)))
       (progn
-        (iy-dwim-downcase (prefix-numeric-value arg))
+        (iy-dwim-downcase (iy-case-transformation-seq-count (prefix-numeric-value arg)))
         (setq iy-last-is-case-transformation t))
     (insert "-")
     (setq iy-last-is-case-transformation nil)))
@@ -182,7 +191,8 @@
           (and iy-last-is-case-transformation
                (memq last-command iy-case-tranformation-functions)))
       (progn
-        (iy-dwim-upcase (prefix-numeric-value arg))
+        (iy-dwim-upcase (iy-case-transformation-seq-count
+                         (prefix-numeric-value arg)))
         (setq iy-last-is-case-transformation t))
     (insert "_")
     (setq iy-last-is-case-transformation nil)))
@@ -198,7 +208,7 @@
   (when (consp arg) (setq arg 1))
   (if (region-active-p)
       (capitalize-region (region-beginning) (region-end))
-    (capitalize-word (prefix-numeric-value arg))))
+    (capitalize-word (iy-case-transformation-seq-count (prefix-numeric-value arg)))))
 
 (defun shrink-whitespaces ()
   "Remove white spaces around cursor to just one or none.
