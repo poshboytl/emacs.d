@@ -37,9 +37,16 @@
 (define-key ctl-x-r-map (kbd "C-r") 'isearch-backward)
 (define-key ctl-x-r-map (kbd "a") 'mc/mark-all-like-this)
 (define-key ctl-x-r-map (kbd "C-n") 'mc/mark-next-like-this)
+(define-key ctl-x-r-map (kbd "M-f") 'mc/mark-next-word-like-this)
+(define-key ctl-x-r-map (kbd "M-F") 'mc/mark-next-symbol-like-this)
 (define-key ctl-x-r-map (kbd "C-p") 'mc/mark-previous-like-this)
+(define-key ctl-x-r-map (kbd "M-b") 'mc/mark-previous-word-like-this)
+(define-key ctl-x-r-map (kbd "M-B") 'mc/mark-previous-symbol-like-this)
 (define-key ctl-x-r-map (kbd "C-a") 'mc/edit-beginnings-of-lines)
 (define-key ctl-x-r-map (kbd "C-e") 'mc/edit-ends-of-lines)
+(define-key ctl-x-r-map (kbd "C-SPC") 'mc/mark-all-in-region)
+(global-unset-key (kbd "C-<down-mouse-1>"))
+(global-set-key (kbd "C-<mouse-1>") 'mc/add-cursor-on-click)
 
 (global-set-key (kbd "C-3") 'mc/mark-all-like-this)
 
