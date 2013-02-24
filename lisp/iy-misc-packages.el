@@ -43,8 +43,6 @@
   (global-undo-tree-mode)
   (define-key undo-tree-map (kbd "C-x r u") nil)
   (define-key undo-tree-map (kbd "C-x r U") nil)
-  (define-key undo-tree-map (kbd "C-x r") nil)
-  (define-key undo-tree-map (kbd "C-r u") 'undo-tree-save-state-to-register)
-  (define-key undo-tree-map (kbd "C-r U") 'undo-tree-restore-state-from-register))
+  (define-key undo-tree-map (kbd "C-x r") nil))
 
 (provide 'iy-misc-packages)

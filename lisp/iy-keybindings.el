@@ -45,6 +45,8 @@
 (define-key ctl-x-r-map (kbd "C-a") 'mc/edit-beginnings-of-lines)
 (define-key ctl-x-r-map (kbd "C-e") 'mc/edit-ends-of-lines)
 (define-key ctl-x-r-map (kbd "C-SPC") 'mc/mark-all-in-region)
+(define-key ctl-x-r-map (kbd "u") 'undo-tree-save-state-to-register)
+(define-key ctl-x-r-map (kbd "U") 'undo-tree-restore-state-from-register)
 (global-unset-key (kbd "C-<down-mouse-1>"))
 (global-set-key (kbd "C-<mouse-1>") 'mc/add-cursor-on-click)
 
@@ -56,6 +58,8 @@
 (custom-set-variables
  '(cua-rectangle-mark-key [(control ?r) return]))
 (cua-selection-mode 2)
+(define-key cua-global-keymap cua-rectangle-mark-key nil)
+(define-key ctl-x-r-map [return] 'cua-set-rectangle-mark)
 
 (global-set-key (kbd "C-8") 'pop-tag-mark)
 
