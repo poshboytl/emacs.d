@@ -37,6 +37,28 @@
  '(rspec-use-bundler-when-possible nil)
  '(rspec-use-zeus-when-possible nil))
 
+(defun rails-nav:goto-assets-stylesheets ()
+  "Go to stylesheets."
+  (interactive)
+  (rails-nav:goto-file-with-menu "app/assets/stylesheets/" "Go to stylesheet.." "s?[ac]ss" t))
+
+(defun rails-nav:goto-assets-javascripts ()
+  "Go to JavaScripts."
+  (interactive)
+  (rails-nav:goto-file-with-menu "app/assets/javascripts/" "Go to javascripts.." "\\(js\\|coffee\\)" t))
+
+(defun rails-find:assets-stylesheets ()
+  "Run find-file in Rails \"assets/stylesheets\" dir"
+  (interactive)
+  (let ((default-directory (rails-core:file "app/assets/stylesheets")))
+    (call-interactively 'ido-find-file)))
+
+(defun rails-find:assets-javascripts ()
+  "Run find-file in Rails \"assets/javascripts\" dir"
+  (interactive)
+  (let ((default-directory (rails-core:file "app/assets/javascripts")))
+    (call-interactively 'ido-find-file)))
+
 (defun iy-el-get-after-emacs-rails ()
   (define-key rails-minor-mode-map  (kbd "C-c C-c #")  'rails-spec:run-last)
   (define-key rails-minor-mode-map  (kbd "C-c C-c 3")  'rails-spec:run-last)
@@ -44,6 +66,10 @@
   (define-key rails-minor-mode-map  (kbd "C-c C-c /")  'rails-spec:run-this-spec)
   (define-key rails-minor-mode-map  (kbd "M-s SPC")  'rails-lib:run-primary-switch)
   (define-key rails-minor-mode-map  (kbd "M-s M-SPC")  'rails-lib:run-secondary-switch)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c g j")  'rails-nav:goto-assets-javascripts)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c g s")  'rails-nav:goto-assets-stylesheets)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c f j")  'rails-find:assets-javascripts)
+  (define-key rails-minor-mode-map  (kbd "C-c C-c f s")  'rails-find:assets-stylesheets)
   (define-key rails-minor-mode-map  (kbd "<f9>") nil)
   (global-set-key (kbd "C-c C-c j") nil))
 
