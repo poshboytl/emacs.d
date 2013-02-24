@@ -58,8 +58,9 @@
   (eval-after-load "ruby-block" '(diminish 'ruby-block-mode))
   (eval-after-load "flyspell" '(diminish 'flyspell-mode " S"))
   (eval-after-load "flymake" '(diminish 'flymake-mode " M"))
-  (eval-after-load "paredit" '(diminish 'paredit-mode " ()"))
+  (eval-after-load "paredit" '(diminish 'paredit-mode " p"))
   (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+  (eval-after-load "outline" '(diminish 'outline-minor-mode " O"))
   (diminish 'auto-fill-function " F"))
 
 (provide 'iy-theme)
