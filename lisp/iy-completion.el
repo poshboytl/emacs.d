@@ -118,8 +118,6 @@
            autopair-backspace)
          ac-trigger-commands))
 
-  (setq ac-trigger-on-stop-words-when-manually nil)
-
   (setq-default
    ac-sources '(ac-source-yasnippet
                 ac-source-abbrev
@@ -153,7 +151,7 @@
         (when (and (not ac-expanded)
                    (or force (ac-trigger-command-p last-command)))
           (let ((auto-complete-mode t))
-            (auto-complete)
+            (auto-complete-1 :triggered t)
             ;; expanded if menu is live or point has moved
             (setq ac-expanded (or (ac-menu-live-p)
                                   (not (equal (point) before-point)))))))
