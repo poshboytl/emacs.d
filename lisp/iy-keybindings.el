@@ -273,13 +273,17 @@
 (global-set-key (kbd "<f1>") help-map)
 (global-set-key (kbd "<f2>") 'recentf-open-files)
 
-(if (fboundp 'iy-compile)
-    (global-set-key (kbd "<f5>") 'iy-compile)
-  (global-set-key (kbd "<f5>") 'compile))
+;; F3, F4 macro
+
+(global-set-key (kbd "<f5>") 'compile)
+(global-set-key (kbd "<f6>") 'helm-imenu)
 
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
 
+;; F8: w3m
+
+(global-set-key (kbd "<f9>") 'agap)
 (global-set-key (kbd "<f10>") 'rgrep)
 (global-set-key (kbd "<f11>") 'occur)
 (global-set-key (kbd "<f12>") 'iy-magit-status)

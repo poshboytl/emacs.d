@@ -124,8 +124,6 @@
 
 ;;{{{ Whitespace
 
-(test
- asdf)
 (custom-set-variables
  '(whitespace-action '(cleanup))
  '(whitespace-global-modes '(emacs-lisp-mode ruby-mode coffee-mode sass-mode css-mode haml-mode))
@@ -137,8 +135,6 @@
 ;;}}}
 
 ;;{{{ Kill ring
-
-;; test
 
 (custom-set-variables
  '(kill-ring-max 500)
