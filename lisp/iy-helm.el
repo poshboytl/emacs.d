@@ -54,9 +54,7 @@
   ;;; Sources
   (defvar iy-helm-sources nil)
   (setq iy-helm-sources
-        '(helm-c-source-ffap-line
-          helm-c-source-ffap-guesser
-          helm-c-source-buffers-list
+        '(helm-c-source-buffers-list
           helm-c-source-files-in-current-dir
           helm-c-source-eproject-files-in-project
           helm-c-source-eproject-projects
