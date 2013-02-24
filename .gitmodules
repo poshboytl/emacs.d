@@ -82,9 +82,6 @@
 [submodule "bundle/zencoding-mode"]
 	path = bundle/zencoding-mode
 	url = git://github.com/rooney/zencoding.git
-[submodule "bundle/rhtml-mode"]
-	path = bundle/rhtml-mode
-	url = git://github.com/eschulte/rhtml.git
 [submodule "bundle/helm"]
 	path = bundle/helm
 	url = git://github.com/emacs-helm/helm.git
