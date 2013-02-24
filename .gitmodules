@@ -97,9 +97,6 @@
 [submodule "bundle/pivotal-tracker"]
 	path = bundle/pivotal-tracker
 	url = git://github.com/jxa/pivotal-tracker.git
-[submodule "bundle/auto-complete"]
-	path = bundle/auto-complete
-	url = git://github.com/doitian/auto-complete.git
 [submodule "bundle/multiple-cursors"]
 	path = bundle/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el
@@ -142,3 +139,6 @@
 [submodule "bundle/ag"]
 	path = bundle/ag
 	url = git://github.com/Wilfred/ag.el.git
+[submodule "bundle/auto-complete"]
+	path = bundle/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git
