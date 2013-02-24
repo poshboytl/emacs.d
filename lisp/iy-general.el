@@ -30,7 +30,8 @@
 
 ;;{{{ Safe variables
 (custom-set-variables
- '(safe-local-variable-values '((encoding . utf-8))))
+ '(safe-local-variable-values '((encoding . utf-8)
+                                (outline-minor-mode . t))))
 ;;}}}
 
 ;;{{{ Shortcuts
