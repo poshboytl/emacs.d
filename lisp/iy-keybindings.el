@@ -194,7 +194,7 @@
 
 ;;{{{ Organization
 
-(define-key iy-map (kbd "i") 'fold-dwim-toggle)
+(define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
 (define-key iy-map (kbd "I") 'fold-dwim-show-all)
 (define-key iy-map (kbd "C-i") 'fold-dwim-hide-all)
 
@@ -222,7 +222,9 @@
 (define-key iy-outline-map "p" 'outline-previous-visible-heading)  ; Previous
 (define-key iy-outline-map "f" 'outline-forward-same-level)        ; Forward - same level
 (define-key iy-outline-map "b" 'outline-backward-same-level)       ; Backward - same level
-(define-key iy-map (kbd "M-i") iy-outline-map)
+
+(define-key iy-outline-map "i" 'fold-dwim-toggle)
+(define-key iy-map (kbd "i") iy-outline-map)
 
 ;;}}}
 

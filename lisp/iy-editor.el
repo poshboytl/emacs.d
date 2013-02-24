@@ -53,7 +53,8 @@
 ;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/site-lisp/common/fold_/hideshow-fringe.el?r=122&spec=svn448
 (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
 (defun display-code-line-counts (ov)
-  (when (eq 'code (overlay-get ov 'hs))
+  (when (or (eq 'code (overlay-get ov 'hs))
+            (eq 'outline (overlay-get ov 'invisible)))
     (let* ((marker-string "*fringe-dummy*")
            (marker-length (length marker-string))
            (display-string (format " (%d)..." (count-lines (overlay-start ov) (overlay-end ov)))))
@@ -63,6 +64,11 @@
       (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
       (overlay-put ov 'display display-string)
       (overlay-put ov 'evaporate t))))
+(defun hide-code-line-counts (ov)
+  (when (or (eq 'code (overlay-get ov 'hs))
+            (eq 'outline (overlay-get ov 'invisible)))
+    (overlay-put ov 'display nil)))
+
 (setq hs-set-up-overlay 'display-code-line-counts)
 
 (add-to-list 'hs-special-modes-alist
@@ -70,36 +76,56 @@
                "\\(def\\|do\\|{\\)" "\\(end\\|}\\)" "#"
                (lambda (arg) (ruby-end-of-block)) nil))
 
+(defadvice outline-flag-region (after display-code-line-counts (from to flag) activate)
+  (let ((os (overlays-in from to)))
+    (if flag
+        (progn
+          (mapc 'hide-code-line-counts os)
+          (when os (display-code-line-counts (car os))))
+      (mapc 'display-code-line-counts os))))
 
-;; TODO
-;; (defadvice forward-comment (around stop-at-outline-header (count) activate)
-;;   (if (or (= 0 (ad-get-arg 0)) (not (or outline-minor-mode (eq major-mode 'outline-mode))))
-;;       (progn ad-do-it)
-;;     (if (outline-on-heading-p)
-;;         (setq ad-return-value nil)
-;;       (let ((loop-times (abs count))
-;;             (direction (/ count (abs count))))
-;;         (ad-set-arg 0 direction)
-;;         (setq ad-return-value t)
-;;         (while (and (> loop-times 0) ad-return-value)
-;;           ad-do-it
-;;           (when ad-return-value
-;;             (if (> direction 0)
-;;               (if (folding-marker-p)
-;;                   (setq ad-return-value nil)
-;;                 ;; (when (folding-marker-p (- (point) 2))
-;;                 ;;   (setq ad-return-value nil)
-;;                 ;;   (forward-char -2)
-;;                 ;;   (beginning-of-line))
-;;                 )
-;;               (when (outline-on-heading-p)
-;;                 (end-of-line)
-;;                 (setq ad-return-value nil)))
-;;             (setq loop-times (1- loop-times))))))))
+(defvar iy-forward-comment-stop-at-outline-header t)
+
+(defun iy-forward-one-comment ()
+  (let ((iy-forward-comment-stop-at-outline-header nil))
+    ;; stop if at the begining of outline heading
+    (when (not (and (bolp) (outline-on-heading-p)))
+      (when (forward-comment 1)
+        ;; forward-comment should not skip outline heading
+        (let ((pos (point)))
+          (if (and (forward-comment -1)
+                   (outline-on-heading-p))
+              nil
+            (goto-char pos)
+            t))))))
+
+(defun iy-backward-one-comment ()
+  (let ((iy-forward-comment-stop-at-outline-header nil))
+    (when (forward-comment -1)
+      (if (outline-on-heading-p)
+          (progn
+            (end-of-line)
+            nil)
+        t))))
+
+;; Fix outline-minor-mode conflicts with fold-dwim
+(defadvice forward-comment (around stop-at-outline-header (count) activate)
+  (if (and (or outline-minor-mode (eq major-mode 'outline-moud))
+           iy-forward-comment-stop-at-outline-header)
+      (progn
+        (while (and (> count 0) (iy-forward-one-comment))
+          (setq count (1- count)))
+        (while (and (< count 0) (iy-backward-one-comment))
+          (setq count (1+ count)))
+        (setq ad-return-value (zerop count)))
+    ad-do-it))
 
 ;;}}}
 
 ;;{{{ Whitespace
+
+(test
+ asdf)
 (custom-set-variables
  '(whitespace-action '(cleanup))
  '(whitespace-global-modes '(emacs-lisp-mode ruby-mode coffee-mode sass-mode css-mode haml-mode))
@@ -107,9 +133,12 @@
  '(whitespace-style (quote (face tabs trailing newline indentation space-before-tab tab-mark newline-mark)))
  '(coffee-cleanup-whitespace nil))
 (global-whitespace-mode)
+
 ;;}}}
 
 ;;{{{ Kill ring
+
+;; test
 
 (custom-set-variables
  '(kill-ring-max 500)
