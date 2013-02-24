@@ -39,7 +39,7 @@
 ;;{{{ Folding
 
 (defvar fringe-face 'fringe)
-(defface collapsed-face '((t (:background "#e0cf9f" :foreground "#5f5f5f"))) "Collapsed Overlay")
+(defface collapsed-face '((t (:background "#2e3330" :foreground "#57705c"))) "Collapsed Overlay")
 (defvar collapsed-face 'collapsed-face)
 
 (add-hook 'lisp-mode-hook 'hs-minor-mode)
