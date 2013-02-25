@@ -26,7 +26,7 @@
 (defun agap (string dir is-regexp)
   "Search string at point inside current directory. Use prefix arg to search by regexp."
   (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))
-                     (ido-read-directory-name default-directory)
+                     (ido-read-directory-name "in: ")
                      current-prefix-arg))
   (ag/search string dir is-regexp))
 
