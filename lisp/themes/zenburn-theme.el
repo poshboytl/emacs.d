@@ -564,6 +564,8 @@
  `(git-gutter-fr:modified ((t (:foreground ,zenburn-yellow))))
  `(git-gutter-fr:added ((t (:foreground ,zenburn-green+1))))
  `(git-gutter-fr:deleted ((t (:foreground ,zenburn-red+1))))
+
+ `(which-func ((t (:foreground ,zenburn-yellow))))
  )
 
 (provide-theme 'zenburn)

@@ -75,22 +75,27 @@
     (maphash (lambda (k v) (setq alist (cons (cons k v) alist))) hash)
     alist))
 
-(defun iy-ido-switch-buffer-two-steps (prompt func &optional hist)
+(defun iy-ido-switch-buffer-two-steps (prompt func &optional hist def)
   (let ((alist (iy-make-buffer-alist-by func)))
     (switch-to-buffer
      (ido-completing-read
       "Buffer: "
       (mapcar 'buffer-name
-              (cdr (assoc (ido-completing-read prompt alist nil t nil hist) alist)))))))
+              (cdr (assoc (ido-completing-read prompt alist nil t nil hist def) alist)))))))
 
 (defvar iy-ido-switch-buffer-by-major-mode-hist nil)
 (defun iy-ido-switch-buffer-by-major-mode ()
   (interactive)
-  (iy-ido-switch-buffer-two-steps
-   "Mode: "
-   (lambda (buf) (replace-regexp-in-string "-mode$" ""
-                                           (symbol-name (with-current-buffer buf major-mode))))
-   iy-ido-switch-buffer-by-major-mode-hist))
+  (flet ((get-major-mode-name (&optional buf)
+                              (replace-regexp-in-string "-mode$" ""
+                                                        (symbol-name (if buf
+                                                                         (with-current-buffer buf major-mode)
+                                                                       major-mode)))))
+    (iy-ido-switch-buffer-two-steps
+     "Mode: "
+     'get-major-mode-name
+     iy-ido-switch-buffer-by-major-mode-hist
+     (get-major-mode-name))))
 
 (defvar iy-ido-switch-buffer-by-ext-name-hist nil)
 (defun iy-ido-switch-buffer-by-ext-name ()
@@ -99,7 +104,8 @@
    "Extension: "
    (lambda (buf)
      (file-name-extension (or (buffer-file-name buf) "")))
-   iy-ido-switch-buffer-by-ext-name-hist))
+   iy-ido-switch-buffer-by-ext-name-hist
+   (file-name-extension (or (buffer-file-name) ""))))
 
 (defalias 'modb 'iy-ido-switch-buffer-by-major-mode)
 (defalias 'extb 'iy-ido-switch-buffer-by-ext-name)
@@ -107,6 +113,7 @@
 ;; Or bind to key
 (define-key iy-map (kbd "b") 'iy-ido-switch-buffer-by-major-mode)
 (define-key iy-map (kbd "B") 'iy-ido-switch-buffer-by-ext-name)
+(define-key iy-map (kbd "M-b") 'iy-ido-switch-buffer-by-ext-name)
 
 ;;}}}
 

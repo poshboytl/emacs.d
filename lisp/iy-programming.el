@@ -1,10 +1,3 @@
-;;{{{ TAGS
-
-(custom-set-variables
- '(tags-add-tables nil))
-
-;;}}}
-
 ;;{{{ ACK
 
 (custom-set-variables
@@ -187,6 +180,15 @@
                              'git-grep-history)))
   (let ((grep-use-null-device nil))
     (grep command-args)))
+
+;;}}}
+
+;;{{{ Misc
+
+(custom-set-variables
+ '(tags-add-tables nil))
+
+;; (which-function-mode 1)
 
 ;;}}}
 
