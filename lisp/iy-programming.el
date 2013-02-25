@@ -36,6 +36,7 @@
                      (ido-read-directory-name default-directory)))
   (ag/search string dir t))
 
+(fset 'ag (function agap))
 (eval-after-load 'ag
   '(progn
      (fset 'ag (function agap))

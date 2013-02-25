@@ -1,63 +1,32 @@
 (require 'iy-dep)
 (require 'flymake)
 
+(push 'flymake-easy el-get-packages)
+(push 'flymake-sass el-get-packages)
+(push 'flymake-ruby el-get-packages)
+(push 'flymake-jslint el-get-packages)
+(push 'flymake-coffee el-get-packages)
+
 (custom-set-variables
  '(compilation-auto-jump-to-first-error nil)
  '(compilation-context-lines 10)
  '(compilation-scroll-output (quote first-error)))
 
-(defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
-  (setq flymake-check-was-interrupted t))
-(ad-activate 'flymake-post-syntax-check)
-
 (add-to-list 'compilation-error-regexp-alist-alist
              '(maven "^\\[\\w+\\] \\(.*\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\] \\(.*\\)$" 1 2 3 (4)))
 (add-to-list 'compilation-error-regexp-alist 'maven)
 
-(defun flymake-ruby-init ()
-  (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-         (local-file  (file-relative-name
-                       temp-file
-                       (file-name-directory buffer-file-name))))
-    (list "ruby" (list "-c" local-file))))
+(defadvice flymake-easy-load (around disable-on-buffer-without-writable-file activate)
+  (when (and (not (null buffer-file-name))
+             (file-writable-p buffer-file-name)
+             (not (string-match "^<\\|flymake" buffer-file-name)))
+    ad-do-it))
 
-
-(defun flymake-jslint-init ()
-  (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-         (local-file  (file-relative-name
-                       temp-file
-                       (file-name-directory buffer-file-name))))
-    (list "jslint" (list "--terse" local-file))))
-
-(push '("\\.rb\\'" flymake-ruby-init) flymake-allowed-file-name-masks)
-(push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
-(push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
-
-(push '("\\.js\\'" flymake-jslint-init) flymake-allowed-file-name-masks)
-
-(push '("^\\([^(]*\\)(\\([0-9]+\\)):\\(.+\\)$"
-        1 2 nil 3)
-      flymake-err-line-patterns)
-
-(defun flymake-init-hook ()
-  (if (and (not (null buffer-file-name))
-           (file-writable-p buffer-file-name)
-           (not (string-match "^<\\|flymake" buffer-file-name)))
-      (flymake-mode 1)))
-
-(add-hook 'ruby-mode-hook 'flymake-init-hook)
-(add-hook 'js-mode-hook 'flymake-init-hook)
-
-(defun iy-next-flymake-error ()
-  (interactive)
-  (flymake-goto-next-error)
-  (flymake-err-echo))
-(defun iy-prev-flymake-error ()
-  (interactive)
-  (flymake-goto-prev-error)
-  (flymake-err-echo))
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+(add-hook 'js-mode-hook 'flymake-jslint-load)
+(add-hook 'sass-mode-hook 'flymake-sass-load)
+(add-hook 'css-mode-hook 'flymake-sass-load)
+(add-hook 'coffee-mode-hook 'flymake-coffee-load)
 
 (defun flymake-err-at (pos)
   (let ((overlays (overlays-at pos)))
@@ -72,14 +41,14 @@
   (message "%s" (mapconcat 'identity (flymake-err-at (point)) "\n")))
 
 (defadvice flymake-goto-next-error (after display-message activate compile)
-  (my-flymake-err-echo))
+  (flymake-err-echo))
 
 (defadvice flymake-goto-prev-error (after display-message activate compile)
-  (my-flymake-err-echo))
+  (flymake-err-echo))
 
-(define-key iy-map (kbd "`") 'iy-next-flymake-error)
-(define-key iy-map (kbd "~") 'iy-prev-flymake-error)
-(define-key iy-map (kbd "M-`") 'iy-next-flymake-error)
+(define-key iy-map (kbd "`") 'flymake-goto-next-error)
+(define-key iy-map (kbd "~") 'flymake-goto-prev-error)
+(define-key iy-map (kbd "M-`") 'flymake-goto-next-error)
 
 (defvar flymake-fringe-overlays nil)
 (make-variable-buffer-local 'flymake-fringe-overlays)

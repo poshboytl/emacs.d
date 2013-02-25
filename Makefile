@@ -6,7 +6,7 @@ else
 endif
 
 BATCH=$(EMACS) -batch -q -no-site-file \
-  -L lisp -L lisp/modes -L el-get/el-get \
+  -L lisp -L lisp/modes -L lisp/3rdparty -L el-get/el-get \
   -eval "(setq max-specpdl-size 2000 max-lisp-eval-depth 1000)" \
 
 ELC= $(BATCH) -f batch-byte-compile

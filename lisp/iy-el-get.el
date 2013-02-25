@@ -136,10 +136,6 @@
     (:name sequential-command :type emacswiki :features sequential-command)
     (:name paredit :lazy t)
     (:name command-log-mode :type git :url bundle :lazy t)
-    (:name flymake-coffee :type git :url bundle :lazy t)
-    (:name flymake-coffeelint :type git :url bundle
-           :build `(,(concat el-get-emacs " -Q -batch -f batch-byte-compile flymake-coffeelint.el")
-                    ("npm")))
     (:name ace-jump-mode :url bundle :lazy t)
     (:name multiple-cursors :type git :url bundle :lazy t)
     (:name jade-mode :type git :url bundle :lazy t)
@@ -158,6 +154,12 @@
     (:name undo-tree :url bundle)
     (:name git-gutter :type git :url bundle)
     (:name git-gutter-fringe :type git :url bundle :depends (git-gutter) :features git-gutter-fringe)
+
+    (:name flymake-easy :type git :url bundle :lazy t)
+    (:name flymake-sass :type git :url bundle :lazy t :depends (flymake-easy))
+    (:name flymake-ruby :type git :url bundle :lazy t :depends (flymake-easy))
+    (:name flymake-jslint :type git :url bundle :lazy t :depends (flymake-easy))
+    (:name flymake-coffee :type git :url bundle :lazy t :depends (flymake-easy))
     )))
 
 (provide 'iy-el-get)

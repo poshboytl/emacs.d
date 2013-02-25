@@ -22,6 +22,7 @@
 (defvar iy-original-exec-path exec-path)
 (defvar iy-original-env-path (getenv "PATH"))
 (defun iy-set-exec-path (sym val)
+  (setq iy-exec-path val)
   (setq exec-path (append val iy-original-exec-path))
   (setenv "PATH" (mapconcat 'identity (cons iy-original-env-path val) ":")))
 (defun iy-remove-exec-path (val)
@@ -82,8 +83,7 @@
   :type '(repeat symbol))
 
 (defcustom iy-exec-path
-  (mapcar 'expand-file-name
-          '("~/.rbenv/shims" "~/.rbenv/bin"))
+  (mapcar 'expand-file-name nil)
   "Files in black list are not loaded"
   :group 'iy-config
   :type '(repeat string)

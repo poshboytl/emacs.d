@@ -142,3 +142,15 @@
 [submodule "bundle/auto-complete"]
 	path = bundle/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git
+[submodule "bundle/flymake-sass"]
+	path = bundle/flymake-sass
+	url = git://github.com/purcell/flymake-sass.git
+[submodule "bundle/flymake-ruby"]
+	path = bundle/flymake-ruby
+	url = git://github.com/purcell/flymake-ruby.git
+[submodule "bundle/flymake-jslint"]
+	path = bundle/flymake-jslint
+	url = git://github.com/purcell/flymake-jslint.git
+[submodule "bundle/flymake-easy"]
+	path = bundle/flymake-easy
+	url = git://github.com/purcell/flymake-easy.git

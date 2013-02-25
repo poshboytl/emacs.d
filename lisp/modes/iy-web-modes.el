@@ -5,7 +5,6 @@
 (push 'sass-mode el-get-packages)
 (push 'rainbow-mode el-get-packages)
 (push 'coffee-mode el-get-packages)
-(push 'flymake-coffee el-get-packages)
 (push 'zencoding-mode el-get-packages)
 (push 'jade-mode el-get-packages)
 
@@ -18,8 +17,6 @@
   (local-set-key (kbd "<return>") 'coffee-newline-and-indent)
   (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "M-j") 'coffee-newline-and-indent)
-  (when (fboundp 'flymake-coffee-load)
-    (flymake-coffee-load))
   (setq autopair-handle-action-fns
         (list 'autopair-default-handle-action
               'autopair-python-triple-quote-action)))

@@ -13,6 +13,7 @@
 (require 'iy-dep)
 
 (add-to-list 'load-path (concat iy-lisp-dir "modes"))
+(add-to-list 'load-path (concat iy-lisp-dir "3rdparty"))
 (add-to-list 'load-path iy-el-get-dir)
 (add-to-list 'load-path (concat iy-el-get-dir "el-get"))
 (add-to-list 'load-path iy-lisp-dir)
@@ -60,12 +61,7 @@
 
   (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
 
-  (setq exec-path
-        (append
-         exec-path
-         '("~/.rbenv/bin")))
-
-  (iy-init-load-modules '(iy-theme iy-pim) '(iy-el-get))
+  (iy-init-load-modules '(iy-theme iy-org-mode) '(iy-el-get))
 
   (el-get 'sync (reverse el-get-packages)))
 

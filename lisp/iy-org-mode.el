@@ -550,4 +550,4 @@ this with to-do items than with projects or headings."
      (format "Execute %s src block" lang)))
  '("ruby" "sh" "R" "ditaa"))
 
-(provide 'iy-pim)
+(provide 'iy-org-mode)
