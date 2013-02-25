@@ -45,4 +45,12 @@
   (define-key undo-tree-map (kbd "C-x r U") nil)
   (define-key undo-tree-map (kbd "C-x r") nil))
 
+(push 'deft el-get-packages)
+(defun iy-el-get-after-deft ()
+  (setq
+   deft-extension "org"
+   deft-directory (concat iy-dropbox-dir "g/snippets")
+   deft-use-filename-as-title t
+   deft-text-mode 'org-mode))
+
 (provide 'iy-misc-packages)

@@ -1,14 +1,6 @@
 (require 'iy-dep)
 (require 'iy-daemon)
 
-(push 'deft el-get-packages)
-(defun iy-el-get-after-deft ()
-  (setq
-   deft-extension "org"
-   deft-directory (concat iy-dropbox-dir "g/snippets")
-   deft-use-filename-as-title t
-   deft-text-mode 'org-mode))
-
 (push 'org-mode el-get-packages)
 
 ;;; Modules
@@ -547,5 +539,15 @@ this with to-do items than with projects or headings."
  '(appt-message-warning-time 10)
  '(calendar-week-start-day 1)
  '(diary-file (concat iy-dropbox-dir "diary")))
+
+;;; Babel
+
+(mapc
+ (lambda (lang)
+   (autoload
+     (intern (concat "org-babel-execute:" lang))
+     (concat "ob-" lang)
+     (format "Execute %s src block" lang)))
+ '("ruby" "sh" "R" "ditaa"))
 
 (provide 'iy-pim)
