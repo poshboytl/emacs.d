@@ -38,6 +38,7 @@
                                 yas-ido-prompt
                                 yas-x-prompt
                                 yas-no-prompt)))
+ '(yas-wrap-around-region 'cua)
  '(yas-use-menu nil))
 
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
