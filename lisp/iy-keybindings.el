@@ -282,7 +282,12 @@
 ;; F3, F4 macro
 
 (global-set-key (kbd "<f5>") 'compile)
-(global-set-key (kbd "<f6>") 'helm-imenu)
+
+(autoload 'tmux-select "tmux-send" nil t)
+(autoload 'tmux-send "tmux-send" nil t)
+
+(global-set-key (kbd "<f6>") 'tmux-send)
+(global-set-key (kbd "C-<f6>") 'tmux-select)
 
 (global-set-key (kbd "C-<f7>") 'speedbar-get-focus)
 (global-set-key (kbd "<ESC> <f7>") 'speedbar-get-focus)
