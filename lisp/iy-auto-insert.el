@@ -1,51 +1,70 @@
 (setq auto-insert-alist
-  '((("\\.\\([Hh]\\|hh\\|hpp\\)\\'" . "C / C++ header")
-     (upcase (concat (file-name-nondirectory
-                      (file-name-sans-extension buffer-file-name))
-                     "_"
-                     (file-name-extension buffer-file-name)))
-     "#ifndef " str \n
-     "#define " str "\n\n"
-     _ "\n\n#endif")
+      '(
+        (("\\.\\(md\\|markdown\\)\\'" . "Markdown")
+         
+         (upcase (concat (file-name-nondirectory
+                          (file-name-sans-extension buffer-file-name))
+                         "_"
+                         (file-name-extension buffer-file-name)))
+         "#ifndef " str \n
+         "#define " str "\n\n"
+         _ "\n\n#endif")
 
-    (("\\.\\([Cc]\\|cc\\|cpp\\)\\'" . "C / C++ program")
-     nil
-     "#include \""
-     (let ((stem (file-name-sans-extension buffer-file-name)))
-       (cond ((file-exists-p (concat stem ".h"))
-              (file-name-nondirectory (concat stem ".h")))
-             ((file-exists-p (concat stem ".hh"))
-              (file-name-nondirectory (concat stem ".hh")))))
-     & ?\" | -10)
+        (("\\.\\([Hh]\\|hh\\|hpp\\)\\'" . "C / C++ header")
+         (upcase (concat (file-name-nondirectory
+                          (file-name-sans-extension buffer-file-name))
+                         "_"
+                         (file-name-extension buffer-file-name)))
+         "#ifndef " str \n
+         "#define " str "\n\n"
+         _ "\n\n#endif")
+        (("\\.\\([Hh]\\|hh\\|hpp\\)\\'" . "C / C++ header")
+         (upcase (concat (file-name-nondirectory
+                          (file-name-sans-extension buffer-file-name))
+                         "_"
+                         (file-name-extension buffer-file-name)))
+         "#ifndef " str \n
+         "#define " str "\n\n"
+         _ "\n\n#endif")
 
-    (("[Mm]akefile\\'" . "Makefile") . "makefile.inc")
+        (("\\.\\([Cc]\\|cc\\|cpp\\)\\'" . "C / C++ program")
+         nil
+         "#include \""
+         (let ((stem (file-name-sans-extension buffer-file-name)))
+           (cond ((file-exists-p (concat stem ".h"))
+                  (file-name-nondirectory (concat stem ".h")))
+                 ((file-exists-p (concat stem ".hh"))
+                  (file-name-nondirectory (concat stem ".hh")))))
+         & ?\" | -10)
 
-    (html-mode . (lambda () (sgml-tag "html")))
+        (("[Mm]akefile\\'" . "Makefile") . "makefile.inc")
 
-    (plain-tex-mode . "tex-insert.tex")
-    (bibtex-mode . "tex-insert.tex")
-    (latex-mode
-     ;; should try to offer completing read for these
-     "options, RET: "
-     "\\documentclass[" str & ?\] | -1
-     ?{ (read-string "class: ") "}\n"
-     ("package, %s: "
-      "\\usepackage[" (read-string "options, RET: ") & ?\] | -1 ?{ str "}\n")
-     _ "\n\\begin{document}\n" _
-     "\n\\end{document}")
+        (html-mode . (lambda () (sgml-tag "html")))
 
-    (("/bin/.*[^/]\\'" . "Shell-Script mode magic number") .
-     (lambda ()
-       (if (eq major-mode (default-value 'major-mode))
-           (sh-mode))))
+        (plain-tex-mode . "tex-insert.tex")
+        (bibtex-mode . "tex-insert.tex")
+        (latex-mode
+         ;; should try to offer completing read for these
+         "options, RET: "
+         "\\documentclass[" str & ?\] | -1
+         ?{ (read-string "class: ") "}\n"
+         ("package, %s: "
+          "\\usepackage[" (read-string "options, RET: ") & ?\] | -1 ?{ str "}\n")
+         _ "\n\\begin{document}\n" _
+         "\n\\end{document}")
 
-    (ada-mode . ada-header)
+        (("/bin/.*[^/]\\'" . "Shell-Script mode magic number") .
+         (lambda ()
+           (if (eq major-mode (default-value 'major-mode))
+               (sh-mode))))
 
-    (("\\.[1-9]\\'" . "Man page skeleton")
-     "Short description: "
-     ".\\\" Copyright (C), " (substring (current-time-string) -4) "  "
-     (getenv "ORGANIZATION") | (progn user-full-name)
-     "
+        (ada-mode . ada-header)
+
+        (("\\.[1-9]\\'" . "Man page skeleton")
+         "Short description: "
+         ".\\\" Copyright (C), " (substring (current-time-string) -4) "  "
+         (getenv "ORGANIZATION") | (progn user-full-name)
+         "
 .\\\" You may distribute this file under the terms of the GNU Free
 .\\\" Documentation License.
 .TH " (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))

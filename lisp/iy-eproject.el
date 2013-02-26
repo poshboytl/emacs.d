@@ -158,11 +158,17 @@ to select from, open file when selected."
   (interactive)
   (iy-eshell-here (ignore-errors (concat "*eshell*<" (eproject-name) ">"))))
 
-(defmacro iy-eproject-call-interactively-in-root (func)
-  `(lambda ()
+(defmacro iy-eproject-defun-in-project-root (func)
+  `(defun ,(intern (concat (symbol-name func) "-in-project-root")) ()
+     ,(concat "Call " (symbol-name func) " in project root")
      (interactive)
      (let ((default-directory (eproject-root)))
-       (call-interactively ,func))))
+       (call-interactively (quote ,func)))))
+
+(iy-eproject-defun-in-project-root ido-find-file)
+(iy-eproject-defun-in-project-root rgrep)
+(iy-eproject-defun-in-project-root git-grep)
+(iy-eproject-defun-in-project-root shell-command)
 
 (defun eproject-root-safe ()
   (ignore-errors (eproject-root)))
@@ -205,16 +211,17 @@ to select from, open file when selected."
   (define-key iy-map (kbd "p p") 'eproject-revisit-project)
   (define-key iy-map (kbd "p c") 'iy-compile)
   (define-key iy-map (kbd "p b") 'eproject-ibuffer)
+  (define-key iy-map (kbd "p C-f") 'ido-find-file-in-project-root)
   (define-key iy-map (kbd "p f") 'iy-eproject-find-file-with-cache)
   (define-key iy-map (kbd "p o") 'iy-eproject-find-file-with-cache)
   (define-key iy-map (kbd "p e") 'iy-eproject-eshell-toggle)
   (define-key iy-map (kbd "p E") 'iy-eproject-eshell-here)
-  (define-key iy-map (kbd "p r") (iy-eproject-call-interactively-in-root 'rgrep))
+  (define-key iy-map (kbd "p r") 'rgrep-in-project-root)
   (define-key iy-map (kbd "p a") 'ag-project-at-point)
   (define-key iy-map (kbd "p A") 'ag-regexp-project-at-point)
-  (define-key iy-map (kbd "p g") (iy-eproject-call-interactively-in-root 'git-grep))
-  (define-key iy-map (kbd "p !") (iy-eproject-call-interactively-in-root 'shell-command))
-  
+  (define-key iy-map (kbd "p g") 'git-grep-in-project-root)
+  (define-key iy-map (kbd "p !") 'shell-command-in-project-root)
+
   ;; generate TAGS, C-u to update
   (define-key iy-map (kbd "p t") 'eproject-visit-tags-table)
   )
