@@ -311,7 +311,8 @@ this with to-do items than with projects or headings."
                       (org-deadline-warning-days 0)
                       (org-agenda-skip-deadline-if-done nil)
                       (org-agenda-skip-timestamp-if-done nil)
-                      (org-agenda-skip-scheduled-if-done nil)))))
+                      (org-agenda-skip-scheduled-if-done nil)))
+           (todo "GOING|PAUSE|TODO")))
 
         ("p" "Projects" ((tags "project/-DONE-CANCELED") (stuck "")))
 
