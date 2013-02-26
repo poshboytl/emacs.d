@@ -18,6 +18,7 @@
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
 (autoload 'ace-jump-mode "ace-jump-mode" nil t)
+(autoload 'ace-jump-line-mode "ace-jump-mode" nil t)
 (define-key iy-map (kbd "f") 'ace-jump-mode)
 (define-key iy-map (kbd "F") 'ace-jump-line-mode)
 (define-key iy-map (kbd "M-f") 'ace-jump-line-mode)

@@ -179,6 +179,7 @@
 
 
  `(fringe ((t (:foreground "#88b090" :background ,zenburn-green-4))))
+ `(linum ((t (:foreground "#88b090" :background ,zenburn-green-4))))
  `(header-line ((t (:background ,zenburn-green-4 
                                 :box (:color ,zenburn-bg+2 :line-width 1)))))
  '(mode-line

@@ -29,11 +29,12 @@
 (add-hook 'after-make-frame-functions 'run-after-make-frame-hooks)
 
 (custom-set-variables
+ '(fringe-mode (nil . 0))
  '(blink-cursor-mode t)
  '(blink-cursor-delay 2)
  '(blink-cursor-interval 0.5)
  '(indicate-empty-lines nil)
- '(indicate-buffer-boundaries 'right)
+ '(indicate-buffer-boundaries 'left)
  '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(show-paren-mode t)
