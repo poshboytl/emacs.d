@@ -9,6 +9,7 @@
 (push 'ag el-get-packages)
 
 (autoload 'ag/search "ag" nil nil)
+(autoload 'ag/dwim-at-point "ag" nil nil)
 (autoload 'ag "ag" nil t)
 (autoload 'ag-regexp "ag" nil t)
 (autoload 'ag-project "ag" nil t)
