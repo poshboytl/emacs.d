@@ -135,7 +135,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 
 (define-key iy-map (kbd "<return>") 'org-clock-goto)
-(define-key iy-map (kbd "<DEL>") 'org-clock-out)
 (define-key iy-map (kbd "r") 'org-capture)
 (define-key iy-map (kbd "M-r") 'org-capture)
 (autoload 'org-footnote-action "org-footnote" nil t)

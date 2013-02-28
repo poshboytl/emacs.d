@@ -229,7 +229,7 @@ middle"
               ((or (eq ev ?j) (eq ev ?\M-j)) (windmove-down))
               ((or (eq ev ?k) (eq ev ?\M-k)) (windmove-up))
               ((or (eq ev ?l) (eq ev ?\M-l)) (windmove-right))
-              ((or (eq ev 'backspace) (eq ev ?\C-h)) (buf-move-left))
+              ((or (eq ev ?) (eq ev 'backspace) (eq ev ?\C-h)) (buf-move-left))
               ((eq ev ?\C-j) (buf-move-down))
               ((eq ev ?\C-k) (buf-move-up))
               ((eq ev ?\C-l) (buf-move-right))
@@ -254,6 +254,7 @@ middle"
 (define-key iy-map (kbd "C-h") 'iy-wind-move-resize)
 ;; translated
 (define-key iy-map (kbd "<backspace>") 'iy-wind-move-resize)
+(define-key iy-map (kbd "<DEL>") 'iy-wind-move-resize)
 (define-key iy-map (kbd "C-j") 'iy-wind-move-resize)
 (define-key iy-map (kbd "C-k") 'iy-wind-move-resize)
 (define-key iy-map (kbd "C-l") 'iy-wind-move-resize)
