@@ -27,6 +27,9 @@
   (local-set-key (kbd "<return>") 'newline-and-indent)
   (autopair-mode 1))
 
+(defun iy-el-get-after-zencoding-mode ()
+  (define-key zencoding-mode-keymap (kbd "C-j") 'zencoding-expand-yas))
+
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 (add-hook 'coffee-mode-hook 'iy-coffee-mode-init)
