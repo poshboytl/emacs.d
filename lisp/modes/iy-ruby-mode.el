@@ -72,8 +72,7 @@
   (define-key rails-minor-mode-map  (kbd "C-c C-c f s")  'rails-find:assets-stylesheets)
   (define-key rails-minor-mode-map  (kbd "<f9>") nil)
   (global-set-key (kbd "C-c C-c j") nil)
-  (global-set-key (kbd "C-c C-c") nil)
-  (global-set-key (kbd "C-c") nil))
+  (global-set-key (kbd "C-c C-c") nil))
 
 (defun iy-turn-of-rails-minor-mode-for-modes ()
   (when (memq major-mode '(rebase-mode))
