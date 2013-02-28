@@ -100,6 +100,9 @@ Changed to use winring
   (winner-mode 1)
   (define-key winring-map (kbd ",") 'winner-undo)
   (define-key winring-map (kbd ".") 'winner-redo)
+  (define-key winner-mode-map [(control c) left] nil)
+  (define-key winner-mode-map [(control c) right] nil)
+  (define-key winner-mode-map [(control c)] nil)
 
   (defun winring-create-frame-hook (frame)
     (winring-set-name "W" frame))
