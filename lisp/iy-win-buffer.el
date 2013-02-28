@@ -90,6 +90,7 @@ Changed to use winring
     ad-do-it))
 
 (push 'switch-window el-get-packages)
+(setq switch-window-shortcut-style 'qwerty)
 (global-set-key (kbd "C-0") 'delete-window)
 (global-set-key (kbd "C-1") 'delete-other-window)
 
