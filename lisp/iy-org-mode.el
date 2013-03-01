@@ -18,6 +18,7 @@
         org-clock
         org-timer
         org-protocol
+        org-drill
         org-mu4e))
 
 ;;; Customization
@@ -529,9 +530,6 @@ this with to-do items than with projects or headings."
 (defun orgb ()
   (interactive)
   (ido-find-file-in-dir org-directory))
-(defun snippet ()
-  (interactive)
-  (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets" )))
 
 (setq org-fontify-done-headline t)
 (custom-set-variables
