@@ -29,10 +29,10 @@
   (setq tmux-session session))
 
 ;;;###autoload
-(defun tmux-send ()
+(defun tmux-send (&optional no-new-line)
   "Send selected region or currently-surrounding blank line-separated \
 block of text to the selected tmux session."
-  (interactive)
+  (interactive "P")
   (when (not tmux-session)
     (call-interactively 'tmux-select))
   (let ((selected (if (region-active-p)
@@ -43,7 +43,7 @@ block of text to the selected tmux session."
       (add-to-history 'tmux-send-hist selected))
     (with-temp-file tmpfile
       (insert selected)
-      (insert "\n"))
+      (unless no-new-line (insert "\n")))
     (call-process "tmux" nil nil nil
                   "load-buffer" tmpfile ";"
                   "paste-buffer" "-t" tmux-session ";")
