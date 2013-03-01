@@ -46,11 +46,18 @@
   (define-key undo-tree-map (kbd "C-x r") nil))
 
 (push 'deft el-get-packages)
+(defun org-drill-deft ()
+  (interactive)
+  (with-current-buffer (find-file-noselect (concat iy-dropbox-dir "g/cards/inbox.org"))
+    (org-drill 'directory)))
+
 (defun iy-el-get-after-deft ()
   (setq
    deft-extension "org"
-   deft-directory (concat iy-dropbox-dir "g/snippets")
+   deft-directory (concat iy-dropbox-dir "g/cards")
    deft-use-filename-as-title t
-   deft-text-mode 'org-mode))
+   deft-text-mode 'org-mode)
+
+  (define-key deft-mode-map (kbd "C-c SPC") 'org-drill-deft))
 
 (provide 'iy-misc-packages)
