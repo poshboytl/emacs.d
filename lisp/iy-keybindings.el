@@ -62,6 +62,7 @@
  '(cua-rectangle-mark-key [(control ?r) return]))
 (cua-selection-mode 2)
 (define-key cua-global-keymap cua-rectangle-mark-key nil)
+(define-key cua-global-keymap (kbd "C-r") nil)
 (define-key ctl-x-r-map [return] 'cua-set-rectangle-mark)
 
 (global-set-key (kbd "C-8") 'pop-tag-mark)
