@@ -567,6 +567,9 @@
  `(git-gutter-fr:deleted ((t (:foreground ,zenburn-red+1))))
 
  `(which-func ((t (:foreground ,zenburn-yellow))))
+
+ `(highlight-indentation-face ((t (:foreground ,zenburn-bg+1 :stipple ,(list 9 1 (string 15 0))))))
+ `(highlight-indentation-current-column-face ((t (:foreground ,zenburn-bg+3 :stipple ,(list 9 1 (string 15 0))))))
  )
 
 (provide-theme 'zenburn)

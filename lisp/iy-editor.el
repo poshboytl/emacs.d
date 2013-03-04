@@ -48,6 +48,17 @@
 
 (push 'fold-dwim el-get-packages)
 
+;; http://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs
+(defun aj-toggle-fold ()
+  "Toggle fold all lines larger than indentation on current line"
+  (interactive)
+  (let ((col 1))
+    (save-excursion
+      (back-to-indentation)
+      (setq col (+ 1 (current-column)))
+      (set-selective-display
+       (if selective-display nil (or col 1))))))
+
 (require 'hideshow)
 
 ;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/site-lisp/common/fold_/hideshow-fringe.el?r=122&spec=svn448
@@ -110,7 +121,7 @@
 
 ;; Fix outline-minor-mode conflicts with fold-dwim
 (defadvice forward-comment (around stop-at-outline-header (count) activate)
-  (if (and (or outline-minor-mode (eq major-mode 'outline-moud))
+  (if (and (or outline-minor-mode (eq major-mode 'outline-mode))
            iy-forward-comment-stop-at-outline-header)
       (progn
         (while (and (> count 0) (iy-forward-one-comment))

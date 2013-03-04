@@ -1,8 +1,10 @@
+
 (custom-set-variables
  '(auto-save-interval 300)
  '(auto-save-list-file-prefix (concat iy-data-dir "autosaves/saves-"))
  '(auto-save-timeout 10)
  '(backup-directory-alist (list (cons "." (expand-file-name "~/.backup/emacs"))))
+ '(backup-by-copying t)
  '(delete-old-versions t)
  '(desktop-base-file-name ".emacs.desktop")
  '(desktop-path (list "." iy-data-dir))
@@ -10,7 +12,7 @@
  '(desktop-save (quote ask-if-new))
  '(desktop-load-locked-desktop t)
  '(kept-new-versions 20)
- '(kept-old-versions 5)
+ '(kept-old-versions 2)
  '(recentf-arrange-rules (quote (("Elisp files (%d)" ".\\.el\\'") ("Java files (%d)" ".\\.java\\'") ("C/C++ files (%d)" ".\\.c\\(pp\\)?\\'" ".\\.h\\(pp\\)?\\'") ("Org files (%d)" ".\\.org\\'"))))
  '(recentf-exclude (quote ("semantic\\.cache" "COMMIT_EDITMSG" "git-emacs-tmp.*" "\\.breadcrumb" "\\.ido\\.last" "\\.projects.ede" "/g/org/")))
  '(recentf-menu-filter (quote recentf-arrange-by-rule))
@@ -20,6 +22,12 @@
  '(session-save-file (concat iy-data-dir "session"))
  '(vc-make-backup-files t)
  '(version-control t))
+
+(defun force-backup-when-auto-save ()
+  "Reset backed up flag."
+  (setq buffer-backed-up nil))
+
+(add-hook 'auto-save-hook 'force-backup-when-auto-save)
 
 (defcustom iy-backup-enable-desktop
   t

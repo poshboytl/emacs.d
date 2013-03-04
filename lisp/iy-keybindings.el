@@ -205,6 +205,7 @@
 (define-key iy-map (kbd "M-i") 'fold-dwim-toggle)
 (define-key iy-map (kbd "I") 'fold-dwim-show-all)
 (define-key iy-map (kbd "C-i") 'fold-dwim-hide-all)
+(define-key iy-map (kbd "|") '||)
 
 ; Outline-minor-mode key map
 (define-prefix-command 'iy-outline-map nil "Outline-")
@@ -232,6 +233,8 @@
 (define-key iy-outline-map "b" 'outline-backward-same-level)       ; Backward - same level
 
 (define-key iy-outline-map "i" 'fold-dwim-toggle)
+(define-key iy-outline-map (kbd "TAB") 'aj-toggle-fold)
+
 (define-key iy-map (kbd "i") iy-outline-map)
 
 ;;}}}
