@@ -1,15 +1,5 @@
 (setq auto-insert-alist
       '(
-        (("\\.\\(md\\|markdown\\)\\'" . "Markdown")
-         
-         (upcase (concat (file-name-nondirectory
-                          (file-name-sans-extension buffer-file-name))
-                         "_"
-                         (file-name-extension buffer-file-name)))
-         "#ifndef " str \n
-         "#define " str "\n\n"
-         _ "\n\n#endif")
-
         (("\\.\\([Hh]\\|hh\\|hpp\\)\\'" . "C / C++ header")
          (upcase (concat (file-name-nondirectory
                           (file-name-sans-extension buffer-file-name))
