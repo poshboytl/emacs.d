@@ -160,7 +160,7 @@
     (:name flymake-ruby :type git :url bundle :lazy t :depends (flymake-easy))
     (:name flymake-jslint :type git :url bundle :lazy t :depends (flymake-easy))
     (:name flymake-coffee :type git :url bundle :lazy t :depends (flymake-easy))
-    (:name highlight-indentation :type elpa :lazy t)
+    (:name highlight-indentation :type git :url bundle :lazy t)
 
     )))
 

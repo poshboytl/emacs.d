@@ -154,3 +154,6 @@
 [submodule "bundle/flymake-easy"]
 	path = bundle/flymake-easy
 	url = git://github.com/purcell/flymake-easy.git
+[submodule "bundle/highlight-indentation"]
+	path = bundle/highlight-indentation
+	url = git://github.com/antonj/Highlight-Indentation-for-Emacs.git

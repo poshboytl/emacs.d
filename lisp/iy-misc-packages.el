@@ -61,10 +61,12 @@
   (define-key deft-mode-map (kbd "C-c SPC") 'org-drill-deft))
 
 (push 'highlight-indentation el-get-packages)
+(autoload 'highlight-indentation-mode "highlight-indentation" nil t)
+(autoload 'highlight-indentation-current-column-mode "highlight-indentation" nil t)
 
 (defun ||()
   (interactive)
-  (if highlight-indentation-mode
+  (if (and (boundp 'highlight-indentation-mode) highlight-indentation-mode)
       (progn
         (call-interactively 'highlight-indentation-mode 1)
         (call-interactively 'highlight-indentation-current-column-mode 1))
