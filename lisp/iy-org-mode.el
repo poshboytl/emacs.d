@@ -261,6 +261,7 @@ this with to-do items than with projects or headings."
 
    ("c" "Code snippet" entry (file (concat iy-dropbox-dir "g/snippets/inbox.org"))
     "* %^{title} %^g\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n\n#+BEGIN_SRC %^{lang}\n  %i%?\n#+END_SRC\n")
+
    ("b" "Default template" entry (file+headline "inbox.org" "Bookmarks")
     "* %:description\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %c\n\n  %i"
     :prepend t :empty-lines 1 :immediate-finish t)))
@@ -327,6 +328,8 @@ this with to-do items than with projects or headings."
         ("C" "Code snippets search" search ""
          ((org-agenda-files (append (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*.org" ))
                                     (file-expand-wildcards (concat iy-dropbox-dir "g/snippets/*/*.org"))))))
+
+        ("g" "open dropbox/g" dired-g)
         ))
 
 ;;; Appt
@@ -527,6 +530,12 @@ this with to-do items than with projects or headings."
 (defun org ()
   (interactive)
   (ido-find-file-in-dir org-directory))
+(defun snippets ()
+  (interactive)
+  (ido-find-file-in-dir (concat iy-dropbox-dir "g/snippets")))
+(defun dired-g (&rest arguments)
+  (interactive)
+  (dired (concat iy-dropbox-dir "g")))
 (defun orgb ()
   (interactive)
   (ido-find-file-in-dir org-directory))
