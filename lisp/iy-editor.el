@@ -63,22 +63,18 @@
 
 ;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/site-lisp/common/fold_/hideshow-fringe.el?r=122&spec=svn448
 (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
+
 (defun display-code-line-counts (ov)
-  (when (or (eq 'code (overlay-get ov 'hs))
-            (eq 'outline (overlay-get ov 'invisible)))
+  (when (eq 'code (overlay-get ov 'hs))
     (let* ((marker-string "*fringe-dummy*")
            (marker-length (length marker-string))
            (display-string (format " (%d)..." (count-lines (overlay-start ov) (overlay-end ov)))))
-      (overlay-put ov 'help-echo "Hiddent text. M-s <SPC> to show")
+      (overlay-put ov 'help-echo "Hiddent text. M-s M-i to show")
       (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
       (overlay-put ov 'before-string marker-string)
       (put-text-property 1 (length display-string) 'face 'collapsed-face display-string)
       (overlay-put ov 'display display-string)
       (overlay-put ov 'evaporate t))))
-(defun hide-code-line-counts (ov)
-  (when (or (eq 'code (overlay-get ov 'hs))
-            (eq 'outline (overlay-get ov 'invisible)))
-    (overlay-put ov 'display nil)))
 
 (setq hs-set-up-overlay 'display-code-line-counts)
 
@@ -88,12 +84,18 @@
                (lambda (arg) (ruby-end-of-block)) nil))
 
 (defadvice outline-flag-region (after display-code-line-counts (from to flag) activate)
-  (let ((os (overlays-in from to)))
-    (if flag
-        (progn
-          (mapc 'hide-code-line-counts os)
-          (when os (display-code-line-counts (car os))))
-      (mapc 'display-code-line-counts os))))
+  (when flag
+    (dolist (ov (overlays-in from to))
+      (when (eq 'outline (overlay-get ov 'invisible))
+        (let* ((marker-string "*fringe-dummy*")
+               (marker-length (length marker-string))
+               (display-string "..."))
+          (overlay-put ov 'help-echo "Hiddent text. M-s i s to show")
+          (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'fringe-face) marker-string)
+          (overlay-put ov 'before-string marker-string)
+          (put-text-property 0 (length display-string) 'face 'collapsed-face display-string)
+          (overlay-put ov 'display display-string)
+          (overlay-put ov 'evaporate t))))))
 
 (defvar iy-forward-comment-stop-at-outline-header t)
 
