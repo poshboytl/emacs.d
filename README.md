@@ -15,11 +15,13 @@ Install
         git submodule init
         git submodule update
 
-2.  To filter loaded files, create `custom.el`, and set `iy-blacklist`, e.g.,
+2.  To filter loaded files, create `custom.readonly.el`, and set `iy-blacklist`, e.g.,
 disable tex mode:
 
         (custom-set-variables
           '(iy-blacklist (list 'iy-tex-mode)))
+
+    Mac user can copy the file `custom.readonly.sample.mac.el` as template.
 
 3.  Secret settings can be added in `secrets.el`, e.g.
 
@@ -30,3 +32,13 @@ disable tex mode:
 5.  Restart If a package failed to install. Or eval:
 
         (el-get 'sync (reverse el-get-packages))
+
+6.  Run <key>M-x customize-group iy-config</key> to see customizable options.
+
+7.  `C-h` is mapped to delete char backward. Find following line in `lisp/iy-keybindings.el` to disable it:
+        
+        (define-key key-translation-map [?\C-h] [?\C-?])
+
+8.  `C-r` is mapped to the default `C-x C-r` keymap, use `C-r C-r` to isearch backward, or delete following line in `lisp/iy-keybindings.el` to disable it:
+
+        (global-set-key (kbd "C-r") ctl-x-r-map)
