@@ -33,12 +33,16 @@ disable tex mode:
 
         (el-get 'sync (reverse el-get-packages))
 
-6.  Run <key>M-x customize-group iy-config</key> to see customizable options.
+6.  Remove this compiled file:
 
-7.  `C-h` is mapped to delete char backward. Find following line in `lisp/iy-keybindings.el` to disable it:
+        rm el-get/emacs-rails/inflections.elc
+
+7.  Run <key>M-x customize-group iy-config</key> to see customizable options.
+
+8.  `C-h` is mapped to delete char backward. Find following line in `lisp/iy-keybindings.el` to disable it:
         
         (define-key key-translation-map [?\C-h] [?\C-?])
 
-8.  `C-r` is mapped to the default `C-x C-r` keymap, use `C-r C-r` to isearch backward, or delete following line in `lisp/iy-keybindings.el` to disable it:
+9.  `C-r` is mapped to the default `C-x C-r` keymap, use `C-r C-r` to isearch backward, or delete following line in `lisp/iy-keybindings.el` to disable it:
 
         (global-set-key (kbd "C-r") ctl-x-r-map)
